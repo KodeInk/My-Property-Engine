@@ -6,9 +6,13 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.context.ApplicationContext;
 
 /**
- * Created by MOVER  on 2/27/2017.
+ *
+ * @author CODE MOVERS
+ * @version 1.0
+ * @since 2/27/2017
+ * @email moverr@gmail.com
+ *
  */
-
 @SpringBootApplication
 public class Application {
     public static  void main(String [] args){
