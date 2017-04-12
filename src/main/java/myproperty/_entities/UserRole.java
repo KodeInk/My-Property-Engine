@@ -54,7 +54,7 @@ public class UserRole implements Serializable {
     private Date dateCreated;
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     @ManyToOne
-    private Users userId;
+    private User userId;
     @JoinColumn(name = "author_id", referencedColumnName = "id")
     @ManyToOne
     private Person authorId;
@@ -98,11 +98,11 @@ public class UserRole implements Serializable {
         this.dateCreated = dateCreated;
     }
 
-    public Users getUserId() {
+    public User getUserId() {
         return userId;
     }
 
-    public void setUserId(Users userId) {
+    public void setUserId(User userId) {
         this.userId = userId;
     }
 

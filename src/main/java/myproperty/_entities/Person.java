@@ -79,12 +79,12 @@ public class Person implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "authorId")
     private Collection<Subscription> subscriptionCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "authorId")
-    private Collection<Users> usersCollection;
+    private Collection<User> userCollection;
     @OneToMany(mappedBy = "authorId")
     private Collection<UserRole> userRoleCollection;
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Users userId;
+    private User userId;
     @OneToMany(mappedBy = "authorId")
     private Collection<Property> propertyCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "authorId")
@@ -202,12 +202,12 @@ public class Person implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Users> getUsersCollection() {
-        return usersCollection;
+    public Collection<User> getUserCollection() {
+        return userCollection;
     }
 
-    public void setUsersCollection(Collection<Users> usersCollection) {
-        this.usersCollection = usersCollection;
+    public void setUserCollection(Collection<User> userCollection) {
+        this.userCollection = userCollection;
     }
 
     @XmlTransient
@@ -219,11 +219,11 @@ public class Person implements Serializable {
         this.userRoleCollection = userRoleCollection;
     }
 
-    public Users getUserId() {
+    public User getUserId() {
         return userId;
     }
 
-    public void setUserId(Users userId) {
+    public void setUserId(User userId) {
         this.userId = userId;
     }
 
