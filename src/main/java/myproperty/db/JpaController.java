@@ -1,10 +1,10 @@
 package myproperty.db;
 
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceException;
-import javax.persistence.Query;
-import javax.persistence.TypedQuery;
+import myproperty.annotation.MainId;
+import myproperty.helper.utilities;
+
+import javax.persistence.*;
 import javax.persistence.criteria.CriteriaQuery;
 import java.io.Serializable;
 import java.lang.reflect.Field;
@@ -22,12 +22,21 @@ public  abstract class JpaController<T  extends  Entity> implements Serializable
     public static final EntityManagerFactoryProvider FACTORY_PROVIDER =  EntityManagerFactoryProvider.getInstance();
 
     private final Class<T> entityClass;
-   // private final Field mainField;
+    private final Field mainIdField;
 
 
     public JpaController(Class<T> entityClass) {
         this.entityClass = entityClass;
         Field f = null;
+
+        for (Field field : entityClass.getDeclaredFields()) {
+            if (field.getDeclaredAnnotation(MainId.class) != null) {
+                field.setAccessible(true);
+                f = field;
+                break;
+            }
+        }
+        mainIdField = f;
 
 
     }
@@ -128,6 +137,80 @@ public  abstract class JpaController<T  extends  Entity> implements Serializable
     }
 
 
+    public void edit(T entity) throws  Exception {
+        EntityManager em = null;
+        try {
+            em = getEntityManager();
+            em.getTransaction().begin();
+            em.merge(entity);
+            em.getTransaction().commit();
+        } catch (Exception ex) {
+            String msg = ex.getLocalizedMessage();
+            if (msg == null || msg.length() == 0) {
+                Integer id = entity.getId();
+                if (find(id) == null) {
+                    throw new Exception("The entity with id " + id + " no longer exists.");
+                }
+            }
+            throw ex;
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+    }
+
+
+    public List<T> getMainIds(boolean all, Object startMainId, Integer offset, Integer limit) {
+        if (mainIdField == null) {
+            return null;
+        }
+
+        if (startMainId == null) {
+            Class<?> type = mainIdField.getType();
+            if (type == String.class) {
+                startMainId = "00000000";
+            } else if (type == Long.class) {
+                startMainId = 0L;
+            } else if (type == Integer.class) {
+                startMainId = 0;
+            }
+        }
+
+        EntityManager entityManager = getEntityManager();
+        List mainIdList = null;
+
+        try {
+            Query query = entityManager.createQuery(
+                    "SELECT obj." + mainIdField.getName() + " " +
+                            "FROM " + entityClass.getSimpleName() + " obj " +
+                            "WHERE obj." + mainIdField.getName() + " > ?1");
+            query.setParameter(1, startMainId);
+            mainIdList = query.getResultList();
+        } catch (NoResultException ex) {
+            LOG.log(Level.FINE, "no main ids found");
+            return null;
+        } catch (PersistenceException ex) {
+            LOG.log(Level.SEVERE, "unexpected persistence exception {0}\n{1}", new Object[]{ ex.getMessage(),
+                    utilities.getStackTrace(ex)
+
+                   });
+            // don't throw WebApplicationException, force caller to handle this
+        } catch (Exception ex) {
+            LOG.log(Level.SEVERE, "unexpected exception {0}\n{1}", new Object[]{ ex.getMessage(), utilities.getStackTrace(ex)});
+            return null;
+        } finally {
+            LOG.log(Level.FINER, "closing entity manager {0}", entityManager);
+            entityManager.close();
+        }
+
+
+        return mainIdList;
+    }
+
+
+
 
 
 }
+
