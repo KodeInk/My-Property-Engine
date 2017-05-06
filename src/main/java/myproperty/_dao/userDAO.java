@@ -1,29 +1,24 @@
 package myproperty._dao;
 
-import java.util.Collection;
-import java.util.Map;
 import myproperty._entities.User;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+
+import java.util.Collection;
 
 /**
- * Created by Mover on 4/9/2017.
+ * Created by Manny on 4/16/2017.
  */
-
-@Repository
-public class userDAO {
-
-    @Autowired
-    public static Map<Integer,User> users;
-
+public interface userDAO {
     //TODO: list Users
-    public Collection<User> getAllUsers(){
-        return this.users.values();
-    }
+    Collection<User> getAllUsers();
 
+    //TODO: get User By Id
+    User getUserById(int id);
 
-    // TODO: create User
+    //TODO: Delete user By Id
+    void deleteUserById(int id);
 
-    // TODO: update User
+    User updateUserById(User user);
 
+    // TODO: Create User
+    void createUser(User user);
 }

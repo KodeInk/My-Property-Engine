@@ -5,32 +5,37 @@
  */
 package myproperty._entities;
 
+import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
+
 
 /**
  *
  * @author Mover
  */
-public class User implements Serializable {
+@Entity
+@Table(name = "user")
+@XmlRootElement
+@NamedQueries({
+        @NamedQuery(name = "User.findAll", query = "SELECT a FROM User a")
+        , @NamedQuery(name = "User.findById", query = "SELECT a FROM User a WHERE a.id = :id")
+        , @NamedQuery(name = "User.checkPassword", query = "SELECT a FROM User a WHERE a.username LIKE :userName AND a.password LIKE :userPassword")
+})
 
+public class User  {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Basic(optional = false)
+    @Column(name = "id")
     private Long id;
+    @Column(name = "username")
     private String username;
+    @Column(name = "password")
     private String password;
+    @Column(name = "status",columnDefinition = " default 'PENDING' ")
     private String status;
     private Date dateCreated;
 

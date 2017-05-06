@@ -8,7 +8,7 @@ import myproperty._entities.Permissions;
 import myproperty._entities.Person;
 import myproperty._entities.Subscription;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2017-04-07T12:09:23")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2017-04-22T10:02:14")
 @StaticMetamodel(SubscriptionPermission.class)
 public class SubscriptionPermission_ { 
 

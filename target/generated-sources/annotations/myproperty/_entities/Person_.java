@@ -18,7 +18,7 @@ import myproperty._entities.Types;
 import myproperty._entities.User;
 import myproperty._entities.UserRole;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2017-04-11T18:54:53")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2017-04-22T10:02:14")
 @StaticMetamodel(Person.class)
 public class Person_ { 
 

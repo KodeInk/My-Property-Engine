@@ -1,11 +1,11 @@
 package myproperty._controller;
 
+
 import myproperty._entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import myproperty._services.UserService;
+import org.springframework.http.MediaType;
 
 import java.util.Collection;
 
@@ -24,5 +24,38 @@ public class UserController {
     public Collection<User> getAllUsers(){
         return userService.getAllUsers();
     }
+
+    @RequestMapping(value = "/{id}",method = RequestMethod.GET)
+    public User getUserById( @PathVariable("id") int id ){
+        return userService.getUserById(id);
+    }
+
+    @RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
+    public Boolean deleteUserById( @PathVariable("id") int id ){
+         userService.deleteUserById(id);
+         return true;
+    }
+
+    @RequestMapping(value="/update",method = RequestMethod.PUT,consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void updateUser(@RequestBody User user) {
+
+        userService.updateUser(user);
+
+    }
+
+
+    @RequestMapping(value="/create",method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void createUser(@RequestBody User user) {
+
+        userService.createUser(user);
+
+    }
+
+
+
+
+
+
+
 
 }
