@@ -5,24 +5,12 @@
  */
 package myproperty._entities;
 
-import java.io.Serializable;
-import java.util.Date;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
+import java.util.Date;
 
 /**
  *
@@ -37,7 +25,6 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "UserRole.findByStatus", query = "SELECT u FROM UserRole u WHERE u.status = :status")
     , @NamedQuery(name = "UserRole.findByDateCreated", query = "SELECT u FROM UserRole u WHERE u.dateCreated = :dateCreated")})
 public class UserRole implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,18 +36,17 @@ public class UserRole implements Serializable {
     @Size(min = 1, max = 8)
     @Column(name = "status")
     private String status;
+    @Column(name = "author_id")
+    private Integer authorId;
     @Column(name = "date_created")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateCreated;
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    @ManyToOne
-    private User userId;
-    @JoinColumn(name = "author_id", referencedColumnName = "id")
-    @ManyToOne
-    private Person authorId;
     @JoinColumn(name = "role_id", referencedColumnName = "id")
     @ManyToOne
     private Roles roleId;
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @ManyToOne
+    private User userId;
 
     public UserRole() {
     }
@@ -90,6 +76,14 @@ public class UserRole implements Serializable {
         this.status = status;
     }
 
+    public Integer getAuthorId() {
+        return authorId;
+    }
+
+    public void setAuthorId(Integer authorId) {
+        this.authorId = authorId;
+    }
+
     public Date getDateCreated() {
         return dateCreated;
     }
@@ -98,28 +92,20 @@ public class UserRole implements Serializable {
         this.dateCreated = dateCreated;
     }
 
-    public User getUserId() {
-        return userId;
-    }
-
-    public void setUserId(User userId) {
-        this.userId = userId;
-    }
-
-    public Person getAuthorId() {
-        return authorId;
-    }
-
-    public void setAuthorId(Person authorId) {
-        this.authorId = authorId;
-    }
-
     public Roles getRoleId() {
         return roleId;
     }
 
     public void setRoleId(Roles roleId) {
         this.roleId = roleId;
+    }
+
+    public User getUserId() {
+        return userId;
+    }
+
+    public void setUserId(User userId) {
+        this.userId = userId;
     }
 
     @Override
@@ -144,7 +130,6 @@ public class UserRole implements Serializable {
 
     @Override
     public String toString() {
-        return "myproperty._entities.UserRole[ id=" + id + " ]";
+        return "UserRole[ id=" + id + " ]";
     }
-
 }

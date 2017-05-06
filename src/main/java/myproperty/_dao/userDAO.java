@@ -1,24 +1,28 @@
 package myproperty._dao;
 
 import myproperty._entities.User;
+import org.springframework.stereotype.Repository;
 
-import java.util.Collection;
+import java.io.Serializable;
+import java.util.List;
 
 /**
- * Created by Manny on 4/16/2017.
+ * Created by Manny on 5/6/2017.
  */
-public interface userDAO {
-    //TODO: list Users
-    Collection<User> getAllUsers();
 
-    //TODO: get User By Id
-    User getUserById(int id);
+@Repository
+public interface userDAO extends Serializable {
+    User  create(User user);
 
-    //TODO: Delete user By Id
-    void deleteUserById(int id);
+    User edit(User user) throws Exception;
 
-    User updateUserById(User user);
+    User findUser(Integer id);
 
-    // TODO: Create User
-    void createUser(User user);
+    List<User> findUserEntities();
+
+    List<User> findUserEntities(int maxResults, int firstResult);
+
+    void destroy(Integer id) throws Exception;
+
+    User CheckPassword(User user);
 }

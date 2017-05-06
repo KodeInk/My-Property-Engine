@@ -5,12 +5,10 @@
  */
 package myproperty._services;
 
-import java.util.Collection;
-import myproperty._dao.PersonDAO;
 import myproperty._entities.Person;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
+
+import java.util.Collection;
 
 /**
  *
@@ -23,14 +21,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 @Service
 public class PersonService {
 
-    @Autowired
-    private PersonDAO person_dao;
+
     public Collection<Person> getAllPeople(int offset, int limit) {
-        return person_dao.getAllPeople(offset, limit);
+      return null;
     }
 
     public Person getPersonById(int id) {
-        return this.person_dao.getPersonById(id);
+       return null;
     }
 
 

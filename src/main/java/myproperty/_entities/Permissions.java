@@ -5,23 +5,11 @@
  */
 package myproperty._entities;
 
-import java.io.Serializable;
-import java.util.Collection;
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
+import java.io.Serializable;
 
 /**
  *
@@ -31,13 +19,13 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "permissions")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Permissions.findAll", query = "SELECT p FROM Permissions p")
-    , @NamedQuery(name = "Permissions.findById", query = "SELECT p FROM Permissions p WHERE p.id = :id")
-    , @NamedQuery(name = "Permissions.findByGrouping", query = "SELECT p FROM Permissions p WHERE p.grouping = :grouping")
-    , @NamedQuery(name = "Permissions.findByCode", query = "SELECT p FROM Permissions p WHERE p.code = :code")
-    , @NamedQuery(name = "Permissions.findByDisplayName", query = "SELECT p FROM Permissions p WHERE p.displayName = :displayName")
-    , @NamedQuery(name = "Permissions.findByPermissionscol", query = "SELECT p FROM Permissions p WHERE p.permissionscol = :permissionscol")
-    , @NamedQuery(name = "Permissions.findByStatus", query = "SELECT p FROM Permissions p WHERE p.status = :status")})
+        @NamedQuery(name = "Permissions.findAll", query = "SELECT p FROM Permissions p")
+        , @NamedQuery(name = "Permissions.findById", query = "SELECT p FROM Permissions p WHERE p.id = :id")
+        , @NamedQuery(name = "Permissions.findByGrouping", query = "SELECT p FROM Permissions p WHERE p.grouping = :grouping")
+        , @NamedQuery(name = "Permissions.findByCode", query = "SELECT p FROM Permissions p WHERE p.code = :code")
+        , @NamedQuery(name = "Permissions.findByDisplayName", query = "SELECT p FROM Permissions p WHERE p.displayName = :displayName")
+        , @NamedQuery(name = "Permissions.findByStatus", query = "SELECT p FROM Permissions p WHERE p.status = :status")})
+
 public class Permissions implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -55,18 +43,11 @@ public class Permissions implements Serializable {
     @Size(max = 45)
     @Column(name = "display_name")
     private String displayName;
-    @Size(max = 45)
-    @Column(name = "permissionscol")
-    private String permissionscol;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 8)
     @Column(name = "status")
     private String status;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "permissionId")
-    private Collection<RolePermission> rolePermissionCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "permissionId")
-    private Collection<SubscriptionPermission> subscriptionPermissionCollection;
 
     public Permissions() {
     }
@@ -112,38 +93,12 @@ public class Permissions implements Serializable {
         this.displayName = displayName;
     }
 
-    public String getPermissionscol() {
-        return permissionscol;
-    }
-
-    public void setPermissionscol(String permissionscol) {
-        this.permissionscol = permissionscol;
-    }
-
     public String getStatus() {
         return status;
     }
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    @XmlTransient
-    public Collection<RolePermission> getRolePermissionCollection() {
-        return rolePermissionCollection;
-    }
-
-    public void setRolePermissionCollection(Collection<RolePermission> rolePermissionCollection) {
-        this.rolePermissionCollection = rolePermissionCollection;
-    }
-
-    @XmlTransient
-    public Collection<SubscriptionPermission> getSubscriptionPermissionCollection() {
-        return subscriptionPermissionCollection;
-    }
-
-    public void setSubscriptionPermissionCollection(Collection<SubscriptionPermission> subscriptionPermissionCollection) {
-        this.subscriptionPermissionCollection = subscriptionPermissionCollection;
     }
 
     @Override
@@ -168,7 +123,8 @@ public class Permissions implements Serializable {
 
     @Override
     public String toString() {
-        return "myproperty._entities.Permissions[ id=" + id + " ]";
+        return "com.awamo.microservice.mifos.dataconnector.database.controllers.Permissions[ id=" + id + " ]";
     }
 
 }
+

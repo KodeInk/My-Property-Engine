@@ -1,4 +1,5 @@
 package myproperty._services;
+
 import myproperty._dao.userDAOImpl;
 import myproperty._entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,29 +18,29 @@ public class UserService {
 
     @Autowired
     @Qualifier("userImpl")
-    private userDAOImpl userDAOImpl;
+    private  userDAOImpl userDAOImpl;
 
     //TODO: Fetch all  Users
     public Collection<User> getAllUsers(){
-        return userDAOImpl.getAllUsers();
+        return userDAOImpl.findUserEntities();
     }
 
     //TODO : get User By Id
-    public User getUserById(int id){
-        return userDAOImpl.getUserById(id);
+    public User getUserById(Integer id){
+        return userDAOImpl.findUser(id);
     }
 
     //TODO: Delete User By Id
-    public void deleteUserById(int id){
-         userDAOImpl.deleteUserById(id);
+    public void deleteUserById(Integer id) throws Exception{
+         userDAOImpl.destroy(id);
     }
     //TODO: update User By Id
-    public User updateUser(User user){
-       return userDAOImpl.updateUserById(user);
+    public User updateUser(User user) throws  Exception{
+       return userDAOImpl.edit(user);
     }
     //TODO: Create User
-    public void createUser(User user){
-        userDAOImpl.createUser(user);
+    public User createUser(User user){
+      return   userDAOImpl.create(user);
     }
 
 

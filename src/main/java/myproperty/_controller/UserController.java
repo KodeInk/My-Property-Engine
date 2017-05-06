@@ -31,13 +31,13 @@ public class UserController {
     }
 
     @RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
-    public Boolean deleteUserById( @PathVariable("id") int id ){
+    public Boolean deleteUserById( @PathVariable("id") int id ) throws  Exception{
          userService.deleteUserById(id);
          return true;
     }
 
     @RequestMapping(value="/update",method = RequestMethod.PUT,consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void updateUser(@RequestBody User user) {
+    public void updateUser(@RequestBody User user) throws Exception {
 
         userService.updateUser(user);
 

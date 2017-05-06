@@ -6,14 +6,12 @@ import javax.persistence.metamodel.CollectionAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 import myproperty._entities.Person;
-import myproperty._entities.RolePermission;
 import myproperty._entities.UserRole;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2017-04-22T10:02:14")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2017-05-06T16:48:37")
 @StaticMetamodel(Roles.class)
 public class Roles_ { 
 
-    public static volatile CollectionAttribute<Roles, RolePermission> rolePermissionCollection;
     public static volatile SingularAttribute<Roles, String> role;
     public static volatile SingularAttribute<Roles, Date> dateCreated;
     public static volatile CollectionAttribute<Roles, UserRole> userRoleCollection;

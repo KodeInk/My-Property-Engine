@@ -5,28 +5,14 @@
  */
 package myproperty._entities;
 
-import java.io.Serializable;
-import java.util.Collection;
-import java.util.Date;
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import java.io.Serializable;
+import java.util.Collection;
+import java.util.Date;
 
 /**
  *
@@ -42,6 +28,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Roles.findByStatus", query = "SELECT r FROM Roles r WHERE r.status = :status")
     , @NamedQuery(name = "Roles.findByDateCreated", query = "SELECT r FROM Roles r WHERE r.dateCreated = :dateCreated")})
 public class Roles implements Serializable {
+
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -60,13 +47,11 @@ public class Roles implements Serializable {
     @Column(name = "date_created")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateCreated;
+    @OneToMany(mappedBy = "roleId")
+    private Collection<UserRole> userRoleCollection;
     @JoinColumn(name = "author_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Person authorId;
-    @OneToMany(mappedBy = "roleId")
-    private Collection<UserRole> userRoleCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "roleId")
-    private Collection<RolePermission> rolePermissionCollection;
 
     public Roles() {
     }
@@ -112,14 +97,6 @@ public class Roles implements Serializable {
         this.dateCreated = dateCreated;
     }
 
-    public Person getAuthorId() {
-        return authorId;
-    }
-
-    public void setAuthorId(Person authorId) {
-        this.authorId = authorId;
-    }
-
     @XmlTransient
     public Collection<UserRole> getUserRoleCollection() {
         return userRoleCollection;
@@ -129,13 +106,12 @@ public class Roles implements Serializable {
         this.userRoleCollection = userRoleCollection;
     }
 
-    @XmlTransient
-    public Collection<RolePermission> getRolePermissionCollection() {
-        return rolePermissionCollection;
+    public Person getAuthorId() {
+        return authorId;
     }
 
-    public void setRolePermissionCollection(Collection<RolePermission> rolePermissionCollection) {
-        this.rolePermissionCollection = rolePermissionCollection;
+    public void setAuthorId(Person authorId) {
+        this.authorId = authorId;
     }
 
     @Override
@@ -160,7 +136,6 @@ public class Roles implements Serializable {
 
     @Override
     public String toString() {
-        return "myproperty._entities.Roles[ id=" + id + " ]";
+        return "com.awamo.microservice.mifos.dataconnector.database.controllers.Roles[ id=" + id + " ]";
     }
-
 }

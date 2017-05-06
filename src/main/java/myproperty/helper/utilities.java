@@ -22,13 +22,13 @@ import java.util.stream.Collectors;
  */
 public class utilities {
 
-    public static final String DATE_FORMAT = "dd/MMM/yyyy";
-    public static final Locale DEFAULT_LOCALE = Locale.ENGLISH;
+    public   static final String DATE_FORMAT = "dd/MMM/yyyy";
+    public   static final Locale DEFAULT_LOCALE = Locale.ENGLISH;
 
-    private static final Logger LOG = Logger.getLogger(utilities.class.getName());
-    private static final Calendar CALENDAR = Calendar.getInstance(DEFAULT_LOCALE);
-    public static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
-    private static final Random RANDOM = new Random();
+    private  static final Logger LOG = Logger.getLogger(utilities.class.getName());
+    private  static final Calendar CALENDAR = Calendar.getInstance(DEFAULT_LOCALE);
+    public   static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
+    private  static final Random RANDOM = new Random();
 
 
 

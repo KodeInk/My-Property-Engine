@@ -5,28 +5,14 @@
  */
 package myproperty._entities;
 
-import java.io.Serializable;
-import java.util.Collection;
-import java.util.Date;
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import java.io.Serializable;
+import java.util.Collection;
+import java.util.Date;
 
 /**
  *
@@ -44,7 +30,6 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Person.findByGender", query = "SELECT p FROM Person p WHERE p.gender = :gender")
     , @NamedQuery(name = "Person.findByDateCreated", query = "SELECT p FROM Person p WHERE p.dateCreated = :dateCreated")})
 public class Person implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -68,33 +53,12 @@ public class Person implements Serializable {
     @Column(name = "date_created")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateCreated;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "authorId")
-    private Collection<AccountType> accountTypeCollection;
-    @OneToMany(mappedBy = "authorId")
-    private Collection<Types> typesCollection;
-    @OneToMany(mappedBy = "authorId")
-    private Collection<Address> addressCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "authorId")
-    private Collection<Roles> rolesCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "authorId")
-    private Collection<Subscription> subscriptionCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "authorId")
-    private Collection<User> userCollection;
-    @OneToMany(mappedBy = "authorId")
-    private Collection<UserRole> userRoleCollection;
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private User userId;
-    @OneToMany(mappedBy = "authorId")
-    private Collection<Property> propertyCollection;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "authorId")
-    private Collection<RolePermission> rolePermissionCollection;
-    @OneToMany(mappedBy = "authorId")
-    private Collection<SubscriptionPermission> subscriptionPermissionCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "authorId")
-    private Collection<Categories> categoriesCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "authorId")
-    private Collection<Account> accountCollection;
+    private Collection<Roles> rolesCollection;
 
     public Person() {
     }
@@ -156,69 +120,6 @@ public class Person implements Serializable {
         this.dateCreated = dateCreated;
     }
 
-    @XmlTransient
-    public Collection<AccountType> getAccountTypeCollection() {
-        return accountTypeCollection;
-    }
-
-    public void setAccountTypeCollection(Collection<AccountType> accountTypeCollection) {
-        this.accountTypeCollection = accountTypeCollection;
-    }
-
-    @XmlTransient
-    public Collection<Types> getTypesCollection() {
-        return typesCollection;
-    }
-
-    public void setTypesCollection(Collection<Types> typesCollection) {
-        this.typesCollection = typesCollection;
-    }
-
-    @XmlTransient
-    public Collection<Address> getAddressCollection() {
-        return addressCollection;
-    }
-
-    public void setAddressCollection(Collection<Address> addressCollection) {
-        this.addressCollection = addressCollection;
-    }
-
-    @XmlTransient
-    public Collection<Roles> getRolesCollection() {
-        return rolesCollection;
-    }
-
-    public void setRolesCollection(Collection<Roles> rolesCollection) {
-        this.rolesCollection = rolesCollection;
-    }
-
-    @XmlTransient
-    public Collection<Subscription> getSubscriptionCollection() {
-        return subscriptionCollection;
-    }
-
-    public void setSubscriptionCollection(Collection<Subscription> subscriptionCollection) {
-        this.subscriptionCollection = subscriptionCollection;
-    }
-
-    @XmlTransient
-    public Collection<User> getUserCollection() {
-        return userCollection;
-    }
-
-    public void setUserCollection(Collection<User> userCollection) {
-        this.userCollection = userCollection;
-    }
-
-    @XmlTransient
-    public Collection<UserRole> getUserRoleCollection() {
-        return userRoleCollection;
-    }
-
-    public void setUserRoleCollection(Collection<UserRole> userRoleCollection) {
-        this.userRoleCollection = userRoleCollection;
-    }
-
     public User getUserId() {
         return userId;
     }
@@ -228,48 +129,12 @@ public class Person implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Property> getPropertyCollection() {
-        return propertyCollection;
+    public Collection<Roles> getRolesCollection() {
+        return rolesCollection;
     }
 
-    public void setPropertyCollection(Collection<Property> propertyCollection) {
-        this.propertyCollection = propertyCollection;
-    }
-
-    @XmlTransient
-    public Collection<RolePermission> getRolePermissionCollection() {
-        return rolePermissionCollection;
-    }
-
-    public void setRolePermissionCollection(Collection<RolePermission> rolePermissionCollection) {
-        this.rolePermissionCollection = rolePermissionCollection;
-    }
-
-    @XmlTransient
-    public Collection<SubscriptionPermission> getSubscriptionPermissionCollection() {
-        return subscriptionPermissionCollection;
-    }
-
-    public void setSubscriptionPermissionCollection(Collection<SubscriptionPermission> subscriptionPermissionCollection) {
-        this.subscriptionPermissionCollection = subscriptionPermissionCollection;
-    }
-
-    @XmlTransient
-    public Collection<Categories> getCategoriesCollection() {
-        return categoriesCollection;
-    }
-
-    public void setCategoriesCollection(Collection<Categories> categoriesCollection) {
-        this.categoriesCollection = categoriesCollection;
-    }
-
-    @XmlTransient
-    public Collection<Account> getAccountCollection() {
-        return accountCollection;
-    }
-
-    public void setAccountCollection(Collection<Account> accountCollection) {
-        this.accountCollection = accountCollection;
+    public void setRolesCollection(Collection<Roles> rolesCollection) {
+        this.rolesCollection = rolesCollection;
     }
 
     @Override
@@ -294,7 +159,7 @@ public class Person implements Serializable {
 
     @Override
     public String toString() {
-        return "myproperty._entities.Person[ id=" + id + " ]";
+        return "com.awamo.microservice.mifos.dataconnector.database.controllers.Person[ id=" + id + " ]";
     }
 
 }
