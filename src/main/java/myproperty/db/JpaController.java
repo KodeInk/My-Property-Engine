@@ -17,6 +17,7 @@ import java.util.logging.Logger;
 /**
  * Created by Mover  on 4/28/2017.
  */
+
 public  abstract class JpaController<T  extends  Entity> implements Serializable{
     private static final Logger LOG = Logger.getLogger(JpaController.class.getName());
     public static final EntityManagerFactoryProvider FACTORY_PROVIDER =  EntityManagerFactoryProvider.getInstance();

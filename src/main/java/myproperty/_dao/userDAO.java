@@ -1,7 +1,6 @@
 package myproperty._dao;
 
 import myproperty._entities.User;
-import org.springframework.stereotype.Repository;
 
 import java.io.Serializable;
 import java.util.List;
@@ -10,7 +9,6 @@ import java.util.List;
  * Created by Manny on 5/6/2017.
  */
 
-@Repository
 public interface userDAO extends Serializable {
     User  create(User user);
 

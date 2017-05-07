@@ -2,7 +2,6 @@ package myproperty._dao;
 
 import myproperty._entities.User;
 import myproperty.db.JpaController;
-import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
@@ -15,7 +14,7 @@ import java.util.logging.Logger;
  * Created by Manny on 5/6/2017.
  */
 
-@Repository
+
 public class userDAOImpl extends JpaController implements userDAO {
    private static final Logger LOG = Logger.getLogger(userDAOImpl.class.getName());
 

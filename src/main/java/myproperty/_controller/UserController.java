@@ -47,7 +47,12 @@ public class UserController {
     @RequestMapping(value="/create",method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
     public void createUser(@RequestBody User user) {
 
-        userService.createUser(user);
+        try {
+            userService.createUser(user);
+        }
+        catch (Exception em){
+            em.getMessage();
+        }
 
     }
 

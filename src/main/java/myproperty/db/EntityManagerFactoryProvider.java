@@ -63,11 +63,12 @@ public class EntityManagerFactoryProvider {
         properties.put("hibernate.connection.password", "mysql");
         properties.put("hibernate.ejb.entitymanager_factory_name", getDatabase());
         try{
-            emf = Persistence.createEntityManagerFactory("TemplatePU",properties);
+            // properties
+            emf = Persistence.createEntityManagerFactory("MYPROPERTY",properties);
 
         }catch (Exception e){
             e.printStackTrace();
-            LOG.log(Level.SEVERE,"Un Expected Error ");
+            LOG.log(Level.SEVERE,"Un Expected Error "+e.toString());
         }
 
         return emf;
