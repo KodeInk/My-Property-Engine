@@ -16,7 +16,17 @@ import java.util.logging.Logger;
 
 
 public class userDAOImpl extends JpaController implements userDAO {
-   private static final Logger LOG = Logger.getLogger(userDAOImpl.class.getName());
+    private static final Logger LOG = Logger.getLogger(userDAOImpl.class.getName());
+
+    private static userDAOImpl instance = null;
+
+    public static userDAOImpl getInstance() {
+        if(instance == null){
+            instance =  new userDAOImpl();
+        }
+        return instance;
+    }
+
 
     public userDAOImpl() {
         super(User.class);
@@ -144,9 +154,9 @@ public class userDAOImpl extends JpaController implements userDAO {
 
 
         try {
-          List<User>  users =  query.getResultList();
+            List<User>  users =  query.getResultList();
 
-          user1 = users.get(0);
+            user1 = users.get(0);
         } finally {
             em.close();
         }

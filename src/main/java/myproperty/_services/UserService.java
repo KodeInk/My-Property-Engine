@@ -15,7 +15,9 @@ import java.util.Collection;
 public class UserService {
 
 
-    private  userDAOImpl userDAOImpl = new userDAOImpl();
+    private  userDAOImpl userDAOImpl = myproperty._dao.userDAOImpl.getInstance();
+
+
 
     //TODO: Fetch all  Users
     public Collection<User> getAllUsers(){

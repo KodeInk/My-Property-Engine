@@ -47,7 +47,7 @@ public class User  {
     @Column(name = "password")
     private String password;
     @Size(max = 11)
-    @Column(name = "status")
+    @Column(name = "status" )
     private String status;
     @Column(name = "date_created")
     @Temporal(TemporalType.TIMESTAMP)

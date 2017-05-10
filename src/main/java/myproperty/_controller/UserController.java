@@ -20,23 +20,23 @@ public class UserController {
     private UserService userService;
 
 
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    @RequestMapping(value = "/list", method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
     public Collection<User> getAllUsers(){
         return userService.getAllUsers();
     }
 
-    @RequestMapping(value = "/{id}",method = RequestMethod.GET)
+    @RequestMapping(value = "/{id}",method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
     public User getUserById( @PathVariable("id") int id ){
         return userService.getUserById(id);
     }
 
-    @RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
+    @RequestMapping(value = "/{id}/delete",method = RequestMethod.DELETE)
     public Boolean deleteUserById( @PathVariable("id") int id ) throws  Exception{
          userService.deleteUserById(id);
          return true;
     }
 
-    @RequestMapping(value="/update",method = RequestMethod.PUT,consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value="/{id}/update",method = RequestMethod.PUT,consumes = MediaType.APPLICATION_JSON_VALUE)
     public void updateUser(@RequestBody User user) throws Exception {
 
         userService.updateUser(user);
