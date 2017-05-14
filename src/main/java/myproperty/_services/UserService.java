@@ -5,6 +5,7 @@ import myproperty._entities.User;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import static myproperty.helper.utilities.*;
 
 
 /**
@@ -39,7 +40,20 @@ public class UserService {
     }
     //TODO: Create User
     public User createUser(User user){
-      return   userDAOImpl.create(user);
+
+        String password = user.getPassword();
+        String username = user.getUsername();
+
+        // Throw Exception when  the User does not meet the mini um requirements
+        if(password.length() <= 3  || username.length() <= 1 ){
+            throw new IllegalArgumentException();
+        }
+        // convert password to protecteed version
+        password = encryptPassword_md5(password);
+        user.setPassword(password);
+        // user.setStatus("PENDING");
+
+        return userDAOImpl.create(user);
     }
 
 

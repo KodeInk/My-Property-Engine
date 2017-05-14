@@ -2,12 +2,15 @@ package myproperty._controller;
 
 
 import myproperty._entities.User;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
 import myproperty._services.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
+import javax.ws.rs.container.ContainerRequestContext;
+import javax.ws.rs.core.Context;
+import myproperty.helper.exception.BadRequestException;
 
 /**
  * Created by Mover on 4/11/2017.
@@ -18,6 +21,10 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Context
+    private ContainerRequestContext context;
+
 
 
     @RequestMapping(value = "/list", method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
@@ -44,15 +51,19 @@ public class UserController {
     }
 
 
-    @RequestMapping(value="/create",method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void createUser(@RequestBody User user) {
+    @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public User createUser(@RequestBody User user) {
+        // String logId = context.getProperty("logId").toString();
 
         try {
-            userService.createUser(user);
+            return userService.createUser(user);
+            // return user;
         }
-        catch (Exception em){
-            em.getMessage();
+ catch (Exception em) {
+
+     throw new BadRequestException("User Did Not Save Succesully ");
         }
+
 
     }
 

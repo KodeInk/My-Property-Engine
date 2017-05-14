@@ -2,23 +2,21 @@ package myproperty.helper;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sun.istack.internal.Nullable;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
-import java.math.BigInteger;
+import java.security.MessageDigest;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 /**
- * Created by Manny on 5/1/2017.
+ * Created by mover on 5/1/2017.
  */
 public class utilities {
 
@@ -85,18 +83,16 @@ public class utilities {
         });
     }
 
-    public static String getNewAwamoID() {
-        LOG.fine("get new awamoId");
-        //return WebserviceConnection.ID_GENERATOR.get(String.class, "/", "token", "ABCD");
-        return new BigInteger(Long.toString(System.currentTimeMillis() - 1000000000000L)).toString(36).toUpperCase();
+    public static String getStackTrace(final Throwable throwable) {
+        final StringWriter stringWriter = new StringWriter();
+        final PrintWriter printWriter = new PrintWriter(stringWriter, true);
+        throwable.printStackTrace(printWriter);
+
+        return stringWriter.getBuffer().toString();
     }
 
 
 
-
-    public static byte[] readAllFromInputstream(InputStream is) {
-        return readAllFromInputstream(is, -1);
-    }
 
     public static byte[] readAllFromInputstream(InputStream is, long size) {
         byte[] bytes;
@@ -256,14 +252,6 @@ public class utilities {
         return new SimpleDateFormat(DATE_FORMAT, utilities.DEFAULT_LOCALE).format(date);
     }
 
-    public static String getStackTrace(final Throwable throwable) {
-        final StringWriter stringWriter = new StringWriter();
-        final PrintWriter printWriter = new PrintWriter(stringWriter, true);
-        throwable.printStackTrace(printWriter);
-
-        return stringWriter.getBuffer().toString();
-    }
-
     public static void logHttpServletRequest(HttpServletRequest httpServletRequest, String logId) {
         Enumeration<String> names = httpServletRequest.getHeaderNames();
         while (names.hasMoreElements()) {
@@ -277,15 +265,6 @@ public class utilities {
         LOG.log(Level.INFO, "{0} :: RemoteHost: {1}", new Object[]{logId, httpServletRequest.getRemoteHost()});
         LOG.log(Level.INFO, "{0} :: RequestURL: {1}", new Object[]{logId, httpServletRequest.getRequestURL()});
     }
-
-    public static boolean isNullOrEmpty(@Nullable String string) {
-        return string == null || string.isEmpty();
-    }
-
-    public static boolean isNullOrEmpty(@Nullable List list) {
-        return list == null || list.isEmpty();
-    }
-
 
 
 
@@ -348,20 +327,52 @@ public class utilities {
         return intPart >= 0 ? intPart + decimals : intPart - decimals;
     }
 
-    //Added by Stephen Kazibwe Sr
-    public static String humanReadableByteCount(long bytes, boolean si) {
-        int unit = si ? 1000 : 1024;
-        if (bytes < unit) return bytes + " B";
-        int exp = (int) (Math.log(bytes) / Math.log(unit));
-        String pre = (si ? "kMGTPE" : "KMGTPE").charAt(exp-1) + (si ? "" : "i");
-        return String.format("%.1f %sB", bytes / Math.pow(unit, exp), pre);
-    }
+
+
 
     public static String stringReplace(String word, String stringToBeReplaced, String stringToReplace) {
 
         return word.replace(stringToBeReplaced, stringToReplace);
 
     }
+
+
+/*
+Using SHA-256 :
+ */
+//TODO: add salt to the pasword to increase the security
+    public static String encryptPassword_md5(String password){
+
+        StringBuilder   sb = new StringBuilder();
+        try {
+            if(password.length() <= 4 )
+                return null;
+
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            md.update(password.getBytes("UTF-8"));
+
+            byte[] bytes = md.digest();
+
+
+            for(int i = 0; i < bytes.length; i ++){
+                sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+            }
+
+        //    return sb.toString();
+
+        }
+        catch (Exception em){
+            LOG.log(Level.WARNING,"Could not generate a message Digest : 0001");
+        }
+
+        return sb.toString();
+    }
+
+
+
+
+
+
 
 
 
