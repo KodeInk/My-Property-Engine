@@ -8,8 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
-import javax.ws.rs.container.ContainerRequestContext;
-import javax.ws.rs.core.Context;
+
 import myproperty.helper.exception.BadRequestException;
 
 /**
@@ -21,11 +20,6 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-
-    @Context
-    private ContainerRequestContext context;
-
-
 
     @RequestMapping(value = "/list", method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
     public Collection<User> getAllUsers(){

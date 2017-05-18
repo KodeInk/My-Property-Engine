@@ -5,21 +5,16 @@
  */
 package myproperty.helper.exception;
 
-import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-
 /**
  *
- * @author Stephen Kazibwe Sr
+ * @author mover
  */
-public class ServiceUnAvailableException extends WebApplicationException{
+public class ServiceUnAvailableException extends RuntimeException {
     public static final Message MESSAGE=new Message("service unavailable");
-    private static final Response.ResponseBuilder RESPONSE_BUILDER= 
-            Response.status(Response.Status.SERVICE_UNAVAILABLE)
-                    .type(MediaType.APPLICATION_JSON);
-    public ServiceUnAvailableException(){
-        super(RESPONSE_BUILDER.entity(MESSAGE).build());
+
+    public ServiceUnAvailableException() {
+        super(MESSAGE.getMessage());
+
     }
     
 }

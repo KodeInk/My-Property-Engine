@@ -4,7 +4,7 @@ import java.util.Objects;
 
 /**
  *
- * @author podolak
+ * @author mover
  */
 public class Message {
 

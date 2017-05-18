@@ -7,21 +7,17 @@ package myproperty.helper.exception;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 
 /**
  *
- * @author Muyinza
+ * @author mover
  */
-public class ForbiddenException extends WebApplicationException
-{
+public class ForbiddenException extends RuntimeException {
     private static final Logger LOG = Logger.getLogger(ForbiddenException.class.getName());
 
     public ForbiddenException()
     {
-        super(Response.Status.FORBIDDEN);
+        super("FORBIDDEN");
     }
     
     public ForbiddenException(String message)
@@ -30,14 +26,8 @@ public class ForbiddenException extends WebApplicationException
     }
     
     public ForbiddenException(String message, String logMessage) {
-        super(
-                Response
-                .status(Response.Status.FORBIDDEN)
-                .entity(new Message(message))
-                .type(MediaType.APPLICATION_JSON_TYPE)
-                .build()
-        );
-        LOG.log(Level.WARNING, logMessage, Response.Status.NOT_FOUND);
+        super(message);
+        LOG.log(Level.WARNING, logMessage, "FORBIDDEN");
     }
     
     
