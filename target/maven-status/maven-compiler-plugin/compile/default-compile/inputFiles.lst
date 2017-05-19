@@ -1,6 +1,7 @@
 E:\codemovers\myproperty\src\main\java\myproperty\_entities\User.java
 E:\codemovers\myproperty\src\main\java\myproperty\_services\UserService.java
 E:\codemovers\myproperty\src\main\java\myproperty\helper\exception\Message.java
+E:\codemovers\myproperty\src\main\java\myproperty\_entities\Users.java
 E:\codemovers\myproperty\src\main\java\myproperty\_entities\AccountType.java
 E:\codemovers\myproperty\src\main\java\myproperty\helper\exception\ServiceUnAvailableException.java
 E:\codemovers\myproperty\src\main\java\myproperty\_entities\Reviews.java
@@ -27,7 +28,6 @@ E:\codemovers\myproperty\src\main\java\myproperty\_entities\Roles.java
 E:\codemovers\myproperty\src\main\java\myproperty\_entities\SubscriptionPermission.java
 E:\codemovers\myproperty\src\main\java\myproperty\db\EntityManagerFactoryProvider.java
 E:\codemovers\myproperty\src\main\java\myproperty\_entities\Property.java
-E:\codemovers\myproperty\src\main\java\myproperty\_entities\Userbak.java
 E:\codemovers\myproperty\src\main\java\myproperty\_controller\AccountController.java
 E:\codemovers\myproperty\src\main\java\myproperty\_dao\userDAO.java
 E:\codemovers\myproperty\src\main\java\myproperty\annotation\MainId.java

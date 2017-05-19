@@ -8,7 +8,10 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.xml.ws.WebServiceException;
+import myproperty.helper.exception.InternalErrorException;
 
 /**
  * Created by Manny on 5/6/2017.
@@ -33,14 +36,16 @@ public class userDAOImpl extends JpaController implements userDAO {
     }
 
 
-    @Override
-    public User  create(User user) {
+    public User create(User user) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
             em.persist(user);
             em.getTransaction().commit();
+        } catch (Exception ex) {
+            LOG.log(Level.WARNING, "Record not Saved");
+            throw new InternalErrorException("Record not Saved", ex);
         } finally {
             if (em != null) {
                 em.close();
@@ -50,7 +55,6 @@ public class userDAOImpl extends JpaController implements userDAO {
     }
 
 
-    @Override
     public User edit(User user) throws Exception {
         EntityManager em = null;
         try {
@@ -126,7 +130,7 @@ public class userDAOImpl extends JpaController implements userDAO {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            User  user;
+            User user;
             try {
                 user = em.getReference(User.class, id);
                 user.getId();
@@ -144,7 +148,7 @@ public class userDAOImpl extends JpaController implements userDAO {
 
 
     @Override
-    public User CheckPassword(User user){
+    public User CheckPassword(User user) {
 
         User user1 = null;
         EntityManager em = getEntityManager();
@@ -154,7 +158,7 @@ public class userDAOImpl extends JpaController implements userDAO {
 
 
         try {
-            List<User>  users =  query.getResultList();
+            List<User> users = query.getResultList();
 
             user1 = users.get(0);
         } finally {

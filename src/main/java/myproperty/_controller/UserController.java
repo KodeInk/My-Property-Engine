@@ -22,12 +22,12 @@ public class UserController {
     private UserService userService;
 
     @RequestMapping(value = "/list", method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
-    public Collection<User> getAllUsers(){
+    public Collection<User> getAllUsers() {
         return userService.getAllUsers();
     }
 
     @RequestMapping(value = "/{id}",method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
-    public User getUserById( @PathVariable("id") int id ){
+    public User getUserById(@PathVariable("id") int id) {
         return userService.getUserById(id);
     }
 
@@ -39,11 +39,20 @@ public class UserController {
 
     @RequestMapping(value="/{id}/update",method = RequestMethod.PUT,consumes = MediaType.APPLICATION_JSON_VALUE)
     public void updateUser(@RequestBody User user) throws Exception {
-
         userService.updateUser(user);
-
     }
 
+    //TODO: Active User
+    @RequestMapping(value = "/{id}/activate", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void activateUser(@RequestBody User user) throws Exception {
+        // userService.updateUser(user);
+    }
+
+    //TODO: Deactive User
+    @RequestMapping(value = "/{id}/deactivate", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void deactivateUser(@RequestBody User user) throws Exception {
+        //userService.updateUser(user);
+    }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public User createUser(@RequestBody User user) {
@@ -51,11 +60,8 @@ public class UserController {
 
         try {
             return userService.createUser(user);
-            // return user;
-        }
- catch (Exception em) {
-
-     throw new BadRequestException("User Did Not Save Succesully ");
+        } catch (Exception em) {
+            throw new BadRequestException("User Did Not Save Succesully ");
         }
 
 

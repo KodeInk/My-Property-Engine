@@ -5,30 +5,38 @@
  */
 package myproperty._entities;
 
-import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Date;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.Date;
-
 
 /**
  *
- * @author Mover
+ * @author Manny
  */
 @Entity
 @Table(name = "user")
 @XmlRootElement
 @NamedQueries({
-
-        @NamedQuery(name = "User.checkPassword", query = "SELECT a FROM User a WHERE a.username LIKE :userName AND a.password LIKE :userPassword")
-})
-
-//@NamedQuery(name = "User.findAll", query = "SELECT a FROM User a")
-// @NamedQuery(name = "User.findById", query = "SELECT a FROM User a WHERE a.id = :id")
-
-
-public class User  {
+    @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u")
+    , @NamedQuery(name = "User.findById", query = "SELECT u FROM User u WHERE u.id = :id")
+    , @NamedQuery(name = "User.findByUsername", query = "SELECT u FROM User u WHERE u.username = :username")
+    , @NamedQuery(name = "User.findByPassword", query = "SELECT u FROM User u WHERE u.password = :password")
+    , @NamedQuery(name = "User.findByStatus", query = "SELECT u FROM User u WHERE u.status = :status")
+    , @NamedQuery(name = "User.findByDateCreated", query = "SELECT u FROM User u WHERE u.dateCreated = :dateCreated")})
+public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -37,23 +45,25 @@ public class User  {
     @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
+
+    @Size(min = 1, max = 255)
     @Column(name = "username")
     private String username;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
+
+    @Size(min = 1, max = 255)
     @Column(name = "password")
     private String password;
-    @Size(max = 11)
-    @Column(name = "status" )
+    @Basic(optional = false)
+
+    @Size(min = 1, max = 11)
+    @Column(name = "status")
     private String status;
+    @Basic(optional = false)
+
     @Column(name = "date_created")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateCreated;
-
-
 
     public User() {
     }
@@ -62,10 +72,12 @@ public class User  {
         this.id = id;
     }
 
-    public User(Integer id, String username, String password) {
+    public User(Integer id, String username, String password, String status, Date dateCreated) {
         this.id = id;
         this.username = username;
         this.password = password;
+        this.status = status;
+        this.dateCreated = dateCreated;
     }
 
     public Integer getId() {
@@ -108,6 +120,29 @@ public class User  {
         this.dateCreated = dateCreated;
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (id != null ? id.hashCode() : 0);
+        return hash;
+    }
 
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof User)) {
+            return false;
+        }
+        User other = (User) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "myproperty._entities.User[ id=" + id + " ]";
+    }
 
 }

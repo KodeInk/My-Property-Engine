@@ -5,6 +5,7 @@ import myproperty._entities.User;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.Date;
 import static myproperty.helper.utilities.*;
 
 
@@ -21,12 +22,12 @@ public class UserService {
 
 
     //TODO: Fetch all  Users
-    public Collection<User> getAllUsers(){
+    public Collection<User> getAllUsers() {
         return userDAOImpl.findUserEntities();
     }
 
     //TODO : get User By Id
-    public User getUserById(Integer id){
+    public User getUserById(Integer id) {
         return userDAOImpl.findUser(id);
     }
 
@@ -35,11 +36,11 @@ public class UserService {
          userDAOImpl.destroy(id);
     }
     //TODO: update User By Id
-    public User updateUser(User user) throws  Exception{
+    public User updateUser(User user) throws Exception {
        return userDAOImpl.edit(user);
     }
     //TODO: Create User
-    public User createUser(User user){
+    public User createUser(User user) {
 
         String password = user.getPassword();
         String username = user.getUsername();
@@ -49,11 +50,13 @@ public class UserService {
             throw new IllegalArgumentException();
         }
         // convert password to protecteed version
-        password = encryptPassword_md5(password);
+        password = encryptPassword_md5("oipii");
         user.setPassword(password);
-        // user.setStatus("PENDING");
+        user.setStatus("PENDING");
+        user.setDateCreated(getCurrentDate());
 
         return userDAOImpl.create(user);
+
     }
 
 

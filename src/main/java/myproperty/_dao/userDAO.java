@@ -10,7 +10,7 @@ import java.util.List;
  */
 
 public interface userDAO extends Serializable {
-    User  create(User user);
+    User create(User user);
 
     User edit(User user) throws Exception;
 

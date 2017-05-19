@@ -17,7 +17,8 @@ public class AccountController {
     }
 
     @RequestMapping(value = "/new", method = RequestMethod.POST)
-    public @ResponseBody String create_new_account(@RequestBody User user){
+    public @ResponseBody
+    String create_new_account(@RequestBody User user) {
         return " Create New Account ";
     }
 }

@@ -8,7 +8,7 @@ import myproperty._entities.AccountType;
 import myproperty._entities.Person;
 import myproperty._entities.Subscription;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2017-05-18T15:12:05")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2017-05-18T22:07:56")
 @StaticMetamodel(Account.class)
 public class Account_ { 
 

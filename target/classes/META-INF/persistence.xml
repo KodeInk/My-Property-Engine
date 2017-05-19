@@ -2,8 +2,7 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
   <persistence-unit name="MYPROPERTY" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>myproperty._entities.User</class>
-    <class>myproperty._entities.Subscription</class>
+    <!--    <class>myproperty._entities.Subscription</class>
     <class>myproperty._entities.Person</class>
     <class>myproperty._entities.AccountType</class>
     <class>myproperty._entities.Account</class>
@@ -18,9 +17,13 @@
     <class>myproperty._entities.UserRole</class>
     <class>myproperty._entities.Property</class>
     <class>myproperty._entities.SubscriptionPermission</class>
-    <class>myproperty._entities.Reviews</class>
+    <class>myproperty._entities.Reviews</class>-->
+    <!--    <class>myproperty._entities.User</class>-->
+    <class>myproperty._entities.Users</class>
+    <class>myproperty._dao.User</class>
+    <class>myproperty._entities.User</class>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/my_property"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/property"/>
       <property name="javax.persistence.jdbc.user" value="root"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
       <property name="javax.persistence.jdbc.password" value="mysql"/>
