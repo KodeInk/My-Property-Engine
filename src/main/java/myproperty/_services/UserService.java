@@ -1,5 +1,7 @@
 package myproperty._services;
 
+import java.util.AbstractCollection;
+import java.util.ArrayList;
 import myproperty._dao.userDAOImpl;
 import myproperty._entities.User;
 import org.springframework.stereotype.Service;
@@ -24,14 +26,26 @@ public class UserService {
 
 
     //TODO: Fetch all  Users
-    public Collection<User> getAllUsers() {
-        return userDAOImpl.findUserEntities();
+    public Collection<UserResponse> getAllUsers() {
+
+        Collection<User> users = userDAOImpl.findUserEntities();
+        Collection<UserResponse> userResponses = new ArrayList<>();
+
+        /*for (User user : users) {
+            userResponses.add(UserResponse(user));
+        } */
+        //Functional Alternative
+        users.forEach((User user) -> {
+            userResponses.add(UserResponse(user));
+        });
+
+        return userResponses;
     }
 
     //TODO : get User By Id
     public UserResponse getUserById(Integer id) {
-        UserResponse userResponse = UserResponse(userDAOImpl.findUser(id));
-        return userResponse;
+
+        return UserResponse(userDAOImpl.findUser(id));
     }
 
     //TODO: Delete User By Id

@@ -27,13 +27,12 @@ public class UserController {
     private static final Logger LOG = Logger.getLogger(UserController.class.getName());
 
     @RequestMapping(value = "/list", method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
-    public Collection<User> getUsers() {
+    public Collection<UserResponse> getUsers() {
         return userService.getAllUsers();
     }
 
     @RequestMapping(value = "/{id}",method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
     public UserResponse getUserById(@PathVariable("id") int id) {
-
         return userService.getUserById(id);
     }
 
@@ -44,8 +43,8 @@ public class UserController {
          return true;
     }
 
-    @RequestMapping(value="/{id}/update",method = RequestMethod.PUT,consumes = MediaType.APPLICATION_JSON_VALUE)
-    public UserResponse updateUser(@RequestBody User user) throws Exception {
+    @RequestMapping(value = "/{id}/update", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public UserResponse updateUser(@RequestBody User user, @RequestParam Integer id) throws Exception {
         LOG.log(Level.INFO, "Hit the User Update Endpoint");
         return userService.updateUser(user);
     }
