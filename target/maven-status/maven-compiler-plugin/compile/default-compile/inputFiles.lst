@@ -33,6 +33,7 @@ E:\codemovers\myproperty\src\main\java\myproperty\_dao\userDAO.java
 E:\codemovers\myproperty\src\main\java\myproperty\annotation\MainId.java
 E:\codemovers\myproperty\src\main\java\myproperty\_entities\Categories.java
 E:\codemovers\myproperty\src\main\java\myproperty\helper\exception\NotFoundException.java
+E:\codemovers\myproperty\src\main\java\myproperty\_entities\UserResponse.java
 E:\codemovers\myproperty\src\main\java\myproperty\db\Entity.java
 E:\codemovers\myproperty\src\main\java\myproperty\_entities\Permissions.java
 E:\codemovers\myproperty\src\main\java\myproperty\_controller\RegistrationController.java

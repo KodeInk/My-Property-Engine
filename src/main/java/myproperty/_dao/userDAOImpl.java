@@ -14,7 +14,7 @@ import javax.xml.ws.WebServiceException;
 import myproperty.helper.exception.InternalErrorException;
 
 /**
- * Created by Manny on 5/6/2017.
+ * Created by mover on 5/6/2017.
  */
 
 
@@ -35,7 +35,7 @@ public class userDAOImpl extends JpaController implements userDAO {
         super(User.class);
     }
 
-
+    @Override
     public User create(User user) {
         EntityManager em = null;
         try {
@@ -54,7 +54,7 @@ public class userDAOImpl extends JpaController implements userDAO {
         return user;
     }
 
-
+    @Override
     public User edit(User user) throws Exception {
         EntityManager em = null;
         try {

@@ -8,6 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
+import myproperty._entities.UserResponse;
 
 import myproperty.helper.exception.BadRequestException;
 
@@ -22,15 +23,16 @@ public class UserController {
     private UserService userService;
 
     @RequestMapping(value = "/list", method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
-    public Collection<User> getAllUsers() {
+    public Collection<User> getUsers() {
         return userService.getAllUsers();
     }
 
     @RequestMapping(value = "/{id}",method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
-    public User getUserById(@PathVariable("id") int id) {
+    public UserResponse getUserById(@PathVariable("id") int id) {
         return userService.getUserById(id);
     }
 
+    //Delete has issues:
     @RequestMapping(value = "/{id}/delete",method = RequestMethod.DELETE)
     public Boolean deleteUserById( @PathVariable("id") int id ) throws  Exception{
          userService.deleteUserById(id);
@@ -38,40 +40,38 @@ public class UserController {
     }
 
     @RequestMapping(value="/{id}/update",method = RequestMethod.PUT,consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void updateUser(@RequestBody User user) throws Exception {
-        userService.updateUser(user);
+    public UserResponse updateUser(@RequestBody User user) throws Exception {
+        return userService.updateUser(user);
     }
 
-    //TODO: Active User
+    //TODO: Activate User 
     @RequestMapping(value = "/{id}/activate", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
     public void activateUser(@RequestBody User user) throws Exception {
-        // userService.updateUser(user);
+
     }
 
-    //TODO: Deactive User
+    //TODO: Deactivate User
     @RequestMapping(value = "/{id}/deactivate", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
     public void deactivateUser(@RequestBody User user) throws Exception {
-        //userService.updateUser(user);
+
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public User createUser(@RequestBody User user) {
-        // String logId = context.getProperty("logId").toString();
-
+    public UserResponse createUser(@RequestBody User user) {
         try {
             return userService.createUser(user);
         } catch (Exception em) {
-            throw new BadRequestException("User Did Not Save Succesully ");
+            throw new BadRequestException("User was not saved correctly  ");
         }
-
-
     }
 
 
 
 
 
-
+    /*
+        Everything will be based on permission some one has on the system:
+     */
 
 
 }

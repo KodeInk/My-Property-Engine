@@ -5,7 +5,8 @@ import myproperty._entities.User;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
-import java.util.Date;
+import myproperty._entities.UserResponse;
+import myproperty.helper.exception.BadRequestException;
 import static myproperty.helper.utilities.*;
 
 
@@ -27,8 +28,9 @@ public class UserService {
     }
 
     //TODO : get User By Id
-    public User getUserById(Integer id) {
-        return userDAOImpl.findUser(id);
+    public UserResponse getUserById(Integer id) {
+        UserResponse userResponse = UserResponse(userDAOImpl.findUser(id));
+        return userResponse;
     }
 
     //TODO: Delete User By Id
@@ -36,27 +38,55 @@ public class UserService {
          userDAOImpl.destroy(id);
     }
     //TODO: update User By Id
-    public User updateUser(User user) throws Exception {
-       return userDAOImpl.edit(user);
+    public UserResponse updateUser(User user) throws Exception {
+        String password;
+
+        // convert password to protecteed version
+        if (!user.getPassword().isEmpty()) {
+            if (user.getPassword().length() <= 3) {
+                throw new BadRequestException("The Password is too short ");
+            }
+            password = encryptPassword_md5(user.getPassword());
+            user.setPassword(password);
+        }
+
+        if (user.getStatus() == null) {
+            user.setStatus("PENDING");
+        }
+
+        user.setDateCreated(getCurrentDate());
+        return UserResponse(userDAOImpl.edit(user));
+
     }
     //TODO: Create User
-    public User createUser(User user) {
+    public UserResponse createUser(User user) {
 
-        String password = user.getPassword();
-        String username = user.getUsername();
+        String password;
+
 
         // Throw Exception when  the User does not meet the mini um requirements
-        if(password.length() <= 3  || username.length() <= 1 ){
+        if (user.getPassword().length() <= 3 || user.getUsername().length() <= 1) {
             throw new IllegalArgumentException();
         }
         // convert password to protecteed version
-        password = encryptPassword_md5("oipii");
+        password = encryptPassword_md5(user.getPassword());
         user.setPassword(password);
-        user.setStatus("PENDING");
+
+        if (user.getStatus() == null)
+            user.setStatus("PENDING");
+
         user.setDateCreated(getCurrentDate());
 
-        return userDAOImpl.create(user);
+        return UserResponse(userDAOImpl.create(user));
 
+    }
+
+    public UserResponse UserResponse(User user1) {
+        UserResponse userResponse = new UserResponse();
+        userResponse.setId(user1.getId());
+        userResponse.setDateCreated(user1.getDateCreated());
+        userResponse.setUsername(user1.getUsername());
+        return userResponse;
     }
 
 
