@@ -8,6 +8,8 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import myproperty._entities.UserResponse;
 
 import myproperty.helper.exception.BadRequestException;
@@ -22,6 +24,8 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    private static final Logger LOG = Logger.getLogger(UserController.class.getName());
+
     @RequestMapping(value = "/list", method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
     public Collection<User> getUsers() {
         return userService.getAllUsers();
@@ -29,6 +33,7 @@ public class UserController {
 
     @RequestMapping(value = "/{id}",method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
     public UserResponse getUserById(@PathVariable("id") int id) {
+
         return userService.getUserById(id);
     }
 
@@ -41,6 +46,7 @@ public class UserController {
 
     @RequestMapping(value="/{id}/update",method = RequestMethod.PUT,consumes = MediaType.APPLICATION_JSON_VALUE)
     public UserResponse updateUser(@RequestBody User user) throws Exception {
+        LOG.log(Level.INFO, "Hit the User Update Endpoint");
         return userService.updateUser(user);
     }
 

@@ -5,6 +5,8 @@ import myproperty._entities.User;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import myproperty._entities.UserResponse;
 import myproperty.helper.exception.BadRequestException;
 import static myproperty.helper.utilities.*;
@@ -17,9 +19,8 @@ import static myproperty.helper.utilities.*;
 @Service
 public class UserService {
 
-
-    private  userDAOImpl userDAOImpl = myproperty._dao.userDAOImpl.getInstance();
-
+    private final userDAOImpl userDAOImpl = myproperty._dao.userDAOImpl.getInstance();
+    private static final Logger LOG = Logger.getLogger(UserService.class.getName());
 
 
     //TODO: Fetch all  Users
@@ -40,10 +41,11 @@ public class UserService {
     //TODO: update User By Id
     public UserResponse updateUser(User user) throws Exception {
         String password;
-
+        LOG.log(Level.INFO, "Hit UpdateUser Method in User Service ");
         // convert password to protecteed version
         if (!user.getPassword().isEmpty()) {
             if (user.getPassword().length() <= 3) {
+                LOG.log(Level.INFO, "The Password is too short ");
                 throw new BadRequestException("The Password is too short ");
             }
             password = encryptPassword_md5(user.getPassword());
@@ -62,7 +64,6 @@ public class UserService {
     public UserResponse createUser(User user) {
 
         String password;
-
 
         // Throw Exception when  the User does not meet the mini um requirements
         if (user.getPassword().length() <= 3 || user.getUsername().length() <= 1) {
