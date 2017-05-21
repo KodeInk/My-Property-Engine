@@ -27,7 +27,6 @@ public class UserService {
 
     //TODO: Fetch all  Users
     public Collection<UserResponse> getAllUsers() {
-
         Collection<User> users = userDAOImpl.findUserEntities();
         Collection<UserResponse> userResponses = new ArrayList<>();
 
@@ -53,27 +52,38 @@ public class UserService {
          userDAOImpl.destroy(id);
     }
     //TODO: update User By Id
-    public UserResponse updateUser(User user) throws Exception {
-        String password;
-        LOG.log(Level.INFO, "Hit UpdateUser Method in User Service ");
+    public UserResponse updateUser(String user_Id, User user) throws Exception {
+
+
+        if (user_Id.isEmpty()) {
+            throw new BadRequestException("User ID is Empty ");
+        }
+
+        Integer userId = Integer.parseInt(user_Id);
+
+        UserResponse _userDetails = getUserById(userId);
+
+        user.setId(userId);
         // convert password to protecteed version
         if (!user.getPassword().isEmpty()) {
             if (user.getPassword().length() <= 3) {
                 LOG.log(Level.INFO, "The Password is too short ");
                 throw new BadRequestException("The Password is too short ");
             }
-            password = encryptPassword_md5(user.getPassword());
-            user.setPassword(password);
+
+            LOG.log(Level.INFO, " Password is  {0}", user.getPassword());
+            user.setPassword(encryptPassword_md5(user.getPassword()));
         }
 
         if (user.getStatus() == null) {
-            user.setStatus("PENDING");
+            user.setStatus(_userDetails.getStatus());
         }
+        user.setDateCreated(_userDetails.getDateCreated());
 
-        user.setDateCreated(getCurrentDate());
         return UserResponse(userDAOImpl.edit(user));
 
     }
+
     //TODO: Create User
     public UserResponse createUser(User user) {
 
@@ -96,12 +106,44 @@ public class UserService {
 
     }
 
+    public UserResponse activateUser(String user_Id, User user) throws Exception {
+
+        if (user_Id.isEmpty()) {
+            throw new BadRequestException("User ID is Empty ");
+        }
+
+        Integer userId = Integer.parseInt(user_Id);
+
+        UserResponse _userDetails = getUserById(userId);
+
+        user.setId(userId);
+        // convert password to protecteed version
+        if (!user.getPassword().isEmpty()) {
+            if (user.getPassword().length() <= 3) {
+                LOG.log(Level.INFO, "The Password is too short ");
+                throw new BadRequestException("The Password is too short ");
+            }
+
+            LOG.log(Level.INFO, " Password is  {0}", user.getPassword());
+            user.setPassword(encryptPassword_md5(user.getPassword()));
+        }
+
+        if (user.getStatus() == null) {
+            user.setStatus(_userDetails.getStatus());
+        }
+        user.setDateCreated(_userDetails.getDateCreated());
+
+        return UserResponse(userDAOImpl.edit(user));
+    }
+
     public UserResponse UserResponse(User user1) {
-        UserResponse userResponse = new UserResponse();
-        userResponse.setId(user1.getId());
-        userResponse.setDateCreated(user1.getDateCreated());
-        userResponse.setUsername(user1.getUsername());
-        return userResponse;
+        UserResponse response = new UserResponse();
+        response.setId(user1.getId());
+        response.setDateCreated(user1.getDateCreated());
+        response.setUsername(user1.getUsername());
+        response.setStatus(user1.getStatus());
+        return response;
+
     }
 
 

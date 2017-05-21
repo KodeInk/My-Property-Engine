@@ -7,7 +7,7 @@ import javax.persistence.metamodel.StaticMetamodel;
 import myproperty._entities.Categories;
 import myproperty._entities.Person;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2017-05-20T20:03:58")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2017-05-21T06:55:53")
 @StaticMetamodel(Types.class)
 public class Types_ { 
 

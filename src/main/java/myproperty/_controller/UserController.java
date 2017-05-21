@@ -44,9 +44,10 @@ public class UserController {
     }
 
     @RequestMapping(value = "/{id}/update", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public UserResponse updateUser(@RequestBody User user, @RequestParam Integer id) throws Exception {
+    public UserResponse updateUser(@RequestBody User user, @PathVariable String id) throws Exception {
         LOG.log(Level.INFO, "Hit the User Update Endpoint");
-        return userService.updateUser(user);
+
+        return userService.updateUser(id, user);
     }
 
     //TODO: Activate User 

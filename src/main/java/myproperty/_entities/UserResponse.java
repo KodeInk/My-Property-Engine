@@ -17,14 +17,16 @@ public class UserResponse {
     private Integer id;
     private String username;
     private Date dateCreated;
+    private String status;
 
     public UserResponse() {
     }
 
-    public UserResponse(Integer id, String username, Date dateCreated) {
+    public UserResponse(Integer id, String username, Date dateCreated, String status) {
         this.id = id;
         this.username = username;
         this.dateCreated = dateCreated;
+        this.status = status;
     }
 
     public Integer getId() {
@@ -51,12 +53,21 @@ public class UserResponse {
         this.dateCreated = dateCreated;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 23 * hash + Objects.hashCode(this.id);
-        hash = 23 * hash + Objects.hashCode(this.username);
-        hash = 23 * hash + Objects.hashCode(this.dateCreated);
+        int hash = 5;
+        hash = 89 * hash + Objects.hashCode(this.id);
+        hash = 89 * hash + Objects.hashCode(this.username);
+        hash = 89 * hash + Objects.hashCode(this.dateCreated);
+        hash = 89 * hash + Objects.hashCode(this.status);
         return hash;
     }
 
@@ -75,19 +86,18 @@ public class UserResponse {
         if (!Objects.equals(this.username, other.username)) {
             return false;
         }
+        if (!Objects.equals(this.status, other.status)) {
+            return false;
+        }
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
-        if (!Objects.equals(this.dateCreated, other.dateCreated)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.dateCreated, other.dateCreated);
     }
 
     @Override
     public String toString() {
-        return this.getClass().getCanonicalName() + "{" + "id=" + id + ", username=" + username + ", dateCreated=" + dateCreated + '}';
+        return this.getClass().getCanonicalName() + "{" + "id=" + id + ", username=" + username + ", dateCreated=" + dateCreated + ", status=" + status + '}';
     }
-
 
 }
