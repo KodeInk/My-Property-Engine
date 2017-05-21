@@ -10,6 +10,7 @@ import java.util.Collection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import myproperty._entities.UserResponse;
+import myproperty.helper.StatusEnum;
 import myproperty.helper.exception.BadRequestException;
 import static myproperty.helper.utilities.*;
 
@@ -51,6 +52,7 @@ public class UserService {
     public void deleteUserById(Integer id) throws Exception{
          userDAOImpl.destroy(id);
     }
+
     //TODO: update User By Id
     public UserResponse updateUser(String user_Id, User user) throws Exception {
 
@@ -98,7 +100,7 @@ public class UserService {
         user.setPassword(password);
 
         if (user.getStatus() == null)
-            user.setStatus("PENDING");
+            user.setStatus(StatusEnum.PENDING.toString());
 
         user.setDateCreated(getCurrentDate());
 
@@ -106,36 +108,34 @@ public class UserService {
 
     }
 
-    public UserResponse activateUser(String user_Id, User user) throws Exception {
-
+    //TODO: Activate User 
+    public UserResponse activateUser(String user_Id) throws Exception {
         if (user_Id.isEmpty()) {
             throw new BadRequestException("User ID is Empty ");
         }
 
         Integer userId = Integer.parseInt(user_Id);
-
-        UserResponse _userDetails = getUserById(userId);
-
+        User user = userDAOImpl.findUser(userId);
         user.setId(userId);
-        // convert password to protecteed version
-        if (!user.getPassword().isEmpty()) {
-            if (user.getPassword().length() <= 3) {
-                LOG.log(Level.INFO, "The Password is too short ");
-                throw new BadRequestException("The Password is too short ");
-            }
-
-            LOG.log(Level.INFO, " Password is  {0}", user.getPassword());
-            user.setPassword(encryptPassword_md5(user.getPassword()));
-        }
-
-        if (user.getStatus() == null) {
-            user.setStatus(_userDetails.getStatus());
-        }
-        user.setDateCreated(_userDetails.getDateCreated());
-
+        user.setStatus(StatusEnum.ACTIVE.toString());
         return UserResponse(userDAOImpl.edit(user));
     }
 
+    //TODO: Activate User
+    public UserResponse deactivateUser(String user_Id) throws Exception {
+        if (user_Id.isEmpty()) {
+            throw new BadRequestException("User ID is Empty ");
+        }
+
+        Integer userId = Integer.parseInt(user_Id);
+        User user = userDAOImpl.findUser(userId);
+        user.setId(userId);
+        user.setStatus(StatusEnum.DEACTIVATED.toString());
+        return UserResponse(userDAOImpl.edit(user));
+    }
+
+
+    //TODO: User Response 
     public UserResponse UserResponse(User user1) {
         UserResponse response = new UserResponse();
         response.setId(user1.getId());

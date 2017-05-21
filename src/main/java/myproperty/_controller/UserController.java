@@ -26,6 +26,7 @@ public class UserController {
 
     private static final Logger LOG = Logger.getLogger(UserController.class.getName());
 
+    //TODO: list all users in the system, best way is to put range of data 
     @RequestMapping(value = "/list", method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
     public Collection<UserResponse> getUsers() {
         return userService.getAllUsers();
@@ -36,32 +37,35 @@ public class UserController {
         return userService.getUserById(id);
     }
 
-    //Delete has issues:
+    //TODO: not yet implemented 
     @RequestMapping(value = "/{id}/delete",method = RequestMethod.DELETE)
-    public Boolean deleteUserById( @PathVariable("id") int id ) throws  Exception{
-         userService.deleteUserById(id);
+    public Boolean deleteUserById(@PathVariable("id") String id) throws Exception {
+        //  userService.deleteUserById(id);
          return true;
     }
 
+    //TODO:Update User
     @RequestMapping(value = "/{id}/update", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public UserResponse updateUser(@RequestBody User user, @PathVariable String id) throws Exception {
         LOG.log(Level.INFO, "Hit the User Update Endpoint");
-
         return userService.updateUser(id, user);
     }
 
     //TODO: Activate User 
     @RequestMapping(value = "/{id}/activate", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void activateUser(@RequestBody User user) throws Exception {
-
+    public UserResponse activateUser(@PathVariable String id) throws Exception {
+        LOG.log(Level.INFO, "Hit the User Activation  Endpoint");
+        return userService.activateUser(id);
     }
 
     //TODO: Deactivate User
     @RequestMapping(value = "/{id}/deactivate", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void deactivateUser(@RequestBody User user) throws Exception {
-
+    public UserResponse deactivateUser(@PathVariable String id) throws Exception {
+        LOG.log(Level.INFO, "Hit the User Activation  Endpoint");
+        return userService.deactivateUser(id);
     }
 
+    //TODO:Create User 
     @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public UserResponse createUser(@RequestBody User user) {
         try {
