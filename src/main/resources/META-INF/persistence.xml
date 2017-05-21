@@ -22,6 +22,7 @@
     <class>myproperty._entities.Users</class>
     <class>myproperty._dao.User</class>
     <class>myproperty._entities.User</class>
+    <class>myproperty._entities.Person</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/property"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

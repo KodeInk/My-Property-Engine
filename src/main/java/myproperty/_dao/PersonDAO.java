@@ -5,34 +5,26 @@
  */
 package myproperty._dao;
 
+import java.io.Serializable;
+import java.util.List;
 import myproperty._entities.Person;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
-
-import java.util.Collection;
-import java.util.Map;
 
 /**
  *
- * @author CODE MOVERS
- * @version 1.0
- * @since 3/12/2017
- * @email moverr@gmail.com
- *
+ * @author mover
  */
-@Repository
-public class PersonDAO {
+public interface PersonDAO extends Serializable {
 
-    @Autowired
-    private static Map<Integer, Person> person;
+    Person create(Person person) throws Exception;
 
-    public Collection<Person> getAllPeople(int offset, int limit) {
-        return null;
-    }
+    void deletePerson(Integer id) throws Exception;
 
-    public Person getPersonById(int id) {
-        return this.person.get(id);
-    }
+    Person edit(Person person) throws Exception;
 
+    Person findPerson(Integer id) throws Exception;
+
+    public List<Person> findUserEntities() throws Exception;
+
+    List<Person> findUserEntities(int maxResults, int firstResult) throws Exception;
 
 }
