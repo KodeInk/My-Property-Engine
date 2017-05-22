@@ -44,35 +44,27 @@ public class PersonController {
     private static final Logger LOG = Logger.getLogger(UserController.class.getName());
 
     @RequestMapping(value = "/list", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public Collection<UserResponse> getPeople() {
-        return userService.getAllUsers();
+    public Collection<PersonResponse> getPeople() {
+        return personService.getAllPeople();
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public UserResponse getPersonById(@PathVariable("id") int id) {
-        return userService.getUserById(id);
-    }
-
-    //Delete has issues:
-    @RequestMapping(value = "/{id}/delete", method = RequestMethod.DELETE)
-    public Boolean deletePersonById(@PathVariable("id") int id) throws Exception {
-        userService.deleteUserById(id);
-        return true;
+    public PersonResponse getPersonById(@PathVariable("id") Integer id) throws Exception {
+        return personService.getPersonById(id);
     }
 
     @RequestMapping(value = "/{id}/update", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public PersonResponse updatePersonById(@RequestBody Person person, @RequestParam Integer id) throws Exception {
-        LOG.log(Level.INFO, "Hit the User Update Endpoint");
+        LOG.log(Level.INFO, "Hit the Person Update Endpoint");
         return personService.updatePerson(id, person);
     }
 
-
     @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public UserResponse createPerson(@RequestBody User user) {
+    public PersonResponse createPerson(@RequestBody Person person) {
         try {
-            return userService.createUser(user);
+            return personService.createPerson(person);
         } catch (Exception em) {
-            throw new BadRequestException("User was not saved correctly  ");
+            throw new BadRequestException("Person  was not saved correctly  ");
         }
     }
 
