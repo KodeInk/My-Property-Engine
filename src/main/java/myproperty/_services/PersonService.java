@@ -5,29 +5,61 @@
  */
 package myproperty._services;
 
+import java.util.ArrayList;
 import myproperty._entities.Person;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.logging.Logger;
+import myproperty._dao.PersonDAOImpl;
+import myproperty._entities.PersonResponse;
+import static myproperty.helper.utilities.getCurrentDate;
 
 /**
- *
- * @author CODE MOVERS
- * @version 1.0
- * @since 3/12/2017
- * @email moverr@gmail.com
+ * mover
  *
  */
 @Service
 public class PersonService {
 
+    private final PersonDAOImpl personDAOImpl = PersonDAOImpl.getInstance();
+    private static final Logger LOG = Logger.getLogger(UserService.class.getName());
 
-    public Collection<Person> getAllPeople(int offset, int limit) {
-      return null;
+    //TODO: Fetch all  Users
+    public Collection<PersonResponse> getAllPeople() {
+
+        Collection<Person> people = personDAOImpl.findEntities();
+
+        Collection<PersonResponse> personResponses = new ArrayList<>();
+        //java 8 functional statement
+        people.forEach((Person person) -> {
+            personResponses.add(PersonResponse(person));
+        });
+
+        return personResponses;
     }
 
-    public Person getPersonById(int id) {
-       return null;
+    //TODO : get Person  By Id
+    public PersonResponse getPersonById(Integer id) throws Exception {
+        return PersonResponse(personDAOImpl.findPerson(id));
+    }
+
+
+    //TODO: update Person By Id
+    public PersonResponse updatePerson(Person person) throws Exception {
+        return PersonResponse(personDAOImpl.edit(person));
+    }
+
+    //TODO: Create Person
+    public PersonResponse createPerson(Person person) throws Exception {
+        person.setDateCreated(getCurrentDate());
+        return PersonResponse(personDAOImpl.create(person));
+    }
+
+    //TODO: Person Response 
+    public PersonResponse PersonResponse(Person person) {
+        PersonResponse personResponse = new PersonResponse();
+        return personResponse;
     }
 
 
