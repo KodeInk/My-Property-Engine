@@ -68,8 +68,5 @@ public class PersonController {
         }
     }
 
-    /*
-        Everything will be based on permission some one has on the system:
-     */
 
 }
