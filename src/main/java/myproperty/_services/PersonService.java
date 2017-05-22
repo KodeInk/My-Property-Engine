@@ -46,7 +46,9 @@ public class PersonService {
 
 
     //TODO: update Person By Id
-    public PersonResponse updatePerson(Person person) throws Exception {
+    public PersonResponse updatePerson(Integer personId, Person person) throws Exception {
+
+        person.setId(personId);
         return PersonResponse(personDAOImpl.edit(person));
     }
 
@@ -59,6 +61,13 @@ public class PersonService {
     //TODO: Person Response 
     public PersonResponse PersonResponse(Person person) {
         PersonResponse personResponse = new PersonResponse();
+        personResponse.setNames(person.getNames());
+        personResponse.setGender(person.getGender());
+        personResponse.setId(person.getId());
+        personResponse.setDateCreated(person.getDateCreated());
+        personResponse.setCreatedBy(person.getCreatedBy());
+        personResponse.setDateUpdated(person.getDateUpdated());
+        personResponse.setUpdatedBy(person.getCreatedBy());
         return personResponse;
     }
 

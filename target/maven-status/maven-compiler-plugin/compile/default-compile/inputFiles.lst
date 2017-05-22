@@ -3,6 +3,7 @@ E:\codemovers\myproperty\src\main\java\myproperty\_services\UserService.java
 E:\codemovers\myproperty\src\main\java\myproperty\helper\exception\Message.java
 E:\codemovers\myproperty\src\main\java\myproperty\_entities\Users.java
 E:\codemovers\myproperty\src\main\java\myproperty\_entities\AccountType.java
+E:\codemovers\myproperty\src\main\java\myproperty\_dao\PersonDAOImpl.java
 E:\codemovers\myproperty\src\main\java\myproperty\helper\exception\ServiceUnAvailableException.java
 E:\codemovers\myproperty\src\main\java\myproperty\_entities\Reviews.java
 E:\codemovers\myproperty\src\main\java\myproperty\_entities\Rating.java
@@ -33,10 +34,12 @@ E:\codemovers\myproperty\src\main\java\myproperty\_dao\userDAO.java
 E:\codemovers\myproperty\src\main\java\myproperty\annotation\MainId.java
 E:\codemovers\myproperty\src\main\java\myproperty\_entities\Categories.java
 E:\codemovers\myproperty\src\main\java\myproperty\helper\exception\NotFoundException.java
+E:\codemovers\myproperty\src\main\java\myproperty\_entities\PersonResponse.java
 E:\codemovers\myproperty\src\main\java\myproperty\_entities\UserResponse.java
 E:\codemovers\myproperty\src\main\java\myproperty\db\Entity.java
 E:\codemovers\myproperty\src\main\java\myproperty\_entities\Permissions.java
 E:\codemovers\myproperty\src\main\java\myproperty\_controller\RegistrationController.java
 E:\codemovers\myproperty\src\main\java\myproperty\_entities\UserRole.java
+E:\codemovers\myproperty\src\main\java\myproperty\helper\StatusEnum.java
 E:\codemovers\myproperty\src\main\java\myproperty\helper\exception\UnauthorizedException.java
 E:\codemovers\myproperty\src\main\java\myproperty\_entities\Subscription.java

@@ -53,7 +53,13 @@ public class UserService {
          userDAOImpl.destroy(id);
     }
     //TODO: update User By Id
-    public UserResponse updateUser(User user) throws Exception {
+    public UserResponse updateUser(Integer user_id, User user) throws Exception {
+
+        // Set User Id
+        user.setId(user_id);
+
+
+        // Password 
         String password;
         LOG.log(Level.INFO, "Hit UpdateUser Method in User Service ");
         // convert password to protecteed version

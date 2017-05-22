@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Collection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import myproperty._entities.PersonResponse;
 import myproperty._entities.User;
 import myproperty._entities.UserResponse;
+import myproperty._services.PersonService;
 import myproperty._services.UserService;
 import myproperty.helper.exception.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +39,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class PersonController {
 
     @Autowired
-    private UserService userService;
+    private PersonService personService;
 
     private static final Logger LOG = Logger.getLogger(UserController.class.getName());
 
@@ -59,9 +61,9 @@ public class PersonController {
     }
 
     @RequestMapping(value = "/{id}/update", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public UserResponse updatePersonById(@RequestBody User user, @RequestParam Integer id) throws Exception {
+    public PersonResponse updatePersonById(@RequestBody Person person, @RequestParam Integer id) throws Exception {
         LOG.log(Level.INFO, "Hit the User Update Endpoint");
-        return userService.updateUser(user);
+        return personService.updatePerson(id, person);
     }
 
 
