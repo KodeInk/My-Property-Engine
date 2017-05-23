@@ -5,6 +5,7 @@ myproperty\helper\exception\ForbiddenException.class
 myproperty\_entities\Account_.class
 myproperty\_entities\Property.class
 myproperty\_entities\Person.class
+myproperty\_entities\PersonResponse.class
 myproperty\_entities\Roles.class
 myproperty\_dao\userDAO.class
 myproperty\helper\exception\InternalErrorException.class
@@ -14,6 +15,7 @@ myproperty\_entities\SubscriptionPermission.class
 myproperty\_controller\PersonController.class
 myproperty\_entities\User.class
 myproperty\_entities\Types_.class
+myproperty\_dao\PersonDAOImpl.class
 myproperty\_entities\Account.class
 myproperty\_entities\Images.class
 myproperty\_entities\SubscriptionPermission_.class
@@ -21,6 +23,7 @@ myproperty\_entities\Permissions_.class
 myproperty\_entities\Rating.class
 myproperty\_entities\Reviews_.class
 myproperty\helper\exception\UnauthorizedException.class
+myproperty\helper\StatusEnum.class
 myproperty\helper\exception\NotFoundException.class
 myproperty\_dao\userDAOImpl.class
 myproperty\helper\exception\ServiceUnAvailableException.class

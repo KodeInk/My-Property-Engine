@@ -17,6 +17,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -61,14 +62,17 @@ public class Person implements Serializable {
     @Column(name = "date_updated")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateUpdated;
+
     @JoinColumn(name = "created_by", referencedColumnName = "id")
-    @ManyToOne
+    @OneToOne
     private User createdBy;
+
     @JoinColumn(name = "updated_by", referencedColumnName = "id")
-    @ManyToOne
+    @OneToOne
     private User updatedBy;
+
     @JoinColumn(name = "userId", referencedColumnName = "id")
-    @ManyToOne
+    @OneToOne
     private User userId;
 
     public Person() {
@@ -164,10 +168,7 @@ public class Person implements Serializable {
             return false;
         }
         Person other = (Person) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+        return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
     }
 
     @Override

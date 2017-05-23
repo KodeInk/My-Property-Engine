@@ -61,9 +61,14 @@ public class PersonService {
     //TODO: Person Response 
     public PersonResponse PersonResponse(Person person) {
         PersonResponse personResponse = new PersonResponse();
+
+        personResponse.setId(person.getId());
         personResponse.setNames(person.getNames());
         personResponse.setGender(person.getGender());
-        personResponse.setId(person.getId());
+        personResponse.setDateofbirth(person.getDateofbirth());
+        personResponse.setUserId(person.getUserId());
+
+
         personResponse.setDateCreated(person.getDateCreated());
         personResponse.setCreatedBy(person.getCreatedBy());
         personResponse.setDateUpdated(person.getDateUpdated());
