@@ -180,7 +180,17 @@ public class PersonResponse {
 
     @Override
     public String toString() {
-        return this.getClass().getCanonicalName() + "{" + "id=" + id + ", names=" + names + ", gender=" + gender + ", dateofbirth=" + dateofbirth + ", dateCreated=" + dateCreated + ", dateUpdated=" + dateUpdated + ", createdBy=" + createdBy + ", updatedBy=" + updatedBy + ", userId=" + userId + '}';
+        return this.getClass().getCanonicalName() + "{"
+                + "id=" + id
+                + ", names=" + names
+                + ", gender=" + gender
+                + ", dateofbirth=" + dateofbirth
+                + ", dateCreated=" + dateCreated
+                + ", dateUpdated=" + dateUpdated
+                + ", createdBy=" + createdBy
+                + ", updatedBy=" + updatedBy
+                + ", userId=" + userId
+                + '}';
     }
 
 

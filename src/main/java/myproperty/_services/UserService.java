@@ -102,11 +102,11 @@ public class UserService {
 
     }
 
-    public UserResponse UserResponse(User user1) {
+    public UserResponse UserResponse(User _user) {
         UserResponse userResponse = new UserResponse();
-        userResponse.setId(user1.getId());
-        userResponse.setDateCreated(user1.getDateCreated());
-        userResponse.setUsername(user1.getUsername());
+        userResponse.setId(_user.getId());
+        userResponse.setDateCreated(_user.getDateCreated());
+        userResponse.setUsername(_user.getUsername());
         return userResponse;
     }
 

@@ -60,20 +60,25 @@ public class PersonService {
 
     //TODO: Person Response 
     public PersonResponse PersonResponse(Person person) {
-        PersonResponse personResponse = new PersonResponse();
+        try {
 
-        personResponse.setId(person.getId());
-        personResponse.setNames(person.getNames());
-        personResponse.setGender(person.getGender());
-        personResponse.setDateofbirth(person.getDateofbirth());
-        personResponse.setUserId(person.getUserId());
+            PersonResponse personResponse = new PersonResponse();
+
+            personResponse.setId(person.getId());
+            personResponse.setNames(person.getNames());
+            personResponse.setGender(person.getGender());
+            personResponse.setDateofbirth(person.getDateofbirth());
+            personResponse.setUserId(person.getUserId());
 
 
-        personResponse.setDateCreated(person.getDateCreated());
-        personResponse.setCreatedBy(person.getCreatedBy());
-        personResponse.setDateUpdated(person.getDateUpdated());
-        personResponse.setUpdatedBy(person.getCreatedBy());
-        return personResponse;
+            personResponse.setDateCreated(person.getDateCreated());
+            personResponse.setCreatedBy(person.getCreatedBy());
+            personResponse.setDateUpdated(person.getDateUpdated());
+            personResponse.setUpdatedBy(person.getCreatedBy());
+            return personResponse;
+        } catch (Exception em) {
+            throw em;
+        }
     }
 
 
