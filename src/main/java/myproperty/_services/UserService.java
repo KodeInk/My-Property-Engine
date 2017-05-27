@@ -104,6 +104,10 @@ public class UserService {
 
     public UserResponse UserResponse(User _user) {
         UserResponse userResponse = new UserResponse();
+        if (_user == null) {
+            return userResponse;
+        }
+
         userResponse.setId(_user.getId());
         userResponse.setDateCreated(_user.getDateCreated());
         userResponse.setUsername(_user.getUsername());

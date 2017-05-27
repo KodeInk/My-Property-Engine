@@ -61,9 +61,12 @@ public class PersonService {
 
     //TODO: Person Response 
     public PersonResponse PersonResponse(Person person) {
-        try {
+
 
             PersonResponse personResponse = new PersonResponse();
+            if (person == null) {
+                return personResponse;
+            }
 
             personResponse.setId(person.getId());
             personResponse.setNames(person.getNames());
@@ -94,9 +97,7 @@ public class PersonService {
             personResponse.setUpdatedBy(_updatedBy);
 
             return personResponse;
-        } catch (Exception em) {
-            throw em;
-        }
+
     }
 
 
