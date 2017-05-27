@@ -147,15 +147,15 @@ public class PersonDAOImpl extends JpaController implements PersonDAO {
         }
     }
 
-    public Person findPersonByUserid(Integer userId) throws Exception {
+    public List<Person> findPersonByUserid(Integer userId) throws Exception {
         EntityManager em = null;
-        Person person = null;
+        List<Person> person = null;
 
         try {
             em = getEntityManager();
             TypedQuery<Person> query = em.createNamedQuery("Person.findPersonByUserId", Person.class);
             query.setParameter("userId", userId);
-            person = query.getSingleResult();
+            person = query.getResultList();
 
         } catch (Exception ex) {
             throw ex;

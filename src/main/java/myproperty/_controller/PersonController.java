@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import myproperty._entities.PersonResponse;
@@ -50,20 +51,22 @@ public class PersonController {
         return personService.getPersonById(id);
     }
 
+    @RequestMapping(value = "userId/{userId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<PersonResponse> getPersonByUserId(@PathVariable("userId") Integer userId) throws Exception {
+        return personService.getPersonByUserId(userId);
+    }
+
+
     @RequestMapping(value = "/{id}/update", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public PersonResponse updatePersonById(@RequestBody Person person, @RequestParam Integer id) throws Exception {
+    public PersonResponse updatePersonById(@RequestBody Person person, @PathVariable Integer id) throws Exception {
         LOG.log(Level.INFO, "Hit the Person Update Endpoint");
         return personService.updatePerson(id, person);
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public PersonResponse createPerson(@RequestBody Person person) {
-        try {
-            return personService.createPerson(person);
-
-        } catch (Exception em) {
-            throw new BadRequestException("Person  was not saved correctly  ");
-        }
+    public PersonResponse createPerson(@RequestBody Person person) throws Exception {
+        LOG.log(Level.INFO, "Hit the Person Create Endpoint");
+        return personService.createPerson(person);
     }
 
 

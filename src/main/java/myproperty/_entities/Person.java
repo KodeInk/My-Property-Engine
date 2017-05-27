@@ -38,7 +38,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Person.findByDateofbirth", query = "SELECT p FROM Person p WHERE p.dateofbirth = :dateofbirth")
     , @NamedQuery(name = "Person.findByDateCreated", query = "SELECT p FROM Person p WHERE p.dateCreated = :dateCreated")
     , @NamedQuery(name = "Person.findByDateUpdated", query = "SELECT p FROM Person p WHERE p.dateUpdated = :dateUpdated")
-    , @NamedQuery(name = "Person.findPersonByUserId", query = "SELECT p FROM Person p WHERE p._user = :userId")
+    , @NamedQuery(name = "Person.findPersonByUserId", query = "SELECT p FROM Person p WHERE p._user.id = :userId")
 
 }
 )
