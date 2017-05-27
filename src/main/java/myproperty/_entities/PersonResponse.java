@@ -22,9 +22,9 @@ public class PersonResponse {
     private Date dateofbirth;
     private Date dateCreated;
     private Date dateUpdated;
-    private User createdBy;
-    private User updatedBy;
-    private User userId;
+    private UserResponse createdBy;
+    private UserResponse updatedBy;
+    private UserResponse _user;
 
     public PersonResponse() {
     }
@@ -33,7 +33,7 @@ public class PersonResponse {
         this.id = id;
     }
 
-    public PersonResponse(Integer id, String names, String gender, Date dateofbirth, Date dateCreated, Date dateUpdated, User createdBy, User updatedBy, User userId) {
+    public PersonResponse(Integer id, String names, String gender, Date dateofbirth, Date dateCreated, Date dateUpdated, UserResponse createdBy, UserResponse updatedBy, UserResponse _user) {
         this.id = id;
         this.names = names;
         this.gender = gender;
@@ -42,7 +42,7 @@ public class PersonResponse {
         this.dateUpdated = dateUpdated;
         this.createdBy = createdBy;
         this.updatedBy = updatedBy;
-        this.userId = userId;
+        this._user = _user;
     }
 
     public PersonResponse(Integer id, String names, String gender, Date dateofbirth) {
@@ -100,42 +100,42 @@ public class PersonResponse {
         this.dateUpdated = dateUpdated;
     }
 
-    public User getCreatedBy() {
+    public UserResponse getCreatedBy() {
         return createdBy;
     }
 
-    public void setCreatedBy(User createdBy) {
+    public void setCreatedBy(UserResponse createdBy) {
         this.createdBy = createdBy;
     }
 
-    public User getUpdatedBy() {
+    public UserResponse getUpdatedBy() {
         return updatedBy;
     }
 
-    public void setUpdatedBy(User updatedBy) {
+    public void setUpdatedBy(UserResponse updatedBy) {
         this.updatedBy = updatedBy;
     }
 
-    public User getUserId() {
-        return userId;
+    public UserResponse getUser() {
+        return _user;
     }
 
-    public void setUserId(User userId) {
-        this.userId = userId;
+    public void setUser(UserResponse _user) {
+        this._user = _user;
     }
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 37 * hash + Objects.hashCode(this.id);
-        hash = 37 * hash + Objects.hashCode(this.names);
-        hash = 37 * hash + Objects.hashCode(this.gender);
-        hash = 37 * hash + Objects.hashCode(this.dateofbirth);
-        hash = 37 * hash + Objects.hashCode(this.dateCreated);
-        hash = 37 * hash + Objects.hashCode(this.dateUpdated);
-        hash = 37 * hash + Objects.hashCode(this.createdBy);
-        hash = 37 * hash + Objects.hashCode(this.updatedBy);
-        hash = 37 * hash + Objects.hashCode(this.userId);
+        int hash = 3;
+        hash = 79 * hash + Objects.hashCode(this.id);
+        hash = 79 * hash + Objects.hashCode(this.names);
+        hash = 79 * hash + Objects.hashCode(this.gender);
+        hash = 79 * hash + Objects.hashCode(this.dateofbirth);
+        hash = 79 * hash + Objects.hashCode(this.dateCreated);
+        hash = 79 * hash + Objects.hashCode(this.dateUpdated);
+        hash = 79 * hash + Objects.hashCode(this.createdBy);
+        hash = 79 * hash + Objects.hashCode(this.updatedBy);
+        hash = 79 * hash + Objects.hashCode(this._user);
         return hash;
     }
 
@@ -175,7 +175,7 @@ public class PersonResponse {
         if (!Objects.equals(this.updatedBy, other.updatedBy)) {
             return false;
         }
-        return Objects.equals(this.userId, other.userId);
+        return Objects.equals(this._user, other._user);
     }
 
     @Override
@@ -189,7 +189,7 @@ public class PersonResponse {
                 + ", dateUpdated=" + dateUpdated
                 + ", createdBy=" + createdBy
                 + ", updatedBy=" + updatedBy
-                + ", userId=" + userId
+                + ", userId=" + _user
                 + '}';
     }
 

@@ -73,7 +73,7 @@ public class Person implements Serializable {
 
     @JoinColumn(name = "userId", referencedColumnName = "id")
     @OneToOne
-    private User userId;
+    private User _user;
 
     public Person() {
     }
@@ -146,12 +146,12 @@ public class Person implements Serializable {
         this.updatedBy = updatedBy;
     }
 
-    public User getUserId() {
-        return userId;
+    public User getUser() {
+        return _user;
     }
 
-    public void setUserId(User userId) {
-        this.userId = userId;
+    public void setUser(User _user) {
+        this._user = _user;
     }
 
     @Override

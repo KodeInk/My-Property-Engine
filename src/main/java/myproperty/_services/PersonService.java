@@ -13,6 +13,7 @@ import java.util.Collection;
 import java.util.logging.Logger;
 import myproperty._dao.PersonDAOImpl;
 import myproperty._entities.PersonResponse;
+import myproperty._entities.UserResponse;
 import static myproperty.helper.utilities.getCurrentDate;
 
 /**
@@ -68,13 +69,30 @@ public class PersonService {
             personResponse.setNames(person.getNames());
             personResponse.setGender(person.getGender());
             personResponse.setDateofbirth(person.getDateofbirth());
-            personResponse.setUserId(person.getUserId());
 
+            // User Details 
+            UserResponse _user = new UserResponse();
+            _user.setUsername(person.getUser().getUsername());
+            _user.setId(person.getUser().getId());
+            _user.setDateCreated(person.getUser().getDateCreated());
+            personResponse.setUser(_user);
 
+            //Created Information
             personResponse.setDateCreated(person.getDateCreated());
-            personResponse.setCreatedBy(person.getCreatedBy());
+            UserResponse _createdBy = new UserResponse();
+            _createdBy.setUsername(person.getCreatedBy().getUsername());
+            _createdBy.setId(person.getCreatedBy().getId());
+            _createdBy.setDateCreated(person.getCreatedBy().getDateCreated());
+            personResponse.setCreatedBy(_createdBy);
+
+            //Updated Information
             personResponse.setDateUpdated(person.getDateUpdated());
-            personResponse.setUpdatedBy(person.getCreatedBy());
+            UserResponse _updatedBy = new UserResponse();
+            _updatedBy.setUsername(person.getUpdatedBy().getUsername());
+            _updatedBy.setId(person.getUpdatedBy().getId());
+            _updatedBy.setDateCreated(person.getUpdatedBy().getDateCreated());
+            personResponse.setUpdatedBy(_updatedBy);
+
             return personResponse;
         } catch (Exception em) {
             throw em;
