@@ -59,8 +59,8 @@ public class PersonController {
     @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public PersonResponse createPerson(@RequestBody Person person) {
         try {
-            //  return personService.createPerson(person);
-            return personService.PersonResponse(person);
+            return personService.createPerson(person);
+
         } catch (Exception em) {
             throw new BadRequestException("Person  was not saved correctly  ");
         }

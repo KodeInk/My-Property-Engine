@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 import myproperty._dao.PersonDAOImpl;
 import myproperty._entities.PersonResponse;
 import myproperty._entities.UserResponse;
+import myproperty.helper.exception.BadRequestException;
 import static myproperty.helper.utilities.getCurrentDate;
 
 /**
@@ -45,6 +46,12 @@ public class PersonService {
         return PersonResponse(personDAOImpl.findPerson(id));
     }
 
+    //TODO : get Person  By  User Id
+    public PersonResponse getPersonByUserId(Integer userId) throws Exception {
+        return PersonResponse(personDAOImpl.findPersonByUserid(userId));
+    }
+
+
 
     //TODO: update Person By Id
     public PersonResponse updatePerson(Integer personId, Person person) throws Exception {
@@ -53,10 +60,21 @@ public class PersonService {
         return PersonResponse(personDAOImpl.edit(person));
     }
 
+
     //TODO: Create Person
     public PersonResponse createPerson(Person person) throws Exception {
         person.setDateCreated(getCurrentDate());
+
+        /*
+        Check if Personal Details exist for this User, if so, You Cant Create another Person with the same User ID
+         */
+//       PersonResponse personResponse = getPersonByUserId(person.getUser().getId());
+//        if (personResponse != null) {
+//            throw new BadRequestException("Personal Details with this User Id Already Exists, Probably Update Them");
+//        }
+
         return PersonResponse(personDAOImpl.create(person));
+
     }
 
     //TODO: Person Response 

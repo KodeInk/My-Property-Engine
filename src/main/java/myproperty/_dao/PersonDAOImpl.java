@@ -12,6 +12,7 @@ import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import myproperty._entities.User;
 import myproperty.db.JpaController;
@@ -48,6 +49,7 @@ public class PersonDAOImpl extends JpaController implements PersonDAO {
             em.getTransaction().begin();
             em.persist(person);
             em.getTransaction().commit();
+            LOG.log(Level.WARNING, "Record   Saved Succesfully");
         } catch (Exception ex) {
             LOG.log(Level.WARNING, "Record not Saved");
             throw new InternalErrorException("Record not Saved", ex);
@@ -144,5 +146,28 @@ public class PersonDAOImpl extends JpaController implements PersonDAO {
             }
         }
     }
+
+    public Person findPersonByUserid(Integer userId) throws Exception {
+        EntityManager em = null;
+        Person person = null;
+
+        try {
+            em = getEntityManager();
+            TypedQuery<Person> query = em.createNamedQuery("Person.findPersonByUserId", Person.class);
+            query.setParameter("userId", userId);
+            person = query.getSingleResult();
+
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            if (em == null) {
+            } else {
+                em.close();
+            }
+        }
+
+        return person;
+    }
+
 
 }
