@@ -70,10 +70,6 @@ public class UserController {
         }
     }
 
-
-
-
-
     /*
         Everything will be based on permission some one has on the system:
      */
