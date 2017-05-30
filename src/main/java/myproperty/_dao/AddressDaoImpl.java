@@ -5,6 +5,7 @@
  */
 package myproperty._dao;
 
+import myproperty._dao.interfaces.AddressDao;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,18 +15,15 @@ import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaQuery;
 import myproperty._entities.Address;
 import myproperty._entities.Person;
-import myproperty._entities.User;
-import myproperty.db.Entity;
 import myproperty.db.JpaController;
 import myproperty.helper.exception.InternalErrorException;
 
 /**
  *
- * @author Manny
+ * @author Mover
  */
-public class AddressDaoImpl extends JpaController {
+public class AddressDaoImpl extends JpaController implements AddressDao {
     private static final Logger LOG = Logger.getLogger(AddressDaoImpl.class.getName());
-
     private static AddressDaoImpl instance = null;
 
     public static AddressDaoImpl getInstance() {
@@ -39,6 +37,7 @@ public class AddressDaoImpl extends JpaController {
         super(Address.class);
     }
 
+    @Override
     public Address create(Address address) throws Exception {
         EntityManager em = null;
         try {
@@ -58,6 +57,7 @@ public class AddressDaoImpl extends JpaController {
         return address;
     }
 
+    @Override
     public Address edit(Address address) throws Exception {
 
         EntityManager em = null;
@@ -84,6 +84,7 @@ public class AddressDaoImpl extends JpaController {
         return address;
     }
 
+    @Override
     public Address findAddress(Integer id) throws Exception {
         EntityManager em = getEntityManager();
         try {
@@ -93,10 +94,12 @@ public class AddressDaoImpl extends JpaController {
         }
     }
 
+    @Override
     public List<Person> findAddressrEntities() throws Exception {
         return findAddressEntities(true, -1, -1);
     }
 
+    @Override
     public List<Person> findAddressEntities(int maxResults, int firstResult) throws Exception {
         return findAddressEntities(false, maxResults, firstResult);
     }
@@ -117,6 +120,7 @@ public class AddressDaoImpl extends JpaController {
         }
     }
 
+    @Override
     public void deleteAddress(Integer id) throws Exception {
         EntityManager em = null;
         try {

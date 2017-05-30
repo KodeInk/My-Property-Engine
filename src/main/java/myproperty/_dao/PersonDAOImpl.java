@@ -15,19 +15,16 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
-import myproperty._entities.User;
 import myproperty.db.JpaController;
 import myproperty.helper.exception.InternalErrorException;
 
 /**
- * mover
+ * @author : mover
  */
 public class PersonDAOImpl extends JpaController implements PersonDAO {
 
     private static final Logger LOG = Logger.getLogger(PersonDAOImpl.class.getName());
-
     private static PersonDAOImpl instance = null;
-
     //singleton implementation
     public static PersonDAOImpl getInstance() {
         if (instance == null) {
