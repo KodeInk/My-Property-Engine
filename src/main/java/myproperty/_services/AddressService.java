@@ -38,7 +38,7 @@ public class AddressService {
     }
 
     //TODO : get Person  By Id
-    public AddressResponse getAddressyId(Integer id) throws Exception {
+    public AddressResponse getAddresById(Integer id) throws Exception {
         Address address = addressDaoImpl.findAddress(id);
         return AddressResponse(address);
     }
