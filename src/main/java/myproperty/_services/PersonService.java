@@ -13,8 +13,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.logging.Logger;
 import myproperty._dao.PersonDAOImpl;
-import myproperty._entities.PersonResponse;
-import myproperty._entities.UserResponse;
+import myproperty._entities.responses.PersonResponse;
+import myproperty._entities.responses.UserResponse;
 import myproperty.helper.exception.BadRequestException;
 import static myproperty.helper.utilities.getCurrentDate;
 

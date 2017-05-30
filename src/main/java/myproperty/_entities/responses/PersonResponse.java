@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package myproperty._entities;
+package myproperty._entities.responses;
 
+import myproperty._entities.responses.UserResponse;
 import java.util.Date;
 import java.util.Objects;
 

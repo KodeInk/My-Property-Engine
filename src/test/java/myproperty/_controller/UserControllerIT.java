@@ -7,7 +7,7 @@ package myproperty._controller;
 
 import java.util.Collection;
 import myproperty._entities.User;
-import myproperty._entities.UserResponse;
+import myproperty._entities.responses.UserResponse;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;

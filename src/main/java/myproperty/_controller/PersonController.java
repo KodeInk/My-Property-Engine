@@ -14,7 +14,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import myproperty._entities.PersonResponse;
+import myproperty._entities.responses.PersonResponse;
 import myproperty._services.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;

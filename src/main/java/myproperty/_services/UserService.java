@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.Collection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import myproperty._entities.UserResponse;
+import myproperty._entities.responses.UserResponse;
 import myproperty.helper.exception.BadRequestException;
 import static myproperty.helper.utilities.*;
 
