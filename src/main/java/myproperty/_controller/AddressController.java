@@ -6,6 +6,7 @@
 package myproperty._controller;
 
 import java.util.List;
+import myproperty._entities.responses.AddressResponse;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,7 +28,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.PUT;
 public class AddressController {
 
     @RequestMapping(value = "/list", method = GET)
-    public List<Object> list() {
+    public List<AddressResponse> list() {
         return null;
     }
 
