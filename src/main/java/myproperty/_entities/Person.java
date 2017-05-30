@@ -6,6 +6,7 @@
 package myproperty._entities;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -14,6 +15,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
@@ -22,6 +24,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -44,6 +47,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 )
 
 public class Person implements Serializable {
+
+    @ManyToMany(mappedBy = "personCollection")
+    private Collection<Address> addressCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -178,6 +184,15 @@ public class Person implements Serializable {
     @Override
     public String toString() {
         return "myproperty._entities.Person[ id=" + id + " ]";
+    }
+
+    @XmlTransient
+    public Collection<Address> getAddressCollection() {
+        return addressCollection;
+    }
+
+    public void setAddressCollection(Collection<Address> addressCollection) {
+        this.addressCollection = addressCollection;
     }
 
 }

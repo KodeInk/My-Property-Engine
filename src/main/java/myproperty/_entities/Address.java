@@ -5,11 +5,28 @@
  */
 package myproperty._entities;
 
-import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Collection;
+import java.util.Date;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.io.Serializable;
-import java.util.Date;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -22,12 +39,18 @@ import java.util.Date;
     @NamedQuery(name = "Address.findAll", query = "SELECT a FROM Address a")
     , @NamedQuery(name = "Address.findById", query = "SELECT a FROM Address a WHERE a.id = :id")
     , @NamedQuery(name = "Address.findByLocation", query = "SELECT a FROM Address a WHERE a.location = :location")
-    , @NamedQuery(name = "Address.findByLongtitude", query = "SELECT a FROM Address a WHERE a.longtitude = :longtitude")
-    , @NamedQuery(name = "Address.findByLatitude", query = "SELECT a FROM Address a WHERE a.latitude = :latitude")
-    , @NamedQuery(name = "Address.findByParentType", query = "SELECT a FROM Address a WHERE a.parentType = :parentType")
-    , @NamedQuery(name = "Address.findByParentId", query = "SELECT a FROM Address a WHERE a.parentId = :parentId")
-    , @NamedQuery(name = "Address.findByDateCreated", query = "SELECT a FROM Address a WHERE a.dateCreated = :dateCreated")})
+    , @NamedQuery(name = "Address.findByLat", query = "SELECT a FROM Address a WHERE a.lat = :lat")
+    , @NamedQuery(name = "Address.findByLng", query = "SELECT a FROM Address a WHERE a.lng = :lng")
+    , @NamedQuery(name = "Address.findByDatecreated", query = "SELECT a FROM Address a WHERE a.datecreated = :datecreated")
+    , @NamedQuery(name = "Address.findByDateupdated", query = "SELECT a FROM Address a WHERE a.dateupdated = :dateupdated")
+    , @NamedQuery(name = "Address.findByStatus", query = "SELECT a FROM Address a WHERE a.status = :status")})
 public class Address implements Serializable {
+
+    @JoinTable(name = "person_address", joinColumns = {
+        @JoinColumn(name = "addressId", referencedColumnName = "id")}, inverseJoinColumns = {
+        @JoinColumn(name = "personId", referencedColumnName = "id")})
+    @ManyToMany
+    private Collection<Person> personCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -35,32 +58,58 @@ public class Address implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Size(max = 45)
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 255)
     @Column(name = "location")
     private String location;
-    @Size(max = 45)
-    @Column(name = "longtitude")
-    private String longtitude;
-    @Size(max = 45)
-    @Column(name = "latitude")
-    private String latitude;
-    @Size(max = 45)
-    @Column(name = "parent_type")
-    private String parentType;
-    @Column(name = "parent_id")
-    private Integer parentId;
-    @Column(name = "date_created")
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 255)
+    @Column(name = "lat")
+    private String lat;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 255)
+    @Column(name = "lng")
+    private String lng;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "datecreated")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date dateCreated;
-    @JoinColumn(name = "author_id", referencedColumnName = "id")
-    @ManyToOne
-    private Person authorId;
+    private Date datecreated;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "dateupdated")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dateupdated;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 8)
+    @Column(name = "status")
+    private String status;
+    @JoinColumn(name = "createdby", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private User createdby;
+    @JoinColumn(name = "updatedby", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private User updatedby;
 
     public Address() {
     }
 
     public Address(Integer id) {
         this.id = id;
+    }
+
+    public Address(Integer id, String location, String lat, String lng, Date datecreated, Date dateupdated, String status) {
+        this.id = id;
+        this.location = location;
+        this.lat = lat;
+        this.lng = lng;
+        this.datecreated = datecreated;
+        this.dateupdated = dateupdated;
+        this.status = status;
     }
 
     public Integer getId() {
@@ -79,52 +128,60 @@ public class Address implements Serializable {
         this.location = location;
     }
 
-    public String getLongtitude() {
-        return longtitude;
+    public String getLat() {
+        return lat;
     }
 
-    public void setLongtitude(String longtitude) {
-        this.longtitude = longtitude;
+    public void setLat(String lat) {
+        this.lat = lat;
     }
 
-    public String getLatitude() {
-        return latitude;
+    public String getLng() {
+        return lng;
     }
 
-    public void setLatitude(String latitude) {
-        this.latitude = latitude;
+    public void setLng(String lng) {
+        this.lng = lng;
     }
 
-    public String getParentType() {
-        return parentType;
+    public Date getDatecreated() {
+        return datecreated;
     }
 
-    public void setParentType(String parentType) {
-        this.parentType = parentType;
+    public void setDatecreated(Date datecreated) {
+        this.datecreated = datecreated;
     }
 
-    public Integer getParentId() {
-        return parentId;
+    public Date getDateupdated() {
+        return dateupdated;
     }
 
-    public void setParentId(Integer parentId) {
-        this.parentId = parentId;
+    public void setDateupdated(Date dateupdated) {
+        this.dateupdated = dateupdated;
     }
 
-    public Date getDateCreated() {
-        return dateCreated;
+    public String getStatus() {
+        return status;
     }
 
-    public void setDateCreated(Date dateCreated) {
-        this.dateCreated = dateCreated;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public Person getAuthorId() {
-        return authorId;
+    public User getCreatedby() {
+        return createdby;
     }
 
-    public void setAuthorId(Person authorId) {
-        this.authorId = authorId;
+    public void setCreatedby(User createdby) {
+        this.createdby = createdby;
+    }
+
+    public User getUpdatedby() {
+        return updatedby;
+    }
+
+    public void setUpdatedby(User updatedby) {
+        this.updatedby = updatedby;
     }
 
     @Override
@@ -150,6 +207,15 @@ public class Address implements Serializable {
     @Override
     public String toString() {
         return "myproperty._entities.Address[ id=" + id + " ]";
+    }
+
+    @XmlTransient
+    public Collection<Person> getPersonCollection() {
+        return personCollection;
+    }
+
+    public void setPersonCollection(Collection<Person> personCollection) {
+        this.personCollection = personCollection;
     }
 
 }
