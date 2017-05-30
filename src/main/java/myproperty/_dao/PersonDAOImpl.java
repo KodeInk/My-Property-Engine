@@ -5,6 +5,7 @@
  */
 package myproperty._dao;
 
+import myproperty._dao.interfaces.PersonDAO;
 import myproperty._entities.Person;
 import java.util.List;
 import java.util.logging.Level;
@@ -112,7 +113,7 @@ public class PersonDAOImpl extends JpaController implements PersonDAO {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(User.class));
+            cq.select(cq.from(Person.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);

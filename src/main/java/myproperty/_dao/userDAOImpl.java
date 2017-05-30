@@ -1,5 +1,6 @@
 package myproperty._dao;
 
+import myproperty._dao.interfaces.userDAO;
 import myproperty._entities.User;
 import myproperty.db.JpaController;
 

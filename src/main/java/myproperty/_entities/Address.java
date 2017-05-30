@@ -102,13 +102,12 @@ public class Address implements Serializable {
         this.id = id;
     }
 
-    public Address(Integer id, String location, String lat, String lng, Date datecreated, Date dateupdated, String status) {
+    public Address(Integer id, String location, String lat, String lng, Date datecreated, String status) {
         this.id = id;
         this.location = location;
         this.lat = lat;
         this.lng = lng;
         this.datecreated = datecreated;
-        this.dateupdated = dateupdated;
         this.status = status;
     }
 
@@ -198,10 +197,7 @@ public class Address implements Serializable {
             return false;
         }
         Address other = (Address) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+        return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
     }
 
     @Override

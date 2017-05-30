@@ -1,4 +1,4 @@
-package myproperty._dao;
+package myproperty._dao.interfaces;
 
 import myproperty._entities.User;
 

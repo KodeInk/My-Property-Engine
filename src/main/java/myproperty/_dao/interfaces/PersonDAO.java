@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package myproperty._dao;
+package myproperty._dao.interfaces;
 
 import java.io.Serializable;
 import java.util.List;
