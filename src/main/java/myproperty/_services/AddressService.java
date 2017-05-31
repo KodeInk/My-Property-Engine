@@ -13,12 +13,14 @@ import myproperty._entities.Address;
 import myproperty._entities.responses.AddressResponse;
 import myproperty._entities.responses.UserResponse;
 import static myproperty.helper.utilities.getCurrentDate;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author Mover
  * @since 5/30/2017
  */
+@Service
 public class AddressService {
 
     private final AddressDaoImpl addressDaoImpl = AddressDaoImpl.getInstance();
