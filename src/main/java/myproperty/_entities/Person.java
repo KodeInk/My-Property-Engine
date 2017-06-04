@@ -48,6 +48,9 @@ import javax.xml.bind.annotation.XmlTransient;
 
 public class Person implements Serializable {
 
+    @ManyToMany(mappedBy = "personCollection")
+    private Collection<Contacts> contactsCollection;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -181,6 +184,15 @@ public class Person implements Serializable {
     @Override
     public String toString() {
         return "myproperty._entities.Person[ id=" + id + " ]";
+    }
+
+    @XmlTransient
+    public Collection<Contacts> getContactsCollection() {
+        return contactsCollection;
+    }
+
+    public void setContactsCollection(Collection<Contacts> contactsCollection) {
+        this.contactsCollection = contactsCollection;
     }
 
 }

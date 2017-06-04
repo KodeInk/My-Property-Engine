@@ -10,7 +10,9 @@ package myproperty.helper;
  * @author Mover 6/4/2017
  */
 public enum ContactTypes {
-    PHONE, EMAIL, WEBSITE, FAX, SOCIALMEDIA, OTHERS;
+    PHONE, EMAIL, WEBSITE, FAX, WATSAPP, FACEBOOK, LINKEDIN, TWITTER, SNAPCHAT, PINTEREST, OTHERS;
+    //SOCIALMEDIA
+
     public static final ContactTypes fromString(String text) {
         ContactTypes returnValue = OTHERS;
 
