@@ -24,6 +24,7 @@ public class AddressResponse {
     private UserResponse createdby;
     private UserResponse updatedby;
 
+
     public AddressResponse() {
     }
 

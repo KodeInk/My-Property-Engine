@@ -12,6 +12,7 @@ import myproperty._dao.AddressDaoImpl;
 import myproperty._entities.Address;
 import myproperty._entities.responses.AddressResponse;
 import myproperty._entities.responses.UserResponse;
+import myproperty.helper.StatusEnum;
 import static myproperty.helper.utilities.getCurrentDate;
 import org.springframework.stereotype.Service;
 
@@ -76,11 +77,13 @@ public class AddressService {
         return AddressResponse(_address);
     }
 
-    //TODO: Create Person
+    //TODO: Create Address
     public AddressResponse createAddress(Address address) throws Exception {
         address.setDatecreated(getCurrentDate());
+        if (address.getStatus() == null) {
+            address.setStatus(StatusEnum.ACTIVE.toString());
+        }
         return AddressResponse(addressDaoImpl.create(address));
-
     }
 
     //TODO: Person Response
@@ -99,7 +102,8 @@ public class AddressService {
         // User Details
         if (address.getCreatedby() != null) {
             UserResponse _user = new UserResponse();
-            // _user.setUsername(address.getCreatedby().getUsername());
+
+            _user.setUsername(address.getCreatedby().getUsername());
             _user.setId(address.getCreatedby().getId());
             _user.setDateCreated(address.getCreatedby().getDateCreated());
             addressResponse.setCreatedby(_user);
@@ -118,6 +122,7 @@ public class AddressService {
             addressResponse.setUpdatedby(_updatedBy);
         }
 
+        addressResponse.setStatus(address.getStatus());
 
         return addressResponse;
 

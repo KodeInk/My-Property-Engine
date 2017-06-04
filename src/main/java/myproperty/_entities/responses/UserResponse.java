@@ -7,6 +7,7 @@ package myproperty._entities.responses;
 
 import java.util.Date;
 import java.util.Objects;
+import myproperty._entities.Person;
 
 /**
  *
@@ -17,6 +18,7 @@ public class UserResponse {
     private Integer id;
     private String username;
     private Date dateCreated;
+    private PersonResponse personResponse;
 
     public UserResponse() {
     }
@@ -51,12 +53,22 @@ public class UserResponse {
         this.dateCreated = dateCreated;
     }
 
+
+    public PersonResponse getPersonResponse() {
+        return personResponse;
+    }
+
+    public void setPersonResponse(PersonResponse personResponse) {
+        this.personResponse = personResponse;
+    }
+
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 23 * hash + Objects.hashCode(this.id);
-        hash = 23 * hash + Objects.hashCode(this.username);
-        hash = 23 * hash + Objects.hashCode(this.dateCreated);
+        hash = 97 * hash + Objects.hashCode(this.id);
+        hash = 97 * hash + Objects.hashCode(this.username);
+        hash = 97 * hash + Objects.hashCode(this.dateCreated);
+        hash = 97 * hash + Objects.hashCode(this.personResponse);
         return hash;
     }
 
@@ -81,12 +93,21 @@ public class UserResponse {
         if (!Objects.equals(this.dateCreated, other.dateCreated)) {
             return false;
         }
+        if (!Objects.equals(this.personResponse, other.personResponse)) {
+            return false;
+        }
         return true;
     }
 
     @Override
     public String toString() {
-        return this.getClass().getCanonicalName() + "{" + "id=" + id + ", username=" + username + ", dateCreated=" + dateCreated + '}';
+        return this.getClass().getCanonicalName()
+                + "{"
+                + "id=" + id
+                + ", username=" + username
+                + ", dateCreated=" + dateCreated
+                + ", person=" + personResponse
+                + '}';
     }
 
 
