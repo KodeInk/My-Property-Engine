@@ -22,23 +22,43 @@ CREATE TABLE IF NOT EXISTS `address` (
   `location` varchar(255) NOT NULL DEFAULT '0',
   `lat` varchar(255) NOT NULL DEFAULT '0',
   `lng` varchar(255) NOT NULL DEFAULT '0',
-  `parenttype` enum('PERSON','PROPERTY','COMPANY','OFFICE') DEFAULT NULL,
-  `parentid` int(20) NOT NULL DEFAULT '0',
   `createdby` int(20) NOT NULL DEFAULT '0',
   `datecreated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `updatedby` int(20) NOT NULL,
-  `dateupdated` datetime NOT NULL,
+  `updatedby` int(20) DEFAULT NULL,
+  `dateupdated` datetime DEFAULT NULL,
   `status` enum('ACTIVE','ARCHIVED') NOT NULL DEFAULT 'ACTIVE',
   PRIMARY KEY (`id`),
-  KEY `FK_address_person` (`parentid`),
+  KEY `CreatedBy` (`createdby`),
+  KEY `UpdatedBy` (`updatedby`),
   FULLTEXT KEY `location` (`location`),
-  CONSTRAINT `FK_address_person` FOREIGN KEY (`parentid`) REFERENCES `address` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Manage All Addresses in the System';
+  CONSTRAINT `CreatedBy` FOREIGN KEY (`createdby`) REFERENCES `user` (`id`),
+  CONSTRAINT `UpdatedBy` FOREIGN KEY (`updatedby`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='Manage All Addresses in the System';
 
--- Dumping data for table property.address: ~0 rows (approximately)
+-- Dumping data for table property.address: ~1 rows (approximately)
 DELETE FROM `address`;
 /*!40000 ALTER TABLE `address` DISABLE KEYS */;
+INSERT INTO `address` (`id`, `location`, `lat`, `lng`, `createdby`, `datecreated`, `updatedby`, `dateupdated`, `status`) VALUES
+	(2, 'Kampala,Uganda', '234.45', '456.78', 2, '2017-05-31 13:24:14', 2, '2017-05-31 13:23:55', 'ACTIVE');
 /*!40000 ALTER TABLE `address` ENABLE KEYS */;
+
+-- Dumping structure for table property.contacts
+CREATE TABLE IF NOT EXISTS `contacts` (
+  `id` int(20) NOT NULL AUTO_INCREMENT,
+  `type` varchar(255) NOT NULL,
+  `details` varchar(255) NOT NULL,
+  `created_by` int(20) NOT NULL,
+  `date_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_by` int(20) NOT NULL,
+  `date_updated` datetime NOT NULL,
+  `status` enum('ACTIVE','ARCHIVED') NOT NULL DEFAULT 'ACTIVE',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Manage System Level Contacts \r\nWebsites, Phone,Fax,Social Media, Etc';
+
+-- Dumping data for table property.contacts: ~0 rows (approximately)
+DELETE FROM `contacts`;
+/*!40000 ALTER TABLE `contacts` DISABLE KEYS */;
+/*!40000 ALTER TABLE `contacts` ENABLE KEYS */;
 
 -- Dumping structure for table property.person
 CREATE TABLE IF NOT EXISTS `person` (
@@ -74,6 +94,36 @@ INSERT INTO `person` (`id`, `userId`, `names`, `gender`, `dateofbirth`, `date_cr
 	(8, 2, 'Julaia KOI', 'FEMALE', '2017-05-26', '2017-05-27 08:02:03', 2, '2017-05-26 05:01:47', 2);
 /*!40000 ALTER TABLE `person` ENABLE KEYS */;
 
+-- Dumping structure for table property.person_address
+CREATE TABLE IF NOT EXISTS `person_address` (
+  `personId` int(20) DEFAULT NULL,
+  `addressId` int(20) DEFAULT NULL,
+  KEY `PersonId` (`personId`),
+  KEY `AddressId` (`addressId`),
+  CONSTRAINT `AddressId` FOREIGN KEY (`addressId`) REFERENCES `address` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `PersonId` FOREIGN KEY (`personId`) REFERENCES `person` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Pivot table between person and Address';
+
+-- Dumping data for table property.person_address: ~0 rows (approximately)
+DELETE FROM `person_address`;
+/*!40000 ALTER TABLE `person_address` DISABLE KEYS */;
+/*!40000 ALTER TABLE `person_address` ENABLE KEYS */;
+
+-- Dumping structure for table property.person_contact
+CREATE TABLE IF NOT EXISTS `person_contact` (
+  `personId` int(20) DEFAULT NULL,
+  `contactId` int(20) DEFAULT NULL,
+  KEY `PS_person` (`personId`),
+  KEY `PS_contact` (`contactId`),
+  CONSTRAINT `PS_contact` FOREIGN KEY (`contactId`) REFERENCES `contacts` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `PS_person` FOREIGN KEY (`personId`) REFERENCES `person` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Person and  Contacts Pivot Table ';
+
+-- Dumping data for table property.person_contact: ~0 rows (approximately)
+DELETE FROM `person_contact`;
+/*!40000 ALTER TABLE `person_contact` DISABLE KEYS */;
+/*!40000 ALTER TABLE `person_contact` ENABLE KEYS */;
+
 -- Dumping structure for table property.user
 CREATE TABLE IF NOT EXISTS `user` (
   `id` int(20) NOT NULL AUTO_INCREMENT,
@@ -84,7 +134,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='Manage User Login, Active, Deactive user,  Password Update, ';
 
--- Dumping data for table property.user: ~2 rows (approximately)
+-- Dumping data for table property.user: ~3 rows (approximately)
 DELETE FROM `user`;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 INSERT INTO `user` (`id`, `username`, `password`, `status`, `date_created`) VALUES
