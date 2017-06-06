@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Collection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import myproperty._entities.Address;
+import myproperty._entities.responses.AddressResponse;
 import myproperty._entities.responses.UserResponse;
 
 import myproperty.helper.exception.BadRequestException;

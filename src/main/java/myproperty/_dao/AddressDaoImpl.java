@@ -14,7 +14,6 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaQuery;
 import myproperty._entities.Address;
-import myproperty._entities.Person;
 import myproperty.db.JpaController;
 import myproperty.helper.exception.InternalErrorException;
 
@@ -95,16 +94,16 @@ public class AddressDaoImpl extends JpaController implements AddressDao {
     }
 
     @Override
-    public List<Person> findAddressrEntities() throws Exception {
+    public List<Address> findAddressrEntities() throws Exception {
         return findAddressEntities(true, -1, -1);
     }
 
     @Override
-    public List<Person> findAddressEntities(int maxResults, int firstResult) throws Exception {
+    public List<Address> findAddressEntities(int maxResults, int firstResult) throws Exception {
         return findAddressEntities(false, maxResults, firstResult);
     }
 
-    private List<Person> findAddressEntities(boolean all, int maxResults, int firstResult) {
+    private List<Address> findAddressEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
@@ -141,6 +140,7 @@ public class AddressDaoImpl extends JpaController implements AddressDao {
             }
         }
     }
+
 
 
 
