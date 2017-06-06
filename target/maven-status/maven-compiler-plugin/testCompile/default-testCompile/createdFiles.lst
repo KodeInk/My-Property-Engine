@@ -1,6 +1,6 @@
-myproperty\_controller\AccountControllerIT.class
+myproperty/_controller/RegistrationControllerIT.class
+myproperty/_controller/AccountControllerIT.class
 RootSuite.class
-myproperty\_controller\UserControllerIT.class
-myproperty\_controller\PersonControllerIT.class
-myproperty\_controller\RegistrationControllerIT.class
-myproperty\_controller\_controllerITSuite.class
+myproperty/_controller/UserControllerIT.class
+myproperty/_controller/PersonControllerIT.class
+myproperty/_controller/_controllerITSuite.class

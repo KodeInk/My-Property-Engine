@@ -141,6 +141,21 @@ public class AddressDaoImpl extends JpaController implements AddressDao {
         }
     }
 
+    @Override
+    public List<Address> findAddressesByUserId(Integer userId) throws Exception {
+        EntityManager em = getEntityManager();
+        try {
+            // return em.find(Address.class, id);
+            Query query = em.createNamedQuery("Address.findByUserid");
+            query.setParameter("userId", userId);
+            List<Address> addresses = query.getResultList();
+            return addresses;
+        } finally {
+            em.close();
+        }
+    }
+
+
 
 
 
