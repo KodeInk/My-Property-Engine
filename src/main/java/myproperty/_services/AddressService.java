@@ -40,14 +40,21 @@ public class AddressService {
         return addressResponses;
     }
 
-    //TODO : get Person  By Id
+    //TODO :  get Address by Id 
     public AddressResponse getAddresById(Integer id) throws Exception {
         Address address = addressDaoImpl.findAddress(id);
         return AddressResponse(address);
     }
 
 
-    //TODO: update Person By Id
+
+    //TODO : get Address by User iD 
+    public AddressResponse getAddressByUserId(Integer userId) throws Exception {
+        Address address = addressDaoImpl.findAddress(userId);
+        return AddressResponse(address);
+    }
+
+    //TODO: update Address
     public AddressResponse updateAddress(Integer addressId, Address address) throws Exception {
 
         address.setId(addressId);
@@ -86,7 +93,7 @@ public class AddressService {
         return AddressResponse(addressDaoImpl.create(address));
     }
 
-    //TODO: Person Response
+    //TODO: Address  Response
     public AddressResponse AddressResponse(Address address) {
 
         AddressResponse addressResponse = new AddressResponse();
@@ -127,6 +134,8 @@ public class AddressService {
         return addressResponse;
 
     }
+
+
 
 
 }

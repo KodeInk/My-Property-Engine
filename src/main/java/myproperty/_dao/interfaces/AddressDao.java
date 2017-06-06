@@ -23,8 +23,8 @@ public interface AddressDao {
 
     Address findAddress(Integer id) throws Exception;
 
-    List<Person> findAddressEntities(int maxResults, int firstResult) throws Exception;
+    List<Address> findAddressEntities(int maxResults, int firstResult) throws Exception;
 
-    List<Person> findAddressrEntities() throws Exception;
+    List<Address> findAddressrEntities() throws Exception;
 
 }
