@@ -60,7 +60,7 @@ public class AddressController {
 
     // Get Address BY User Id 
     @RequestMapping(value = "/{userId}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public AddressResponse getAddressByUserid(@PathVariable Integer userId) throws Exception {
+    public Collection<AddressResponse> getAddressByUserid(@PathVariable Integer userId) throws Exception {
         LOG.log(Level.INFO, " Get Addresss by User Id Endpoint ");
         return addressService.getAddressByUserId(userId);
     }

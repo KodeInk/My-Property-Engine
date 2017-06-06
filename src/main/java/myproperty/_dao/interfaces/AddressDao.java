@@ -27,4 +27,6 @@ public interface AddressDao {
 
     List<Address> findAddressrEntities() throws Exception;
 
+    public List<Address> findAddressesByUserId(Integer id) throws Exception;
+
 }
