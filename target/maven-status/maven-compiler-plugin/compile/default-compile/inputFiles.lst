@@ -14,6 +14,7 @@ E:\codemovers\myproperty\src\main\java\myproperty\helper\utilities.java
 E:\codemovers\myproperty\src\main\java\myproperty\_entities\Images.java
 E:\codemovers\myproperty\src\main\java\myproperty\_entities\Types.java
 E:\codemovers\myproperty\src\main\java\myproperty\_entities\responses\AddressResponse.java
+E:\codemovers\myproperty\src\main\java\myproperty\_entities\Contacts.java
 E:\codemovers\myproperty\src\main\java\myproperty\helper\exception\BadRequestException.java
 E:\codemovers\myproperty\src\main\java\myproperty\helper\exception\InternalErrorException.java
 E:\codemovers\myproperty\src\main\java\myproperty\_entities\Roles.java
@@ -29,6 +30,7 @@ E:\codemovers\myproperty\src\main\java\myproperty\helper\exception\Message.java
 E:\codemovers\myproperty\src\main\java\myproperty\_entities\Users.java
 E:\codemovers\myproperty\src\main\java\myproperty\_dao\PersonDAOImpl.java
 E:\codemovers\myproperty\src\main\java\myproperty\_entities\Reviews.java
+E:\codemovers\myproperty\src\main\java\myproperty\helper\ContactTypes.java
 E:\codemovers\myproperty\src\main\java\myproperty\helper\exception\ForbiddenException.java
 E:\codemovers\myproperty\src\main\java\myproperty\_dao\AddressDaoImpl.java
 E:\codemovers\myproperty\src\main\java\myproperty\_controller\UserController.java

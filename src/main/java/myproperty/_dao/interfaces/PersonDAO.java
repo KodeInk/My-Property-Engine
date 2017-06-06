@@ -6,7 +6,9 @@
 package myproperty._dao.interfaces;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
+import myproperty._entities.Address;
 import myproperty._entities.Person;
 
 /**

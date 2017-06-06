@@ -5,6 +5,8 @@
  */
 package myproperty._dao;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import myproperty._dao.interfaces.PersonDAO;
 import myproperty._entities.Person;
 import java.util.List;
@@ -15,6 +17,8 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
+import myproperty._entities.Address;
+import myproperty._entities.User;
 import myproperty.db.JpaController;
 import myproperty.helper.exception.InternalErrorException;
 
@@ -166,6 +170,5 @@ public class PersonDAOImpl extends JpaController implements PersonDAO {
 
         return person;
     }
-
 
 }

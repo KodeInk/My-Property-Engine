@@ -14,7 +14,10 @@ import java.util.Collection;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import myproperty._entities.Address;
+import myproperty._entities.responses.AddressResponse;
 import myproperty._entities.responses.PersonResponse;
+import myproperty._services.AddressService;
 import myproperty._services.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -36,6 +39,9 @@ public class PersonController {
 
     @Autowired
     private PersonService personService;
+
+    @Autowired
+    private AddressService addressService;
 
     private static final Logger LOG = Logger.getLogger(UserController.class.getName());
 
@@ -65,6 +71,15 @@ public class PersonController {
     public PersonResponse createPerson(@RequestBody Person person) throws Exception {
         LOG.log(Level.INFO, "Hit the Person Create Endpoint");
         return personService.createPerson(person);
+    }
+
+    @RequestMapping(value = "/{id}/crateAddress", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public AddressResponse createAddress(
+            @RequestBody Address address,
+            @PathVariable Integer id
+    ) throws Exception {
+        LOG.log(Level.INFO, " Create Address  Endpoint");
+        return addressService.createAddress(address);
     }
 
 

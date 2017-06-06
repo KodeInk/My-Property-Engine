@@ -4,6 +4,7 @@ myproperty\Application.class
 myproperty\_controller\UserController.class
 myproperty\helper\exception\ForbiddenException.class
 myproperty\_entities\Account_.class
+myproperty\helper\ContactTypes.class
 myproperty\_entities\Property.class
 myproperty\_entities\Person.class
 myproperty\_entities\Roles.class
@@ -16,6 +17,7 @@ myproperty\_entities\SubscriptionPermission.class
 myproperty\_controller\PersonController.class
 myproperty\_entities\responses\AddressResponse.class
 myproperty\_entities\User.class
+myproperty\_entities\Contacts_.class
 myproperty\_entities\Types_.class
 myproperty\_dao\PersonDAOImpl.class
 myproperty\_entities\Account.class
@@ -60,6 +62,7 @@ myproperty\helper\utilities.class
 myproperty\_entities\Subscription.class
 myproperty\helper\exception\Message.class
 myproperty\_entities\Address_.class
+myproperty\_entities\Contacts.class
 myproperty\_dao\interfaces\AddressDao.class
 myproperty\_entities\AccountType_.class
 myproperty\_entities\UserRole_.class

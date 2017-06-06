@@ -20,6 +20,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -30,7 +31,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Manny
+ * @author Mover
  */
 @Entity
 @Table(name = "address")
@@ -49,8 +50,8 @@ public class Address implements Serializable {
     @JoinTable(name = "person_address", joinColumns = {
         @JoinColumn(name = "addressId", referencedColumnName = "id")}, inverseJoinColumns = {
         @JoinColumn(name = "personId", referencedColumnName = "id")})
-    @ManyToMany
-    private Collection<Person> personCollection;
+    @OneToOne
+    private Person personCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -94,6 +95,13 @@ public class Address implements Serializable {
     @JoinColumn(name = "updatedby", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private User updatedby;
+
+    @Size(max = 255)
+    @Column(name = "parent_type")
+    private String parentType;
+    @Column(name = "parent_id")
+    private Integer parentId;
+
 
     public Address() {
     }
@@ -183,6 +191,23 @@ public class Address implements Serializable {
         this.updatedby = updatedby;
     }
 
+    public String getParentType() {
+        return parentType;
+    }
+
+    public void setParentType(String parentType) {
+        this.parentType = parentType;
+    }
+
+    public Integer getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(Integer parentId) {
+        this.parentId = parentId;
+    }
+
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -203,15 +228,6 @@ public class Address implements Serializable {
     @Override
     public String toString() {
         return "myproperty._entities.Address[ id=" + id + " ]";
-    }
-
-    @XmlTransient
-    public Collection<Person> getPersonCollection() {
-        return personCollection;
-    }
-
-    public void setPersonCollection(Collection<Person> personCollection) {
-        this.personCollection = personCollection;
     }
 
 }
