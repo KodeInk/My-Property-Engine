@@ -27,6 +27,8 @@ CREATE TABLE IF NOT EXISTS `address` (
   `updatedby` int(20) DEFAULT NULL,
   `dateupdated` datetime DEFAULT NULL,
   `status` enum('ACTIVE','ARCHIVED') NOT NULL DEFAULT 'ACTIVE',
+  `parent_type` varchar(255) DEFAULT NULL,
+  `parent_id` int(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `CreatedBy` (`createdby`),
   KEY `UpdatedBy` (`updatedby`),
@@ -35,11 +37,11 @@ CREATE TABLE IF NOT EXISTS `address` (
   CONSTRAINT `UpdatedBy` FOREIGN KEY (`updatedby`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='Manage All Addresses in the System';
 
--- Dumping data for table property.address: ~1 rows (approximately)
+-- Dumping data for table property.address: ~0 rows (approximately)
 DELETE FROM `address`;
 /*!40000 ALTER TABLE `address` DISABLE KEYS */;
-INSERT INTO `address` (`id`, `location`, `lat`, `lng`, `createdby`, `datecreated`, `updatedby`, `dateupdated`, `status`) VALUES
-	(2, 'Kampala,Uganda', '234.45', '456.78', 2, '2017-05-31 13:24:14', 2, '2017-05-31 13:23:55', 'ACTIVE');
+INSERT INTO `address` (`id`, `location`, `lat`, `lng`, `createdby`, `datecreated`, `updatedby`, `dateupdated`, `status`, `parent_type`, `parent_id`) VALUES
+	(2, 'Kampala,Uganda', '234.45', '456.78', 2, '2017-05-31 13:24:14', 2, '2017-05-31 13:23:55', 'ACTIVE', NULL, NULL);
 /*!40000 ALTER TABLE `address` ENABLE KEYS */;
 
 -- Dumping structure for table property.contacts
@@ -52,6 +54,8 @@ CREATE TABLE IF NOT EXISTS `contacts` (
   `updated_by` int(20) NOT NULL,
   `date_updated` datetime NOT NULL,
   `status` enum('ACTIVE','ARCHIVED') NOT NULL DEFAULT 'ACTIVE',
+  `parent_type` varchar(255) DEFAULT NULL,
+  `parent_id` int(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Manage System Level Contacts \r\nWebsites, Phone,Fax,Social Media, Etc';
 
@@ -134,7 +138,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='Manage User Login, Active, Deactive user,  Password Update, ';
 
--- Dumping data for table property.user: ~3 rows (approximately)
+-- Dumping data for table property.user: ~2 rows (approximately)
 DELETE FROM `user`;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 INSERT INTO `user` (`id`, `username`, `password`, `status`, `date_created`) VALUES
