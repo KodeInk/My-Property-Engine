@@ -49,8 +49,8 @@ public class AddressService {
 
 
     //TODO : get Address by User iD 
-    public AddressResponse getAddressByUserId(Integer id) throws Exception {
-        Address address = addressDaoImpl.findAddress(id);
+    public AddressResponse getAddressByUserId(Integer userId) throws Exception {
+        Address address = addressDaoImpl.findAddress(userId);
         return AddressResponse(address);
     }
 

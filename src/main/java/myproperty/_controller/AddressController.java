@@ -62,7 +62,7 @@ public class AddressController {
     @RequestMapping(value = "/{userId}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public AddressResponse getAddressByUserid(@PathVariable Integer userId) throws Exception {
         LOG.log(Level.INFO, " Get Addresss by User Id Endpoint ");
-        return addressService.getAddressByUserId(id, address);
+        return addressService.getAddressByUserId(userId);
     }
 
 
