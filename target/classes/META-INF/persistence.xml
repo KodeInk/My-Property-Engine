@@ -23,6 +23,7 @@
     <class>myproperty.v1._entities.User</class>
     <class>myproperty.v1._entities.Contacts</class>
     <class>myproperty.v1._entities.Address</class>
+    <class>myproperty.v1._entities.Contacts_1</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/property"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

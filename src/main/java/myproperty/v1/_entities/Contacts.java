@@ -6,7 +6,6 @@
 package myproperty.v1._entities;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -15,8 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -25,7 +23,6 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -39,14 +36,13 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Contacts.findById", query = "SELECT c FROM Contacts c WHERE c.id = :id")
     , @NamedQuery(name = "Contacts.findByType", query = "SELECT c FROM Contacts c WHERE c.type = :type")
     , @NamedQuery(name = "Contacts.findByDetails", query = "SELECT c FROM Contacts c WHERE c.details = :details")
-    , @NamedQuery(name = "Contacts.findByCreatedBy", query = "SELECT c FROM Contacts c WHERE c.createdBy = :createdBy")
     , @NamedQuery(name = "Contacts.findByDateCreated", query = "SELECT c FROM Contacts c WHERE c.dateCreated = :dateCreated")
-    , @NamedQuery(name = "Contacts.findByUpdatedBy", query = "SELECT c FROM Contacts c WHERE c.updatedBy = :updatedBy")
     , @NamedQuery(name = "Contacts.findByDateUpdated", query = "SELECT c FROM Contacts c WHERE c.dateUpdated = :dateUpdated")
-    , @NamedQuery(name = "Contacts.findByStatus", query = "SELECT c FROM Contacts c WHERE c.status = :status")})
+    , @NamedQuery(name = "Contacts.findByStatus", query = "SELECT c FROM Contacts c WHERE c.status = :status")
+    , @NamedQuery(name = "Contacts.findByParentType", query = "SELECT c FROM Contacts c WHERE c.parentType = :parentType")
+    , @NamedQuery(name = "Contacts.findByParentId", query = "SELECT c FROM Contacts c WHERE c.parentId = :parentId")})
 public class Contacts implements Serializable {
 
-    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -64,17 +60,9 @@ public class Contacts implements Serializable {
     private String details;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "created_by")
-    private int createdBy;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "date_created")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateCreated;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "updated_by")
-    private int updatedBy;
     @Basic(optional = false)
     @NotNull
     @Column(name = "date_updated")
@@ -85,11 +73,17 @@ public class Contacts implements Serializable {
     @Size(min = 1, max = 8)
     @Column(name = "status")
     private String status;
-    @JoinTable(name = "person_contact", joinColumns = {
-        @JoinColumn(name = "contactId", referencedColumnName = "id")}, inverseJoinColumns = {
-        @JoinColumn(name = "personId", referencedColumnName = "id")})
-    @ManyToMany
-    private Collection<Person> personCollection;
+    @Size(max = 255)
+    @Column(name = "parent_type")
+    private String parentType;
+    @Column(name = "parent_id")
+    private Integer parentId;
+    @JoinColumn(name = "created_by", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private User createdBy;
+    @JoinColumn(name = "updated_by", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private User updatedBy;
 
     public Contacts() {
     }
@@ -98,13 +92,11 @@ public class Contacts implements Serializable {
         this.id = id;
     }
 
-    public Contacts(Integer id, String type, String details, int createdBy, Date dateCreated, int updatedBy, Date dateUpdated, String status) {
+    public Contacts(Integer id, String type, String details, Date dateCreated, Date dateUpdated, String status) {
         this.id = id;
         this.type = type;
         this.details = details;
-        this.createdBy = createdBy;
         this.dateCreated = dateCreated;
-        this.updatedBy = updatedBy;
         this.dateUpdated = dateUpdated;
         this.status = status;
     }
@@ -133,28 +125,12 @@ public class Contacts implements Serializable {
         this.details = details;
     }
 
-    public int getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(int createdBy) {
-        this.createdBy = createdBy;
-    }
-
     public Date getDateCreated() {
         return dateCreated;
     }
 
     public void setDateCreated(Date dateCreated) {
         this.dateCreated = dateCreated;
-    }
-
-    public int getUpdatedBy() {
-        return updatedBy;
-    }
-
-    public void setUpdatedBy(int updatedBy) {
-        this.updatedBy = updatedBy;
     }
 
     public Date getDateUpdated() {
@@ -173,13 +149,36 @@ public class Contacts implements Serializable {
         this.status = status;
     }
 
-    @XmlTransient
-    public Collection<Person> getPersonCollection() {
-        return personCollection;
+    public String getParentType() {
+        return parentType;
     }
 
-    public void setPersonCollection(Collection<Person> personCollection) {
-        this.personCollection = personCollection;
+    public void setParentType(String parentType) {
+        this.parentType = parentType;
+    }
+
+    public Integer getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(Integer parentId) {
+        this.parentId = parentId;
+    }
+
+    public User getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(User createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public User getUpdatedBy() {
+        return updatedBy;
+    }
+
+    public void setUpdatedBy(User updatedBy) {
+        this.updatedBy = updatedBy;
     }
 
     @Override
@@ -204,7 +203,7 @@ public class Contacts implements Serializable {
 
     @Override
     public String toString() {
-        return "myproperty._entities.Contacts[ id=" + id + " ]";
+        return "myproperty.v1._entities.Contacts[ id=" + id + " ]";
     }
 
 }
