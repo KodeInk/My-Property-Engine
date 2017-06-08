@@ -74,7 +74,7 @@ public class PersonController {
         return personService.createPerson(person);
     }
 
-    @RequestMapping(value = "/{id}/crateAddress", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/{id}/createAddress", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public AddressResponse createAddress(
             @RequestBody Address address,
             @PathVariable Integer id

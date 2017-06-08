@@ -7,6 +7,7 @@ package myproperty._entities.responses;
 
 import java.util.Date;
 import java.util.Objects;
+import myproperty.helper.ParentTypes;
 
 /**
  *
@@ -23,6 +24,8 @@ public class AddressResponse {
     private String status;
     private UserResponse createdby;
     private UserResponse updatedby;
+    private String parent_type;
+    private Integer parent_id;
 
 
     public AddressResponse() {
@@ -107,18 +110,36 @@ public class AddressResponse {
         this.updatedby = updatedby;
     }
 
+    public String getParent_type() {
+        return parent_type;
+    }
+
+    public void setParent_type(String parent_type) {
+        this.parent_type = parent_type;
+    }
+
+    public Integer getParent_id() {
+        return parent_id;
+    }
+
+    public void setParent_id(Integer parent_id) {
+        this.parent_id = parent_id;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 89 * hash + Objects.hashCode(this.id);
-        hash = 89 * hash + Objects.hashCode(this.location);
-        hash = 89 * hash + Objects.hashCode(this.lat);
-        hash = 89 * hash + Objects.hashCode(this.lng);
-        hash = 89 * hash + Objects.hashCode(this.datecreated);
-        hash = 89 * hash + Objects.hashCode(this.dateupdated);
-        hash = 89 * hash + Objects.hashCode(this.status);
-        hash = 89 * hash + Objects.hashCode(this.createdby);
-        hash = 89 * hash + Objects.hashCode(this.updatedby);
+        int hash = 3;
+        hash = 37 * hash + Objects.hashCode(this.id);
+        hash = 37 * hash + Objects.hashCode(this.location);
+        hash = 37 * hash + Objects.hashCode(this.lat);
+        hash = 37 * hash + Objects.hashCode(this.lng);
+        hash = 37 * hash + Objects.hashCode(this.datecreated);
+        hash = 37 * hash + Objects.hashCode(this.dateupdated);
+        hash = 37 * hash + Objects.hashCode(this.status);
+        hash = 37 * hash + Objects.hashCode(this.createdby);
+        hash = 37 * hash + Objects.hashCode(this.updatedby);
+        hash = 37 * hash + Objects.hashCode(this.parent_type);
+        hash = 37 * hash + Objects.hashCode(this.parent_id);
         return hash;
     }
 
@@ -146,6 +167,9 @@ public class AddressResponse {
         if (!Objects.equals(this.status, other.status)) {
             return false;
         }
+        if (!Objects.equals(this.parent_type, other.parent_type)) {
+            return false;
+        }
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
@@ -158,7 +182,10 @@ public class AddressResponse {
         if (!Objects.equals(this.createdby, other.createdby)) {
             return false;
         }
-        return Objects.equals(this.updatedby, other.updatedby);
+        if (!Objects.equals(this.updatedby, other.updatedby)) {
+            return false;
+        }
+        return Objects.equals(this.parent_id, other.parent_id);
     }
 
     @Override
@@ -174,6 +201,8 @@ public class AddressResponse {
                 + ", status=" + status
                 + ", createdby=" + createdby
                 + ", updatedby=" + updatedby
+                + ", parent_type=" + parent_type
+                + ", parent_id=" + parent_id
                 + '}';
     }
 

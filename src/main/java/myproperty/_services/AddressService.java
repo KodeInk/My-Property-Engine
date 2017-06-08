@@ -101,7 +101,10 @@ public class AddressService {
         }
         address.setParentType(parentTypes.toString());
         address.setParentId(parent_id);
-        return AddressResponse(addressDaoImpl.create(address));
+        //return AddressResponse(addressDaoImpl.create(address));
+
+        return AddressResponse(address);
+
     }
 
     //TODO: Address  Response
@@ -141,6 +144,8 @@ public class AddressService {
         }
 
         addressResponse.setStatus(address.getStatus());
+        addressResponse.setParent_id(address.getParentId());
+        addressResponse.setParent_type(address.getParentType());
 
         return addressResponse;
 

@@ -6,7 +6,6 @@
 package myproperty._entities;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -15,19 +14,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -47,11 +42,6 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Address.findByStatus", query = "SELECT a FROM Address a WHERE a.status = :status")})
 public class Address implements Serializable {
 
-    @JoinTable(name = "person_address", joinColumns = {
-        @JoinColumn(name = "addressId", referencedColumnName = "id")}, inverseJoinColumns = {
-        @JoinColumn(name = "personId", referencedColumnName = "id")})
-    @OneToOne
-    private Person personCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -96,6 +86,7 @@ public class Address implements Serializable {
     @ManyToOne(optional = false)
     private User updatedby;
 
+    // Important Columns 
     @Size(max = 255)
     @Column(name = "parent_type")
     private String parentType;
