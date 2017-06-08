@@ -50,40 +50,42 @@ public class Address implements Serializable {
     @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
-    @NotNull
+
     @Size(min = 1, max = 255)
     @Column(name = "location")
     private String location;
     @Basic(optional = false)
-    @NotNull
+
     @Size(min = 1, max = 255)
     @Column(name = "lat")
     private String lat;
     @Basic(optional = false)
-    @NotNull
+
     @Size(min = 1, max = 255)
     @Column(name = "lng")
     private String lng;
     @Basic(optional = false)
-    @NotNull
+
     @Column(name = "datecreated")
     @Temporal(TemporalType.TIMESTAMP)
     private Date datecreated;
     @Basic(optional = false)
-    @NotNull
+
     @Column(name = "dateupdated")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateupdated;
     @Basic(optional = false)
-    @NotNull
+
     @Size(min = 1, max = 8)
     @Column(name = "status")
     private String status;
+
     @JoinColumn(name = "createdby", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = true)
     private User createdby;
     @JoinColumn(name = "updatedby", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = true)
+
     private User updatedby;
 
     // Important Columns 
