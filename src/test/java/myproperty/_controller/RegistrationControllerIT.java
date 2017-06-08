@@ -5,6 +5,7 @@
  */
 package myproperty._controller;
 
+import myproperty.v1._controller.RegistrationController;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;

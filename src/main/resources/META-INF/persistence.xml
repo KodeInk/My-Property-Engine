@@ -19,10 +19,10 @@
     <class>myproperty._entities.SubscriptionPermission</class>
     <class>myproperty._entities.Reviews</class>-->
     <!--    <class>myproperty._entities.User</class>-->
-    <class>myproperty._entities.User</class>
-    <class>myproperty._entities.Person</class>
-    <class>myproperty._entities.Address</class>
-    <class>myproperty._entities.Contacts</class>
+    <class>myproperty.v1._entities.Person</class>
+    <class>myproperty.v1._entities.User</class>
+    <class>myproperty.v1._entities.Contacts</class>
+    <class>myproperty.v1._entities.Address</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/property"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

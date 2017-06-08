@@ -5,9 +5,10 @@
  */
 package myproperty._controller;
 
+import myproperty.v1._controller.UserController;
 import java.util.Collection;
-import myproperty._entities.User;
-import myproperty._entities.responses.UserResponse;
+import myproperty.v1._entities.User;
+import myproperty.v1._entities.responses.UserResponse;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;

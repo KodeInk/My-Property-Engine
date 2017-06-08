@@ -5,10 +5,11 @@
  */
 package myproperty._controller;
 
+import myproperty.v1._controller.PersonController;
 import java.util.Collection;
 import java.util.List;
-import myproperty._entities.Person;
-import myproperty._entities.responses.PersonResponse;
+import myproperty.v1._entities.Person;
+import myproperty.v1._entities.responses.PersonResponse;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;

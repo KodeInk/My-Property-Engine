@@ -1,5 +1,6 @@
 package myproperty._entities;
 
+import myproperty.v1._entities.Users;
 import java.util.Date;
 import javax.annotation.Generated;
 import javax.persistence.metamodel.SingularAttribute;

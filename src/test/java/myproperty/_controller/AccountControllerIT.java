@@ -5,7 +5,8 @@
  */
 package myproperty._controller;
 
-import myproperty._entities.User;
+import myproperty.v1._controller.AccountController;
+import myproperty.v1._entities.User;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;

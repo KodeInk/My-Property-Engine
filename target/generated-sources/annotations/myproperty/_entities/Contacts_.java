@@ -1,11 +1,12 @@
 package myproperty._entities;
 
+import myproperty.v1._entities.Contacts;
 import java.util.Date;
 import javax.annotation.Generated;
 import javax.persistence.metamodel.CollectionAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
-import myproperty._entities.Person;
+import myproperty.v1._entities.Person;
 
 <<<<<<< HEAD
 @Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2017-06-07T00:14:20")

@@ -1,5 +1,6 @@
 package myproperty._entities;
 
+import myproperty.v1._entities.Permissions;
 import javax.annotation.Generated;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
