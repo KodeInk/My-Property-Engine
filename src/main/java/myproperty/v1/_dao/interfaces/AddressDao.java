@@ -29,4 +29,7 @@ public interface AddressDao {
 
     public List<Address> findAddressesByUserId(Integer id) throws Exception;
 
+    public List<Address> findAddresses(Integer parent_id, String parent_type) throws Exception;
+
+
 }

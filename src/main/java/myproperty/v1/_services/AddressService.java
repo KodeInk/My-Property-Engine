@@ -41,6 +41,24 @@ public class AddressService {
         return addressResponses;
     }
 
+    //TODO: FEtch all Addresses
+    /*
+     *  Based on Parent type and Parent Id:
+     */
+    public Collection<AddressResponse> getAllAddresses(ParentTypes parentTypes, Integer parent_id) throws Exception {
+
+        Collection<Address> addresses = addressDaoImpl.findAddresses(parent_id, parentTypes.toString());
+
+        Collection<AddressResponse> addressResponses = new ArrayList<>();
+        //java 8 functional statement
+        addresses.forEach((Address address) -> {
+            addressResponses.add(AddressResponse(address));
+        });
+
+        return addressResponses;
+    }
+
+
     //TODO :  get Address by Id 
     public AddressResponse getAddresById(Integer id) throws Exception {
         Address address = addressDaoImpl.findAddress(id);

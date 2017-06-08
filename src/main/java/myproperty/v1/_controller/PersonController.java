@@ -85,9 +85,11 @@ public class PersonController {
         return addressService.createAddress(address, ParentTypes.PERSON, id);
     }
 
-    @RequestMapping(value = "/list", method = GET)
-    public Collection<AddressResponse> list() {
-        return addressService.getAllAddresses();
+    //TODO: GEt Address by Person Id 
+    @RequestMapping(value = "/{id}/listAddresses", method = GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Collection<AddressResponse> list(
+            @PathVariable Integer id) throws Exception {
+        return addressService.getAllAddresses(ParentTypes.PERSON, id);
     }
 
 
