@@ -12,6 +12,7 @@ import myproperty._dao.AddressDaoImpl;
 import myproperty._entities.Address;
 import myproperty._entities.responses.AddressResponse;
 import myproperty._entities.responses.UserResponse;
+import myproperty.helper.ParentTypes;
 import myproperty.helper.StatusEnum;
 import static myproperty.helper.utilities.getCurrentDate;
 import org.springframework.stereotype.Service;
@@ -93,11 +94,13 @@ public class AddressService {
     }
 
     //TODO: Create Address
-    public AddressResponse createAddress(Address address) throws Exception {
+    public AddressResponse createAddress(Address address, ParentTypes parentTypes, Integer parent_id) throws Exception {
         address.setDatecreated(getCurrentDate());
         if (address.getStatus() == null) {
             address.setStatus(StatusEnum.ACTIVE.toString());
         }
+        address.setParentType(parentTypes.toString());
+        address.setParentId(parent_id);
         return AddressResponse(addressDaoImpl.create(address));
     }
 

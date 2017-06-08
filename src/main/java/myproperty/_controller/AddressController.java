@@ -52,11 +52,11 @@ public class AddressController {
         return addressService.updateAddress(id, address);
     }
 
-    @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public AddressResponse createAddress(@RequestBody Address address) throws Exception {
-        LOG.log(Level.INFO, " Create Address  Endpoint");
-        return addressService.createAddress(address);
-    }
-
+//    @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+//    public AddressResponse createAddress(@RequestBody Address address) throws Exception {
+//        LOG.log(Level.INFO, " Create Address  Endpoint");
+//        return addressService.createAddress(address);
+//    }
+//
 
 }

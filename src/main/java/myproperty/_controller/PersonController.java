@@ -19,6 +19,7 @@ import myproperty._entities.responses.AddressResponse;
 import myproperty._entities.responses.PersonResponse;
 import myproperty._services.AddressService;
 import myproperty._services.PersonService;
+import myproperty.helper.ParentTypes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -79,7 +80,7 @@ public class PersonController {
             @PathVariable Integer id
     ) throws Exception {
         LOG.log(Level.INFO, " Create Address  Endpoint");
-        return addressService.createAddress(address);
+        return addressService.createAddress(address, ParentTypes.PERSON, id);
     }
 
 
