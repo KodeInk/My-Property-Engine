@@ -41,7 +41,7 @@ public class ContactsController {
      */
     @RequestMapping(value = "/list", method = GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public Collection<ContactsResponse> list() {
-        return contactsService.getAllContactses();
+        return contactsService.getAllContacts();
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)

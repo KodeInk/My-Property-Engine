@@ -27,7 +27,7 @@ public class ContactsService {
     private final ContactsDAOImpl contactsDAOImpl = ContactsDAOImpl.getInstance();
 
     //TODO: Fetch all  Users
-    public Collection<ContactsResponse> getAllContactses() {
+    public Collection<ContactsResponse> getAllContacts() {
 
         Collection<Contacts> contactses = contactsDAOImpl.findEntities();
 
@@ -44,7 +44,7 @@ public class ContactsService {
     /*
      *  Based on Parent type and Parent Id:
      */
-    public Collection<ContactsResponse> getAllContactses(ParentTypes parentTypes, Integer parent_id) throws Exception {
+    public Collection<ContactsResponse> getAllContacts(ParentTypes parentTypes, Integer parent_id) throws Exception {
 
         Collection<Contacts> addresses = contactsDAOImpl.findContactses(parent_id, parentTypes.toString());
 

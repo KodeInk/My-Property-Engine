@@ -15,9 +15,12 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import myproperty.v1._entities.Address;
+import myproperty.v1._entities.Contacts;
 import myproperty.v1._entities.responses.AddressResponse;
+import myproperty.v1._entities.responses.ContactsResponse;
 import myproperty.v1._entities.responses.PersonResponse;
 import myproperty.v1._services.AddressService;
+import myproperty.v1._services.ContactsService;
 import myproperty.v1._services.PersonService;
 import myproperty.v1.helper.ParentTypes;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +47,9 @@ public class PersonController {
 
     @Autowired
     private AddressService addressService;
+
+    @Autowired
+    private ContactsService contactsService;
 
     private static final Logger LOG = Logger.getLogger(UserController.class.getName());
 
@@ -87,10 +93,28 @@ public class PersonController {
 
     //TODO: GEt Address by Person Id 
     @RequestMapping(value = "/{id}/listAddresses", method = GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public Collection<AddressResponse> list(
+    public Collection<AddressResponse> listAddreses(
             @PathVariable Integer id) throws Exception {
         return addressService.getAllAddresses(ParentTypes.PERSON, id);
     }
+
+    //@Note: the Id is the Person ID
+    @RequestMapping(value = "/{id}/createContact", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ContactsResponse createContact(
+            @RequestBody Contacts contacts,
+            @PathVariable Integer id
+    ) throws Exception {
+        LOG.log(Level.INFO, " Create Address  Endpoint");
+        return contactsService.createContacts(contacts, ParentTypes.PERSON, id);
+    }
+
+    //TODO: GEt Address by Person Id
+    @RequestMapping(value = "/{id}/listContacts", method = GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Collection<ContactsResponse> listContacts(
+            @PathVariable Integer id) throws Exception {
+        return contactsService.getAllContacts(ParentTypes.PERSON, id);
+    }
+
 
 
 }
