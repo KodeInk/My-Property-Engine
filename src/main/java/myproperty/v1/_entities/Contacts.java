@@ -67,7 +67,7 @@ public class Contacts implements Serializable {
     @Column(name = "date_updated")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateUpdated;
-    @Basic(optional = false)
+    @Basic(optional = true)
 
     @Size(min = 1, max = 8)
     @Column(name = "status")

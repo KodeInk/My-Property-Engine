@@ -13,10 +13,12 @@
 
 
 -- Dumping database structure for property
+DROP DATABASE IF EXISTS `property`;
 CREATE DATABASE IF NOT EXISTS `property` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `property`;
 
 -- Dumping structure for table property.address
+DROP TABLE IF EXISTS `address`;
 CREATE TABLE IF NOT EXISTS `address` (
   `id` int(20) NOT NULL AUTO_INCREMENT,
   `location` varchar(255) NOT NULL DEFAULT '0',
@@ -35,36 +37,45 @@ CREATE TABLE IF NOT EXISTS `address` (
   FULLTEXT KEY `location` (`location`),
   CONSTRAINT `CreatedBy` FOREIGN KEY (`createdby`) REFERENCES `user` (`id`),
   CONSTRAINT `UpdatedBy` FOREIGN KEY (`updatedby`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='Manage All Addresses in the System';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='Manage All Addresses in the System';
 
--- Dumping data for table property.address: ~0 rows (approximately)
+-- Dumping data for table property.address: ~1 rows (approximately)
 DELETE FROM `address`;
 /*!40000 ALTER TABLE `address` DISABLE KEYS */;
 INSERT INTO `address` (`id`, `location`, `lat`, `lng`, `createdby`, `datecreated`, `updatedby`, `dateupdated`, `status`, `parent_type`, `parent_id`) VALUES
-	(2, 'Kampala,Uganda', '234.45', '456.78', 2, '2017-05-31 13:24:14', 2, '2017-05-31 13:23:55', 'ACTIVE', NULL, NULL);
+	(2, 'Kampala,Uganda', '234.45', '456.78', 2, '2017-06-07 00:40:53', 2, '2017-05-31 13:23:55', 'ACTIVE', 'PERSON', 1),
+	(3, 'Kamuli,Uganda', '323323', '722923', 1, '2017-06-08 19:47:10', NULL, NULL, 'ACTIVE', 'PERSON', 1);
 /*!40000 ALTER TABLE `address` ENABLE KEYS */;
 
 -- Dumping structure for table property.contacts
+DROP TABLE IF EXISTS `contacts`;
 CREATE TABLE IF NOT EXISTS `contacts` (
   `id` int(20) NOT NULL AUTO_INCREMENT,
   `type` varchar(255) NOT NULL,
   `details` varchar(255) NOT NULL,
   `created_by` int(20) NOT NULL,
   `date_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `updated_by` int(20) NOT NULL,
-  `date_updated` datetime NOT NULL,
+  `updated_by` int(20) DEFAULT NULL,
+  `date_updated` datetime DEFAULT NULL,
   `status` enum('ACTIVE','ARCHIVED') NOT NULL DEFAULT 'ACTIVE',
-  `parent_type` varchar(255) DEFAULT NULL,
-  `parent_id` int(20) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Manage System Level Contacts \r\nWebsites, Phone,Fax,Social Media, Etc';
+  `parent_type` varchar(255) NOT NULL,
+  `parent_id` int(20) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `CC_CreatedBy` (`created_by`),
+  KEY `CC_UpdatedBy` (`updated_by`),
+  CONSTRAINT `CC_CreatedBy` FOREIGN KEY (`created_by`) REFERENCES `user` (`id`),
+  CONSTRAINT `CC_UpdatedBy` FOREIGN KEY (`updated_by`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='Manage System Level Contacts \r\nWebsites, Phone,Fax,Social Media, Etc';
 
 -- Dumping data for table property.contacts: ~0 rows (approximately)
 DELETE FROM `contacts`;
 /*!40000 ALTER TABLE `contacts` DISABLE KEYS */;
+INSERT INTO `contacts` (`id`, `type`, `details`, `created_by`, `date_created`, `updated_by`, `date_updated`, `status`, `parent_type`, `parent_id`) VALUES
+	(1, 'PHONE', '+256779820962', 1, '2017-06-09 13:50:45', NULL, NULL, 'ACTIVE', 'PERSON', 1);
 /*!40000 ALTER TABLE `contacts` ENABLE KEYS */;
 
 -- Dumping structure for table property.person
+DROP TABLE IF EXISTS `person`;
 CREATE TABLE IF NOT EXISTS `person` (
   `id` int(20) NOT NULL AUTO_INCREMENT,
   `userId` int(20) DEFAULT NULL,
@@ -98,37 +109,8 @@ INSERT INTO `person` (`id`, `userId`, `names`, `gender`, `dateofbirth`, `date_cr
 	(8, 2, 'Julaia KOI', 'FEMALE', '2017-05-26', '2017-05-27 08:02:03', 2, '2017-05-26 05:01:47', 2);
 /*!40000 ALTER TABLE `person` ENABLE KEYS */;
 
--- Dumping structure for table property.person_address
-CREATE TABLE IF NOT EXISTS `person_address` (
-  `personId` int(20) DEFAULT NULL,
-  `addressId` int(20) DEFAULT NULL,
-  KEY `PersonId` (`personId`),
-  KEY `AddressId` (`addressId`),
-  CONSTRAINT `AddressId` FOREIGN KEY (`addressId`) REFERENCES `address` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `PersonId` FOREIGN KEY (`personId`) REFERENCES `person` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Pivot table between person and Address';
-
--- Dumping data for table property.person_address: ~0 rows (approximately)
-DELETE FROM `person_address`;
-/*!40000 ALTER TABLE `person_address` DISABLE KEYS */;
-/*!40000 ALTER TABLE `person_address` ENABLE KEYS */;
-
--- Dumping structure for table property.person_contact
-CREATE TABLE IF NOT EXISTS `person_contact` (
-  `personId` int(20) DEFAULT NULL,
-  `contactId` int(20) DEFAULT NULL,
-  KEY `PS_person` (`personId`),
-  KEY `PS_contact` (`contactId`),
-  CONSTRAINT `PS_contact` FOREIGN KEY (`contactId`) REFERENCES `contacts` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `PS_person` FOREIGN KEY (`personId`) REFERENCES `person` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Person and  Contacts Pivot Table ';
-
--- Dumping data for table property.person_contact: ~0 rows (approximately)
-DELETE FROM `person_contact`;
-/*!40000 ALTER TABLE `person_contact` DISABLE KEYS */;
-/*!40000 ALTER TABLE `person_contact` ENABLE KEYS */;
-
 -- Dumping structure for table property.user
+DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
   `id` int(20) NOT NULL AUTO_INCREMENT,
   `username` varchar(255) NOT NULL DEFAULT '0',

@@ -104,7 +104,7 @@ public class PersonController {
             @RequestBody Contacts contacts,
             @PathVariable Integer id
     ) throws Exception {
-        LOG.log(Level.INFO, " Create Address  Endpoint");
+        LOG.log(Level.INFO, " Create Ccontacts  Endpoint");
         return contactsService.createContacts(contacts, ParentTypes.PERSON, id);
     }
 
