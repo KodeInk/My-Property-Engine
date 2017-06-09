@@ -13,7 +13,7 @@ import myproperty.v1._entities.User;
  *
  * @author mover 6/8/2017
  */
-public class ContactResponse {
+public class ContactsResponse {
     private Integer id;
     private String type;
     private String details;
@@ -25,10 +25,10 @@ public class ContactResponse {
     private String parent_type;
     private Integer parent_id;
 
-    public ContactResponse() {
+    public ContactsResponse() {
     }
 
-    public ContactResponse(Integer id, String type, String details, String parent_type, Integer parent_id) {
+    public ContactsResponse(Integer id, String type, String details, String parent_type, Integer parent_id) {
         this.id = id;
         this.type = type;
         this.details = details;
@@ -143,7 +143,7 @@ public class ContactResponse {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final ContactResponse other = (ContactResponse) obj;
+        final ContactsResponse other = (ContactsResponse) obj;
         if (!Objects.equals(this.type, other.type)) {
             return false;
         }
