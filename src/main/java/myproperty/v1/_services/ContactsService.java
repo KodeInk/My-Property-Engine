@@ -58,7 +58,7 @@ public class ContactsService {
     }
 
     //TODO :  get Contacts by Id
-    public ContactsResponse getAddresById(Integer id) throws Exception {
+    public ContactsResponse getContactById(Integer id) throws Exception {
         Contacts address = contactsDAOImpl.findContacts(id);
         return ContactsResponse(address);
     }
