@@ -98,8 +98,8 @@ public class ContactsService {
             _Contacts.setDateUpdated(dateUpdate);
         }
 
-        Contacts _address = contactsDAOImpl.edit(_Contacts);
-        return ContactsResponse(_address);
+        Contacts _contacts = contactsDAOImpl.edit(_Contacts);
+        return ContactsResponse(_contacts);
     }
 
     //TODO: Create Contacts
@@ -143,7 +143,7 @@ public class ContactsService {
         //Updated Information
         contactsResponse.setDateUpdated(contacts.getDateUpdated());
 
-        if (contactsResponse.getUpdatedBy() != null) {
+        if (contacts.getUpdatedBy() != null) {
             UserResponse _updatedBy = new UserResponse();
             _updatedBy.setUsername(contacts.getUpdatedBy().getUsername());
             _updatedBy.setId(contacts.getUpdatedBy().getId());
