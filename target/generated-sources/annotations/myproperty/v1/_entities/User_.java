@@ -8,7 +8,7 @@ import javax.persistence.metamodel.StaticMetamodel;
 import myproperty.v1._entities.Address;
 import myproperty.v1._entities.Contacts;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2017-06-09T12:18:22")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2017-06-12T21:21:04")
 @StaticMetamodel(User.class)
 public class User_ { 
 

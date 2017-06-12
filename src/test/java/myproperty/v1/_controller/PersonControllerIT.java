@@ -5,7 +5,10 @@
  */
 package myproperty.v1._controller;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import myproperty.AppJersey;
 import myproperty.v1._entities.responses.PersonResponse;
@@ -13,6 +16,7 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 /**
@@ -67,7 +71,7 @@ public class PersonControllerIT {
         try {
             Map<String, String> vars = new HashMap<String, String>();
             // Test person Id  one 
-            vars.put("id", "7890");
+            vars.put("id", "1");
 
             String url = getendPoint() + "{id}";
             RestTemplate restTemplate = new RestTemplate();
@@ -83,21 +87,38 @@ public class PersonControllerIT {
         }
     }
 
-//    /**
-//     * Test of getPersonByUserId method, of class PersonController.
-//     */
-//    @Test
-//    public void testGetPersonByUserId() throws Exception {
-//        System.out.println("getPersonByUserId");
-//        Integer userId = null;
-//        PersonController instance = new PersonController();
-//        List<PersonResponse> expResult = null;
-//        List<PersonResponse> result = instance.getPersonByUserId(userId);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
+    /**
+     * Test of getPersonByUserId method, of class PersonController.
+     * @throws java.lang.Exception
+     */
+    @Test
+    public void testGetPersonByUserId() throws Exception {
+        System.out.println("Checking the Get People End Point By User Id  ");
+        try {
+            Map<String, String> vars = new HashMap<>();
+            // Test Get Person by User id 
+            vars.put("userId", "1");
+
+            String url = getendPoint() + "userId/{userId}";
+            RestTemplate restTemplate = new RestTemplate();
+            PersonResponse[] result = restTemplate.getForObject(url, PersonResponse[].class, vars);
+            System.out.print(Arrays.toString(result));
+
+            if (result.length > 0) {
+                for (PersonResponse pr : result) {
+                    System.out.print(pr.toString());
+                }
+
+            } else {
+                fail("Was not Able to get any response ");
+            }
+
+
+        } catch (RestClientException e) {
+            fail("Something Went Wrong ");
+        }
+    }
+
 //    /**
 //     * Test of updatePersonById method, of class PersonController.
 //     */

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="myproperty.v1._controller.PersonControllerIT" time="0.601" tests="1" errors="0" skipped="0" failures="1">
+<testsuite name="myproperty.v1._controller.PersonControllerIT" time="1.112" tests="3" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_101\jre\bin"/>
@@ -15,7 +15,7 @@
     <property name="user.country" value="US"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.os.patch.level" value=""/>
-    <property name="test" value="myproperty.v1._controller.PersonControllerIT#testGetPeople"/>
+    <property name="test" value="myproperty/v1/_controller/**/*IT.java"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
     <property name="user.dir" value="E:\codemovers\myproperty"/>
     <property name="java.runtime.version" value="1.8.0_101-b13"/>
@@ -45,7 +45,7 @@
     <property name="java.vm.specification.version" value="1.8"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="java.home" value="C:\Program Files\Java\jdk1.8.0_101\jre"/>
-    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -Dtest=myproperty.v1._controller.PersonControllerIT#testGetPeople -Dmaven.ext.class.path=C:\Program Files\NetBeans 8.2\java\maven-nblib\netbeans-eventspy.jar -Dfile.encoding=UTF-8 surefire:test"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -Dtest=myproperty/v1/_controller/**/*IT.java -Dmaven.ext.class.path=C:\Program Files\NetBeans 8.2\java\maven-nblib\netbeans-eventspy.jar -Dfile.encoding=UTF-8 test-compile surefire:test"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
     <property name="user.language" value="en"/>
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
@@ -62,17 +62,7 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase name="testGetPeople" classname="myproperty.v1._controller.PersonControllerIT" time="0.601">
-    <failure message="Something Went Wrong " type="java.lang.AssertionError">java.lang.AssertionError: Something Went Wrong 
-	at org.junit.Assert.fail(Assert.java:88)
-	at myproperty.v1._controller.PersonControllerIT.testGetPeople(PersonControllerIT.java:57)
-</failure>
-    <system-out><![CDATA[Checking the Get People End Point 
-POST: 8080
-19:59:28.172 [main] DEBUG org.springframework.web.client.RestTemplate - Created GET request for "http://localhost:8080/person/list"
-19:59:28.219 [main] DEBUG org.springframework.web.client.RestTemplate - Setting request Accept header to [application/json, application/*+json]
-19:59:28.269 [main] DEBUG org.springframework.web.client.RestTemplate - GET request for "http://localhost:8080/person/list" resulted in 200 (null)
-19:59:28.270 [main] DEBUG org.springframework.web.client.RestTemplate - Reading [class myproperty.v1._entities.responses.PersonResponse] as "application/json;charset=UTF-8" using [org.springframework.http.converter.json.MappingJackson2HttpMessageConverter@2f177a4b]
-]]></system-out>
-  </testcase>
+  <testcase name="testGetPersonById" classname="myproperty.v1._controller.PersonControllerIT" time="0.601"/>
+  <testcase name="testGetPersonByUserId" classname="myproperty.v1._controller.PersonControllerIT" time="0.511"/>
+  <testcase name="testGetPeople" classname="myproperty.v1._controller.PersonControllerIT" time="0"/>
 </testsuite>

@@ -8,7 +8,7 @@ import myproperty.v1._entities.Permissions;
 import myproperty.v1._entities.Person;
 import myproperty.v1._entities.Roles;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2017-06-09T12:18:22")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2017-06-12T21:21:04")
 @StaticMetamodel(RolePermission.class)
 public class RolePermission_ { 
 
