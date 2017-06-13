@@ -1,6 +1,7 @@
 package myproperty.v1._controller;
 
 import myproperty.v1._entities.User;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -16,7 +17,7 @@ public class AccountController {
         return "Helo Accounts Mappers ";
     }
 
-    @RequestMapping(value = "/new", method = RequestMethod.POST)
+    @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody
     String create_new_account(@RequestBody User user) {
         return " Create New Account ";

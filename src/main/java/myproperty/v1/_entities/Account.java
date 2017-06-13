@@ -5,135 +5,45 @@
  */
 package myproperty.v1._entities;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-import java.io.Serializable;
-import java.util.Date;
-
 /**
  *
- * @author Mover
+ * @author mover 6/12/2017
  */
-@Entity
-@Table(name = "account")
-@XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Account.findAll", query = "SELECT a FROM Account a")
-    , @NamedQuery(name = "Account.findById", query = "SELECT a FROM Account a WHERE a.id = :id")
-    , @NamedQuery(name = "Account.findByAccountName", query = "SELECT a FROM Account a WHERE a.accountName = :accountName")
-    , @NamedQuery(name = "Account.findByDateCreated", query = "SELECT a FROM Account a WHERE a.dateCreated = :dateCreated")})
-public class Account implements Serializable {
+public class Account {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @Basic(optional = false)
-    @NotNull
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private Integer id;
-    @Size(max = 255)
-    @Column(name = "account_name")
-    private String accountName;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "date_created")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dateCreated;
-    @JoinColumn(name = "account_type", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private AccountType accountType;
-    @JoinColumn(name = "author_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private Person authorId;
-    @JoinColumn(name = "subscription", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private Subscription subscription;
+    private String username;
+    private String password;
+    private String email_address;
 
-    public Account() {
+    public Account(String username, String password, String email_address) {
+        this.username = username;
+        this.password = password;
+        this.email_address = email_address;
     }
 
-    public Account(Integer id) {
-        this.id = id;
+    public String getUsername() {
+        return username;
     }
 
-    public Account(Integer id, Date dateCreated) {
-        this.id = id;
-        this.dateCreated = dateCreated;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public Integer getId() {
-        return id;
+    public String getPassword() {
+        return password;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public String getAccountName() {
-        return accountName;
+    public String getEmail_address() {
+        return email_address;
     }
 
-    public void setAccountName(String accountName) {
-        this.accountName = accountName;
+    public void setEmail_address(String email_address) {
+        this.email_address = email_address;
     }
 
-    public Date getDateCreated() {
-        return dateCreated;
-    }
-
-    public void setDateCreated(Date dateCreated) {
-        this.dateCreated = dateCreated;
-    }
-
-    public AccountType getAccountType() {
-        return accountType;
-    }
-
-    public void setAccountType(AccountType accountType) {
-        this.accountType = accountType;
-    }
-
-    public Person getAuthorId() {
-        return authorId;
-    }
-
-    public void setAuthorId(Person authorId) {
-        this.authorId = authorId;
-    }
-
-    public Subscription getSubscription() {
-        return subscription;
-    }
-
-    public void setSubscription(Subscription subscription) {
-        this.subscription = subscription;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Account)) {
-            return false;
-        }
-        Account other = (Account) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "myproperty._entities.Account[ id=" + id + " ]";
-    }
 
 }
