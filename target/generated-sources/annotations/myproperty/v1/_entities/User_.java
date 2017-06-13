@@ -5,10 +5,11 @@ import javax.annotation.Generated;
 import javax.persistence.metamodel.CollectionAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
+import myproperty.v1._entities.Accounts;
 import myproperty.v1._entities.Address;
 import myproperty.v1._entities.Contacts;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2017-06-12T21:21:04")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2017-06-13T17:21:01")
 @StaticMetamodel(User.class)
 public class User_ { 
 
@@ -16,6 +17,7 @@ public class User_ {
     public static volatile SingularAttribute<User, String> password;
     public static volatile CollectionAttribute<User, Contacts> contactsCollection;
     public static volatile SingularAttribute<User, Date> dateCreated;
+    public static volatile CollectionAttribute<User, Accounts> accountsCollection;
     public static volatile CollectionAttribute<User, Contacts> contactsCollection1;
     public static volatile CollectionAttribute<User, Address> addressCollection1;
     public static volatile SingularAttribute<User, Integer> id;

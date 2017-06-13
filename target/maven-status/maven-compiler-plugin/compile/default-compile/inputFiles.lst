@@ -1,6 +1,6 @@
 E:\codemovers\myproperty\src\main\java\myproperty\v1\_entities\Address.java
+E:\codemovers\myproperty\src\main\java\myproperty\v1\_entities\Packages.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\_entities\User.java
-E:\codemovers\myproperty\src\main\java\myproperty\v1\_entities\SubscriptionPermission.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\db\Entity.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\_entities\Roles.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\_entities\Types.java
@@ -27,10 +27,10 @@ E:\codemovers\myproperty\src\main\java\myproperty\v1\_services\AddressService.ja
 E:\codemovers\myproperty\src\main\java\myproperty\v1\_entities\responses\AddressResponse.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\helper\exception\UnauthorizedException.java
 E:\codemovers\myproperty\src\main\java\myproperty\AppJersey.java
-E:\codemovers\myproperty\src\main\java\myproperty\v1\_entities\AccountType.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\_entities\Person.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\helper\exception\InternalErrorException.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\_dao\interfaces\ContactsDAO.java
+E:\codemovers\myproperty\src\main\java\myproperty\v1\_entities\AccountTypes.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\helper\utilities.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\_dao\userDAOImpl.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\_controller\AddressController.java
@@ -40,7 +40,7 @@ E:\codemovers\myproperty\src\main\java\myproperty\v1\_services\Status.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\_entities\Property.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\_entities\responses\PersonResponse.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\helper\ParentTypes.java
-E:\codemovers\myproperty\src\main\java\myproperty\v1\_entities\Subscription.java
+E:\codemovers\myproperty\src\main\java\myproperty\v1\_entities\Accounts.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\_entities\UserRole.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\_controller\UserController.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\_entities\Account.java

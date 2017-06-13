@@ -21,7 +21,6 @@ myproperty\v1\_entities\responses\ContactsResponse.class
 myproperty\v1\_entities\Permissions_.class
 myproperty\v1\_dao\interfaces\ContactsDAO.class
 myproperty\v1\_entities\Categories_.class
-myproperty\v1\_entities\Subscription_.class
 myproperty\v1\_services\PersonService.class
 myproperty\v1\_entities\responses\UserResponse.class
 myproperty\v1\helper\exception\BadRequestException.class
@@ -30,11 +29,9 @@ myproperty\v1\_entities\Account.class
 myproperty\v1\_entities\Contacts.class
 myproperty\v1\_entities\Reviews.class
 myproperty\v1\_entities\Roles_.class
-myproperty\v1\_entities\AccountType.class
 myproperty\v1\_entities\Person.class
 myproperty\v1\_entities\Users_.class
 myproperty\v1\helper\exception\InternalErrorException.class
-myproperty\v1\_entities\Account_.class
 myproperty\v1\_entities\User.class
 myproperty\v1\helper\ContactTypes.class
 myproperty\v1\helper\utilities.class
@@ -46,7 +43,6 @@ myproperty\v1\_dao\userDAOImpl.class
 myproperty\v1\_services\Status.class
 myproperty\v1\_controller\AddressController.class
 myproperty\v1\_entities\Rating.class
-myproperty\v1\_entities\SubscriptionPermission_.class
 myproperty\v1\helper\ParentTypes.class
 myproperty\v1\_entities\Contacts_.class
 myproperty\v1\_entities\Person_.class
@@ -60,13 +56,10 @@ myproperty\v1\_dao\interfaces\userDAO.class
 myproperty\v1\_entities\Images_.class
 myproperty\v1\_entities\Types_.class
 myproperty\v1\_controller\PersonController.class
-myproperty\v1\_entities\SubscriptionPermission.class
 myproperty\v1\db\EntityManagerFactoryProvider.class
 myproperty\v1\_services\UserService.class
 myproperty\v1\annotation\MainId.class
-myproperty\v1\_entities\AccountType_.class
 myproperty\v1\_entities\Users.class
-myproperty\v1\_entities\Subscription.class
 myproperty\v1\helper\exception\Message.class
 myproperty\v1\db\Entity.class
 myproperty\v1\_dao\ContactsDAOImpl.class
