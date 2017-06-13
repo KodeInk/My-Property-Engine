@@ -63,8 +63,10 @@ public class Accounts implements Serializable {
     private Date dateCreated;
     @Basic(optional = false)
 
-    @Column(name = "created_by")
-    private int createdBy;
+    @JoinColumn(name = "created_by", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private User createdBy;
+
     @Column(name = "date_updated")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateUpdated;
@@ -76,6 +78,7 @@ public class Accounts implements Serializable {
     @JoinColumn(name = "package_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Packages packageId;
+
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private User userId;
@@ -88,7 +91,7 @@ public class Accounts implements Serializable {
         this.id = id;
     }
 
-    public Accounts(Integer id, int parentId, String status, Date dateCreated, int createdBy) {
+    public Accounts(Integer id, int parentId, String status, Date dateCreated, User createdBy) {
         this.id = id;
         this.parentId = parentId;
         this.status = status;
@@ -128,11 +131,11 @@ public class Accounts implements Serializable {
         this.dateCreated = dateCreated;
     }
 
-    public int getCreatedBy() {
+    public User getCreatedBy() {
         return createdBy;
     }
 
-    public void setCreatedBy(int createdBy) {
+    public void setCreatedBy(User createdBy) {
         this.createdBy = createdBy;
     }
 

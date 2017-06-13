@@ -1,6 +1,8 @@
 package myproperty.v1._controller;
 
 import myproperty.v1._entities.User;
+import myproperty.v1._services.AccountService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,6 +13,9 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/account")
 public class AccountController {
+
+    @Autowired
+    private AccountService accountService;
 
     @RequestMapping(method = RequestMethod.GET)
     public String getAccounts(){

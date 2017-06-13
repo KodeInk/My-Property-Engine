@@ -18,6 +18,10 @@ public class AccountService {
 
     //TODO:Create Account
     public void createAccount(Account account) {
+        //STEP ONE: Create User Username and Password:
+
+        //STEP TWO: Create Empty Person [Profile]:
+        //STEP THREE: Create Contact Information Email Address:
     }
 
     //TODO: Activate Account
