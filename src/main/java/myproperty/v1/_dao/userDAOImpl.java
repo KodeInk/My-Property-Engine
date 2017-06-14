@@ -11,6 +11,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import myproperty.v1.helper.ContactTypes;
 import myproperty.v1.helper.exception.InternalErrorException;
 
 /**
@@ -148,7 +149,7 @@ public class userDAOImpl extends JpaController implements userDAO {
 
 
     @Override
-    public User CheckPassword(User user) {
+    public User CheckPassword(User user) throws Exception {
 
         User user1 = null;
         EntityManager em = getEntityManager();
@@ -166,6 +167,30 @@ public class userDAOImpl extends JpaController implements userDAO {
         }
 
         return user1;
+    }
+
+    @Override
+    public List<User> checkActiveUserByEmail(String email_address) throws Exception {
+        EntityManager em = null;
+        try {
+            em = getEntityManager();
+            em.getTransaction().begin();
+            String query = "SELECT U.* FROM user  U \n"
+                    + "JOIN person P \n"
+                    + "ON P.userId = U.id\n"
+                    + "JOIN contacts  C \n"
+                    + "ON P.id = C.parent_id AND C.parent_type LIKE 'PERSON'\n"
+                    + "WHERE C.type LIKE '" + ContactTypes.EMAIL + "' AND U.status NOT LIKE 'DEACTIVATED'";
+                    
+            Query q = em.createNativeQuery(query, User.class);
+            User u = (User) q.getResultList();
+
+        } finally {
+            em.close();
+        }
+
+
+        return null;
     }
 
 

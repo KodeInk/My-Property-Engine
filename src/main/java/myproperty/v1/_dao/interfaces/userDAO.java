@@ -22,5 +22,7 @@ public interface userDAO extends Serializable {
 
     void destroy(Integer id) throws Exception;
 
-    User CheckPassword(User user);
+    User CheckPassword(User user) throws Exception;
+
+    List<User> checkActiveUserByEmail(String email_address) throws Exception;
 }

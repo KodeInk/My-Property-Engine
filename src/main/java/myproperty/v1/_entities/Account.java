@@ -11,22 +11,22 @@ package myproperty.v1._entities;
  */
 public class Account {
 
-    private String username;
+    private String names;
     private String password;
     private String email_address;
 
-    public Account(String username, String password, String email_address) {
-        this.username = username;
+    public Account(String names, String password, String email_address) {
+        this.names = names;
         this.password = password;
         this.email_address = email_address;
     }
 
-    public String getUsername() {
-        return username;
+    public String getNames() {
+        return names;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setNames(String names) {
+        this.names = names;
     }
 
     public String getPassword() {

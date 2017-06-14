@@ -39,7 +39,11 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Contacts.findByDateUpdated", query = "SELECT c FROM Contacts c WHERE c.dateUpdated = :dateUpdated")
     , @NamedQuery(name = "Contacts.findByStatus", query = "SELECT c FROM Contacts c WHERE c.status = :status")
     , @NamedQuery(name = "Contacts.findByParentType", query = "SELECT c FROM Contacts c WHERE c.parentType = :parentType")
-    , @NamedQuery(name = "Contacts.findByParentId", query = "SELECT c FROM Contacts c WHERE c.parentId = :parentId")})
+    , @NamedQuery(name = "Contacts.findByParentId", query = "SELECT c FROM Contacts c WHERE c.parentId = :parentId")
+    , @NamedQuery(name = "Contacts.findByParentIdAndParentType", query = "SELECT c FROM Contacts c WHERE c.parentId = :parentId AND c.parentType LIKE :parentType")
+
+})
+
 public class Contacts implements Serializable {
 
     @Id
