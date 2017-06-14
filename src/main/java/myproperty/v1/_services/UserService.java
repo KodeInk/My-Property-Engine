@@ -7,6 +7,7 @@ import myproperty.v1._entities.User;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import myproperty.v1._entities.responses.UserResponse;
@@ -112,6 +113,11 @@ public class UserService {
         userResponse.setDateCreated(_user.getDateCreated());
         userResponse.setUsername(_user.getUsername());
         return userResponse;
+    }
+
+    public List<User> checkActiveUserByEmail(String email_address) throws Exception {
+
+        return userDAOImpl.checkActiveUserByEmail(email_address);
     }
 
 
