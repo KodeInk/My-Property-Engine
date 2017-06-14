@@ -1,6 +1,4 @@
 package myproperty.v1._services;
-
-import java.util.AbstractCollection;
 import java.util.ArrayList;
 import myproperty.v1._dao.userDAOImpl;
 import myproperty.v1._entities.User;
@@ -116,6 +114,8 @@ public class UserService {
     }
 
     public List<User> checkActiveUserByEmail(String email_address) throws Exception {
+        if (validate_email(email_address) == false)
+            throw new BadRequestException("Invalid Email Address ");
 
         return userDAOImpl.checkActiveUserByEmail(email_address);
     }

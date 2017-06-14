@@ -378,7 +378,7 @@ Using SHA-256 :
     }
 
 
-    public static Boolean valida_email(String EmailAddress) {
+    public static Boolean validate_email(String EmailAddress) {
         EmailValidator validator = new EmailValidator();
         return validator.validate(EmailAddress);
     }
