@@ -36,6 +36,7 @@ public class AccountService {
     PersonResponse personResponse;
     User user;
     Contacts contacts;
+    Accounts accounts;
 
     private static final Logger LOG = Logger.getLogger(AccountService.class.getName());
 
@@ -94,7 +95,22 @@ public class AccountService {
         }
         //STEP FOUR : Create Account data
         {
-            if ()
+            // Check to see that User is Created, Profile is Created, and Contact Information is Created for this User
+            //Checker 
+            if ((userResponse.getId() > 0) && (personResponse.getId() > 0) && (contacts.getId() > 0)) {
+                accounts = new Accounts();
+
+                // Re Initialize the Account Owner :: 
+                User account_owner = new User();
+                account_owner.setId(userResponse.getId());
+                account_owner.setUsername(userResponse.getUsername());
+                accounts.setAccount_owner(account_owner);
+
+                // Set Status  ::
+                accounts.setStatus(StatusEnum.ACTIVE.toString());
+                accounts.setParentId(0);
+
+            }
         }
 
         //TODO: Send Email to the User and Notify about Account Creation ::
