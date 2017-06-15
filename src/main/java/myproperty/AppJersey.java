@@ -13,7 +13,7 @@ import org.springframework.web.client.RestTemplate;
 
 /**
  *
- * @author Manny
+ * @author mover
  */
 public class AppJersey {
 
