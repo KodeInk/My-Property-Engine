@@ -81,7 +81,7 @@ public class Accounts implements Serializable {
 
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private User userId;
+    private User account_owner;
 
 
     public Accounts() {
@@ -91,12 +91,12 @@ public class Accounts implements Serializable {
         this.id = id;
     }
 
-    public Accounts(Integer id, int parentId, String status, Date dateCreated, User createdBy) {
+    public Accounts(Integer id, int parentId, String status, Date dateCreated, User account_owner) {
         this.id = id;
         this.parentId = parentId;
         this.status = status;
         this.dateCreated = dateCreated;
-        this.createdBy = createdBy;
+        this.account_owner = account_owner;
     }
 
     public Integer getId() {
@@ -171,12 +171,12 @@ public class Accounts implements Serializable {
         this.packageId = packageId;
     }
 
-    public User getUserId() {
-        return userId;
+    public User getAccount_owner() {
+        return account_owner;
     }
 
-    public void setUserId(User userId) {
-        this.userId = userId;
+    public void setAccount_owner(User account_owner) {
+        this.account_owner = account_owner;
     }
 
     @Override

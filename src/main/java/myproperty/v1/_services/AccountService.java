@@ -92,7 +92,10 @@ public class AccountService {
                 contactsService.createContacts(contacts, ParentTypes.PERSON, personResponse.getId());
             }
         }
-        //STEP FOUR : Create Account data 
+        //STEP FOUR : Create Account data
+        {
+            if ()
+        }
 
         //TODO: Send Email to the User and Notify about Account Creation ::
     }
