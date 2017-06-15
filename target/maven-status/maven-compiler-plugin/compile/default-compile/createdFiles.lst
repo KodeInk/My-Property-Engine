@@ -1,7 +1,9 @@
 myproperty\v1\_entities\UserRole_.class
 myproperty\v1\_entities\Images.class
+myproperty\v1\_entities\AccountTypes_.class
 myproperty\v1\_entities\Property.class
 myproperty\Application.class
+myproperty\v1\_dao\AccountsDaoImpl.class
 myproperty\v1\_controller\AccountController.class
 myproperty\v1\helper\exception\UnauthorizedException.class
 myproperty\v1\_entities\responses\PersonResponse.class
@@ -12,6 +14,7 @@ myproperty\v1\_dao\PersonDAOImpl.class
 myproperty\v1\_entities\Types.class
 myproperty\v1\_controller\RegistrationController.class
 myproperty\v1\_entities\Address_.class
+myproperty\v1\_dao\interfaces\AccountsDao.class
 myproperty\v1\_dao\interfaces\PersonDAO.class
 myproperty\v1\_entities\Roles.class
 myproperty\v1\_controller\UserController.class
@@ -20,6 +23,7 @@ myproperty\v1\_entities\RolePermission_.class
 myproperty\v1\_entities\responses\ContactsResponse.class
 myproperty\v1\_entities\Permissions_.class
 myproperty\v1\_dao\interfaces\ContactsDAO.class
+myproperty\v1\_entities\Accounts.class
 myproperty\v1\_entities\Categories_.class
 myproperty\v1\_services\PersonService.class
 myproperty\v1\_entities\responses\UserResponse.class
@@ -29,13 +33,16 @@ myproperty\v1\_entities\Account.class
 myproperty\v1\_entities\Contacts.class
 myproperty\v1\_entities\Reviews.class
 myproperty\v1\_entities\Roles_.class
+myproperty\AppJersey.class
 myproperty\v1\_entities\Person.class
 myproperty\v1\_entities\Users_.class
+myproperty\v1\helper\EmailValidator.class
 myproperty\v1\helper\exception\InternalErrorException.class
 myproperty\v1\_entities\User.class
 myproperty\v1\helper\ContactTypes.class
 myproperty\v1\helper\utilities.class
 myproperty\v1\_entities\Categories.class
+myproperty\v1\_entities\responses\AccountsResponse.class
 myproperty\v1\_dao\interfaces\AddressDao.class
 myproperty\v1\_entities\responses\AddressResponse.class
 myproperty\v1\_entities\Permissions.class
@@ -44,6 +51,7 @@ myproperty\v1\_services\Status.class
 myproperty\v1\_controller\AddressController.class
 myproperty\v1\_entities\Rating.class
 myproperty\v1\helper\ParentTypes.class
+myproperty\v1\_entities\Packages.class
 myproperty\v1\_entities\Contacts_.class
 myproperty\v1\_entities\Person_.class
 myproperty\v1\_entities\Reviews_.class
@@ -64,7 +72,12 @@ myproperty\v1\helper\exception\Message.class
 myproperty\v1\db\Entity.class
 myproperty\v1\_dao\ContactsDAOImpl.class
 myproperty\v1\_entities\Rating_.class
+myproperty\v1\_entities\Accounts_.class
 myproperty\v1\_entities\RolePermission.class
+myproperty\v1\_entities\Packages_.class
+myproperty\v1\_services\AccountService.class
 myproperty\v1\_entities\Property_.class
+myproperty\v1\_entities\AccountTypes.class
 myproperty\v1\_entities\User_.class
 myproperty\v1\_controller\ContactsController.class
+myproperty\v1\_entities\responses\AccountResponse.class

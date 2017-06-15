@@ -9,7 +9,7 @@ import myproperty.v1._entities.Accounts;
 import myproperty.v1._entities.Address;
 import myproperty.v1._entities.Contacts;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2017-06-13T17:21:01")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2017-06-15T23:38:24")
 @StaticMetamodel(User.class)
 public class User_ { 
 

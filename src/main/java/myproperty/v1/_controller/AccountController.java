@@ -1,6 +1,6 @@
 package myproperty.v1._controller;
 
-import myproperty.v1._entities.User;
+import myproperty.v1._entities.Account;
 import myproperty.v1._services.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -17,14 +17,14 @@ public class AccountController {
     @Autowired
     private AccountService accountService;
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public String getAccounts(){
         return "Helo Accounts Mappers ";
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody
-    String create_new_account(@RequestBody User user) {
-        return " Create New Account ";
+    Boolean create_new_account(@RequestBody Account account) throws Exception {
+        return accountService.createAccount(account);
     }
 }

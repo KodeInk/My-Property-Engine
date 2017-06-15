@@ -53,12 +53,15 @@ public class AccountService {
     @Autowired
     ContactsService contactsService;
     //TODO:Create Account
-    public void createAccount(Account account) throws Exception {
+    public Boolean createAccount(Account account) throws Exception {
         //STEP ONE: Create User Username and Password:
         // Check to see that Email Address does not exist ::
         names = account.getNames();
         email_address = account.getEmail_address();
         password = account.getPassword();
+
+        Person person = new Person();
+
         //Check to see that Mandatory Fields are filled 
         if (names.length() <= 2 || email_address.length() <= 4 || password.length() <= 4) {
             LOG.log(Level.INFO, "Crate New Account Service Level Method Hit ");
@@ -76,16 +79,18 @@ public class AccountService {
             user.setPassword(account.getPassword());
             user.setStatus(StatusEnum.PENDING.toString());
             userResponse = userService.createUser(user);
+            user.setId(userResponse.getId());
+
         }
 
         //STEP TWO: Create Empty Person [Profile]:
         {
             if (userResponse.getId() > 0) {
-                Person person = new Person();
-                user.setId(userResponse.getId());
+
                 person.setUser(user);
                 person.setNames(account.getNames());
                 personResponse = personService.createPerson(person);
+                person.setId(personResponse.getId());
             }
         }
         //STEP THREE: Create Contact Information Email Address:
@@ -94,6 +99,7 @@ public class AccountService {
                 contacts = new Contacts();
                 contacts.setType(ContactTypes.EMAIL.toString());
                 contacts.setDetails(account.getEmail_address());
+                contacts.setCreatedBy(user);
                 contactsService.createContacts(contacts, ParentTypes.PERSON, personResponse.getId());
             }
         }
@@ -120,6 +126,7 @@ public class AccountService {
             }
         }
 
+        return true;
         //TODO: Send Email to the User and Notify about Account Creation ::
     }
 

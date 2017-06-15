@@ -51,8 +51,8 @@ public class AccountControllerIT {
         User user = null;
         AccountController instance = new AccountController();
         String expResult = "";
-        String result = instance.create_new_account(user);
-        assertEquals(expResult, result);
+//        String result = instance.create_new_account(user);
+        //      assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

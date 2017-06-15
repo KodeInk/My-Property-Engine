@@ -172,6 +172,7 @@ public class userDAOImpl extends JpaController implements userDAO {
     @Override
     public List<User> checkActiveUserByEmail(String email_address) throws Exception {
         EntityManager em = null;
+        List<User> users = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
@@ -183,14 +184,14 @@ public class userDAOImpl extends JpaController implements userDAO {
                     + "WHERE C.type LIKE '" + ContactTypes.EMAIL + "' AND U.status NOT LIKE 'DEACTIVATED'";
                     
             Query q = em.createNativeQuery(query, User.class);
-            User u = (User) q.getResultList();
+            users = q.getResultList();
 
         } finally {
             em.close();
         }
 
 
-        return null;
+        return users;
     }
 
 

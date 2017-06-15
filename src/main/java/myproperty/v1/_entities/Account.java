@@ -15,6 +15,10 @@ public class Account {
     private String password;
     private String email_address;
 
+    public Account() {
+    }
+
+
     public Account(String names, String password, String email_address) {
         this.names = names;
         this.password = password;

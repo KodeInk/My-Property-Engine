@@ -1,6 +1,7 @@
 E:\codemovers\myproperty\src\main\java\myproperty\v1\_entities\Address.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\_entities\Packages.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\_entities\User.java
+E:\codemovers\myproperty\src\main\java\myproperty\v1\_dao\AccountsDaoImpl.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\db\Entity.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\_entities\Roles.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\_entities\Types.java
@@ -9,8 +10,11 @@ E:\codemovers\myproperty\src\main\java\myproperty\v1\_controller\RegistrationCon
 E:\codemovers\myproperty\src\main\java\myproperty\v1\_dao\PersonDAOImpl.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\helper\exception\Message.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\_dao\interfaces\AddressDao.java
+E:\codemovers\myproperty\src\main\java\myproperty\v1\_dao\interfaces\AccountsDao.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\_entities\responses\UserResponse.java
 E:\codemovers\myproperty\src\main\java\myproperty\Application.java
+E:\codemovers\myproperty\src\main\java\myproperty\v1\_services\AccountService.java
+E:\codemovers\myproperty\src\main\java\myproperty\v1\_entities\responses\AccountResponse.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\_dao\ContactsDAOImpl.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\_dao\AddressDaoImpl.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\_services\ContactsService.java
@@ -18,6 +22,7 @@ E:\codemovers\myproperty\src\main\java\myproperty\v1\_dao\interfaces\PersonDAO.j
 E:\codemovers\myproperty\src\main\java\myproperty\v1\helper\StatusEnum.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\_controller\ContactsController.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\_entities\Contacts.java
+E:\codemovers\myproperty\src\main\java\myproperty\v1\_entities\responses\AccountsResponse.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\_entities\responses\ContactsResponse.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\_controller\AccountController.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\_entities\RolePermission.java
@@ -52,6 +57,7 @@ E:\codemovers\myproperty\src\main\java\myproperty\v1\db\EntityManagerFactoryProv
 E:\codemovers\myproperty\src\main\java\myproperty\v1\helper\exception\ServiceUnAvailableException.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\_entities\Categories.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\_entities\Permissions.java
+E:\codemovers\myproperty\src\main\java\myproperty\v1\helper\EmailValidator.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\_entities\Rating.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\helper\ContactTypes.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\_services\UserService.java
