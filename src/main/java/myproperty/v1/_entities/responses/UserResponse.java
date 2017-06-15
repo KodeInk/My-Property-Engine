@@ -7,7 +7,6 @@ package myproperty.v1._entities.responses;
 
 import java.util.Date;
 import java.util.Objects;
-import myproperty.v1._entities.Person;
 
 /**
  *

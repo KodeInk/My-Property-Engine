@@ -8,6 +8,8 @@ package myproperty.v1._services;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import myproperty.v1._dao.AccountsDaoImpl;
+import myproperty.v1._dao.AddressDaoImpl;
 import myproperty.v1._entities.Account;
 import myproperty.v1._entities.Accounts;
 import myproperty.v1._entities.Contacts;
@@ -37,6 +39,8 @@ public class AccountService {
     User user;
     Contacts contacts;
     Accounts accounts;
+
+    private final AccountsDaoImpl accountsDaoImpl = AccountsDaoImpl.getInstance();
 
     private static final Logger LOG = Logger.getLogger(AccountService.class.getName());
 
@@ -109,6 +113,9 @@ public class AccountService {
                 // Set Status  ::
                 accounts.setStatus(StatusEnum.ACTIVE.toString());
                 accounts.setParentId(0);
+
+                accounts = accountsDaoImpl.create(accounts);
+
 
             }
         }
