@@ -9,18 +9,20 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import myproperty.v1._dao.AccountsDaoImpl;
-import myproperty.v1._dao.AddressDaoImpl;
 import myproperty.v1._entities.Account;
 import myproperty.v1._entities.Accounts;
 import myproperty.v1._entities.Contacts;
 import myproperty.v1._entities.Person;
 import myproperty.v1._entities.User;
+import myproperty.v1._entities.responses.AccountsResponse;
+import myproperty.v1._entities.responses.ContactsResponse;
 import myproperty.v1._entities.responses.PersonResponse;
 import myproperty.v1._entities.responses.UserResponse;
 import myproperty.v1.helper.ContactTypes;
 import myproperty.v1.helper.ParentTypes;
 import myproperty.v1.helper.StatusEnum;
 import myproperty.v1.helper.exception.BadRequestException;
+import static myproperty.v1.helper.utilities.getCurrentDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,6 +38,7 @@ public class AccountService {
     private String password;
     UserResponse userResponse;
     PersonResponse personResponse;
+    ContactsResponse contactsResponse;
     User user;
     Contacts contacts;
     Accounts accounts;
@@ -53,7 +56,7 @@ public class AccountService {
     @Autowired
     ContactsService contactsService;
     //TODO:Create Account
-    public Boolean createAccount(Account account) throws Exception {
+    public AccountsResponse createAccount(Account account) throws Exception {
         //STEP ONE: Create User Username and Password:
         // Check to see that Email Address does not exist ::
         names = account.getNames();
@@ -61,6 +64,7 @@ public class AccountService {
         password = account.getPassword();
 
         Person person = new Person();
+
 
         //Check to see that Mandatory Fields are filled 
         if (names.length() <= 2 || email_address.length() <= 4 || password.length() <= 4) {
@@ -89,6 +93,7 @@ public class AccountService {
 
                 person.setUser(user);
                 person.setNames(account.getNames());
+                person.setDateCreated(getCurrentDate());
                 personResponse = personService.createPerson(person);
                 person.setId(personResponse.getId());
             }
@@ -100,7 +105,9 @@ public class AccountService {
                 contacts.setType(ContactTypes.EMAIL.toString());
                 contacts.setDetails(account.getEmail_address());
                 contacts.setCreatedBy(user);
-                contactsService.createContacts(contacts, ParentTypes.PERSON, personResponse.getId());
+                contacts.setDateCreated(getCurrentDate());
+                contactsResponse = contactsService.createContacts(contacts, ParentTypes.PERSON, personResponse.getId());
+                contacts.setId(contactsResponse.getId());
             }
         }
         //STEP FOUR : Create Account data
@@ -115,10 +122,14 @@ public class AccountService {
                 account_owner.setId(userResponse.getId());
                 account_owner.setUsername(userResponse.getUsername());
                 accounts.setAccount_owner(account_owner);
+                accounts.setDateCreated(getCurrentDate());
 
                 // Set Status  ::
                 accounts.setStatus(StatusEnum.ACTIVE.toString());
-                accounts.setParentId(0);
+                //  accounts.setParentId(0);
+
+                //todo: add Packages
+                //todo: add account types 
 
                 accounts = accountsDaoImpl.create(accounts);
 
@@ -126,7 +137,7 @@ public class AccountService {
             }
         }
 
-        return true;
+        return getAccountsResponse(accounts);
         //TODO: Send Email to the User and Notify about Account Creation ::
     }
 
@@ -156,5 +167,31 @@ public class AccountService {
     //TODO: List accounts
     public void getAccounts() {
 
+    }
+
+    public AccountsResponse getAccountsResponse(Accounts accounts) {
+        AccountsResponse accountsResponse = new AccountsResponse();
+
+        accountsResponse.setId(accounts.getId());
+//        if (accounts.getParentId() > 0) {
+//            accountsResponse.setParentId(accounts.getParentId());
+//        }
+
+        accountsResponse.setStatus(accounts.getStatus());
+        accountsResponse.setDateCreated(accounts.getDateCreated());
+        //accountsResponse.setCreatedBy(accounts.getCrea);
+        if (accounts.getCreatedBy() > 0) {
+            accountsResponse.setCreatedBy(accounts.getCreatedBy());
+        }
+
+//        if (accounts.getUpdatedBy() > 0) {
+//            accountsResponse.setUpdatedBy(accounts.getUpdatedBy());
+//        }
+
+        accountsResponse.setDateCreated(null);
+
+        accountsResponse.setDateCreated(null);
+
+        return accountsResponse;
     }
 }

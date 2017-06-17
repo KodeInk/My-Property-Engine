@@ -1,6 +1,7 @@
 package myproperty.v1._controller;
 
 import myproperty.v1._entities.Account;
+import myproperty.v1._entities.responses.AccountsResponse;
 import myproperty.v1._services.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -24,7 +25,7 @@ public class AccountController {
 
     @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody
-    Boolean create_new_account(@RequestBody Account account) throws Exception {
+    AccountsResponse create_new_account(@RequestBody Account account) throws Exception {
         return accountService.createAccount(account);
     }
 }

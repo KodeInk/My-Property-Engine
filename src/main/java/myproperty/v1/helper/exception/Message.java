@@ -1,11 +1,14 @@
 package myproperty.v1.helper.exception;
 
 import java.util.Objects;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
  *
  * @author mover
  */
+@ResponseStatus(value = HttpStatus.OK)
 public class Message {
 
     private String message;

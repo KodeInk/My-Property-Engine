@@ -18,9 +18,9 @@ public class AccountsResponse {
     private int parentId;
     private String status;
     private Date dateCreated;
-    private UserResponse createdBy;
+    private Integer createdBy;
     private Date dateUpdated;
-    private UserResponse updatedBy;
+    private Integer updatedBy;
 
     public AccountsResponse() {
     }
@@ -57,11 +57,11 @@ public class AccountsResponse {
         this.dateCreated = dateCreated;
     }
 
-    public UserResponse getCreatedBy() {
+    public Integer getCreatedBy() {
         return createdBy;
     }
 
-    public void setCreatedBy(UserResponse createdBy) {
+    public void setCreatedBy(Integer createdBy) {
         this.createdBy = createdBy;
     }
 
@@ -73,11 +73,11 @@ public class AccountsResponse {
         this.dateUpdated = dateUpdated;
     }
 
-    public UserResponse getUpdatedBy() {
+    public Integer getUpdatedBy() {
         return updatedBy;
     }
 
-    public void setUpdatedBy(UserResponse updatedBy) {
+    public void setUpdatedBy(Integer updatedBy) {
         this.updatedBy = updatedBy;
     }
 
