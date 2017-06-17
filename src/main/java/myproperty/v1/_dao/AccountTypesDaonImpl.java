@@ -5,6 +5,7 @@
  */
 package myproperty.v1._dao;
 
+import myproperty.v1._dao.interfaces.AccountTypesDao;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -13,7 +14,6 @@ import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaQuery;
 import myproperty.v1._entities.AccountTypes;
 import myproperty.v1._entities.Address;
-import myproperty.v1.db.Entity;
 import myproperty.v1.db.JpaController;
 import myproperty.v1.helper.exception.InternalErrorException;
 
@@ -21,7 +21,7 @@ import myproperty.v1.helper.exception.InternalErrorException;
  *
  * @author Mover 6/17/2017
  */
-public class AccountTypesDaonImpl extends JpaController {
+public class AccountTypesDaonImpl extends JpaController implements AccountTypesDao {
 
     private static final Logger LOG = Logger.getLogger(AccountTypesDaonImpl.class.getName());
     private static AccountTypesDaonImpl instance = null;
@@ -37,6 +37,7 @@ public class AccountTypesDaonImpl extends JpaController {
         super(AccountTypes.class);
     }
 
+    @Override
     public AccountTypes create(AccountTypes accountTypes) throws Exception {
         EntityManager em = null;
         try {
@@ -56,6 +57,7 @@ public class AccountTypesDaonImpl extends JpaController {
         return accountTypes;
     }
 
+    @Override
     public AccountTypes edit(AccountTypes accountTypes) throws Exception {
 
         EntityManager em = null;
@@ -82,6 +84,7 @@ public class AccountTypesDaonImpl extends JpaController {
         return accountTypes;
     }
 
+    @Override
     public AccountTypes findAccountTypes(Integer id) throws Exception {
         EntityManager em = getEntityManager();
         try {
@@ -91,10 +94,12 @@ public class AccountTypesDaonImpl extends JpaController {
         }
     }
 
+    @Override
     public List<AccountTypes> findAccountTypesEntities() throws Exception {
         return findAccountTypesEntities(true, -1, -1);
     }
 
+    @Override
     public List<AccountTypes> findAccountTypesEntities(int maxResults, int firstResult) throws Exception {
         return findAccountTypesEntities(false, maxResults, firstResult);
     }
@@ -115,16 +120,15 @@ public class AccountTypesDaonImpl extends JpaController {
         }
     }
 
-    public AccountTypes findAccountType(String Account) throws Exception {
+    @Override
+    public AccountTypes findAccountType(String accountType) throws Exception {
         EntityManager em = getEntityManager();
         try {
             // return em.find(Address.class, id);
-            Query query = em.createNamedQuery("Address.findByParent");
-            query.setParameter("parent_id", parent_id);
-            query.setParameter("parent_type", parent_type);
-
-            List<Address> addresses = query.getResultList();
-            return addresses;
+            Query query = em.createNamedQuery("AccountTypes.findByAccountType");
+            query.setParameter("accountType", accountType);
+            List<AccountTypes> accountTypes = query.getResultList();
+            return accountTypes.get(0);
         } finally {
             em.close();
         }
