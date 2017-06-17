@@ -9,15 +9,15 @@ package myproperty.v1.helper;
  *
  * @author mover 6/17/2017
  */
-public enum Packages {
+public enum AccountPackage {
     BASIC, BRONZE, SILVER, GOLD, PLATINUM;
 
-    public static final Packages fromString(String text) {
-        Packages returnValue = BASIC;
+    public static final AccountPackage fromString(String text) {
+        AccountPackage returnValue = BASIC;
 
         try {
             if (text != null) {
-                returnValue = Packages.valueOf(text.toUpperCase());
+                returnValue = AccountPackage.valueOf(text.toUpperCase());
             }
         } catch (IllegalArgumentException e) {
 
@@ -27,7 +27,7 @@ public enum Packages {
         return returnValue;
     }
 
-    public static final Packages fromObject(Object text) {
+    public static final AccountPackage fromObject(Object text) {
         return fromString(text.toString());
     }
 }
