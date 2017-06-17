@@ -181,7 +181,7 @@ public class userDAOImpl extends JpaController implements userDAO {
                     + "ON P.userId = U.id\n"
                     + "JOIN contacts  C \n"
                     + "ON P.id = C.parent_id AND C.parent_type LIKE 'PERSON'\n"
-                    + "WHERE C.type LIKE '" + ContactTypes.EMAIL + "' AND U.status NOT LIKE 'DEACTIVATED'";
+                    + "WHERE C.type LIKE '" + ContactTypes.EMAIL + "' AND U.status NOT LIKE 'DEACTIVATED' AND C.details LIKE  '%" + email_address + "%'  ";
                     
             Query q = em.createNativeQuery(query, User.class);
             users = q.getResultList();
