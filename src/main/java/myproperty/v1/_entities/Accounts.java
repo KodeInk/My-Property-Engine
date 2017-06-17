@@ -20,6 +20,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -41,6 +42,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Accounts.findByUpdatedBy", query = "SELECT a FROM Accounts a WHERE a.updatedBy = :updatedBy")})
 public class Accounts implements Serializable {
 
+    //TEST
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -61,11 +63,10 @@ public class Accounts implements Serializable {
     @Column(name = "date_created")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateCreated;
-    @Basic(optional = false)
 
-    @JoinColumn(name = "created_by", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private User createdBy;
+    @Basic(optional = false)
+    @Column(name = "created_by")
+    private int createdBy;
 
     @Column(name = "date_updated")
     @Temporal(TemporalType.TIMESTAMP)
@@ -131,13 +132,6 @@ public class Accounts implements Serializable {
         this.dateCreated = dateCreated;
     }
 
-    public User getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(User createdBy) {
-        this.createdBy = createdBy;
-    }
 
     public Date getDateUpdated() {
         return dateUpdated;
@@ -179,6 +173,15 @@ public class Accounts implements Serializable {
         this.account_owner = account_owner;
     }
 
+    public int getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(int createdBy) {
+        this.createdBy = createdBy;
+    }
+
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -200,5 +203,6 @@ public class Accounts implements Serializable {
     public String toString() {
         return "myproperty.v1._entities.Accounts[ id=" + id + " ]";
     }
+
 
 }
