@@ -10,10 +10,10 @@ package myproperty.v1.helper;
  * @author mover 6/17/2017
  */
 public enum AccountPackage {
-    FREE, BRONZE, SILVER, GOLD, PLATINUM;
+    BASIC, GOLD, PREMIUM;
 
     public static final AccountPackage fromString(String text) {
-        AccountPackage returnValue = FREE;
+        AccountPackage returnValue = BASIC;
 
         try {
             if (text != null) {
@@ -21,7 +21,7 @@ public enum AccountPackage {
             }
         } catch (IllegalArgumentException e) {
 
-            returnValue = FREE;
+            returnValue = BASIC;
         }
 
         return returnValue;

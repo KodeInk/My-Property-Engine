@@ -10,14 +10,18 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import myproperty.v1._dao.AccountsDaoImpl;
 import myproperty.v1._entities.Account;
+import myproperty.v1._entities.AccountTypes;
 import myproperty.v1._entities.Accounts;
+import static myproperty.v1._entities.Accounts_.accountTypeId;
 import myproperty.v1._entities.Contacts;
 import myproperty.v1._entities.Person;
 import myproperty.v1._entities.User;
+import myproperty.v1._entities.responses.AccountTypesResponse;
 import myproperty.v1._entities.responses.AccountsResponse;
 import myproperty.v1._entities.responses.ContactsResponse;
 import myproperty.v1._entities.responses.PersonResponse;
 import myproperty.v1._entities.responses.UserResponse;
+import myproperty.v1.helper.AccountType;
 import myproperty.v1.helper.ContactTypes;
 import myproperty.v1.helper.ParentTypes;
 import myproperty.v1.helper.StatusEnum;
@@ -55,6 +59,9 @@ public class AccountService {
 
     @Autowired
     ContactsService contactsService;
+
+    @Autowired
+    AccountTypesService accountTypesService;
     //TODO:Create Account
     public AccountsResponse createAccount(Account account) throws Exception {
         //STEP ONE: Create User Username and Password:
@@ -130,7 +137,12 @@ public class AccountService {
                 //  accounts.setParentId(0);
 
                 //todo: add Packages
-                //todo: add account types 
+                //todo: add account types
+                AccountTypesResponse accountTypesResponse = accountTypesService.findAccountType(AccountType.NORMAL.toString());
+                AccountTypes accountTypes = new AccountTypes();
+                accountTypes.setId(accountTypesResponse.getId());
+                accountTypes.setAccountType(accountTypesResponse.getAccountType());
+                accounts.setAccountTypeId(accountTypes);
 
                 accounts = accountsDaoImpl.create(accounts);
 
