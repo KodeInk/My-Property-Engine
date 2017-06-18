@@ -21,7 +21,7 @@ public interface AccountsDao {
 
     Accounts edit(Accounts accounts) throws Exception;
 
-    Accounts findAccounts(Integer id) throws Exception;
+    Accounts findAccount(Integer id) throws Exception;
 
     List<Accounts> findAccountsEntities(int maxResults, int firstResult) throws Exception;
 

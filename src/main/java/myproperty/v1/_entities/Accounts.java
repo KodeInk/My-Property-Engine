@@ -70,8 +70,10 @@ public class Accounts implements Serializable {
     @Column(name = "date_updated")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateUpdated;
+
     @Column(name = "updated_by")
     private Integer updatedBy;
+
     @JoinColumn(name = "account_type_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private AccountTypes accountTypeId;

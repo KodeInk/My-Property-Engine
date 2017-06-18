@@ -30,6 +30,7 @@ import myproperty.v1.helper.ContactTypes;
 import myproperty.v1.helper.ParentTypes;
 import myproperty.v1.helper.StatusEnum;
 import myproperty.v1.helper.exception.BadRequestException;
+import myproperty.v1.helper.exception.ForbiddenException;
 import static myproperty.v1.helper.utilities.getCurrentDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -146,7 +147,7 @@ public class AccountService {
 
                 // Set Status  ::
                 accounts.setStatus(StatusEnum.ACTIVE.toString());
-                //  accounts.setParentId(0);
+                //  account.setParentId(0);
 
                 //todo: add Packages
                 accountPackageResponse = accountPackageService.findAccountPackage(AccountPackage.BASIC.toString());
@@ -175,26 +176,64 @@ public class AccountService {
     /*
     Pass the account ID and activate or deaactivate ::
      */
-    public void activateAccount(Integer account_id) {
+    public AccountsResponse activateAccount(Integer account_id) throws Exception {
+        if (account_id <= 0)
+            throw new ForbiddenException("Account Id can not be empty ");
+
+        Accounts account = accountsDaoImpl.findAccount(account_id);
+        //Set Account Status to Active
+        account.setStatus(StatusEnum.ACTIVE.toString());
+
+        //TODO: Setting who updates :: functionality missing ::
+        //Add date Account Updated 
+        account.setDateUpdated(getCurrentDate());
+        return getAccountsResponse(accountsDaoImpl.edit(account));
 
     }
     //TODO: Deactivate Account
     /*
     Pass the account ID and activate or deaactivate ::
      */
-    public void deactivateAccount(Integer account_id) {
+    public AccountsResponse deactivateAccount(Integer account_id) throws Exception {
+        if (account_id <= 0) {
+            throw new ForbiddenException("Account Id can not be empty ");
+        }
 
+        Accounts account = accountsDaoImpl.findAccount(account_id);
+        //Set Account Status to Active
+        account.setStatus(StatusEnum.DEACTIVATED.toString());
+
+        //TODO: Setting who updates :: functionality missing ::
+        //Add date Account Updated
+        account.setDateUpdated(getCurrentDate());
+        return getAccountsResponse(accountsDaoImpl.edit(account));
     }
     //TODO: update Account
-    public void updateAccount(Integer account_id, Accounts accounts) {
+    public AccountsResponse updateAccount(Integer account_id, Accounts _account) throws Exception {
+        if (account_id <= 0) {
+            throw new ForbiddenException("Account Id can not be empty ");
+        }
 
+        Accounts account = accountsDaoImpl.findAccount(account_id);
+        if ((_account.getAccountTypeId() != null) && (_account.getAccountTypeId() != account.getAccountTypeId())) {
+            account.setAccountTypeId(_account.getAccountTypeId());
+        }
+
+        if ((_account.getPackageId() != null) && (_account.getPackageId() != account.getPackageId())) {
+            account.setPackageId(_account.getPackageId());
+        }
+
+        return getAccountsResponse(accountsDaoImpl.edit(account));
     }
     //TODO: get account Details
-    public void getAccountDetails(Integer account_id) {
-
+    public AccountsResponse getAccountDetails(Integer account_id) throws Exception {
+        if (account_id <= 0) {
+            throw new ForbiddenException("Account Id can not be empty ");
+        }
+        return getAccountsResponse(accountsDaoImpl.findAccount(account_id));
     }
 
-    //TODO: List accounts
+    //TODO: List account
     public Collection<AccountsResponse> getAccounts() {
         Collection<AccountsResponse> accountsResponses = new ArrayList<>();
         Collection<Accounts> _accounts = accountsDaoImpl.findEntities();
@@ -214,7 +253,7 @@ public class AccountService {
 
         accountsResponse.setStatus(accounts.getStatus());
         accountsResponse.setDateCreated(accounts.getDateCreated());
-        //accountsResponse.setCreatedBy(accounts.getCrea);
+        //accountsResponse.setCreatedBy(account.getCrea);
         if (accounts.getCreatedBy() > 0) {
             accountsResponse.setCreatedBy(accounts.getCreatedBy());
         }

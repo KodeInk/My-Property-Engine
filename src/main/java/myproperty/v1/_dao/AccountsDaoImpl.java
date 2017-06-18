@@ -71,7 +71,7 @@ public class AccountsDaoImpl extends JpaController implements AccountsDao {
             if (msg == null || msg.length() == 0) {
                 Integer id = accounts.getId();
 
-                if (findAccounts(id) == null) {
+                if (findAccount(id) == null) {
                     throw new Exception("The  Account  with id " + id + " no longer exists.");
                 }
             }
@@ -85,7 +85,7 @@ public class AccountsDaoImpl extends JpaController implements AccountsDao {
     }
 
     @Override
-    public Accounts findAccounts(Integer id) throws Exception {
+    public Accounts findAccount(Integer id) throws Exception {
         EntityManager em = getEntityManager();
         try {
             return em.find(Accounts.class, id);
