@@ -5,6 +5,7 @@
  */
 package myproperty.v1._dao;
 
+import myproperty.v1._dao.interfaces.AccountPackagesDao;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,7 +21,7 @@ import myproperty.v1.helper.exception.InternalErrorException;
  *
  * @author mover 6/18/2017
  */
-public class AccountPackagesDaoImpl extends JpaController {
+public class AccountPackagesDaoImpl extends JpaController implements AccountPackagesDao {
 
     private static final Logger LOG = Logger.getLogger(AccountPackagesDaoImpl.class.getName());
     private static AccountPackagesDaoImpl instance = null;
@@ -36,6 +37,7 @@ public class AccountPackagesDaoImpl extends JpaController {
         super(Packages.class);
     }
 
+    @Override
     public Packages create(Packages packages) throws Exception {
         EntityManager em = null;
         try {
@@ -55,8 +57,8 @@ public class AccountPackagesDaoImpl extends JpaController {
         return packages;
     }
 
+    @Override
     public Packages edit(Packages packages) throws Exception {
-
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -81,6 +83,7 @@ public class AccountPackagesDaoImpl extends JpaController {
         return packages;
     }
 
+    @Override
     public Packages findPackages(Integer id) throws Exception {
         EntityManager em = getEntityManager();
         try {
@@ -90,10 +93,12 @@ public class AccountPackagesDaoImpl extends JpaController {
         }
     }
 
+    @Override
     public List<Packages> findPackagesEntities() throws Exception {
         return findPackagesEntities(true, -1, -1);
     }
 
+    @Override
     public List<Packages> findPackagesEntities(int maxResults, int firstResult) throws Exception {
         return findPackagesEntities(false, maxResults, firstResult);
     }
@@ -114,14 +119,15 @@ public class AccountPackagesDaoImpl extends JpaController {
         }
     }
 
-    public Packages findAccountType(String accountType) throws Exception {
+    @Override
+    public Packages findPackagebyName(String package_name) throws Exception {
         EntityManager em = getEntityManager();
         try {
             // return em.find(Address.class, id);
-            Query query = em.createNamedQuery("Packages.findByAccountType");
-            query.setParameter("accountType", accountType);
-            List<Packages> accountTypes = query.getResultList();
-            return accountTypes.get(0);
+            Query query = em.createNamedQuery("Packages.findBypackage_name");
+            query.setParameter("package_name", package_name);
+            List<Packages> packages = query.getResultList();
+            return packages.get(0);
         } finally {
             em.close();
         }
