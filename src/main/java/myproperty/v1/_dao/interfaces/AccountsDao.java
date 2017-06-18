@@ -21,10 +21,10 @@ public interface AccountsDao {
 
     Accounts edit(Accounts accounts) throws Exception;
 
-    Accounts findContacts(Integer id) throws Exception;
+    Accounts findAccounts(Integer id) throws Exception;
 
-    List<Accounts> findContactsEntities(int maxResults, int firstResult) throws Exception;
+    List<Accounts> findAccountsEntities(int maxResults, int firstResult) throws Exception;
 
-    List<Accounts> findContactsrEntities() throws Exception;
+    List<Accounts> findAccountsrEntities() throws Exception;
 
 }

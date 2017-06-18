@@ -1,5 +1,6 @@
 package myproperty.v1._controller;
 
+import java.util.Collection;
 import myproperty.v1._entities.Account;
 import myproperty.v1._entities.responses.AccountsResponse;
 import myproperty.v1._services.AccountService;
@@ -18,9 +19,9 @@ public class AccountController {
     @Autowired
     private AccountService accountService;
 
-    @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public String getAccounts(){
-        return "Helo Accounts Mappers ";
+    @RequestMapping(value = "/list", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Collection<AccountsResponse> getAccounts() throws Exception {
+        return accountService.getAccounts();
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)

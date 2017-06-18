@@ -9,11 +9,13 @@ import java.util.logging.Logger;
 import myproperty.v1._dao.AccountPackagesDaoImpl;
 import myproperty.v1._entities.Packages;
 import myproperty.v1._entities.responses.AccountPackageResponse;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author mover 6/18/2017
  */
+@Service
 public class AccountPackageService {
 
     private final AccountPackagesDaoImpl accountPackagesDaoImpl = AccountPackagesDaoImpl.getInstance();

@@ -18,9 +18,10 @@ public class AccountsResponse {
     private int parentId;
     private String status;
     private Date dateCreated;
-    private Integer createdBy;
+    private UserResponse createdBy;
     private Date dateUpdated;
-    private Integer updatedBy;
+    private UserResponse updatedBy;
+    private UserResponse user;
 
     public AccountsResponse() {
     }
@@ -57,13 +58,6 @@ public class AccountsResponse {
         this.dateCreated = dateCreated;
     }
 
-    public Integer getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(Integer createdBy) {
-        this.createdBy = createdBy;
-    }
 
     public Date getDateUpdated() {
         return dateUpdated;
@@ -73,17 +67,33 @@ public class AccountsResponse {
         this.dateUpdated = dateUpdated;
     }
 
-    public Integer getUpdatedBy() {
+    public UserResponse getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(UserResponse createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public UserResponse getUpdatedBy() {
         return updatedBy;
     }
 
-    public void setUpdatedBy(Integer updatedBy) {
+    public void setUpdatedBy(UserResponse updatedBy) {
         this.updatedBy = updatedBy;
+    }
+
+    public UserResponse getUser() {
+        return user;
+    }
+
+    public void setUser(UserResponse user) {
+        this.user = user;
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
+        int hash = 5;
         hash = 13 * hash + Objects.hashCode(this.id);
         hash = 13 * hash + this.parentId;
         hash = 13 * hash + Objects.hashCode(this.status);
@@ -91,6 +101,7 @@ public class AccountsResponse {
         hash = 13 * hash + Objects.hashCode(this.createdBy);
         hash = 13 * hash + Objects.hashCode(this.dateUpdated);
         hash = 13 * hash + Objects.hashCode(this.updatedBy);
+        hash = 13 * hash + Objects.hashCode(this.user);
         return hash;
     }
 
@@ -127,8 +138,9 @@ public class AccountsResponse {
         if (!Objects.equals(this.updatedBy, other.updatedBy)) {
             return false;
         }
-        return true;
+        return Objects.equals(this.user, other.user);
     }
+
 
     @Override
     public String toString() {
@@ -141,6 +153,7 @@ public class AccountsResponse {
                 + ", createdBy=" + createdBy
                 + ", dateUpdated=" + dateUpdated
                 + ", updatedBy=" + updatedBy
+                + ", accountOwner=" + user
                 + "}";
     }
 

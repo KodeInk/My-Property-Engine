@@ -101,16 +101,16 @@ public class PersonDAOImpl extends JpaController implements PersonDAO {
     }
 
     @Override
-    public List<Person> findUserEntities() throws Exception {
-        return findUserEntities(true, -1, -1);
+    public List<Person> findPersonEntities() throws Exception {
+        return findPersonEntities(true, -1, -1);
     }
 
     @Override
-    public List<Person> findUserEntities(int maxResults, int firstResult) throws Exception {
-        return findUserEntities(false, maxResults, firstResult);
+    public List<Person> findPersonEntities(int maxResults, int firstResult) throws Exception {
+        return findPersonEntities(false, maxResults, firstResult);
     }
 
-    private List<Person> findUserEntities(boolean all, int maxResults, int firstResult) {
+    private List<Person> findPersonEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();

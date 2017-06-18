@@ -71,7 +71,7 @@ public class AccountsDaoImpl extends JpaController implements AccountsDao {
             if (msg == null || msg.length() == 0) {
                 Integer id = accounts.getId();
 
-                if (findContacts(id) == null) {
+                if (findAccounts(id) == null) {
                     throw new Exception("The  Account  with id " + id + " no longer exists.");
                 }
             }
@@ -85,7 +85,7 @@ public class AccountsDaoImpl extends JpaController implements AccountsDao {
     }
 
     @Override
-    public Accounts findContacts(Integer id) throws Exception {
+    public Accounts findAccounts(Integer id) throws Exception {
         EntityManager em = getEntityManager();
         try {
             return em.find(Accounts.class, id);
@@ -95,16 +95,16 @@ public class AccountsDaoImpl extends JpaController implements AccountsDao {
     }
 
     @Override
-    public List<Accounts> findContactsrEntities() throws Exception {
-        return findContactsEntities(true, -1, -1);
+    public List<Accounts> findAccountsrEntities() throws Exception {
+        return findAccountsEntities(true, -1, -1);
     }
 
     @Override
-    public List<Accounts> findContactsEntities(int maxResults, int firstResult) throws Exception {
-        return findContactsEntities(false, maxResults, firstResult);
+    public List<Accounts> findAccountsEntities(int maxResults, int firstResult) throws Exception {
+        return findAccountsEntities(false, maxResults, firstResult);
     }
 
-    private List<Accounts> findContactsEntities(boolean all, int maxResults, int firstResult) {
+    private List<Accounts> findAccountsEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();

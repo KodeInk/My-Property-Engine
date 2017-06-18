@@ -6,9 +6,7 @@
 package myproperty.v1._dao.interfaces;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.List;
-import myproperty.v1._entities.Address;
 import myproperty.v1._entities.Person;
 
 /**
@@ -25,8 +23,8 @@ public interface PersonDAO extends Serializable {
 
     Person findPerson(Integer id) throws Exception;
 
-    public List<Person> findUserEntities() throws Exception;
+    public List<Person> findPersonEntities() throws Exception;
 
-    List<Person> findUserEntities(int maxResults, int firstResult) throws Exception;
+    List<Person> findPersonEntities(int maxResults, int firstResult) throws Exception;
 
 }

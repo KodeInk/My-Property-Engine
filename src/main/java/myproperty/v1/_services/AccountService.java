@@ -5,6 +5,8 @@
  */
 package myproperty.v1._services;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -191,8 +193,15 @@ public class AccountService {
     }
 
     //TODO: List accounts
-    public void getAccounts() {
+    public Collection<AccountsResponse> getAccounts() {
+        Collection<AccountsResponse> accountsResponses = new ArrayList<>();
+        Collection<Accounts> _accounts = accountsDaoImpl.findEntities();
 
+        _accounts.forEach((account) -> {
+            accountsResponses.add(getAccountsResponse(account));
+        });
+
+        return accountsResponses;
     }
 
     public AccountsResponse getAccountsResponse(Accounts accounts) {
@@ -210,13 +219,11 @@ public class AccountService {
             accountsResponse.setCreatedBy(accounts.getCreatedBy());
         }
 
+
 //        if (accounts.getUpdatedBy() > 0) {
 //            accountsResponse.setUpdatedBy(accounts.getUpdatedBy());
 //        }
 
-        accountsResponse.setDateCreated(null);
-
-        accountsResponse.setDateCreated(null);
 
         return accountsResponse;
     }
