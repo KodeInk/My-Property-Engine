@@ -12,15 +12,17 @@ import myproperty.v1._dao.AccountsDaoImpl;
 import myproperty.v1._entities.Account;
 import myproperty.v1._entities.AccountTypes;
 import myproperty.v1._entities.Accounts;
-import static myproperty.v1._entities.Accounts_.accountTypeId;
 import myproperty.v1._entities.Contacts;
+import myproperty.v1._entities.Packages;
 import myproperty.v1._entities.Person;
 import myproperty.v1._entities.User;
+import myproperty.v1._entities.responses.AccountPackageResponse;
 import myproperty.v1._entities.responses.AccountTypesResponse;
 import myproperty.v1._entities.responses.AccountsResponse;
 import myproperty.v1._entities.responses.ContactsResponse;
 import myproperty.v1._entities.responses.PersonResponse;
 import myproperty.v1._entities.responses.UserResponse;
+import myproperty.v1.helper.AccountPackage;
 import myproperty.v1.helper.AccountType;
 import myproperty.v1.helper.ContactTypes;
 import myproperty.v1.helper.ParentTypes;
@@ -40,28 +42,34 @@ public class AccountService {
     private String names;
     private String email_address;
     private String password;
-    UserResponse userResponse;
-    PersonResponse personResponse;
-    ContactsResponse contactsResponse;
-    User user;
-    Contacts contacts;
-    Accounts accounts;
+    private UserResponse userResponse;
+    private PersonResponse personResponse;
+    private ContactsResponse contactsResponse;
+    private AccountPackageResponse accountPackageResponse;
+
+    private User user;
+    private Contacts contacts;
+    private Accounts accounts;
 
     private final AccountsDaoImpl accountsDaoImpl = AccountsDaoImpl.getInstance();
 
     private static final Logger LOG = Logger.getLogger(AccountService.class.getName());
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @Autowired
-    PersonService personService;
+    private PersonService personService;
 
     @Autowired
-    ContactsService contactsService;
+    private ContactsService contactsService;
 
     @Autowired
-    AccountTypesService accountTypesService;
+    private AccountTypesService accountTypesService;
+
+    @Autowired
+    private AccountPackageService accountPackageService;
+
     //TODO:Create Account
     public AccountsResponse createAccount(Account account) throws Exception {
         //STEP ONE: Create User Username and Password:
@@ -137,13 +145,18 @@ public class AccountService {
                 //  accounts.setParentId(0);
 
                 //todo: add Packages
+                accountPackageResponse = accountPackageService.findAccountPackage(AccountPackage.BASIC.toString());
+                Packages packages = new Packages();
+                packages.setId(accountPackageResponse.getId());
+                packages.setPackage_name(accountPackageResponse.getPackage_name());
+                accounts.setPackageId(packages);
+
                 //todo: add account types
                 AccountTypesResponse accountTypesResponse = accountTypesService.findAccountType(AccountType.NORMAL.toString());
                 AccountTypes accountTypes = new AccountTypes();
                 accountTypes.setId(accountTypesResponse.getId());
                 accountTypes.setAccountType(accountTypesResponse.getAccountType());
                 accounts.setAccountTypeId(accountTypes);
-
                 accounts = accountsDaoImpl.create(accounts);
 
 
