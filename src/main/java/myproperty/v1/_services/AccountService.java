@@ -141,6 +141,8 @@ public class AccountService {
                 accounts.setAccount_owner(account_owner);
                 accounts.setDateCreated(getCurrentDate());
 
+                //Set Created By
+                accounts.setCreatedBy(account_owner.getId());
 
                 // Set Status  ::
                 accounts.setStatus(StatusEnum.ACTIVE.toString());
@@ -208,9 +210,7 @@ public class AccountService {
         AccountsResponse accountsResponse = new AccountsResponse();
 
         accountsResponse.setId(accounts.getId());
-//        if (accounts.getParentId() > 0) {
-//            accountsResponse.setParentId(accounts.getParentId());
-//        }
+
 
         accountsResponse.setStatus(accounts.getStatus());
         accountsResponse.setDateCreated(accounts.getDateCreated());
@@ -220,9 +220,28 @@ public class AccountService {
         }
 
 
-//        if (accounts.getUpdatedBy() > 0) {
-//            accountsResponse.setUpdatedBy(accounts.getUpdatedBy());
-//        }
+        if (accounts.getAccount_owner().getId() > 0) {
+            UserResponse _user = new UserResponse();
+            _user.setId(accounts.getAccount_owner().getId());
+            _user.setUsername(accounts.getAccount_owner().getUsername());
+            _user.setStatus(accounts.getAccount_owner().getStatus());
+            _user.setDateCreated(accounts.getAccount_owner().getDateCreated());
+            accountsResponse.setUser(_user);
+        }
+
+
+
+
+        if (accounts.getCreatedBy() > 0) {
+            accountsResponse.setCreatedBy(accounts.getCreatedBy());
+        }
+
+        if (accounts.getUpdatedBy() != null) {
+            accountsResponse.setUpdatedBy(accounts.getUpdatedBy());
+        }
+
+        accountsResponse.setDateUpdated(accounts.getDateUpdated());
+
 
 
         return accountsResponse;

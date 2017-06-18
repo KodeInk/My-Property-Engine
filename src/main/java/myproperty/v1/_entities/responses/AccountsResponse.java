@@ -18,10 +18,11 @@ public class AccountsResponse {
     private int parentId;
     private String status;
     private Date dateCreated;
-    private UserResponse createdBy;
+    private Integer createdBy;
     private Date dateUpdated;
-    private UserResponse updatedBy;
+    private Integer updatedBy;
     private UserResponse user;
+
 
     public AccountsResponse() {
     }
@@ -67,19 +68,19 @@ public class AccountsResponse {
         this.dateUpdated = dateUpdated;
     }
 
-    public UserResponse getCreatedBy() {
+    public Integer getCreatedBy() {
         return createdBy;
     }
 
-    public void setCreatedBy(UserResponse createdBy) {
+    public void setCreatedBy(Integer createdBy) {
         this.createdBy = createdBy;
     }
 
-    public UserResponse getUpdatedBy() {
+    public Integer getUpdatedBy() {
         return updatedBy;
     }
 
-    public void setUpdatedBy(UserResponse updatedBy) {
+    public void setUpdatedBy(Integer updatedBy) {
         this.updatedBy = updatedBy;
     }
 
@@ -93,15 +94,15 @@ public class AccountsResponse {
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 13 * hash + Objects.hashCode(this.id);
-        hash = 13 * hash + this.parentId;
-        hash = 13 * hash + Objects.hashCode(this.status);
-        hash = 13 * hash + Objects.hashCode(this.dateCreated);
-        hash = 13 * hash + Objects.hashCode(this.createdBy);
-        hash = 13 * hash + Objects.hashCode(this.dateUpdated);
-        hash = 13 * hash + Objects.hashCode(this.updatedBy);
-        hash = 13 * hash + Objects.hashCode(this.user);
+        int hash = 7;
+        hash = 67 * hash + Objects.hashCode(this.id);
+        hash = 67 * hash + this.parentId;
+        hash = 67 * hash + Objects.hashCode(this.status);
+        hash = 67 * hash + Objects.hashCode(this.dateCreated);
+        hash = 67 * hash + Objects.hashCode(this.createdBy);
+        hash = 67 * hash + Objects.hashCode(this.dateUpdated);
+        hash = 67 * hash + Objects.hashCode(this.updatedBy);
+        hash = 67 * hash + Objects.hashCode(this.user);
         return hash;
     }
 
@@ -140,7 +141,6 @@ public class AccountsResponse {
         }
         return Objects.equals(this.user, other.user);
     }
-
 
     @Override
     public String toString() {

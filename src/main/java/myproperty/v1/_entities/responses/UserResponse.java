@@ -10,7 +10,7 @@ import java.util.Objects;
 
 /**
  *
- * @author Mover 5/19/
+ * @author Mover 5/19/2017
  */
 public class UserResponse {
 
@@ -18,6 +18,7 @@ public class UserResponse {
     private String username;
     private Date dateCreated;
     private PersonResponse personResponse;
+    private String status;
 
     public UserResponse() {
     }
@@ -61,13 +62,22 @@ public class UserResponse {
         this.personResponse = personResponse;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 97 * hash + Objects.hashCode(this.id);
-        hash = 97 * hash + Objects.hashCode(this.username);
-        hash = 97 * hash + Objects.hashCode(this.dateCreated);
-        hash = 97 * hash + Objects.hashCode(this.personResponse);
+        hash = 73 * hash + Objects.hashCode(this.id);
+        hash = 73 * hash + Objects.hashCode(this.username);
+        hash = 73 * hash + Objects.hashCode(this.dateCreated);
+        hash = 73 * hash + Objects.hashCode(this.personResponse);
+        hash = 73 * hash + Objects.hashCode(this.status);
         return hash;
     }
 
@@ -86,17 +96,19 @@ public class UserResponse {
         if (!Objects.equals(this.username, other.username)) {
             return false;
         }
+        if (!Objects.equals(this.status, other.status)) {
+            return false;
+        }
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
         if (!Objects.equals(this.dateCreated, other.dateCreated)) {
             return false;
         }
-        if (!Objects.equals(this.personResponse, other.personResponse)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.personResponse, other.personResponse);
     }
+
+
 
     @Override
     public String toString() {
@@ -106,6 +118,7 @@ public class UserResponse {
                 + ", username=" + username
                 + ", dateCreated=" + dateCreated
                 + ", person=" + personResponse
+                + ", status=" + status
                 + '}';
     }
 
