@@ -13,12 +13,10 @@
 
 
 -- Dumping database structure for property
-DROP DATABASE IF EXISTS `property`;
 CREATE DATABASE IF NOT EXISTS `property` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `property`;
 
 -- Dumping structure for table property.accounts
-DROP TABLE IF EXISTS `accounts`;
 CREATE TABLE IF NOT EXISTS `accounts` (
   `id` int(20) NOT NULL AUTO_INCREMENT,
   `user_id` int(20) NOT NULL DEFAULT '0',
@@ -45,7 +43,6 @@ DELETE FROM `accounts`;
 /*!40000 ALTER TABLE `accounts` ENABLE KEYS */;
 
 -- Dumping structure for table property.account_types
-DROP TABLE IF EXISTS `account_types`;
 CREATE TABLE IF NOT EXISTS `account_types` (
   `id` int(20) NOT NULL AUTO_INCREMENT,
   `account_type` varchar(255) NOT NULL DEFAULT '0',
@@ -53,7 +50,7 @@ CREATE TABLE IF NOT EXISTS `account_types` (
   UNIQUE KEY `account_type` (`account_type`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='Account Types eg Personal, Company, Broker, it helps in classifying accounts : ';
 
--- Dumping data for table property.account_types: ~0 rows (approximately)
+-- Dumping data for table property.account_types: ~3 rows (approximately)
 DELETE FROM `account_types`;
 /*!40000 ALTER TABLE `account_types` DISABLE KEYS */;
 INSERT INTO `account_types` (`id`, `account_type`) VALUES
@@ -63,7 +60,6 @@ INSERT INTO `account_types` (`id`, `account_type`) VALUES
 /*!40000 ALTER TABLE `account_types` ENABLE KEYS */;
 
 -- Dumping structure for table property.address
-DROP TABLE IF EXISTS `address`;
 CREATE TABLE IF NOT EXISTS `address` (
   `id` int(20) NOT NULL AUTO_INCREMENT,
   `location` varchar(255) NOT NULL DEFAULT '0',
@@ -84,7 +80,7 @@ CREATE TABLE IF NOT EXISTS `address` (
   CONSTRAINT `UpdatedBy` FOREIGN KEY (`updatedby`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='Manage All Addresses in the System';
 
--- Dumping data for table property.address: ~0 rows (approximately)
+-- Dumping data for table property.address: ~2 rows (approximately)
 DELETE FROM `address`;
 /*!40000 ALTER TABLE `address` DISABLE KEYS */;
 INSERT INTO `address` (`id`, `location`, `lat`, `lng`, `createdby`, `datecreated`, `updatedby`, `dateupdated`, `status`, `parent_type`, `parent_id`) VALUES
@@ -93,7 +89,6 @@ INSERT INTO `address` (`id`, `location`, `lat`, `lng`, `createdby`, `datecreated
 /*!40000 ALTER TABLE `address` ENABLE KEYS */;
 
 -- Dumping structure for table property.contacts
-DROP TABLE IF EXISTS `contacts`;
 CREATE TABLE IF NOT EXISTS `contacts` (
   `id` int(20) NOT NULL AUTO_INCREMENT,
   `type` varchar(255) NOT NULL,
@@ -112,7 +107,7 @@ CREATE TABLE IF NOT EXISTS `contacts` (
   CONSTRAINT `CC_UpdatedBy` FOREIGN KEY (`updated_by`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='Manage System Level Contacts \r\nWebsites, Phone,Fax,Social Media, Etc';
 
--- Dumping data for table property.contacts: ~3 rows (approximately)
+-- Dumping data for table property.contacts: ~4 rows (approximately)
 DELETE FROM `contacts`;
 /*!40000 ALTER TABLE `contacts` DISABLE KEYS */;
 INSERT INTO `contacts` (`id`, `type`, `details`, `created_by`, `date_created`, `updated_by`, `date_updated`, `status`, `parent_type`, `parent_id`) VALUES
@@ -123,7 +118,6 @@ INSERT INTO `contacts` (`id`, `type`, `details`, `created_by`, `date_created`, `
 /*!40000 ALTER TABLE `contacts` ENABLE KEYS */;
 
 -- Dumping structure for table property.packages
-DROP TABLE IF EXISTS `packages`;
 CREATE TABLE IF NOT EXISTS `packages` (
   `id` int(20) NOT NULL AUTO_INCREMENT,
   `package` varchar(255) NOT NULL DEFAULT '0',
@@ -131,7 +125,7 @@ CREATE TABLE IF NOT EXISTS `packages` (
   UNIQUE KEY `package` (`package`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='Manage App Packages';
 
--- Dumping data for table property.packages: ~0 rows (approximately)
+-- Dumping data for table property.packages: ~3 rows (approximately)
 DELETE FROM `packages`;
 /*!40000 ALTER TABLE `packages` DISABLE KEYS */;
 INSERT INTO `packages` (`id`, `package`) VALUES
@@ -141,7 +135,6 @@ INSERT INTO `packages` (`id`, `package`) VALUES
 /*!40000 ALTER TABLE `packages` ENABLE KEYS */;
 
 -- Dumping structure for table property.person
-DROP TABLE IF EXISTS `person`;
 CREATE TABLE IF NOT EXISTS `person` (
   `id` int(20) NOT NULL AUTO_INCREMENT,
   `userId` int(20) DEFAULT NULL,
@@ -161,7 +154,7 @@ CREATE TABLE IF NOT EXISTS `person` (
   CONSTRAINT `P_USERID` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COMMENT='Manage Profile, Personal  Information ';
 
--- Dumping data for table property.person: ~11 rows (approximately)
+-- Dumping data for table property.person: ~12 rows (approximately)
 DELETE FROM `person`;
 /*!40000 ALTER TABLE `person` DISABLE KEYS */;
 INSERT INTO `person` (`id`, `userId`, `names`, `gender`, `dateofbirth`, `date_created`, `created_by`, `date_updated`, `updated_by`) VALUES
@@ -180,7 +173,6 @@ INSERT INTO `person` (`id`, `userId`, `names`, `gender`, `dateofbirth`, `date_cr
 /*!40000 ALTER TABLE `person` ENABLE KEYS */;
 
 -- Dumping structure for table property.user
-DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
   `id` int(20) NOT NULL AUTO_INCREMENT,
   `username` varchar(255) NOT NULL DEFAULT '0',
@@ -190,7 +182,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='Manage User Login, Active, Deactive user,  Password Update, ';
 
--- Dumping data for table property.user: ~5 rows (approximately)
+-- Dumping data for table property.user: ~7 rows (approximately)
 DELETE FROM `user`;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 INSERT INTO `user` (`id`, `username`, `password`, `status`, `date_created`) VALUES
