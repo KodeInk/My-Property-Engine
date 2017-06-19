@@ -29,7 +29,7 @@ public class PersonControllerIT {
     public PersonControllerIT() {
     }
 
-    public static String getendPoint() {
+    private static String getendPoint() {
         return AppJersey.getHOST() + "person/";
     }
 
