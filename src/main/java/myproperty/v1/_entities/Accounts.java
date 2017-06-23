@@ -6,8 +6,10 @@
 package myproperty.v1._entities;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,11 +19,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -40,6 +44,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Accounts.findByDateUpdated", query = "SELECT a FROM Accounts a WHERE a.dateUpdated = :dateUpdated")
     , @NamedQuery(name = "Accounts.findByUpdatedBy", query = "SELECT a FROM Accounts a WHERE a.updatedBy = :updatedBy")})
 public class Accounts implements Serializable {
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "accountId")
+    private Collection<Property> propertyCollection;
 
     //TEST
     private static final long serialVersionUID = 1L;
@@ -203,6 +210,15 @@ public class Accounts implements Serializable {
     @Override
     public String toString() {
         return "myproperty.v1._entities.Accounts[ id=" + id + " ]";
+    }
+
+    @XmlTransient
+    public Collection<Property> getPropertyCollection() {
+        return propertyCollection;
+    }
+
+    public void setPropertyCollection(Collection<Property> propertyCollection) {
+        this.propertyCollection = propertyCollection;
     }
 
 

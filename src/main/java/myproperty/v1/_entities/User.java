@@ -41,6 +41,9 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "User.findByDateCreated", query = "SELECT u FROM User u WHERE u.dateCreated = :dateCreated")})
 public class User implements Serializable {
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
+    private Collection<Property> propertyCollection;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "account_owner")
     private Collection<Accounts> accountsCollection;
 
@@ -204,6 +207,15 @@ public class User implements Serializable {
 
     public void setAccountsCollection(Collection<Accounts> accountsCollection) {
         this.accountsCollection = accountsCollection;
+    }
+
+    @XmlTransient
+    public Collection<Property> getPropertyCollection() {
+        return propertyCollection;
+    }
+
+    public void setPropertyCollection(Collection<Property> propertyCollection) {
+        this.propertyCollection = propertyCollection;
     }
 
 }

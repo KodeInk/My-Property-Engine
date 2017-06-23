@@ -10,6 +10,7 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.Date;
+import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -33,21 +34,39 @@ public class Property implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Size(max = 45)
-    @Column(name = "name")
-    private String name;
-    @Size(max = 100)
-    @Column(name = "description")
-    private String description;
-    @Size(max = 8)
-    @Column(name = "status")
-    private String status;
-    @Column(name = "date_created")
+
+    @Basic(optional = false)
+
+    @Column(name = "dateCreated")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateCreated;
-    @JoinColumn(name = "author_id", referencedColumnName = "id")
-    @ManyToOne
-    private Person authorId;
+    @Basic(optional = false)
+
+    @Column(name = "dateUpdated")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dateUpdated;
+    @Basic(optional = false)
+
+    @Size(min = 1, max = 75)
+    @Column(name = "brief")
+    private String brief;
+    @Basic(optional = false)
+
+    @Size(min = 1, max = 8)
+    @Column(name = "status")
+    private String status;
+    @Basic(optional = false)
+
+    @Size(min = 1, max = 500)
+    @Column(name = "details")
+    private String details;
+    @JoinColumn(name = "accountId", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Accounts accountId;
+    @JoinColumn(name = "userId", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private User userId;
+
 
     public Property() {
     }
@@ -56,28 +75,29 @@ public class Property implements Serializable {
         this.id = id;
     }
 
-    public Integer getId() {
-        return id;
+
+    public Date getDateCreated() {
+        return dateCreated;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setDateCreated(Date dateCreated) {
+        this.dateCreated = dateCreated;
     }
 
-    public String getName() {
-        return name;
+    public Date getDateUpdated() {
+        return dateUpdated;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setDateUpdated(Date dateUpdated) {
+        this.dateUpdated = dateUpdated;
     }
 
-    public String getDescription() {
-        return description;
+    public String getBrief() {
+        return brief;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setBrief(String brief) {
+        this.brief = brief;
     }
 
     public String getStatus() {
@@ -88,45 +108,28 @@ public class Property implements Serializable {
         this.status = status;
     }
 
-    public Date getDateCreated() {
-        return dateCreated;
+    public String getDetails() {
+        return details;
     }
 
-    public void setDateCreated(Date dateCreated) {
-        this.dateCreated = dateCreated;
+    public void setDetails(String details) {
+        this.details = details;
     }
 
-    public Person getAuthorId() {
-        return authorId;
+    public Accounts getAccountId() {
+        return accountId;
     }
 
-    public void setAuthorId(Person authorId) {
-        this.authorId = authorId;
+    public void setAccountId(Accounts accountId) {
+        this.accountId = accountId;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
+    public User getUserId() {
+        return userId;
     }
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Property)) {
-            return false;
-        }
-        Property other = (Property) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "myproperty._entities.Property[ id=" + id + " ]";
+    public void setUserId(User userId) {
+        this.userId = userId;
     }
 
 }
