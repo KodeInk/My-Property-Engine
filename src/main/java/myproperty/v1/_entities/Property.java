@@ -131,6 +131,13 @@ public class Property implements Serializable {
         this.userId = userId;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     @Override
     public boolean equals(Object object) {
