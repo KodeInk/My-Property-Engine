@@ -24,7 +24,10 @@ import java.util.Date;
     , @NamedQuery(name = "Property.findByName", query = "SELECT p FROM Property p WHERE p.name = :name")
     , @NamedQuery(name = "Property.findByDescription", query = "SELECT p FROM Property p WHERE p.description = :description")
     , @NamedQuery(name = "Property.findByStatus", query = "SELECT p FROM Property p WHERE p.status = :status")
-    , @NamedQuery(name = "Property.findByDateCreated", query = "SELECT p FROM Property p WHERE p.dateCreated = :dateCreated")})
+    , @NamedQuery(name = "Property.findByDateCreated", query = "SELECT p FROM Property p WHERE p.dateCreated = :dateCreated")
+    , @NamedQuery(name = "Property.findByUser", query = "SELECT p FROM Property p WHERE p.user.id = :userId")
+    , @NamedQuery(name = "Property.findByAccount", query = "SELECT p FROM Property p  WHERE p.account.id  = :accountId")
+})
 public class Property implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -61,10 +64,10 @@ public class Property implements Serializable {
     private String details;
     @JoinColumn(name = "accountId", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Accounts accountId;
+    private Accounts account;
     @JoinColumn(name = "userId", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private User userId;
+    private User user;
 
 
     public Property() {
@@ -115,20 +118,20 @@ public class Property implements Serializable {
         this.details = details;
     }
 
-    public Accounts getAccountId() {
-        return accountId;
+    public Accounts getAccount() {
+        return account;
     }
 
-    public void setAccountId(Accounts accountId) {
-        this.accountId = accountId;
+    public void setAccount(Accounts account) {
+        this.account = account;
     }
 
-    public User getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(User userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Integer getId() {

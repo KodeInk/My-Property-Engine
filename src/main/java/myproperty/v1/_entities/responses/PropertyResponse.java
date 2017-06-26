@@ -19,7 +19,7 @@ public class PropertyResponse {
     private String brief;
     private String status;
     private String details;
-    private AccountResponse accountResponse;
+    private AccountsResponse accountResponse;
     private UserResponse userResponse;
 
     public PropertyResponse() {
@@ -73,13 +73,14 @@ public class PropertyResponse {
         this.details = details;
     }
 
-    public AccountResponse getAccountResponse() {
+    public AccountsResponse getAccountResponse() {
         return accountResponse;
     }
 
-    public void setAccountResponse(AccountResponse accountResponse) {
+    public void setAccountResponse(AccountsResponse accountResponse) {
         this.accountResponse = accountResponse;
     }
+
 
     public UserResponse getUserResponse() {
         return userResponse;

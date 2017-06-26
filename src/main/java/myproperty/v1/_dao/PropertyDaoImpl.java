@@ -99,6 +99,31 @@ public class PropertyDaoImpl extends JpaController implements PropertyDao {
         }
     }
 
+    //TODO: Get Property By User ID 
+    public List<Property> findPropertyEntitiesByUserId(Integer Userid, int maxResults, int firstResult) {
+        EntityManager em = getEntityManager();
+        try {
+            Query query = em.createNamedQuery("Property.findByUser");
+            query.setParameter("userId", Userid);
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
+    //TODO: Get Property Entity By Account ID 
+    public List<Property> findPropertyEntitiesByAccountId(Integer accountId, int maxResults, int firstResult) {
+        EntityManager em = getEntityManager();
+        try {
+            Query query = em.createNamedQuery("Property.findByAccount");
+            query.setParameter("accountId", accountId);
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
+
     @Override
     public void destroy(Integer id) throws Exception {
         EntityManager em = null;
