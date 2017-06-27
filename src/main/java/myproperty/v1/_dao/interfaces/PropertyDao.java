@@ -24,4 +24,6 @@ public interface PropertyDao {
 
     List<Property> findPropertyEntities(int maxResults, int firstResult);
 
+    public Property create(Property property) throws Exception;
+
 }

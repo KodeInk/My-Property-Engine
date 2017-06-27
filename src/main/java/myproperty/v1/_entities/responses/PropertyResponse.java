@@ -19,8 +19,8 @@ public class PropertyResponse {
     private String brief;
     private String status;
     private String details;
-    private AccountsResponse accountResponse;
-    private UserResponse userResponse;
+    private Integer accountId;
+    private Integer userId;
 
     public PropertyResponse() {
     }
@@ -73,34 +73,33 @@ public class PropertyResponse {
         this.details = details;
     }
 
-    public AccountsResponse getAccountResponse() {
-        return accountResponse;
+    public Integer getAccountId() {
+        return accountId;
     }
 
-    public void setAccountResponse(AccountsResponse accountResponse) {
-        this.accountResponse = accountResponse;
+    public void setAccountId(Integer accountId) {
+        this.accountId = accountId;
     }
 
-
-    public UserResponse getUserResponse() {
-        return userResponse;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setUserResponse(UserResponse userResponse) {
-        this.userResponse = userResponse;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 23 * hash + Objects.hashCode(this.id);
-        hash = 23 * hash + Objects.hashCode(this.dateCreated);
-        hash = 23 * hash + Objects.hashCode(this.dateUpdated);
-        hash = 23 * hash + Objects.hashCode(this.brief);
-        hash = 23 * hash + Objects.hashCode(this.status);
-        hash = 23 * hash + Objects.hashCode(this.details);
-        hash = 23 * hash + Objects.hashCode(this.accountResponse);
-        hash = 23 * hash + Objects.hashCode(this.userResponse);
+        hash = 83 * hash + Objects.hashCode(this.id);
+        hash = 83 * hash + Objects.hashCode(this.dateCreated);
+        hash = 83 * hash + Objects.hashCode(this.dateUpdated);
+        hash = 83 * hash + Objects.hashCode(this.brief);
+        hash = 83 * hash + Objects.hashCode(this.status);
+        hash = 83 * hash + Objects.hashCode(this.details);
+        hash = 83 * hash + Objects.hashCode(this.accountId);
+        hash = 83 * hash + Objects.hashCode(this.userId);
         return hash;
     }
 
@@ -134,10 +133,10 @@ public class PropertyResponse {
         if (!Objects.equals(this.dateUpdated, other.dateUpdated)) {
             return false;
         }
-        if (!Objects.equals(this.accountResponse, other.accountResponse)) {
+        if (!Objects.equals(this.accountId, other.accountId)) {
             return false;
         }
-        return Objects.equals(this.userResponse, other.userResponse);
+        return Objects.equals(this.userId, other.userId);
     }
 
     @Override
@@ -150,8 +149,8 @@ public class PropertyResponse {
                 + ", brief=" + brief
                 + ", status=" + status
                 + ", details=" + details
-                + ", accountResponse=" + accountResponse
-                + ", userResponse=" + userResponse
+                + ", accountId=" + accountId
+                + ", userId=" + userId
                 + "}";
     }
 

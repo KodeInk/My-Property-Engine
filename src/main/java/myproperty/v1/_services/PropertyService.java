@@ -7,16 +7,11 @@ package myproperty.v1._services;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 import java.util.logging.Logger;
 import myproperty.v1._dao.PropertyDaoImpl;
-import myproperty.v1._entities.Person;
 import myproperty.v1._entities.Property;
-import myproperty.v1._entities.responses.AccountResponse;
-import myproperty.v1._entities.responses.AccountsResponse;
-import myproperty.v1._entities.responses.PersonResponse;
 import myproperty.v1._entities.responses.PropertyResponse;
-import myproperty.v1._entities.responses.UserResponse;
+import static myproperty.v1.helper.utilities.getCurrentDate;
 import org.springframework.stereotype.Service;
 
 /**
@@ -28,6 +23,12 @@ public class PropertyService {
 
     private final PropertyDaoImpl propertyDaoImpl = PropertyDaoImpl.getInstance();
     private static final Logger LOG = Logger.getLogger(PropertyService.class.getName());
+
+    //TODO: Create new Property
+    public PropertyResponse createProperty(Property property) throws Exception {
+        property.setDateCreated(getCurrentDate());
+        return propertyResponse(propertyDaoImpl.create(property));
+    }
 
     //TODO: Fetch all  Property
     public Collection<PropertyResponse> getAllProperties() {
@@ -72,7 +73,6 @@ public class PropertyService {
     public PropertyResponse propertyResponse(Property property) {
 
         PropertyResponse propertyResponse = new PropertyResponse();
-        
         propertyResponse.setId(property.getId());
         propertyResponse.setDateCreated(property.getDateCreated());
         propertyResponse.setDateUpdated(property.getDateUpdated());
@@ -80,15 +80,11 @@ public class PropertyService {
         propertyResponse.setStatus(property.getStatus());
         propertyResponse.setDetails(property.getDetails());
 
-        AccountsResponse accountResponse = new AccountsResponse();
+        // concentrate on the property : 
+        propertyResponse.setAccountId(property.getAccount().getId());
+        propertyResponse.setUserId(property.getUser().getId());
 
-        accountResponse.setId(property.getAccount().getId());
-        accountResponse.setParentId(property.getAccount().getParentId());
-        accountResponse.setStatus(property.getAccount().getStatus());
-
-        propertyResponse.setAccountResponse(accountResponse);
-
-        return null;
+        return propertyResponse;
     }
 
 }

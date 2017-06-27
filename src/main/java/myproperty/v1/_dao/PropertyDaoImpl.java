@@ -7,14 +7,17 @@ package myproperty.v1._dao;
 
 import myproperty.v1._dao.interfaces.PropertyDao;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaQuery;
+import myproperty.v1._entities.Person;
 import myproperty.v1._entities.Property;
 import myproperty.v1._entities.User;
 import myproperty.v1.db.JpaController;
+import myproperty.v1.helper.exception.InternalErrorException;
 
 /**
  *
@@ -35,6 +38,27 @@ public class PropertyDaoImpl extends JpaController implements PropertyDao {
 
     public PropertyDaoImpl() {
         super(Property.class);
+    }
+
+    @Override
+    public Property create(Property property) throws Exception {
+
+        EntityManager em = null;
+        try {
+            em = getEntityManager();
+            em.getTransaction().begin();
+            em.persist(property);
+            em.getTransaction().commit();
+            LOG.log(Level.WARNING, "Record   Saved Succesfully");
+        } catch (Exception ex) {
+            LOG.log(Level.WARNING, "Record not Saved");
+            throw new InternalErrorException("Record not Saved", ex);
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+        return property;
     }
 
     @Override
