@@ -25,6 +25,26 @@ public class PropertyService {
     private static final Logger LOG = Logger.getLogger(PropertyService.class.getName());
 
     //TODO: Create new Property
+    public PropertyResponse updateProperty(Integer property_id, Property property) throws Exception {
+
+        property.setId(property_id);
+        Property _property = propertyDaoImpl.findProperty(property_id);
+
+        if (property.getBrief() != null) {
+            _property.setBrief(property.getBrief());
+        }
+
+        if (property.getDetails() != null) {
+            _property.setDetails(property.getDetails());
+        }
+
+        _property.setDateUpdated(getCurrentDate());
+
+        return propertyResponse(propertyDaoImpl.edit(_property));
+    }
+
+
+    //TODO: Create new Property
     public PropertyResponse createProperty(Property property) throws Exception {
         property.setDateCreated(getCurrentDate());
         return propertyResponse(propertyDaoImpl.create(property));
