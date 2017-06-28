@@ -27,6 +27,7 @@
     <class>myproperty.v1._entities.Accounts</class>
     <class>myproperty.v1._entities.Packages</class>
     <class>myproperty.v1._entities.AccountTypes</class>
+    <class>myproperty.v1._entities.Property</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/property"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

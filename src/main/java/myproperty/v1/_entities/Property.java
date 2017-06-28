@@ -21,8 +21,8 @@ import java.util.Date;
 @NamedQueries({
     @NamedQuery(name = "Property.findAll", query = "SELECT p FROM Property p")
     , @NamedQuery(name = "Property.findById", query = "SELECT p FROM Property p WHERE p.id = :id")
-    , @NamedQuery(name = "Property.findByName", query = "SELECT p FROM Property p WHERE p.name = :name")
-    , @NamedQuery(name = "Property.findByDescription", query = "SELECT p FROM Property p WHERE p.description = :description")
+    , @NamedQuery(name = "Property.findByName", query = "SELECT p FROM Property p WHERE p.brief = :brief")
+    , @NamedQuery(name = "Property.findByDescription", query = "SELECT p FROM Property p WHERE p.details = :details")
     , @NamedQuery(name = "Property.findByStatus", query = "SELECT p FROM Property p WHERE p.status = :status")
     , @NamedQuery(name = "Property.findByDateCreated", query = "SELECT p FROM Property p WHERE p.dateCreated = :dateCreated")
     , @NamedQuery(name = "Property.findByUser", query = "SELECT p FROM Property p WHERE p.user.id = :userId")

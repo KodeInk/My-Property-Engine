@@ -84,13 +84,24 @@ public class PropertyService {
     }
 
     //TODO : get Property  By Id
-    public PropertyResponse getPropertyById(Integer id) throws Exception {
+    public PropertyResponse getPropertyById(Integer id) {
+        try {
         Property property = propertyDaoImpl.findProperty(id);
-        return propertyResponse(property);
+            return propertyResponse(property);
+        } catch (NullPointerException ex) {
+            return propertyResponse(null);
+        } catch (Exception ex) {
+            throw new InternalError("Something went wrong ");
+        }
+
     }
 
 
     public PropertyResponse propertyResponse(Property property) {
+
+        if (property == null) {
+            return null;
+        }
 
         PropertyResponse propertyResponse = new PropertyResponse();
         propertyResponse.setId(property.getId());

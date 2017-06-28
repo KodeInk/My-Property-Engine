@@ -45,8 +45,6 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Accounts.findByUpdatedBy", query = "SELECT a FROM Accounts a WHERE a.updatedBy = :updatedBy")})
 public class Accounts implements Serializable {
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "account")
-    private Collection<Property> propertyCollection;
 
     //TEST
     private static final long serialVersionUID = 1L;
@@ -209,17 +207,10 @@ public class Accounts implements Serializable {
 
     @Override
     public String toString() {
-        return "myproperty.v1._entities.Accounts[ id=" + id + " ]";
+        return this.getClass().getCanonicalName()
+                + "[ id=" + id + " ]";
     }
 
-    @XmlTransient
-    public Collection<Property> getPropertyCollection() {
-        return propertyCollection;
-    }
-
-    public void setPropertyCollection(Collection<Property> propertyCollection) {
-        this.propertyCollection = propertyCollection;
-    }
 
 
 }
