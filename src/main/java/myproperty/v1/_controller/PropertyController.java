@@ -50,7 +50,7 @@ public class PropertyController {
     }
 
     @RequestMapping(value = "/user/{userId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public Collection<PropertyResponse> getPropertyByUserId(@PathVariable("accountid") Integer userId) throws Exception {
+    public Collection<PropertyResponse> getPropertyByUserId(@PathVariable("userId") Integer userId) throws Exception {
         return propertyService.getAllPropertiesByUserId(userId);
     }
 

@@ -11,6 +11,10 @@ import java.util.logging.Logger;
 import myproperty.v1._dao.PropertyDaoImpl;
 import myproperty.v1._entities.Property;
 import myproperty.v1._entities.responses.PropertyResponse;
+import myproperty.v1.helper.StatusEnum;
+import myproperty.v1.helper.exception.BadRequestException;
+import myproperty.v1.helper.exception.InternalErrorException;
+import myproperty.v1.helper.exception.NotFoundException;
 import static myproperty.v1.helper.utilities.getCurrentDate;
 import org.springframework.stereotype.Service;
 
@@ -25,10 +29,14 @@ public class PropertyService {
     private static final Logger LOG = Logger.getLogger(PropertyService.class.getName());
 
     //TODO: Create new Property
-    public PropertyResponse updateProperty(Integer property_id, Property property) throws Exception {
+    public PropertyResponse updateProperty(Integer property_id, Property property) {
 
+        try {
         property.setId(property_id);
-        Property _property = propertyDaoImpl.findProperty(property_id);
+        Property _property = null;
+
+            _property = propertyDaoImpl.findProperty(property_id);
+
 
         if (property.getBrief() != null) {
             _property.setBrief(property.getBrief());
@@ -40,13 +48,27 @@ public class PropertyService {
 
         _property.setDateUpdated(getCurrentDate());
 
-        return propertyResponse(propertyDaoImpl.edit(_property));
+            return propertyResponse(propertyDaoImpl.edit(_property));
+        } catch (NullPointerException ex) {
+            throw new NotFoundException("Record not found in the database ");
+        } catch (Exception e) {
+            System.out.println("" + e.getMessage());
+            throw new InternalErrorException("Something went wrong");
+
+        }
+
     }
 
 
     //TODO: Create new Property
     public PropertyResponse createProperty(Property property) throws Exception {
+
+        if (property.getBrief().isEmpty() || property.getDetails().isEmpty() || property.getUser().getId() <= 0 || property.getAccount().getId() <= 0) {
+            throw new BadRequestException("Mandatory Fields are missing");
+        }
+
         property.setDateCreated(getCurrentDate());
+        property.setStatus(StatusEnum.ACTIVE.toString());
         return propertyResponse(propertyDaoImpl.create(property));
     }
 

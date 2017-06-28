@@ -42,8 +42,7 @@ public class Property implements Serializable {
     @Column(name = "dateCreated")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateCreated;
-    @Basic(optional = false)
-
+    @Basic(optional = true)
     @Column(name = "dateUpdated")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateUpdated;
