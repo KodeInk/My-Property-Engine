@@ -52,6 +52,8 @@ public class PersonControllerIT {
             String url = getendPoint() + "list";
             RestTemplate restTemplate = new RestTemplate();
             String result = restTemplate.getForObject(url, String.class);
+            assertNotNull(result);
+
             if (result.isEmpty()) {
                 fail("Was not Able to get any response ");
             }

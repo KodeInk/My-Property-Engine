@@ -8,9 +8,7 @@ package myproperty.v1._controller;
 import java.util.Collection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import myproperty.v1._entities.Person;
 import myproperty.v1._entities.Property;
-import myproperty.v1._entities.responses.PersonResponse;
 import myproperty.v1._entities.responses.PropertyResponse;
 import myproperty.v1._services.PropertyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,16 +34,19 @@ public class PropertyController {
 
     @RequestMapping(value = "/list", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public Collection<PropertyResponse> getProperty() {
+        LOG.log(Level.INFO, " Get All Property End Point");
         return propertyService.getAllProperties();
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public PropertyResponse getPropertyById(@PathVariable("id") Integer id) throws Exception {
+        LOG.log(Level.INFO, " Get All Property  By Id End Point");
         return propertyService.getPropertyById(id);
     }
 
     @RequestMapping(value = "/accountId/{accountid}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public Collection<PropertyResponse> getPropertyByAccountId(@PathVariable("accountid") Integer accountId) throws Exception {
+        LOG.log(Level.INFO, " Get All Property By Account Id  End Point");
         return propertyService.getAllPropertiesByAccountId(accountId);
     }
 
@@ -56,12 +57,13 @@ public class PropertyController {
 
     @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public PropertyResponse createProperty(@RequestBody Property property) throws Exception {
+        LOG.log(Level.INFO, " Create Property End Point");
         return propertyService.createProperty(property);
     }
 
     @RequestMapping(value = "/{id}/update", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public PropertyResponse updatePropertyById(@RequestBody Property property, @PathVariable Integer id) throws Exception {
-        LOG.log(Level.INFO, "Hit the Person Update Endpoint");
+        LOG.log(Level.INFO, " Update Property t");
         return propertyService.updateProperty(id, property);
     }
 
