@@ -5,17 +5,18 @@
  */
 package myproperty.v1._controller;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import myproperty.AppJersey;
 import myproperty.v1._entities.Property;
-import myproperty.v1._entities.responses.PersonResponse;
 import myproperty.v1._entities.responses.PropertyResponse;
+import myproperty.v1.helper.utilities;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
@@ -26,6 +27,7 @@ import org.springframework.web.client.RestTemplate;
 public class PropertyControllerIT {
 
     private static PropertyController controller;
+
     public PropertyControllerIT() {
     }
 
@@ -44,6 +46,7 @@ public class PropertyControllerIT {
 
     /**
      * Test of getProperty method, of class PropertyController.
+     *
      * @throws java.lang.Exception
      */
     @Test
@@ -67,6 +70,7 @@ public class PropertyControllerIT {
 
     /**
      * Test of getPropertyById method, of class PropertyController.
+     *
      * @throws java.lang.Exception
      */
     @Test
@@ -87,6 +91,7 @@ public class PropertyControllerIT {
 
     /**
      * Test of getPropertyByAccountId method, of class PropertyController.
+     *
      * @throws java.lang.Exception
      */
     @Test
@@ -138,17 +143,36 @@ public class PropertyControllerIT {
 
     /**
      * Test of createProperty method, of class PropertyController.
+     *
+     * @throws java.lang.Exception
      */
     @Test
     public void testCreateProperty() throws Exception {
-        System.out.println("createProperty");
-        Property property = null;
-        PropertyController instance = new PropertyController();
-        PropertyResponse expResult = null;
-        PropertyResponse result = instance.createProperty(property);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        try {
+            System.out.println("Checking the Create Property By User Id   End Point ");
+
+            String brief = "testing" + utilities.getCurrentDate().getTime();
+            String details = "details" + utilities.getCurrentDate().getTime();
+            Integer account = 1;
+            Integer user = 2;
+
+            Map<String, Object> vars = new HashMap<>();
+            vars.put("brief", brief);
+            vars.put("details", details);
+            vars.put("account", account);
+            vars.put("user", user);
+            //vars.put("dateCreated", utilities.getCurrentDate().toString());
+
+            String url = getendPoint() + "create/";
+            RestTemplate restTemplate = new RestTemplate();
+            PropertyResponse propertyResponses = restTemplate.postForObject(url, vars, PropertyResponse.class);
+
+            assertNotNull(propertyResponses);
+
+        } catch (RestClientException e) {
+            System.out.println(e.toString());
+            fail("Something Went Wrong ");
+        }
     }
 
     /**
@@ -156,15 +180,33 @@ public class PropertyControllerIT {
      */
     @Test
     public void testUpdatePropertyById() throws Exception {
-        System.out.println("updatePropertyById");
-        Property property = null;
-        Integer id = null;
-        PropertyController instance = new PropertyController();
-        PropertyResponse expResult = null;
-        PropertyResponse result = instance.updatePropertyById(property, id);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        try {
+            System.out.println("Checking the Create Property By User Id   End Point ");
+
+            String brief = "testing" + utilities.getCurrentDate().getTime();
+            String details = "details" + utilities.getCurrentDate().getTime();
+            Integer account = 1;
+            Integer user = 2;
+
+            Map<String, Object> vars = new HashMap<>();
+            vars.put("brief", brief);
+            vars.put("details", details);
+            vars.put("account", account);
+            vars.put("user", user);
+            vars.put("id", "2");
+            //vars.put("dateCreated", utilities.getCurrentDate().toString());
+
+            String url = getendPoint() + "2/update";
+            RestTemplate restTemplate = new RestTemplate();
+            //restTemplate.put(url, vars);
+            restTemplate.put(url, vars);
+
+
+        } catch (RestClientException e) {
+            System.out.println(e.toString());
+            fail("Something Went Wrong ");
+        }
+
     }
 
 }
