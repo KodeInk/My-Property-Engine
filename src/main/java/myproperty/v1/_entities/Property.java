@@ -9,7 +9,9 @@ import javax.persistence.*;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -29,6 +31,9 @@ import java.util.Date;
     , @NamedQuery(name = "Property.findByAccount", query = "SELECT p FROM Property p  WHERE p.account.id  = :accountId")
 })
 public class Property implements Serializable {
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "propertyId")
+    private Collection<PropertyTypes> propertyTypesCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -162,6 +167,15 @@ public class Property implements Serializable {
     @Override
     public String toString() {
         return "property[ id=" + id + " ]";
+    }
+
+    @XmlTransient
+    public Collection<PropertyTypes> getPropertyTypesCollection() {
+        return propertyTypesCollection;
+    }
+
+    public void setPropertyTypesCollection(Collection<PropertyTypes> propertyTypesCollection) {
+        this.propertyTypesCollection = propertyTypesCollection;
     }
 
 
