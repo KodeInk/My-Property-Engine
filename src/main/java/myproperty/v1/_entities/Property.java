@@ -32,8 +32,6 @@ import javax.xml.bind.annotation.XmlTransient;
 })
 public class Property implements Serializable {
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "propertyId")
-    private Collection<PropertyTypes> propertyTypesCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -72,6 +70,10 @@ public class Property implements Serializable {
     @JoinColumn(name = "userId", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private User user;
+
+    @JoinColumn(name = "type", referencedColumnName = "id")
+    @ManyToOne
+    private PropertyTypes type;
 
 
     public Property() {
@@ -164,18 +166,18 @@ public class Property implements Serializable {
         return hash;
     }
 
+    public PropertyTypes getType() {
+        return type;
+    }
+
+    public void setType(PropertyTypes type) {
+        this.type = type;
+    }
+
+
     @Override
     public String toString() {
         return "property[ id=" + id + " ]";
-    }
-
-    @XmlTransient
-    public Collection<PropertyTypes> getPropertyTypesCollection() {
-        return propertyTypesCollection;
-    }
-
-    public void setPropertyTypesCollection(Collection<PropertyTypes> propertyTypesCollection) {
-        this.propertyTypesCollection = propertyTypesCollection;
     }
 
 

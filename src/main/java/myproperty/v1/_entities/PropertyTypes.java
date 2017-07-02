@@ -6,6 +6,7 @@
 package myproperty.v1._entities;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,11 +17,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import myproperty.v1._entities.Property;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -35,6 +37,9 @@ import myproperty.v1._entities.Property;
     , @NamedQuery(name = "PropertyTypes.findByType", query = "SELECT p FROM PropertyTypes p WHERE p.type = :type")
     , @NamedQuery(name = "PropertyTypes.findByStatus", query = "SELECT p FROM PropertyTypes p WHERE p.status = :status")})
 public class PropertyTypes implements Serializable {
+
+    @OneToMany(mappedBy = "type")
+    private Collection<Property> propertyCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -55,9 +60,7 @@ public class PropertyTypes implements Serializable {
     @JoinColumn(name = "classification_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private PropertyClassification classificationId;
-    @JoinColumn(name = "property_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private Property propertyId;
+
 
     public PropertyTypes() {
     }
@@ -104,13 +107,6 @@ public class PropertyTypes implements Serializable {
         this.classificationId = classificationId;
     }
 
-    public Property getPropertyId() {
-        return propertyId;
-    }
-
-    public void setPropertyId(Property propertyId) {
-        this.propertyId = propertyId;
-    }
 
     @Override
     public int hashCode() {
@@ -126,15 +122,21 @@ public class PropertyTypes implements Serializable {
             return false;
         }
         PropertyTypes other = (PropertyTypes) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+        return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
     }
 
     @Override
     public String toString() {
         return "myproperty.v1._controller.PropertyTypes[ id=" + id + " ]";
+    }
+
+    @XmlTransient
+    public Collection<Property> getPropertyCollection() {
+        return propertyCollection;
+    }
+
+    public void setPropertyCollection(Collection<Property> propertyCollection) {
+        this.propertyCollection = propertyCollection;
     }
 
 }

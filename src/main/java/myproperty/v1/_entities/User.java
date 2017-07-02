@@ -6,10 +6,8 @@
 package myproperty.v1._entities;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,13 +15,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -40,22 +36,6 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "User.findByStatus", query = "SELECT u FROM User u WHERE u.status = :status")
     , @NamedQuery(name = "User.findByDateCreated", query = "SELECT u FROM User u WHERE u.dateCreated = :dateCreated")})
 public class User implements Serializable {
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
-    private Collection<Property> propertyCollection;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "account_owner")
-    private Collection<Accounts> accountsCollection;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "createdBy")
-    private Collection<Contacts> contactsCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "updatedBy")
-    private Collection<Contacts> contactsCollection1;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "createdby")
-    private Collection<Address> addressCollection;
-    @OneToMany(mappedBy = "updatedby")
-    private Collection<Address> addressCollection1;
 
 
     private static final long serialVersionUID = 1L;
@@ -161,61 +141,7 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "myproperty._entities.User[ id=" + id + " ]";
-    }
-
-    @XmlTransient
-    public Collection<Address> getAddressCollection() {
-        return addressCollection;
-    }
-
-    public void setAddressCollection(Collection<Address> addressCollection) {
-        this.addressCollection = addressCollection;
-    }
-
-    @XmlTransient
-    public Collection<Address> getAddressCollection1() {
-        return addressCollection1;
-    }
-
-    public void setAddressCollection1(Collection<Address> addressCollection1) {
-        this.addressCollection1 = addressCollection1;
-    }
-
-    @XmlTransient
-    public Collection<Contacts> getContactsCollection() {
-        return contactsCollection;
-    }
-
-    public void setContactsCollection(Collection<Contacts> contactsCollection) {
-        this.contactsCollection = contactsCollection;
-    }
-
-    @XmlTransient
-    public Collection<Contacts> getContactsCollection1() {
-        return contactsCollection1;
-    }
-
-    public void setContactsCollection1(Collection<Contacts> contactsCollection1) {
-        this.contactsCollection1 = contactsCollection1;
-    }
-
-    @XmlTransient
-    public Collection<Accounts> getAccountsCollection() {
-        return accountsCollection;
-    }
-
-    public void setAccountsCollection(Collection<Accounts> accountsCollection) {
-        this.accountsCollection = accountsCollection;
-    }
-
-    @XmlTransient
-    public Collection<Property> getPropertyCollection() {
-        return propertyCollection;
-    }
-
-    public void setPropertyCollection(Collection<Property> propertyCollection) {
-        this.propertyCollection = propertyCollection;
+        return this.getClass().getCanonicalName() + "{ id=" + id + " {";
     }
 
 
