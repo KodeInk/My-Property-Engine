@@ -133,6 +133,7 @@ public class PropertyService {
         propertyResponse.setStatus(property.getStatus());
         propertyResponse.setDetails(property.getDetails());
 
+        propertyResponse.setProperty_type(property.getType().getType());
         // concentrate on the property : 
         propertyResponse.setAccountId(property.getAccount().getId());
         propertyResponse.setUserId(property.getUser().getId());

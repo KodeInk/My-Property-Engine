@@ -21,6 +21,7 @@ public class PropertyResponse {
     private String details;
     private Integer accountId;
     private Integer userId;
+    private String property_type;
 
     public PropertyResponse() {
     }
@@ -89,17 +90,26 @@ public class PropertyResponse {
         this.userId = userId;
     }
 
+    public String getProperty_type() {
+        return property_type;
+    }
+
+    public void setProperty_type(String property_type) {
+        this.property_type = property_type;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 83 * hash + Objects.hashCode(this.id);
-        hash = 83 * hash + Objects.hashCode(this.dateCreated);
-        hash = 83 * hash + Objects.hashCode(this.dateUpdated);
-        hash = 83 * hash + Objects.hashCode(this.brief);
-        hash = 83 * hash + Objects.hashCode(this.status);
-        hash = 83 * hash + Objects.hashCode(this.details);
-        hash = 83 * hash + Objects.hashCode(this.accountId);
-        hash = 83 * hash + Objects.hashCode(this.userId);
+        int hash = 3;
+        hash = 37 * hash + Objects.hashCode(this.id);
+        hash = 37 * hash + Objects.hashCode(this.dateCreated);
+        hash = 37 * hash + Objects.hashCode(this.dateUpdated);
+        hash = 37 * hash + Objects.hashCode(this.brief);
+        hash = 37 * hash + Objects.hashCode(this.status);
+        hash = 37 * hash + Objects.hashCode(this.details);
+        hash = 37 * hash + Objects.hashCode(this.accountId);
+        hash = 37 * hash + Objects.hashCode(this.userId);
+        hash = 37 * hash + Objects.hashCode(this.property_type);
         return hash;
     }
 
@@ -124,6 +134,9 @@ public class PropertyResponse {
         if (!Objects.equals(this.details, other.details)) {
             return false;
         }
+        if (!Objects.equals(this.property_type, other.property_type)) {
+            return false;
+        }
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
@@ -136,8 +149,12 @@ public class PropertyResponse {
         if (!Objects.equals(this.accountId, other.accountId)) {
             return false;
         }
-        return Objects.equals(this.userId, other.userId);
+        if (!Objects.equals(this.userId, other.userId)) {
+            return false;
+        }
+        return true;
     }
+
 
     @Override
     public String toString() {
@@ -150,6 +167,7 @@ public class PropertyResponse {
                 + ", status=" + status
                 + ", details=" + details
                 + ", accountId=" + accountId
+                + ", type=" + property_type
                 + ", userId=" + userId
                 + "}";
     }
