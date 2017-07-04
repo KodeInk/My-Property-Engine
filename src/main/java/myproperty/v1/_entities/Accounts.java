@@ -6,10 +6,8 @@
 package myproperty.v1._entities;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,13 +17,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -44,7 +40,6 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Accounts.findByDateUpdated", query = "SELECT a FROM Accounts a WHERE a.dateUpdated = :dateUpdated")
     , @NamedQuery(name = "Accounts.findByUpdatedBy", query = "SELECT a FROM Accounts a WHERE a.updatedBy = :updatedBy")})
 public class Accounts implements Serializable {
-
 
     //TEST
     private static final long serialVersionUID = 1L;
@@ -210,8 +205,6 @@ public class Accounts implements Serializable {
         return this.getClass().getCanonicalName()
                 + "[ id=" + id + " ]";
     }
-
-
 
 
 }

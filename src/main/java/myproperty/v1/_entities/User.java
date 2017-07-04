@@ -37,7 +37,6 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "User.findByDateCreated", query = "SELECT u FROM User u WHERE u.dateCreated = :dateCreated")})
 public class User implements Serializable {
 
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -143,6 +142,5 @@ public class User implements Serializable {
     public String toString() {
         return this.getClass().getCanonicalName() + "{ id=" + id + " {";
     }
-
 
 }
