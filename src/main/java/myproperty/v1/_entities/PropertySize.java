@@ -36,16 +36,16 @@ public class PropertySize implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @NotNull
+
     @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
-    @NotNull
+
     @Size(min = 1, max = 255)
     @Column(name = "size")
     private String size;
     @Basic(optional = false)
-    @NotNull
+
     @Size(min = 1, max = 9)
     @Column(name = "unitMeasure")
     private String unitMeasure;

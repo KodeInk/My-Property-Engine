@@ -32,6 +32,8 @@ import javax.xml.bind.annotation.XmlTransient;
 })
 public class Property implements Serializable {
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "propertyId")
+    private Collection<PropertySize> propertySizeCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -178,6 +180,15 @@ public class Property implements Serializable {
     @Override
     public String toString() {
         return "property[ id=" + id + " ]";
+    }
+
+    @XmlTransient
+    public Collection<PropertySize> getPropertySizeCollection() {
+        return propertySizeCollection;
+    }
+
+    public void setPropertySizeCollection(Collection<PropertySize> propertySizeCollection) {
+        this.propertySizeCollection = propertySizeCollection;
     }
 
 

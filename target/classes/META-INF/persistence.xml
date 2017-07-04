@@ -30,6 +30,7 @@
     <class>myproperty.v1._entities.Property</class>
     <class>myproperty.v1._entities.PropertyTypes</class>
     <class>myproperty.v1._entities.PropertyClassification</class>
+    <class>myproperty.v1._entities.PropertySize</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/property"/>
       <property name="javax.persistence.jdbc.user" value="root"/>
