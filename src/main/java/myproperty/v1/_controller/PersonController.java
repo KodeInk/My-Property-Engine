@@ -5,7 +5,7 @@
  */
 package myproperty.v1._controller;
 
-import myproperty.v1._entities.Person;
+import myproperty.v1.db._entities.Person;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,11 +14,11 @@ import java.util.Collection;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import myproperty.v1._entities.Address;
-import myproperty.v1._entities.Contacts;
-import myproperty.v1._entities.responses.AddressResponse;
-import myproperty.v1._entities.responses.ContactsResponse;
-import myproperty.v1._entities.responses.PersonResponse;
+import myproperty.v1.db._entities.Address;
+import myproperty.v1.db._entities.Contacts;
+import myproperty.v1.db._entities.responses.AddressResponse;
+import myproperty.v1.db._entities.responses.ContactsResponse;
+import myproperty.v1.db._entities.responses.PersonResponse;
 import myproperty.v1._services.AddressService;
 import myproperty.v1._services.ContactsService;
 import myproperty.v1._services.PersonService;

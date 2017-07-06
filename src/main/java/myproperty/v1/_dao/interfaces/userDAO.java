@@ -1,6 +1,6 @@
 package myproperty.v1._dao.interfaces;
 
-import myproperty.v1._entities.User;
+import myproperty.v1.db._entities.User;
 
 import java.io.Serializable;
 import java.util.List;

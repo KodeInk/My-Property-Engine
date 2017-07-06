@@ -6,7 +6,7 @@
 package myproperty.v1._dao.interfaces;
 
 import java.util.List;
-import myproperty.v1._entities.Accounts;
+import myproperty.v1.db._entities.Accounts;
 
 /**
  *

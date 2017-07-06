@@ -1,9 +1,9 @@
 package myproperty.v1._controller;
 
 import java.util.Collection;
-import myproperty.v1._entities.Account;
-import myproperty.v1._entities.Accounts;
-import myproperty.v1._entities.responses.AccountsResponse;
+import myproperty.v1.db._entities.Account;
+import myproperty.v1.db._entities.Accounts;
+import myproperty.v1.db._entities.responses.AccountsResponse;
 import myproperty.v1._services.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;

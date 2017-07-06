@@ -1,7 +1,7 @@
 package myproperty.v1._dao;
 
 import myproperty.v1._dao.interfaces.userDAO;
-import myproperty.v1._entities.User;
+import myproperty.v1.db._entities.User;
 import myproperty.v1.db.JpaController;
 
 import javax.persistence.EntityManager;

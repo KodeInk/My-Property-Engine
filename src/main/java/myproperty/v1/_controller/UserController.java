@@ -1,7 +1,7 @@
 package myproperty.v1._controller;
 
 
-import myproperty.v1._entities.User;
+import myproperty.v1.db._entities.User;
 import myproperty.v1._services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Collection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import myproperty.v1._entities.responses.UserResponse;
+import myproperty.v1.db._entities.responses.UserResponse;
 import myproperty.v1.helper.exception.BadRequestException;
 
 /**

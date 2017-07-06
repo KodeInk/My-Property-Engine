@@ -6,15 +6,15 @@
 package myproperty.v1._services;
 
 import java.util.ArrayList;
-import myproperty.v1._entities.Person;
+import myproperty.v1.db._entities.Person;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.logging.Logger;
 import myproperty.v1._dao.PersonDAOImpl;
-import myproperty.v1._entities.responses.PersonResponse;
-import myproperty.v1._entities.responses.UserResponse;
+import myproperty.v1.db._entities.responses.PersonResponse;
+import myproperty.v1.db._entities.responses.UserResponse;
 import myproperty.v1.helper.exception.BadRequestException;
 import static myproperty.v1.helper.utilities.getCurrentDate;
 

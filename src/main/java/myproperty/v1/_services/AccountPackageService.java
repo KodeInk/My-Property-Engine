@@ -7,8 +7,8 @@ package myproperty.v1._services;
 
 import java.util.logging.Logger;
 import myproperty.v1._dao.AccountPackagesDaoImpl;
-import myproperty.v1._entities.Packages;
-import myproperty.v1._entities.responses.AccountPackageResponse;
+import myproperty.v1.db._entities.Packages;
+import myproperty.v1.db._entities.responses.AccountPackageResponse;
 import org.springframework.stereotype.Service;
 
 /**

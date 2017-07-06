@@ -7,7 +7,7 @@ package myproperty.v1._dao.interfaces;
 
 import java.io.Serializable;
 import java.util.List;
-import myproperty.v1._entities.Person;
+import myproperty.v1.db._entities.Person;
 
 /**
  *

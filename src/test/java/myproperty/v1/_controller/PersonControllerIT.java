@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import myproperty.AppJersey;
-import myproperty.v1._entities.responses.PersonResponse;
+import myproperty.v1.db._entities.responses.PersonResponse;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
