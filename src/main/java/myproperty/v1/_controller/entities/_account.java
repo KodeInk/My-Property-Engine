@@ -3,23 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package myproperty.v1.db._entities;
+package myproperty.v1._controller.entities;
 
 /**
  *
  * @author mover 6/12/2017
  */
-public class Account {
+public class _account {
 
     private String names;
     private String password;
     private String email_address;
 
-    public Account() {
+    public _account() {
     }
 
 
-    public Account(String names, String password, String email_address) {
+    public _account(String names, String password, String email_address) {
         this.names = names;
         this.password = password;
         this.email_address = email_address;

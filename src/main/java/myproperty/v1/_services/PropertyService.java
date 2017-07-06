@@ -8,8 +8,13 @@ package myproperty.v1._services;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.logging.Logger;
+import myproperty.v1._controller.entities._property;
 import myproperty.v1._dao.PropertyDaoImpl;
+import myproperty.v1.db._entities.Accounts;
 import myproperty.v1.db._entities.Property;
+import myproperty.v1.db._entities.PropertySize;
+import myproperty.v1.db._entities.PropertyTypes;
+import myproperty.v1.db._entities.User;
 import myproperty.v1.db._entities.responses.PropertyResponse;
 import myproperty.v1.helper.StatusEnum;
 import myproperty.v1.helper.exception.BadRequestException;
@@ -61,15 +66,56 @@ public class PropertyService {
 
 
     //TODO: Create new Property
-    public PropertyResponse createProperty(Property property) throws Exception {
+    public PropertyResponse createProperty(_property _property) throws Exception {
 
+        //TODO: convert Pojo to Database Entity
+        Property property = GeneratePropertyEntity(_property);
+
+        //TODO: Create Property Size
         if (property.getBrief().isEmpty() || property.getDetails().isEmpty() || property.getUser().getId() <= 0 || property.getAccount().getId() <= 0) {
             throw new BadRequestException("Mandatory Fields are missing");
         }
 
+        //TODO: Create Property Size
         property.setDateCreated(getCurrentDate());
         property.setStatus(StatusEnum.ACTIVE.toString());
-        return propertyResponse(propertyDaoImpl.create(property));
+
+        //Response :: 
+        property = propertyDaoImpl.create(property);
+
+        //Create Property Size
+        PropertySize propertySize = new PropertySize();
+        propertySize.setPropertyId(property);
+        propertySize.setSize(_property.getProperty_size().getSize());
+        propertySize.setUnitMeasure(_property.getProperty_size().getUnitMeasure());
+
+
+
+        return null;
+//propertyResponse(propertyDaoImpl.create(property));
+    }
+
+    private Property GeneratePropertyEntity(_property _property) {
+        Property property = new Property();
+        property.setBrief(_property.getBrief());
+        property.setDetails(_property.getDetails());
+
+        User user = new User(_property.getUserId());
+        property.setUser(user);
+
+        Accounts accounts = new Accounts(_property.getAccountId());
+        property.setAccount(accounts);
+
+        PropertyTypes propertyTypes = new PropertyTypes(_property.getType());
+        property.setType(propertyTypes);
+
+        property.setBrief(_property.getBrief());
+        property.setBrief(_property.getBrief());
+        property.setBrief(_property.getBrief());
+        property.setBrief(_property.getBrief());
+        property.setBrief(_property.getBrief());
+
+        return property;
     }
 
     //TODO: Fetch all  Property

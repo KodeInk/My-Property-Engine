@@ -1,7 +1,7 @@
 package myproperty.v1._controller;
 
 import java.util.Collection;
-import myproperty.v1.db._entities.Account;
+import myproperty.v1._controller.entities._account;
 import myproperty.v1.db._entities.Accounts;
 import myproperty.v1.db._entities.responses.AccountsResponse;
 import myproperty.v1._services.AccountService;
@@ -32,7 +32,7 @@ public class AccountController {
 
 
     @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public AccountsResponse create_new_account(@RequestBody Account account) throws Exception {
+    public AccountsResponse create_new_account(@RequestBody _account account) throws Exception {
         return accountService.createAccount(account);
     }
 

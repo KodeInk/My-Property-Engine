@@ -12,7 +12,7 @@ import java.util.Objects;
  *
  * @author mover 7/6/2017
  */
-public class _Property {
+public class _property {
 
     private Integer id;
     private Date dateCreated;
@@ -23,11 +23,12 @@ public class _Property {
     private Integer accountId;
     private Integer userId;
     private _property_size property_size;
+    private Integer type;
 
-    public _Property() {
+    public _property() {
     }
 
-    public _Property(Integer id) {
+    public _property(Integer id) {
         this.id = id;
     }
 
@@ -103,6 +104,15 @@ public class _Property {
         this.property_size = property_size;
     }
 
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
+
     @Override
     public int hashCode() {
         int hash = 7;
@@ -129,7 +139,7 @@ public class _Property {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final _Property other = (_Property) obj;
+        final _property other = (_property) obj;
         if (!Objects.equals(this.brief, other.brief)) {
             return false;
         }
@@ -170,6 +180,7 @@ public class _Property {
                 + ", accountId=" + accountId
                 + ", userId=" + userId
                 + ", property_size=" + property_size
+                + ", type=" + type
                 + "}";
     }
 

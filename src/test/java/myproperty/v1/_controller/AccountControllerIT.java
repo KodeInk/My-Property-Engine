@@ -8,7 +8,7 @@ package myproperty.v1._controller;
 import java.util.HashMap;
 import java.util.Map;
 import myproperty.AppJersey;
-import myproperty.v1.db._entities.Account;
+import myproperty.v1._controller.entities._account;
 import myproperty.v1.db._entities.Accounts;
 import myproperty.v1.db._entities.responses.AccountsResponse;
 import myproperty.v1.helper.utilities;
@@ -68,7 +68,7 @@ public class AccountControllerIT {
         try {
             String url = getendPoint() + "create";
             RestTemplate restTemplate = new RestTemplate();
-            Account acount = new Account();
+            _account acount = new _account();
             acount.setEmail_address("myprapati" + utilities.getCurrentDate().getTime() + "@myprapati.com");
             acount.setNames("Test " + utilities.getCurrentDate());
             acount.setPassword("testing");

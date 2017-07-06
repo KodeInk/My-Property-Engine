@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Manny
+ * @author Mover
  */
 @Entity
 @Table(name = "account_types")

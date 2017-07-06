@@ -8,6 +8,7 @@ package myproperty.v1._controller;
 import java.util.Collection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import myproperty.v1._controller.entities._property;
 import myproperty.v1.db._entities.Property;
 import myproperty.v1.db._entities.responses.PropertyResponse;
 import myproperty.v1._services.PropertyService;
@@ -56,7 +57,7 @@ public class PropertyController {
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public PropertyResponse createProperty(@RequestBody Property property) throws Exception {
+    public PropertyResponse createProperty(@RequestBody _property property) throws Exception {
         LOG.log(Level.INFO, " Create Property End Point");
         return propertyService.createProperty(property);
     }

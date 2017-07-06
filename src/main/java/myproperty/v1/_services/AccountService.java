@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import myproperty.v1._dao.AccountsDaoImpl;
-import myproperty.v1.db._entities.Account;
+import myproperty.v1._controller.entities._account;
 import myproperty.v1.db._entities.AccountTypes;
 import myproperty.v1.db._entities.Accounts;
 import myproperty.v1.db._entities.Contacts;
@@ -73,8 +73,8 @@ public class AccountService {
     @Autowired
     private AccountPackageService accountPackageService;
 
-    //TODO:Create Account
-    public AccountsResponse createAccount(Account account) throws Exception {
+    //TODO:Create _account
+    public AccountsResponse createAccount(_account account) throws Exception {
         //STEP ONE: Create User Username and Password:
         // Check to see that Email Address does not exist ::
         names = account.getNames();
@@ -128,14 +128,14 @@ public class AccountService {
                 contacts.setId(contactsResponse.getId());
             }
         }
-        //STEP FOUR : Create Account data
+        //STEP FOUR : Create _account data
         {
             // Check to see that User is Created, Profile is Created, and Contact Information is Created for this User
             //Checker 
             if ((userResponse.getId() > 0) && (personResponse.getId() > 0) && (contacts.getId() > 0)) {
                 accounts = new Accounts();
 
-                // Re Initialize the Account Owner :: 
+                // Re Initialize the _account Owner :: 
                 User account_owner = new User();
                 account_owner.setId(userResponse.getId());
                 account_owner.setUsername(userResponse.getUsername());
@@ -169,10 +169,10 @@ public class AccountService {
         }
 
         return getAccountsResponse(accounts);
-        //TODO: Send Email to the User and Notify about Account Creation ::
+        //TODO: Send Email to the User and Notify about _account Creation ::
     }
 
-    //TODO: Activate Account
+    //TODO: Activate _account
     /*
     Pass the account ID and activate or deaactivate ::
      */
@@ -181,16 +181,16 @@ public class AccountService {
             throw new ForbiddenException("Account Id can not be empty ");
 
         Accounts account = accountsDaoImpl.findAccount(account_id);
-        //Set Account Status to Active
+        //Set _account Status to Active
         account.setStatus(StatusEnum.ACTIVE.toString());
 
         //TODO: Setting who updates :: functionality missing ::
-        //Add date Account Updated 
+        //Add date _account Updated 
         account.setDateUpdated(getCurrentDate());
         return getAccountsResponse(accountsDaoImpl.edit(account));
 
     }
-    //TODO: Deactivate Account
+    //TODO: Deactivate _account
     /*
     Pass the account ID and activate or deaactivate ::
      */
@@ -200,15 +200,15 @@ public class AccountService {
         }
 
         Accounts account = accountsDaoImpl.findAccount(account_id);
-        //Set Account Status to Active
+        //Set _account Status to Active
         account.setStatus(StatusEnum.DEACTIVATED.toString());
 
         //TODO: Setting who updates :: functionality missing ::
-        //Add date Account Updated
+        //Add date _account Updated
         account.setDateUpdated(getCurrentDate());
         return getAccountsResponse(accountsDaoImpl.edit(account));
     }
-    //TODO: update Account
+    //TODO: update _account
     public AccountsResponse updateAccount(Integer account_id, Accounts _account) throws Exception {
         if (account_id <= 0) {
             throw new ForbiddenException("Account Id can not be empty ");
