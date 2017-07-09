@@ -5,6 +5,7 @@
  */
 package myproperty.v1._dao;
 
+import myproperty.v1._dao.interfaces.PropertySizeDao;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,14 +16,13 @@ import javax.persistence.criteria.CriteriaQuery;
 import myproperty.v1.db.JpaController;
 import myproperty.v1.db._entities.Property;
 import myproperty.v1.db._entities.PropertySize;
-import myproperty.v1.db._entities.User;
 import myproperty.v1.helper.exception.InternalErrorException;
 
 /**
  *
  * @author Mover
  */
-public class PropertySizeDaoImpl extends JpaController {
+public class PropertySizeDaoImpl extends JpaController implements PropertySizeDao {
 
     private static final Logger LOG = Logger.getLogger(PropertySizeDaoImpl.class.getName());
 
@@ -39,6 +39,7 @@ public class PropertySizeDaoImpl extends JpaController {
         super(PropertySize.class);
     }
 
+    @Override
     public PropertySize create(PropertySize propertySize) throws Exception {
 
         EntityManager em = null;
@@ -59,6 +60,7 @@ public class PropertySizeDaoImpl extends JpaController {
         return propertySize;
     }
 
+    @Override
     public PropertySize edit(PropertySize propertySize) throws Exception {
         EntityManager em = null;
         try {
@@ -84,6 +86,7 @@ public class PropertySizeDaoImpl extends JpaController {
         return propertySize;
     }
 
+    @Override
     public PropertySize findProperty(Integer id) {
         EntityManager em = getEntityManager();
         try {
@@ -93,10 +96,12 @@ public class PropertySizeDaoImpl extends JpaController {
         }
     }
 
+    @Override
     public List<Property> findPropertySizeEntities() {
         return findPropertySizeEntities(true, -1, -1);
     }
 
+    @Override
     public List<Property> findPropertySizeEntities(int maxResults, int firstResult) {
         return findPropertySizeEntities(false, maxResults, firstResult);
     }
@@ -117,6 +122,7 @@ public class PropertySizeDaoImpl extends JpaController {
         }
     }
 
+    @Override
     public void destroy(Integer id) throws Exception {
         EntityManager em = null;
         try {
@@ -139,6 +145,7 @@ public class PropertySizeDaoImpl extends JpaController {
     }
 
     //TODO: Get Property Size  By Property Id 
+    @Override
     public List<Property> findPropertySizeEntitiesByPropertyId(Integer propertyId, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {

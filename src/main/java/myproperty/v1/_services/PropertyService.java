@@ -10,6 +10,7 @@ import java.util.Collection;
 import java.util.logging.Logger;
 import myproperty.v1._controller.entities._property;
 import myproperty.v1._dao.PropertyDaoImpl;
+import myproperty.v1._dao.PropertySizeDaoImpl;
 import myproperty.v1.db._entities.Accounts;
 import myproperty.v1.db._entities.Property;
 import myproperty.v1.db._entities.PropertySize;
@@ -31,6 +32,9 @@ import org.springframework.stereotype.Service;
 public class PropertyService {
 
     private final PropertyDaoImpl propertyDaoImpl = PropertyDaoImpl.getInstance();
+
+    private final PropertySizeDaoImpl propertySizeDaoImpl = PropertySizeDaoImpl.getInstance();
+
     private static final Logger LOG = Logger.getLogger(PropertyService.class.getName());
 
     //TODO: Create new Property
@@ -89,10 +93,9 @@ public class PropertyService {
         propertySize.setSize(_property.getProperty_size().getSize());
         propertySize.setUnitMeasure(_property.getProperty_size().getUnitMeasure());
 
+        propertySize = propertySizeDaoImpl.create(propertySize);
 
-
-        return null;
-//propertyResponse(propertyDaoImpl.create(property));
+        return propertyResponse(property);
     }
 
     private Property GeneratePropertyEntity(_property _property) {

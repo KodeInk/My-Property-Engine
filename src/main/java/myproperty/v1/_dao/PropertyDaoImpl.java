@@ -14,7 +14,6 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaQuery;
 import myproperty.v1.db._entities.Property;
-import myproperty.v1.db._entities.User;
 import myproperty.v1.db.JpaController;
 import myproperty.v1.helper.exception.InternalErrorException;
 
