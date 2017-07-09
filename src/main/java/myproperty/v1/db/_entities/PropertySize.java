@@ -32,7 +32,10 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "PropertySize.findAll", query = "SELECT p FROM PropertySize p")
     , @NamedQuery(name = "PropertySize.findById", query = "SELECT p FROM PropertySize p WHERE p.id = :id")
     , @NamedQuery(name = "PropertySize.findBySize", query = "SELECT p FROM PropertySize p WHERE p.size = :size")
-    , @NamedQuery(name = "PropertySize.findByUnitMeasure", query = "SELECT p FROM PropertySize p WHERE p.unitMeasure = :unitMeasure")})
+    , @NamedQuery(name = "PropertySize.findByUnitMeasure", query = "SELECT p FROM PropertySize p WHERE p.unitMeasure = :unitMeasure")
+    , @NamedQuery(name = "PropertySize.findByPropertyId", query = "SELECT p FROM PropertySize p WHERE p.propertyId = :propertyId")
+
+})
 public class PropertySize implements Serializable {
 
     private static final long serialVersionUID = 1L;
