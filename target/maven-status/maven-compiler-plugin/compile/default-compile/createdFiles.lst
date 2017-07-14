@@ -1,3 +1,4 @@
+myproperty\v1\_controller\entities\_property.class
 myproperty\v1\_dao\AccountsDaoImpl.class
 myproperty\v1\_controller\AccountController.class
 myproperty\v1\db\_entities\Property.class
@@ -5,7 +6,7 @@ myproperty\v1\db\_entities\Types_.class
 myproperty\v1\_dao\AddressDaoImpl.class
 myproperty\v1\helper\exception\NotFoundException.class
 myproperty\v1\_dao\PersonDAOImpl.class
-myproperty\v1\db\_entities\Account.class
+myproperty\v1\_dao\interfaces\PropertySizeDao.class
 myproperty\v1\_dao\AccountPackagesDaoImpl.class
 myproperty\v1\db\_entities\responses\ContactsResponse.class
 myproperty\v1\_dao\interfaces\PersonDAO.class
@@ -56,6 +57,7 @@ myproperty\v1\db\_entities\Contacts.class
 myproperty\v1\_dao\interfaces\AccountPackagesDao.class
 myproperty\v1\db\_entities\Categories.class
 myproperty\v1\db\_entities\Accounts.class
+myproperty\v1\_dao\PropertySizeDaoImpl.class
 myproperty\v1\_controller\PropertyController.class
 myproperty\Application.class
 myproperty\v1\helper\exception\UnauthorizedException.class
@@ -76,6 +78,7 @@ myproperty\v1\db\_entities\Person_.class
 myproperty\v1\helper\EmailValidator.class
 myproperty\v1\_dao\interfaces\PropertyDao.class
 myproperty\v1\_services\Status.class
+myproperty\v1\_controller\entities\_property_size.class
 myproperty\v1\_dao\AccountTypesDaonImpl.class
 myproperty\v1\db\_entities\RolePermission_.class
 myproperty\v1\db\_entities\responses\AccountsResponse.class
@@ -101,4 +104,5 @@ myproperty\v1\db\_entities\PropertyClassification_.class
 myproperty\v1\db\_entities\Users.class
 myproperty\v1\_services\AccountTypesService.class
 myproperty\v1\_services\AccountService.class
+myproperty\v1\_controller\entities\_account.class
 myproperty\v1\_controller\ContactsController.class

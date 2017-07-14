@@ -22,7 +22,7 @@ public class _property {
     private String details;
     private Integer accountId;
     private Integer userId;
-    private _property_size property_size;
+    private _property_size[] property_size;
     private Integer type;
 
     public _property() {
@@ -96,13 +96,14 @@ public class _property {
         this.userId = userId;
     }
 
-    public _property_size getProperty_size() {
+    public _property_size[] getProperty_size() {
         return property_size;
     }
 
-    public void setProperty_size(_property_size property_size) {
+    public void setProperty_size(_property_size[] property_size) {
         this.property_size = property_size;
     }
+
 
     public Integer getType() {
         return type;

@@ -75,27 +75,29 @@ public class PropertyService {
         //TODO: convert Pojo to Database Entity
         Property property = GeneratePropertyEntity(_property);
 
-        //TODO: Create Property Size
-        if (property.getBrief().isEmpty() || property.getDetails().isEmpty() || property.getUser().getId() <= 0 || property.getAccount().getId() <= 0) {
+//        //TODO: Create Property Size
+        if (property.getBrief().isEmpty() || property.getDetails().isEmpty()) {
             throw new BadRequestException("Mandatory Fields are missing");
         }
 
-        //TODO: Create Property Size
-        property.setDateCreated(getCurrentDate());
-        property.setStatus(StatusEnum.ACTIVE.toString());
-
-        //Response :: 
-        property = propertyDaoImpl.create(property);
-
-        //Create Property Size
-        PropertySize propertySize = new PropertySize();
-        propertySize.setPropertyId(property);
-        propertySize.setSize(_property.getProperty_size().getSize());
-        propertySize.setUnitMeasure(_property.getProperty_size().getUnitMeasure());
-
-        propertySize = propertySizeDaoImpl.create(propertySize);
-
+        //  || property.getUser().getId() <= 0 || property.getAccount().getId() <= 0
         return propertyResponse(property);
+        //TODO: Create Property Size
+//        property.setDateCreated(getCurrentDate());
+//        property.setStatus(StatusEnum.ACTIVE.toString());
+//
+//        //Response ::
+//        property = propertyDaoImpl.create(property);
+//
+//        //Create Property Size
+//        PropertySize propertySize = new PropertySize();
+//        propertySize.setPropertyId(property);
+//        propertySize.setSize(_property.getProperty_size().getSize());
+//        propertySize.setUnitMeasure(_property.getProperty_size().getUnitMeasure());
+//
+//        propertySize = propertySizeDaoImpl.create(propertySize);
+//
+//        return propertyResponse(property);
     }
 
     private Property GeneratePropertyEntity(_property _property) {
@@ -103,10 +105,12 @@ public class PropertyService {
         property.setBrief(_property.getBrief());
         property.setDetails(_property.getDetails());
 
-        User user = new User(_property.getUserId());
+        User user = new User();
+        user.setId(_property.getUserId());
         property.setUser(user);
 
-        Accounts accounts = new Accounts(_property.getAccountId());
+        Accounts accounts = new Accounts();
+        accounts.setId(_property.getAccountId());
         property.setAccount(accounts);
 
         PropertyTypes propertyTypes = new PropertyTypes(_property.getType());

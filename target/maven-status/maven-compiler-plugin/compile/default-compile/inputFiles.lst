@@ -1,5 +1,7 @@
 E:\codemovers\myproperty\src\main\java\myproperty\v1\db\_entities\Address.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\_dao\AccountTypesDaonImpl.java
+E:\codemovers\myproperty\src\main\java\myproperty\v1\_controller\entities\_property_size.java
+E:\codemovers\myproperty\src\main\java\myproperty\v1\_dao\interfaces\PropertySizeDao.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\db\_entities\Types.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\_services\AccountTypesService.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\db\_entities\Person.java
@@ -11,6 +13,7 @@ E:\codemovers\myproperty\src\main\java\myproperty\v1\_controller\PersonControlle
 E:\codemovers\myproperty\src\main\java\myproperty\v1\_controller\RegistrationController.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\_dao\PersonDAOImpl.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\helper\exception\Message.java
+E:\codemovers\myproperty\src\main\java\myproperty\v1\_controller\entities\_account.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\_dao\interfaces\AddressDao.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\helper\AccountType.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\_dao\interfaces\AccountsDao.java
@@ -66,7 +69,7 @@ E:\codemovers\myproperty\src\main\java\myproperty\v1\helper\AccountPackage.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\helper\exception\NotFoundException.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\_dao\interfaces\userDAO.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\db\JpaController.java
-E:\codemovers\myproperty\src\main\java\myproperty\v1\db\_entities\Account.java
+E:\codemovers\myproperty\src\main\java\myproperty\v1\_controller\entities\_property.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\db\EntityManagerFactoryProvider.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\db\_entities\Contacts.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\db\_entities\Users.java
@@ -75,6 +78,7 @@ E:\codemovers\myproperty\src\main\java\myproperty\v1\db\_entities\responses\Prop
 E:\codemovers\myproperty\src\main\java\myproperty\v1\_services\AccountPackageService.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\_dao\PropertyDaoImpl.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\helper\EmailValidator.java
+E:\codemovers\myproperty\src\main\java\myproperty\v1\_dao\PropertySizeDaoImpl.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\db\_entities\Rating.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\_services\PropertyService.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\helper\ContactTypes.java

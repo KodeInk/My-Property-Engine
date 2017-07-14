@@ -5,12 +5,14 @@
  */
 package myproperty.v1._controller.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.Objects;
 
 /**
  *
- * @author Manny
+ * @author mover
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class _property_size {
     private Integer id;
     private Integer property_id;
