@@ -32,7 +32,7 @@ import javax.xml.bind.annotation.XmlTransient;
 })
 public class Property implements Serializable {
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "propertyId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "property")
     private Collection<PropertySize> propertySizeCollection;
 
     private static final long serialVersionUID = 1L;

@@ -56,7 +56,7 @@ public class PropertySize implements Serializable {
     private String unitMeasure;
     @JoinColumn(name = "property_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Property propertyId;
+    private Property property;
 
     public PropertySize() {
     }
@@ -95,12 +95,12 @@ public class PropertySize implements Serializable {
         this.unitMeasure = unitMeasure;
     }
 
-    public Property getPropertyId() {
-        return propertyId;
+    public Property getProperty() {
+        return property;
     }
 
-    public void setPropertyId(Property propertyId) {
-        this.propertyId = propertyId;
+    public void setProperty(Property property) {
+        this.property = property;
     }
 
     @Override

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.logging.Logger;
 import myproperty.v1._controller.entities._property;
+import myproperty.v1._controller.entities._property_size;
 import myproperty.v1._dao.PropertyDaoImpl;
 import myproperty.v1._dao.PropertySizeDaoImpl;
 import myproperty.v1.db._entities.Accounts;
@@ -80,24 +81,32 @@ public class PropertyService {
             throw new BadRequestException("Mandatory Fields are missing");
         }
 
-        //  || property.getUser().getId() <= 0 || property.getAccount().getId() <= 0
-        return propertyResponse(property);
-        //TODO: Create Property Size
-//        property.setDateCreated(getCurrentDate());
-//        property.setStatus(StatusEnum.ACTIVE.toString());
-//
-//        //Response ::
-//        property = propertyDaoImpl.create(property);
-//
-//        //Create Property Size
-//        PropertySize propertySize = new PropertySize();
-//        propertySize.setPropertyId(property);
-//        propertySize.setSize(_property.getProperty_size().getSize());
-//        propertySize.setUnitMeasure(_property.getProperty_size().getUnitMeasure());
-//
-//        propertySize = propertySizeDaoImpl.create(propertySize);
-//
-//        return propertyResponse(property);
+        property.setDateCreated(getCurrentDate());
+        property.setStatus(StatusEnum.ACTIVE.toString());
+
+        property = propertyDaoImpl.create(property);
+
+        if (property != null) {
+            //Create Property Size
+            _property_size[] propertySizes = _property.getProperty_size();
+
+            PropertySize propertySize = new PropertySize();
+
+            for (_property_size _propertySize : propertySizes) {
+                propertySize.setProperty(property);
+                propertySize.setSize(_propertySize.getSize());
+                propertySize.setUnitMeasure(_propertySize.getUnitMeasure());
+
+                propertySizeDaoImpl.create(propertySize);
+                propertySize = null;
+            }
+            return propertyResponse(property);
+
+        } else {
+            throw new InternalErrorException("Something Went Wrong, Could not Save the Property");
+        }
+
+
     }
 
     private Property GeneratePropertyEntity(_property _property) {
