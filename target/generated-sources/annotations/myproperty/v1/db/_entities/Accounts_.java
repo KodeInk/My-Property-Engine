@@ -8,7 +8,7 @@ import myproperty.v1.db._entities.AccountTypes;
 import myproperty.v1.db._entities.Packages;
 import myproperty.v1.db._entities.User;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2017-07-10T03:21:09")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2017-07-14T15:39:50")
 @StaticMetamodel(Accounts.class)
 public class Accounts_ { 
 

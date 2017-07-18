@@ -96,7 +96,6 @@ public class PropertyService {
                 propertySize.setProperty(property);
                 propertySize.setSize(_propertySize.getSize());
                 propertySize.setUnitMeasure(_propertySize.getUnitMeasure());
-
                 propertySizeDaoImpl.create(propertySize);
                 propertySize = null;
             }
