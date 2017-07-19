@@ -10,6 +10,7 @@ import java.util.Collection;
 import java.util.logging.Logger;
 import myproperty.v1._controller.entities._property;
 import myproperty.v1._controller.entities._property_size;
+import myproperty.v1._dao.AccountsDaoImpl;
 import myproperty.v1._dao.PropertyDaoImpl;
 import myproperty.v1._dao.PropertySizeDaoImpl;
 import myproperty.v1.db._entities.Accounts;
@@ -37,6 +38,8 @@ public class PropertyService {
     private final PropertySizeDaoImpl propertySizeDaoImpl = PropertySizeDaoImpl.getInstance();
 
     private static final Logger LOG = Logger.getLogger(PropertyService.class.getName());
+    private final AccountsDaoImpl accountsDaoImpl = AccountsDaoImpl.getInstance();
+
 
     //TODO: Create new Property
     public PropertyResponse updateProperty(Integer property_id, Property property) {
@@ -73,10 +76,39 @@ public class PropertyService {
     //TODO: Create new Property
     public PropertyResponse createProperty(_property _property) throws Exception {
 
+        //TODO: Validate Mandatories\\
+        _property.validate_property();
         //TODO: convert Pojo to Database Entity
-        Property property = GeneratePropertyEntity(_property);
+        Property property = new Property();
+        try {
+            property.setBrief(_property.getBrief());
+            property.setDetails(_property.getDetails());
 
-//        //TODO: Create Property Size
+            //TODO: Check that the User Exists ::
+            // this might change to the logged in user no need to send it from the client
+            User user = new User(_property.getUser());
+            property.setUser(user);
+
+            //TODO: Check if account exists and also that the account is Active 
+            Accounts account = accountsDaoImpl.findAccount(_property.getAccount());
+            if (account.getId() == null) {
+                throw new BadRequestException("Associated Account does not exist");
+            }
+            property.setAccount(account);
+
+            PropertyTypes propertyTypes = new PropertyTypes(_property.getType());
+            property.setType(propertyTypes);
+
+            property.setBrief(_property.getBrief());
+            property.setBrief(_property.getBrief());
+            property.setBrief(_property.getBrief());
+            property.setBrief(_property.getBrief());
+            property.setBrief(_property.getBrief());
+        } catch (Exception em) {
+            System.out.println("ERROR");
+            throw em;
+        }
+        //TODO: Create Property Size
         if (property.getBrief().isEmpty() || property.getDetails().isEmpty()) {
             throw new BadRequestException("Mandatory Fields are missing");
         }
@@ -108,18 +140,20 @@ public class PropertyService {
 
     }
 
-    private Property GeneratePropertyEntity(_property _property) {
+    private Property GeneratePropertyEntity(_property _property) throws Exception {
         Property property = new Property();
         property.setBrief(_property.getBrief());
         property.setDetails(_property.getDetails());
 
         User user = new User();
-        user.setId(_property.getUserId());
+        user.setId(_property.getUser());
         property.setUser(user);
 
-        Accounts accounts = new Accounts();
-        accounts.setId(_property.getAccountId());
-        property.setAccount(accounts);
+        Accounts account = accountsDaoImpl.findAccount(_property.getAccount());
+        if (account.getId() != null) {
+            property.setAccount(account);
+        }
+
 
         PropertyTypes propertyTypes = new PropertyTypes(_property.getType());
         property.setType(propertyTypes);

@@ -49,8 +49,8 @@ public class PropertyDaoImpl extends JpaController implements PropertyDao {
             em.getTransaction().commit();
             LOG.log(Level.WARNING, "Record   Saved Succesfully");
         } catch (Exception ex) {
-            LOG.log(Level.WARNING, "Record not Saved");
-            throw new InternalErrorException("Record not Saved", ex);
+            LOG.log(Level.WARNING, "DB LEVEL ");
+            throw ex;
         } finally {
             if (em != null) {
                 em.close();

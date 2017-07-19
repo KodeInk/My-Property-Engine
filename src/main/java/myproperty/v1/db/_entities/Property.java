@@ -70,7 +70,7 @@ public class Property implements Serializable {
     @ManyToOne(optional = false)
     private Accounts account;
     @JoinColumn(name = "userId", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+    // @ManyToOne(optional = false)
     private User user;
 
     @JoinColumn(name = "type", referencedColumnName = "id")

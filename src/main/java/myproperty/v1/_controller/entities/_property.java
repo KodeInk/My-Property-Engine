@@ -7,6 +7,7 @@ package myproperty.v1._controller.entities;
 
 import java.util.Date;
 import java.util.Objects;
+import myproperty.v1.helper.exception.BadRequestException;
 
 /**
  *
@@ -20,8 +21,8 @@ public class _property {
     private String brief;
     private String status;
     private String details;
-    private Integer accountId;
-    private Integer userId;
+    private Integer account;
+    private Integer user;
     private _property_size[] property_size;
     private Integer type;
 
@@ -80,20 +81,20 @@ public class _property {
         this.details = details;
     }
 
-    public Integer getAccountId() {
-        return accountId;
+    public Integer getAccount() {
+        return account;
     }
 
-    public void setAccountId(Integer accountId) {
-        this.accountId = accountId;
+    public void setAccount(Integer account) {
+        this.account = account;
     }
 
-    public Integer getUserId() {
-        return userId;
+    public Integer getUser() {
+        return user;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setUser(Integer user) {
+        this.user = user;
     }
 
     public _property_size[] getProperty_size() {
@@ -123,8 +124,8 @@ public class _property {
         hash = 59 * hash + Objects.hashCode(this.brief);
         hash = 59 * hash + Objects.hashCode(this.status);
         hash = 59 * hash + Objects.hashCode(this.details);
-        hash = 59 * hash + Objects.hashCode(this.accountId);
-        hash = 59 * hash + Objects.hashCode(this.userId);
+        hash = 59 * hash + Objects.hashCode(this.account);
+        hash = 59 * hash + Objects.hashCode(this.user);
         hash = 59 * hash + Objects.hashCode(this.property_size);
         return hash;
     }
@@ -159,10 +160,10 @@ public class _property {
         if (!Objects.equals(this.dateUpdated, other.dateUpdated)) {
             return false;
         }
-        if (!Objects.equals(this.accountId, other.accountId)) {
+        if (!Objects.equals(this.account, other.account)) {
             return false;
         }
-        if (!Objects.equals(this.userId, other.userId)) {
+        if (!Objects.equals(this.user, other.user)) {
             return false;
         }
         return Objects.equals(this.property_size, other.property_size);
@@ -178,11 +179,23 @@ public class _property {
                 + ", brief=" + brief
                 + ", status=" + status
                 + ", details=" + details
-                + ", accountId=" + accountId
-                + ", userId=" + userId
+                + ", accountId=" + account
+                + ", userId=" + user
                 + ", property_size=" + property_size
                 + ", type=" + type
                 + "}";
+    }
+
+    public Boolean validate_property() {
+        if (this.account == null || this.account <= 0 || this.getUser() == null || this.getUser() <= 0 || this.getBrief() == null || this.getDetails() == null) {
+            throw new BadRequestException("Fill Madantories");
+        }
+
+        if (this.property_size == null) {
+            throw new BadRequestException("Property Size is Missing");
+        }
+
+        return true;
     }
 
 }
