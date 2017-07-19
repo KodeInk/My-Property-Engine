@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Manny
+ * @author mover
  */
 @Entity
 @Table(name = "property_types")
