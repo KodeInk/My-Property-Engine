@@ -13,6 +13,7 @@ import myproperty.v1._controller.entities._property_size;
 import myproperty.v1._dao.AccountsDaoImpl;
 import myproperty.v1._dao.PropertyDaoImpl;
 import myproperty.v1._dao.PropertySizeDaoImpl;
+import myproperty.v1._dao.PropertyTypesDaoImpl;
 import myproperty.v1.db._entities.Accounts;
 import myproperty.v1.db._entities.Property;
 import myproperty.v1.db._entities.PropertySize;
@@ -36,6 +37,7 @@ public class PropertyService {
     private final PropertyDaoImpl propertyDaoImpl = PropertyDaoImpl.getInstance();
 
     private final PropertySizeDaoImpl propertySizeDaoImpl = PropertySizeDaoImpl.getInstance();
+    private final PropertyTypesDaoImpl propertyTypesDaoImpl = PropertyTypesDaoImpl.getInstance();
 
     private static final Logger LOG = Logger.getLogger(PropertyService.class.getName());
     private final AccountsDaoImpl accountsDaoImpl = AccountsDaoImpl.getInstance();
@@ -96,7 +98,10 @@ public class PropertyService {
             }
             property.setAccount(account);
 
-            PropertyTypes propertyTypes = new PropertyTypes(_property.getType());
+            PropertyTypes propertyTypes = propertyTypesDaoImpl.findPropertyType(_property.getType());
+            if (propertyTypes.getId() == null) {
+                throw new BadRequestException("Invalid Property Type");
+            }
             property.setType(propertyTypes);
 
             property.setBrief(_property.getBrief());
@@ -228,7 +233,8 @@ public class PropertyService {
         propertyResponse.setStatus(property.getStatus());
         propertyResponse.setDetails(property.getDetails());
 
-        propertyResponse.setProperty_type(property.getType().getType());
+        String property_type = property.getType().getType();
+        propertyResponse.setProperty_type(property_type);
         // concentrate on the property : 
         propertyResponse.setAccountId(property.getAccount().getId());
         propertyResponse.setUserId(property.getUser().getId());

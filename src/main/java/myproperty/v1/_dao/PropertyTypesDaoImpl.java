@@ -5,6 +5,7 @@
  */
 package myproperty.v1._dao;
 
+import myproperty.v1._dao.interfaces.PropertyTypesDao;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,7 +20,7 @@ import myproperty.v1.db._entities.PropertyTypes;
  *
  * @author mover 7/20/2017
  */
-public class PropertyTypesDaoImpl extends JpaController {
+public class PropertyTypesDaoImpl extends JpaController implements PropertyTypesDao {
 
     private static final Logger LOG = Logger.getLogger(PropertyTypesDaoImpl.class.getName());
 
@@ -36,6 +37,7 @@ public class PropertyTypesDaoImpl extends JpaController {
         super(PropertyTypes.class);
     }
 
+    @Override
     public PropertyTypes create(PropertyTypes propertyTypes) throws Exception {
 
         EntityManager em = null;
@@ -56,6 +58,7 @@ public class PropertyTypesDaoImpl extends JpaController {
         return propertyTypes;
     }
 
+    @Override
     public PropertyTypes edit(PropertyTypes propertyTypes) throws Exception {
         EntityManager em = null;
         try {
@@ -81,6 +84,7 @@ public class PropertyTypesDaoImpl extends JpaController {
         return propertyTypes;
     }
 
+    @Override
     public PropertyTypes findPropertyType(Integer id) {
         EntityManager em = getEntityManager();
         try {
@@ -90,10 +94,12 @@ public class PropertyTypesDaoImpl extends JpaController {
         }
     }
 
+    @Override
     public List<PropertyTypes> findPropertyTypeEntities() {
         return findPropertyTypesEntities(true, -1, -1);
     }
 
+    @Override
     public List<PropertyTypes> findPropertyTypeEntities(int maxResults, int firstResult) {
         return findPropertyTypesEntities(false, maxResults, firstResult);
     }
@@ -114,6 +120,7 @@ public class PropertyTypesDaoImpl extends JpaController {
         }
     }
 
+    @Override
     public void destroy(Integer id) throws Exception {
         EntityManager em = null;
         try {
