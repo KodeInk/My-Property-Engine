@@ -5,6 +5,7 @@
  */
 package myproperty.v1.db._entities.responses;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Objects;
 
@@ -22,6 +23,8 @@ public class PropertyResponse {
     private Integer accountId;
     private Integer userId;
     private String property_type;
+
+    private PropertySizeResponse[] propertySizeResponses;
 
     public PropertyResponse() {
     }
@@ -98,18 +101,27 @@ public class PropertyResponse {
         this.property_type = property_type;
     }
 
+    public PropertySizeResponse[] getPropertySizeResponses() {
+        return propertySizeResponses;
+    }
+
+    public void setPropertySizeResponses(PropertySizeResponse[] propertySizeResponses) {
+        this.propertySizeResponses = propertySizeResponses;
+    }
+
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 37 * hash + Objects.hashCode(this.id);
-        hash = 37 * hash + Objects.hashCode(this.dateCreated);
-        hash = 37 * hash + Objects.hashCode(this.dateUpdated);
-        hash = 37 * hash + Objects.hashCode(this.brief);
-        hash = 37 * hash + Objects.hashCode(this.status);
-        hash = 37 * hash + Objects.hashCode(this.details);
-        hash = 37 * hash + Objects.hashCode(this.accountId);
-        hash = 37 * hash + Objects.hashCode(this.userId);
-        hash = 37 * hash + Objects.hashCode(this.property_type);
+        hash = 43 * hash + Objects.hashCode(this.id);
+        hash = 43 * hash + Objects.hashCode(this.dateCreated);
+        hash = 43 * hash + Objects.hashCode(this.dateUpdated);
+        hash = 43 * hash + Objects.hashCode(this.brief);
+        hash = 43 * hash + Objects.hashCode(this.status);
+        hash = 43 * hash + Objects.hashCode(this.details);
+        hash = 43 * hash + Objects.hashCode(this.accountId);
+        hash = 43 * hash + Objects.hashCode(this.userId);
+        hash = 43 * hash + Objects.hashCode(this.property_type);
+        hash = 43 * hash + Arrays.deepHashCode(this.propertySizeResponses);
         return hash;
     }
 
@@ -152,6 +164,9 @@ public class PropertyResponse {
         if (!Objects.equals(this.userId, other.userId)) {
             return false;
         }
+        if (!Arrays.deepEquals(this.propertySizeResponses, other.propertySizeResponses)) {
+            return false;
+        }
         return true;
     }
 
@@ -169,6 +184,7 @@ public class PropertyResponse {
                 + ", accountId=" + accountId
                 + ", type=" + property_type
                 + ", userId=" + userId
+                + ", propertySize=" + propertySizeResponses
                 + "}";
     }
 

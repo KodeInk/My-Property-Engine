@@ -14,7 +14,6 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaQuery;
 import myproperty.v1.db.JpaController;
-import myproperty.v1.db._entities.Property;
 import myproperty.v1.db._entities.PropertySize;
 import myproperty.v1.helper.exception.InternalErrorException;
 
@@ -73,7 +72,7 @@ public class PropertySizeDaoImpl extends JpaController implements PropertySizeDa
             if (msg == null || msg.length() == 0) {
                 Integer id = propertySize.getId();
 
-                if (findProperty(id) == null) {
+                if (findPropertySize(id) == null) {
                     throw new Exception("The Property  with id " + id + " no longer exists.");
                 }
             }
@@ -87,7 +86,7 @@ public class PropertySizeDaoImpl extends JpaController implements PropertySizeDa
     }
 
     @Override
-    public PropertySize findProperty(Integer id) {
+    public PropertySize findPropertySize(Integer id) {
         EntityManager em = getEntityManager();
         try {
             return em.find(PropertySize.class, id);
@@ -97,16 +96,16 @@ public class PropertySizeDaoImpl extends JpaController implements PropertySizeDa
     }
 
     @Override
-    public List<Property> findPropertySizeEntities() {
+    public List<PropertySize> findPropertySizeEntities() {
         return findPropertySizeEntities(true, -1, -1);
     }
 
     @Override
-    public List<Property> findPropertySizeEntities(int maxResults, int firstResult) {
+    public List<PropertySize> findPropertySizeEntities(int maxResults, int firstResult) {
         return findPropertySizeEntities(false, maxResults, firstResult);
     }
 
-    private List<Property> findPropertySizeEntities(boolean all, int maxResults, int firstResult) {
+    private List<PropertySize> findPropertySizeEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
@@ -146,7 +145,7 @@ public class PropertySizeDaoImpl extends JpaController implements PropertySizeDa
 
     //TODO: Get Property Size  By Property Id 
     @Override
-    public List<Property> findPropertySizeEntitiesByPropertyId(Integer propertyId, int maxResults, int firstResult) {
+    public List<PropertySize> findPropertySizeEntitiesByPropertyId(Integer propertyId, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             Query query = em.createNamedQuery("PropertySize.findByPropertyId");

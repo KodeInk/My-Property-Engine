@@ -21,13 +21,13 @@ public interface PropertySizeDao {
 
     PropertySize edit(PropertySize propertySize) throws Exception;
 
-    PropertySize findProperty(Integer id);
+    PropertySize findPropertySize(Integer id);
 
-    List<Property> findPropertySizeEntities();
+    List<PropertySize> findPropertySizeEntities();
 
-    List<Property> findPropertySizeEntities(int maxResults, int firstResult);
+    List<PropertySize> findPropertySizeEntities(int maxResults, int firstResult);
 
     //TODO: Get Property Size  By Property Id
-    List<Property> findPropertySizeEntitiesByPropertyId(Integer propertyId, int maxResults, int firstResult);
+    List<PropertySize> findPropertySizeEntitiesByPropertyId(Integer propertyId, int maxResults, int firstResult);
 
 }

@@ -20,6 +20,7 @@ import myproperty.v1.db._entities.PropertySize;
 import myproperty.v1.db._entities.PropertyTypes;
 import myproperty.v1.db._entities.User;
 import myproperty.v1.db._entities.responses.PropertyResponse;
+import myproperty.v1.db._entities.responses.PropertySizeResponse;
 import myproperty.v1.helper.StatusEnum;
 import myproperty.v1.helper.exception.BadRequestException;
 import myproperty.v1.helper.exception.InternalErrorException;
@@ -129,13 +130,18 @@ public class PropertyService {
 
             PropertySize propertySize = new PropertySize();
 
+            Collection<PropertySize> collection = new ArrayList<>();
+
             for (_property_size _propertySize : propertySizes) {
                 propertySize.setProperty(property);
                 propertySize.setSize(_propertySize.getSize());
                 propertySize.setUnitMeasure(_propertySize.getUnitMeasure());
                 propertySizeDaoImpl.create(propertySize);
+                collection.add(propertySize);
                 propertySize = null;
             }
+
+            property.setPropertySizeCollection(collection);
             return propertyResponse(property);
 
         } else {
@@ -238,6 +244,28 @@ public class PropertyService {
         // concentrate on the property : 
         propertyResponse.setAccountId(property.getAccount().getId());
         propertyResponse.setUserId(property.getUser().getId());
+
+        PropertySizeResponse propertySizeResponse = new PropertySizeResponse();
+        PropertySizeResponse[] propertySizeResponses;
+        //new PropertySizeResponse[]()
+
+        Integer counter = 0;
+        if (!property.getPropertySizeCollection().isEmpty()) {
+            propertySizeResponses = new PropertySizeResponse[property.getPropertySizeCollection().size()];
+
+            for (PropertySize propertySize : property.getPropertySizeCollection()) {
+                propertySizeResponse.setId(propertySize.getId());
+                propertySizeResponse.setSize(propertySize.getSize());
+                propertySizeResponse.setUnitMeasure(propertySize.getUnitMeasure());
+                propertySizeResponses[counter] = propertySizeResponse;
+                counter++;
+            }
+            propertyResponse.setPropertySizeResponses(propertySizeResponses);
+        }
+
+        // property location: address system :: 
+
+        // property size ::
 
         return propertyResponse;
     }
