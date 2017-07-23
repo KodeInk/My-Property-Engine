@@ -10,7 +10,7 @@ import myproperty.v1.db._entities.PropertySize;
 import myproperty.v1.db._entities.PropertyTypes;
 import myproperty.v1.db._entities.User;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2017-07-20T02:07:08")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2017-07-23T22:47:46")
 @StaticMetamodel(Property.class)
 public class Property_ { 
 

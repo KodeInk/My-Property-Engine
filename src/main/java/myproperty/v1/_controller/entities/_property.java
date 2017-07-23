@@ -5,6 +5,7 @@
  */
 package myproperty.v1._controller.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Objects;
@@ -14,6 +15,7 @@ import myproperty.v1.helper.exception.BadRequestException;
  *
  * @author mover 7/6/2017
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class _property {
 
     private Integer id;

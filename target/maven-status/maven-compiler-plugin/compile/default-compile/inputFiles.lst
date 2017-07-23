@@ -1,3 +1,4 @@
+E:\codemovers\myproperty\src\main\java\myproperty\v1\_dao\interfaces\PropertyTypesDao.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\db\_entities\Address.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\_dao\AccountTypesDaonImpl.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\_controller\entities\_property_size.java
@@ -6,6 +7,7 @@ E:\codemovers\myproperty\src\main\java\myproperty\v1\db\_entities\Types.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\_services\AccountTypesService.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\db\_entities\Person.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\db\_entities\PropertyClassification.java
+E:\codemovers\myproperty\src\main\java\myproperty\v1\db\_entities\responses\PropertySizeResponse.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\_dao\AccountsDaoImpl.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\db\Entity.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\db\_entities\RolePermission.java
@@ -52,6 +54,7 @@ E:\codemovers\myproperty\src\main\java\myproperty\v1\helper\exception\Unauthoriz
 E:\codemovers\myproperty\src\main\java\myproperty\v1\db\_entities\Categories.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\db\_entities\Images.java
 E:\codemovers\myproperty\src\main\java\myproperty\AppJersey.java
+E:\codemovers\myproperty\src\main\java\myproperty\v1\_dao\PropertyTypesDaoImpl.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\helper\exception\InternalErrorException.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\_dao\interfaces\ContactsDAO.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\helper\utilities.java
@@ -78,6 +81,7 @@ E:\codemovers\myproperty\src\main\java\myproperty\v1\db\_entities\responses\Prop
 E:\codemovers\myproperty\src\main\java\myproperty\v1\_services\AccountPackageService.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\_dao\PropertyDaoImpl.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\helper\EmailValidator.java
+E:\codemovers\myproperty\src\main\java\myproperty\v1\_controller\entities\_property_type.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\_dao\PropertySizeDaoImpl.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\db\_entities\Rating.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\_services\PropertyService.java

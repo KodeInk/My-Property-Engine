@@ -26,6 +26,11 @@ public class PropertyResponse {
 
     private PropertySizeResponse[] propertySizeResponses;
 
+    private String location;
+    private String lat;
+    private String lng;
+
+
     public PropertyResponse() {
     }
 
@@ -109,19 +114,46 @@ public class PropertyResponse {
         this.propertySizeResponses = propertySizeResponses;
     }
 
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getLat() {
+        return lat;
+    }
+
+    public void setLat(String lat) {
+        this.lat = lat;
+    }
+
+    public String getLng() {
+        return lng;
+    }
+
+    public void setLng(String lng) {
+        this.lng = lng;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 43 * hash + Objects.hashCode(this.id);
-        hash = 43 * hash + Objects.hashCode(this.dateCreated);
-        hash = 43 * hash + Objects.hashCode(this.dateUpdated);
-        hash = 43 * hash + Objects.hashCode(this.brief);
-        hash = 43 * hash + Objects.hashCode(this.status);
-        hash = 43 * hash + Objects.hashCode(this.details);
-        hash = 43 * hash + Objects.hashCode(this.accountId);
-        hash = 43 * hash + Objects.hashCode(this.userId);
-        hash = 43 * hash + Objects.hashCode(this.property_type);
-        hash = 43 * hash + Arrays.deepHashCode(this.propertySizeResponses);
+        int hash = 7;
+        hash = 11 * hash + Objects.hashCode(this.id);
+        hash = 11 * hash + Objects.hashCode(this.dateCreated);
+        hash = 11 * hash + Objects.hashCode(this.dateUpdated);
+        hash = 11 * hash + Objects.hashCode(this.brief);
+        hash = 11 * hash + Objects.hashCode(this.status);
+        hash = 11 * hash + Objects.hashCode(this.details);
+        hash = 11 * hash + Objects.hashCode(this.accountId);
+        hash = 11 * hash + Objects.hashCode(this.userId);
+        hash = 11 * hash + Objects.hashCode(this.property_type);
+        hash = 11 * hash + Arrays.deepHashCode(this.propertySizeResponses);
+        hash = 11 * hash + Objects.hashCode(this.location);
+        hash = 11 * hash + Objects.hashCode(this.lat);
+        hash = 11 * hash + Objects.hashCode(this.lng);
         return hash;
     }
 
@@ -149,6 +181,15 @@ public class PropertyResponse {
         if (!Objects.equals(this.property_type, other.property_type)) {
             return false;
         }
+        if (!Objects.equals(this.location, other.location)) {
+            return false;
+        }
+        if (!Objects.equals(this.lat, other.lat)) {
+            return false;
+        }
+        if (!Objects.equals(this.lng, other.lng)) {
+            return false;
+        }
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
@@ -170,7 +211,6 @@ public class PropertyResponse {
         return true;
     }
 
-
     @Override
     public String toString() {
         return this.getClass().getCanonicalName()
@@ -185,6 +225,9 @@ public class PropertyResponse {
                 + ", type=" + property_type
                 + ", userId=" + userId
                 + ", propertySize=" + propertySizeResponses
+                + ", location=" + location
+                + ", lat=" + lat
+                + ", lng=" + lng
                 + "}";
     }
 

@@ -24,6 +24,7 @@ myproperty\v1\helper\exception\BadRequestException.class
 myproperty\v1\db\_entities\responses\AccountResponse.class
 myproperty\v1\db\_entities\Images_.class
 myproperty\v1\helper\exception\InternalErrorException.class
+myproperty\v1\db\_entities\responses\PropertySizeResponse.class
 myproperty\v1\helper\ContactTypes.class
 myproperty\v1\helper\utilities.class
 myproperty\v1\db\_entities\PropertySize.class
@@ -59,6 +60,7 @@ myproperty\v1\db\_entities\Categories.class
 myproperty\v1\db\_entities\Accounts.class
 myproperty\v1\_dao\PropertySizeDaoImpl.class
 myproperty\v1\_controller\PropertyController.class
+myproperty\v1\_controller\entities\_property_type.class
 myproperty\Application.class
 myproperty\v1\helper\exception\UnauthorizedException.class
 myproperty\v1\db\_entities\Rating_.class
@@ -80,6 +82,7 @@ myproperty\v1\_dao\interfaces\PropertyDao.class
 myproperty\v1\_services\Status.class
 myproperty\v1\_controller\entities\_property_size.class
 myproperty\v1\_dao\AccountTypesDaonImpl.class
+myproperty\v1\_dao\PropertyTypesDaoImpl.class
 myproperty\v1\db\_entities\RolePermission_.class
 myproperty\v1\db\_entities\responses\AccountsResponse.class
 myproperty\v1\_services\AddressService.class
@@ -104,5 +107,6 @@ myproperty\v1\db\_entities\PropertyClassification_.class
 myproperty\v1\db\_entities\Users.class
 myproperty\v1\_services\AccountTypesService.class
 myproperty\v1\_services\AccountService.class
+myproperty\v1\_dao\interfaces\PropertyTypesDao.class
 myproperty\v1\_controller\entities\_account.class
 myproperty\v1\_controller\ContactsController.class

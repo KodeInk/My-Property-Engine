@@ -7,20 +7,26 @@ package myproperty.v1._services;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
+import java.util.List;
 import java.util.logging.Logger;
+import javax.swing.text.Utilities;
 import myproperty.v1._controller.entities._property;
 import myproperty.v1._controller.entities._property_size;
 import myproperty.v1._dao.AccountsDaoImpl;
+import myproperty.v1._dao.AddressDaoImpl;
 import myproperty.v1._dao.PropertyDaoImpl;
 import myproperty.v1._dao.PropertySizeDaoImpl;
 import myproperty.v1._dao.PropertyTypesDaoImpl;
 import myproperty.v1.db._entities.Accounts;
+import myproperty.v1.db._entities.Address;
 import myproperty.v1.db._entities.Property;
 import myproperty.v1.db._entities.PropertySize;
 import myproperty.v1.db._entities.PropertyTypes;
 import myproperty.v1.db._entities.User;
 import myproperty.v1.db._entities.responses.PropertyResponse;
 import myproperty.v1.db._entities.responses.PropertySizeResponse;
+import myproperty.v1.helper.ParentTypes;
 import myproperty.v1.helper.StatusEnum;
 import myproperty.v1.helper.exception.BadRequestException;
 import myproperty.v1.helper.exception.InternalErrorException;
@@ -39,6 +45,8 @@ public class PropertyService {
 
     private final PropertySizeDaoImpl propertySizeDaoImpl = PropertySizeDaoImpl.getInstance();
     private final PropertyTypesDaoImpl propertyTypesDaoImpl = PropertyTypesDaoImpl.getInstance();
+    private final AddressDaoImpl addressDaoImpl = AddressDaoImpl.getInstance();
+
 
     private static final Logger LOG = Logger.getLogger(PropertyService.class.getName());
     private final AccountsDaoImpl accountsDaoImpl = AccountsDaoImpl.getInstance();
@@ -132,6 +140,7 @@ public class PropertyService {
 
             Collection<PropertySize> collection = new ArrayList<>();
 
+            // Create Property Size
             for (_property_size _propertySize : propertySizes) {
                 propertySize.setProperty(property);
                 propertySize.setSize(_propertySize.getSize());
@@ -140,8 +149,28 @@ public class PropertyService {
                 collection.add(propertySize);
                 propertySize = null;
             }
-
             property.setPropertySizeCollection(collection);
+
+            // Create Property Address ::
+            Address address = new Address();
+            if (!_property.getLocation().isEmpty() || _property.getLocation() != null) {
+                address.setLocation(_property.getLocation());
+            }
+
+            if ((!_property.getLat().isEmpty() || _property.getLat() != null) && (!_property.getLng().isEmpty() || _property.getLng() != null)) {
+                address.setLng(_property.getLng());
+                address.setLat(_property.getLat());
+            }
+
+            // Set Addresss to the System
+            address.setParentId(property.getId());
+            address.setParentType(ParentTypes.PROPERTY.toString());
+            address.setStatus(StatusEnum.ACTIVE.toString());
+            address.setCreatedby(property.getUser());
+            address.setDatecreated(new Date());
+            address = addressDaoImpl.create(address);
+
+
             return propertyResponse(property);
 
         } else {
@@ -263,7 +292,25 @@ public class PropertyService {
             propertyResponse.setPropertySizeResponses(propertySizeResponses);
         }
 
-        // property location: address system :: 
+        // property location: address system ::
+        try {
+        List<Address> addresses = addressDaoImpl.findAddresses(property.getId(), ParentTypes.PROPERTY.toString());
+
+            // Set Adress 
+        if (addresses.size() > 0) {
+            Address address = addresses.get(0);
+            propertyResponse.setLocation(address.getLocation());
+            propertyResponse.setLat(address.getLat());
+            propertyResponse.setLng(address.getLng());
+
+            }
+        } catch (Exception e) {
+            System.out.println("Was not Able to retrieve  Property Address");
+            propertyResponse.setLocation(null);
+            propertyResponse.setLat(null);
+            propertyResponse.setLng(null);
+        }
+
 
         // property size ::
 
