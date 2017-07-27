@@ -29,6 +29,27 @@ import java.util.Date;
     , @NamedQuery(name = "Roles.findByDateCreated", query = "SELECT r FROM Roles r WHERE r.dateCreated = :dateCreated")})
 public class Roles implements Serializable {
 
+    @Size(max = 100)
+    @Column(name = "name")
+    private String name;
+    @Size(max = 50)
+    @Column(name = "code")
+    private String code;
+    @Size(max = 255)
+    @Column(name = "brief")
+    private String brief;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "created_by")
+    private int createdBy;
+    @Column(name = "date_updated")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dateUpdated;
+    @Column(name = "updated_by")
+    private Integer updatedBy;
+    @OneToMany(mappedBy = "roleId")
+    private Collection<PermissionRole> permissionRoleCollection;
+
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -137,5 +158,62 @@ public class Roles implements Serializable {
     @Override
     public String toString() {
         return "com.awamo.microservice.mifos.dataconnector.database.controllers.Roles[ id=" + id + " ]";
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getBrief() {
+        return brief;
+    }
+
+    public void setBrief(String brief) {
+        this.brief = brief;
+    }
+
+    public int getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(int createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public Date getDateUpdated() {
+        return dateUpdated;
+    }
+
+    public void setDateUpdated(Date dateUpdated) {
+        this.dateUpdated = dateUpdated;
+    }
+
+    public Integer getUpdatedBy() {
+        return updatedBy;
+    }
+
+    public void setUpdatedBy(Integer updatedBy) {
+        this.updatedBy = updatedBy;
+    }
+
+    @XmlTransient
+    public Collection<PermissionRole> getPermissionRoleCollection() {
+        return permissionRoleCollection;
+    }
+
+    public void setPermissionRoleCollection(Collection<PermissionRole> permissionRoleCollection) {
+        this.permissionRoleCollection = permissionRoleCollection;
     }
 }

@@ -10,6 +10,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
+import java.util.Collection;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -27,6 +29,14 @@ import java.io.Serializable;
         , @NamedQuery(name = "Permissions.findByStatus", query = "SELECT p FROM Permissions p WHERE p.status = :status")})
 
 public class Permissions implements Serializable {
+
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 100)
+    @Column(name = "name")
+    private String name;
+    @OneToMany(mappedBy = "permissionId")
+    private Collection<PermissionRole> permissionRoleCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -124,6 +134,23 @@ public class Permissions implements Serializable {
     @Override
     public String toString() {
         return "com.awamo.microservice.mifos.dataconnector.database.controllers.Permissions[ id=" + id + " ]";
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @XmlTransient
+    public Collection<PermissionRole> getPermissionRoleCollection() {
+        return permissionRoleCollection;
+    }
+
+    public void setPermissionRoleCollection(Collection<PermissionRole> permissionRoleCollection) {
+        this.permissionRoleCollection = permissionRoleCollection;
     }
 
 }
