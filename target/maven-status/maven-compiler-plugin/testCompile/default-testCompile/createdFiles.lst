@@ -1,0 +1,4 @@
+RootSuite.class
+myproperty/v1/_controller/PersonControllerIT.class
+myproperty/v1/_controller/AccountControllerIT.class
+myproperty/v1/_controller/PropertyControllerIT.class

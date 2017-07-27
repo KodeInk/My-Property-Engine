@@ -34,6 +34,7 @@ import myproperty.v1.helper.ParentTypes;
 import myproperty.v1.helper.StatusEnum;
 import myproperty.v1.helper.exception.BadRequestException;
 import myproperty.v1.helper.exception.ForbiddenException;
+import static myproperty.v1.helper.utilities.encryptPassword_md5;
 import static myproperty.v1.helper.utilities.getCurrentDate;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -256,34 +257,35 @@ public class AccountService {
         User user = null;
         AuthenticationResponse authenticationResponse = new AuthenticationResponse();
         authenticationResponse.setIsLoggedIn(false);
-        try {
+        {
             {
                 if (login.getPassword() == null || login.getUsername() == null) {
                     throw new BadRequestException("Fill in Blanks");
                 }
             }
 
-            //TODO: user service, check to see that user exists in the Database:
             {
-                String uername = login.getUsername();
-                String password = login.getPassword();
+                String _username = login.getUsername();
+                String _password = encryptPassword_md5(login.getPassword());
 
-                user = userDAOImpl.loginUser(uername, password);
+//                System.out.println("++++++++++++++++++++++++++++++++");
+//                System.out.println(_username);
+//                System.out.println(_password);
+//                System.out.println("++++++++++++++++++++++++++++++++");
+//
+
+                user = userDAOImpl.loginUser(_username, _password);
+                System.out.println(user);
 
                 if (user == null) {
-                    throw new BadRequestException("Username or Password is Invalid");
+                    throw new ForbiddenException("Username or Password is Invalid");
                 }
-                //TODO: Make Basic Authorization repsone, since this system is stateless ::
 
-                String authorization = convertToBasicAuth(uername, password);
+                String authorization = convertToBasicAuth(_username, _password);
                 authenticationResponse.setAuthorization(authorization);
                 authenticationResponse.setIsLoggedIn(true);
-                //missing is associating authentication response with permissions 
             }
 
-        } catch (Exception em) {
-            System.out.println("Something Went Wrong");
-            System.out.println(em.toString());
         }
 
         return authenticationResponse;
