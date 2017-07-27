@@ -6,6 +6,7 @@ import myproperty.v1._controller.entities._login;
 import myproperty.v1.db._entities.Accounts;
 import myproperty.v1.db._entities.responses.AccountsResponse;
 import myproperty.v1._services.AccountService;
+import myproperty.v1.db._entities.responses.AuthenticationResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -54,8 +55,8 @@ public class AccountController {
 
     //TODO: Handle Login 
     @RequestMapping(value = "/login", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public void loginAccount(@RequestBody _login login) throws Exception {
-        accountService.loginAccount(login);
+    public AuthenticationResponse loginAccount(@RequestBody _login login) throws Exception {
+        return accountService.loginAccount(login);
     }
 
 

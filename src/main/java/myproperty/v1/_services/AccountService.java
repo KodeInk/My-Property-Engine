@@ -255,6 +255,7 @@ public class AccountService {
         //TODO: check to see that the username and password are not empty
         User user = null;
         AuthenticationResponse authenticationResponse = new AuthenticationResponse();
+        authenticationResponse.setIsLoggedIn(false);
         try {
             {
                 if (login.getPassword() == null || login.getUsername() == null) {
@@ -276,6 +277,7 @@ public class AccountService {
 
                 String authorization = convertToBasicAuth(uername, password);
                 authenticationResponse.setAuthorization(authorization);
+                authenticationResponse.setIsLoggedIn(true);
                 //missing is associating authentication response with permissions 
             }
 
