@@ -12,6 +12,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import myproperty.v1._dao.AccountsDaoImpl;
 import myproperty.v1._controller.entities._account;
+import myproperty.v1._controller.entities._login;
+import myproperty.v1._dao.userDAOImpl;
 import myproperty.v1.db._entities.AccountTypes;
 import myproperty.v1.db._entities.Accounts;
 import myproperty.v1.db._entities.Contacts;
@@ -21,6 +23,7 @@ import myproperty.v1.db._entities.User;
 import myproperty.v1.db._entities.responses.AccountPackageResponse;
 import myproperty.v1.db._entities.responses.AccountTypesResponse;
 import myproperty.v1.db._entities.responses.AccountsResponse;
+import myproperty.v1.db._entities.responses.AuthenticationResponse;
 import myproperty.v1.db._entities.responses.ContactsResponse;
 import myproperty.v1.db._entities.responses.PersonResponse;
 import myproperty.v1.db._entities.responses.UserResponse;
@@ -32,6 +35,7 @@ import myproperty.v1.helper.StatusEnum;
 import myproperty.v1.helper.exception.BadRequestException;
 import myproperty.v1.helper.exception.ForbiddenException;
 import static myproperty.v1.helper.utilities.getCurrentDate;
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -55,6 +59,8 @@ public class AccountService {
     private Accounts accounts;
 
     private final AccountsDaoImpl accountsDaoImpl = AccountsDaoImpl.getInstance();
+    private final userDAOImpl userDAOImpl = myproperty.v1._dao.userDAOImpl.getInstance();
+
 
     private static final Logger LOG = Logger.getLogger(AccountService.class.getName());
 
@@ -243,6 +249,51 @@ public class AccountService {
         });
 
         return accountsResponses;
+    }
+
+    public AuthenticationResponse loginAccount(_login login) {
+        //TODO: check to see that the username and password are not empty
+        User user = null;
+        AuthenticationResponse authenticationResponse = new AuthenticationResponse();
+        try {
+            {
+                if (login.getPassword() == null || login.getUsername() == null) {
+                    throw new BadRequestException("Fill in Blanks");
+                }
+            }
+
+            //TODO: user service, check to see that user exists in the Database:
+            {
+                String uername = login.getUsername();
+                String password = login.getPassword();
+
+                user = userDAOImpl.loginUser(uername, password);
+
+                if (user == null) {
+                    throw new BadRequestException("Username or Password is Invalid");
+                }
+                //TODO: Make Basic Authorization repsone, since this system is stateless ::
+
+                String authorization = convertToBasicAuth(uername, password);
+                authenticationResponse.setAuthorization(authorization);
+                //missing is associating authentication response with permissions 
+            }
+
+        } catch (Exception em) {
+            System.out.println("Something Went Wrong");
+            System.out.println(em.toString());
+        }
+
+        return authenticationResponse;
+    }
+
+    private String convertToBasicAuth(String username, String Password) {
+        String authString = username + ":" + password;
+        byte[] authEncBytes = Base64.encodeBase64(authString.getBytes());
+        String authStringEnc = new String(authEncBytes);
+        return ("Basic " + authStringEnc);
+        //  String possibleAuthenticationKey = "Basic " + Base64.getEncoder().encodeToString(usernamePassowrd.trim().getBytes());
+
     }
 
     public AccountsResponse getAccountsResponse(Accounts accounts) {

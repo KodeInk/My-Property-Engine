@@ -150,23 +150,42 @@ public class userDAOImpl extends JpaController implements userDAO {
 
     @Override
     public User CheckPassword(User user) throws Exception {
-
         User user1 = null;
         EntityManager em = getEntityManager();
-        Query query = em.createNamedQuery("User.checkPassword");
-        query.setParameter("userName",user.getUsername());
-        query.setParameter("userPassword",user.getPassword());
-
-
         try {
+            Query query = em.createNamedQuery("User.checkPassword");
+            query.setParameter("userName", user.getUsername());
+            query.setParameter("userPassword", user.getPassword());
             List<User> users = query.getResultList();
-
-            user1 = users.get(0);
+            if (users.size() > 0) {
+                user1 = users.get(0);
+            }
         } finally {
             em.close();
         }
 
         return user1;
+    }
+
+    public User loginUser(String username, String password) {
+        User user = null;
+        EntityManager em = getEntityManager();
+        try {
+
+            Query query = em.createNamedQuery("User.findUserByUsernameAndPassword");
+            query.setParameter("username", username);
+            query.setParameter("password", password);
+            List<User> users = query.getResultList();
+            if (users.size() > 0) {
+                user = users.get(0);
+            }
+
+        } finally {
+            em.close();
+        }
+
+        return user;
+
     }
 
     @Override
