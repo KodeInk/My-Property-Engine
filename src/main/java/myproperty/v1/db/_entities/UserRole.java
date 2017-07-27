@@ -14,7 +14,7 @@ import java.util.Date;
 
 /**
  *
- * @author Manny
+ * @author mover 7/27/2017
  */
 @Entity
 @Table(name = "user_role")
