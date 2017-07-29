@@ -3,31 +3,32 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package myproperty.v1.helper;
+package myproperty.v1.helper.enums;
 
 /**
  *
- * @author mover 6/17/2017
+ * @author Mover 6/7/2017
  */
-public enum AccountPackage {
-    BASIC, GOLD, PREMIUM;
+public enum ParentTypes {
+    PERSON, COMPANY, PROPERTY, OTHERS;
 
-    public static final AccountPackage fromString(String text) {
-        AccountPackage returnValue = BASIC;
+    public static final ParentTypes fromString(String text) {
+        ParentTypes returnValue = OTHERS;
 
         try {
             if (text != null) {
-                returnValue = AccountPackage.valueOf(text.toUpperCase());
+                returnValue = ParentTypes.valueOf(text.toUpperCase());
             }
         } catch (IllegalArgumentException e) {
 
-            returnValue = BASIC;
+            returnValue = OTHERS;
         }
 
         return returnValue;
     }
 
-    public static final AccountPackage fromObject(Object text) {
+    public static final ParentTypes fromObject(Object text) {
         return fromString(text.toString());
     }
+
 }

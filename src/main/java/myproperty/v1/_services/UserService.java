@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import myproperty.v1.db._entities.responses.UserResponse;
-import myproperty.v1.helper.StatusEnum;
+import myproperty.v1.helper.enums.StatusEnum;
 import myproperty.v1.helper.exception.BadRequestException;
 import static myproperty.v1.helper.utilities.*;
 

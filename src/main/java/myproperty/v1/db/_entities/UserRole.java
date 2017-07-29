@@ -43,10 +43,10 @@ public class UserRole implements Serializable {
     private Date dateCreated;
     @JoinColumn(name = "role_id", referencedColumnName = "id")
     @ManyToOne
-    private Roles roleId;
+    private Roles role;
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     @ManyToOne
-    private User userId;
+    private User user;
 
     public UserRole() {
     }
@@ -92,20 +92,20 @@ public class UserRole implements Serializable {
         this.dateCreated = dateCreated;
     }
 
-    public Roles getRoleId() {
-        return roleId;
+    public Roles getRole() {
+        return role;
     }
 
-    public void setRoleId(Roles roleId) {
-        this.roleId = roleId;
+    public void setRole(Roles role) {
+        this.role = role;
     }
 
-    public User getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(User userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override

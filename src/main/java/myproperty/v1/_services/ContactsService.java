@@ -12,8 +12,8 @@ import myproperty.v1._dao.ContactsDAOImpl;
 import myproperty.v1.db._entities.Contacts;
 import myproperty.v1.db._entities.responses.ContactsResponse;
 import myproperty.v1.db._entities.responses.UserResponse;
-import myproperty.v1.helper.ParentTypes;
-import myproperty.v1.helper.StatusEnum;
+import myproperty.v1.helper.enums.ParentTypes;
+import myproperty.v1.helper.enums.StatusEnum;
 import static myproperty.v1.helper.utilities.getCurrentDate;
 import org.springframework.stereotype.Service;
 

@@ -20,6 +20,7 @@ import myproperty.v1.db._entities.Contacts;
 import myproperty.v1.db._entities.Packages;
 import myproperty.v1.db._entities.Person;
 import myproperty.v1.db._entities.User;
+import myproperty.v1.db._entities.UserRole;
 import myproperty.v1.db._entities.responses.AccountPackageResponse;
 import myproperty.v1.db._entities.responses.AccountTypesResponse;
 import myproperty.v1.db._entities.responses.AccountsResponse;
@@ -27,11 +28,11 @@ import myproperty.v1.db._entities.responses.AuthenticationResponse;
 import myproperty.v1.db._entities.responses.ContactsResponse;
 import myproperty.v1.db._entities.responses.PersonResponse;
 import myproperty.v1.db._entities.responses.UserResponse;
-import myproperty.v1.helper.AccountPackage;
-import myproperty.v1.helper.AccountType;
-import myproperty.v1.helper.ContactTypes;
-import myproperty.v1.helper.ParentTypes;
-import myproperty.v1.helper.StatusEnum;
+import myproperty.v1.helper.enums.AccountPackage;
+import myproperty.v1.helper.enums.AccountType;
+import myproperty.v1.helper.enums.ContactTypes;
+import myproperty.v1.helper.enums.ParentTypes;
+import myproperty.v1.helper.enums.StatusEnum;
 import myproperty.v1.helper.exception.BadRequestException;
 import myproperty.v1.helper.exception.ForbiddenException;
 import static myproperty.v1.helper.utilities.encryptPassword_md5;
@@ -109,7 +110,10 @@ public class AccountService {
             user.setStatus(StatusEnum.PENDING.toString());
             userResponse = userService.createUser(user);
             user.setId(userResponse.getId());
+            UserRole role = new UserRole();
+            role.setUser(user);
 
+            //TODO: Setup the User Roles which is administrator ::
         }
 
         //STEP TWO: Create Empty Person [Profile]:
@@ -136,6 +140,7 @@ public class AccountService {
             }
         }
         //STEP FOUR : Create _account data
+        //TODO:
         {
             // Check to see that User is Created, Profile is Created, and Contact Information is Created for this User
             //Checker 
@@ -172,8 +177,10 @@ public class AccountService {
                 accounts = accountsDaoImpl.create(accounts);
 
 
+
             }
         }
+        //STEP FIVE: ADD DEFAULT ROLE
 
         return getAccountsResponse(accounts);
         //TODO: Send Email to the User and Notify about _account Creation ::

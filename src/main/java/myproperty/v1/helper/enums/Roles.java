@@ -3,32 +3,34 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package myproperty.v1.helper;
+package myproperty.v1.helper.enums;
 
 /**
  *
- * @author Mover 5/21/2017
+ * @author mover 7/20/2017
+ *
+ *
  */
-public enum StatusEnum {
+public enum Roles {
 
-    ACTIVE, DEACTIVATED, PENDING, ARCHIVED;
+    SUPERADMIN, ADMINISTRATOR;
 
-    public static final StatusEnum fromString(String text) {
-        StatusEnum returnValue = PENDING;
+    public static final Roles fromString(String text) {
+        Roles returnValue = SUPERADMIN;
 
         try {
             if (text != null) {
-                returnValue = StatusEnum.valueOf(text.toUpperCase());
+                returnValue = Roles.valueOf(text.toUpperCase());
             }
         } catch (IllegalArgumentException e) {
 
-            returnValue = PENDING;
+            returnValue = SUPERADMIN;
         }
 
         return returnValue;
     }
 
-    public static final StatusEnum fromObject(Object text) {
+    public static final Roles fromObject(Object text) {
         return fromString(text.toString());
     }
 

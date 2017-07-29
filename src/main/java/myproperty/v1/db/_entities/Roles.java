@@ -68,7 +68,7 @@ public class Roles implements Serializable {
     @Column(name = "date_created")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateCreated;
-    @OneToMany(mappedBy = "roleId")
+    @OneToMany(mappedBy = "role")
     private Collection<UserRole> userRoleCollection;
     @JoinColumn(name = "author_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
