@@ -11,16 +11,16 @@ package myproperty.v1.helper.enums;
  *
  *
  */
-public enum Roles {
+public enum RolesEnum {
 
     SUPERADMIN, ADMINISTRATOR;
 
-    public static final Roles fromString(String text) {
-        Roles returnValue = SUPERADMIN;
+    public static final RolesEnum fromString(String text) {
+        RolesEnum returnValue = SUPERADMIN;
 
         try {
             if (text != null) {
-                returnValue = Roles.valueOf(text.toUpperCase());
+                returnValue = RolesEnum.valueOf(text.toUpperCase());
             }
         } catch (IllegalArgumentException e) {
 
@@ -30,7 +30,7 @@ public enum Roles {
         return returnValue;
     }
 
-    public static final Roles fromObject(Object text) {
+    public static final RolesEnum fromObject(Object text) {
         return fromString(text.toString());
     }
 

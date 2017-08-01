@@ -1,6 +1,6 @@
 package myproperty.v1._services;
 import java.util.ArrayList;
-import myproperty.v1._dao.userDAOImpl;
+import myproperty.v1._dao.UserDAOImpl;
 import myproperty.v1.db._entities.User;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +21,7 @@ import static myproperty.v1.helper.utilities.*;
 @Service
 public class UserService {
 
-    private final userDAOImpl userDAOImpl = myproperty.v1._dao.userDAOImpl.getInstance();
+    private final UserDAOImpl userDAOImpl = myproperty.v1._dao.UserDAOImpl.getInstance();
     private static final Logger LOG = Logger.getLogger(UserService.class.getName());
 
 

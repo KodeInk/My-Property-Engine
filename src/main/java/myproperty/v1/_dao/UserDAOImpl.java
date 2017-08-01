@@ -11,6 +11,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import myproperty.v1.db._entities.Roles;
 import myproperty.v1.helper.enums.ContactTypes;
 import myproperty.v1.helper.exception.InternalErrorException;
 
@@ -19,20 +20,18 @@ import myproperty.v1.helper.exception.InternalErrorException;
  */
 
 
-public class userDAOImpl extends JpaController implements userDAO {
-    private static final Logger LOG = Logger.getLogger(userDAOImpl.class.getName());
+public class UserDAOImpl extends JpaController implements userDAO {
+    private static final Logger LOG = Logger.getLogger(UserDAOImpl.class.getName());
+    private static UserDAOImpl instance = null;
 
-    private static userDAOImpl instance = null;
-
-    public static userDAOImpl getInstance() {
-        if(instance == null){
-            instance =  new userDAOImpl();
+    public static UserDAOImpl getInstance() {
+        if (instance == null) {
+            instance = new UserDAOImpl();
         }
         return instance;
     }
 
-
-    public userDAOImpl() {
+    public UserDAOImpl() {
         super(User.class);
     }
 

@@ -13,12 +13,14 @@ import java.util.logging.Logger;
 import myproperty.v1._dao.AccountsDaoImpl;
 import myproperty.v1._controller.entities._account;
 import myproperty.v1._controller.entities._login;
-import myproperty.v1._dao.userDAOImpl;
+import myproperty.v1._dao.RolesDaoImpl;
+import myproperty.v1._dao.UserDAOImpl;
 import myproperty.v1.db._entities.AccountTypes;
 import myproperty.v1.db._entities.Accounts;
 import myproperty.v1.db._entities.Contacts;
 import myproperty.v1.db._entities.Packages;
 import myproperty.v1.db._entities.Person;
+import myproperty.v1.db._entities.Roles;
 import myproperty.v1.db._entities.User;
 import myproperty.v1.db._entities.UserRole;
 import myproperty.v1.db._entities.responses.AccountPackageResponse;
@@ -32,6 +34,7 @@ import myproperty.v1.helper.enums.AccountPackage;
 import myproperty.v1.helper.enums.AccountType;
 import myproperty.v1.helper.enums.ContactTypes;
 import myproperty.v1.helper.enums.ParentTypes;
+import myproperty.v1.helper.enums.RolesEnum;
 import myproperty.v1.helper.enums.StatusEnum;
 import myproperty.v1.helper.exception.BadRequestException;
 import myproperty.v1.helper.exception.ForbiddenException;
@@ -61,7 +64,8 @@ public class AccountService {
     private Accounts accounts;
 
     private final AccountsDaoImpl accountsDaoImpl = AccountsDaoImpl.getInstance();
-    private final userDAOImpl userDAOImpl = myproperty.v1._dao.userDAOImpl.getInstance();
+    private final UserDAOImpl userDAOImpl = UserDAOImpl.getInstance();
+    private final RolesDaoImpl rolesDaoImpl = RolesDaoImpl.getInstance();
 
 
     private static final Logger LOG = Logger.getLogger(AccountService.class.getName());
@@ -110,8 +114,12 @@ public class AccountService {
             user.setStatus(StatusEnum.PENDING.toString());
             userResponse = userService.createUser(user);
             user.setId(userResponse.getId());
-            UserRole role = new UserRole();
-            role.setUser(user);
+
+            Roles roles = rolesDaoImpl.findRoleByName(RolesEnum.ADMINISTRATOR.toString());
+            // Get Role By Name
+            UserRole userrole = new UserRole();
+            userrole.setUser(user);
+            userrole.setRole(roles);
 
             //TODO: Setup the User Roles which is administrator ::
         }

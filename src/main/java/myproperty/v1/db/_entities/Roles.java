@@ -25,6 +25,7 @@ import java.util.Date;
     @NamedQuery(name = "Roles.findAll", query = "SELECT r FROM Roles r")
     , @NamedQuery(name = "Roles.findById", query = "SELECT r FROM Roles r WHERE r.id = :id")
     , @NamedQuery(name = "Roles.findByRole", query = "SELECT r FROM Roles r WHERE r.role = :role")
+    , @NamedQuery(name = "Roles.findByName", query = "SELECT r FROM Roles r WHERE r.name = :name")
     , @NamedQuery(name = "Roles.findByStatus", query = "SELECT r FROM Roles r WHERE r.status = :status")
     , @NamedQuery(name = "Roles.findByDateCreated", query = "SELECT r FROM Roles r WHERE r.dateCreated = :dateCreated")})
 public class Roles implements Serializable {
