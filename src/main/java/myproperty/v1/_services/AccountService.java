@@ -15,6 +15,7 @@ import myproperty.v1._controller.entities._account;
 import myproperty.v1._controller.entities._login;
 import myproperty.v1._dao.RolesDaoImpl;
 import myproperty.v1._dao.UserDAOImpl;
+import myproperty.v1._dao.UserRoleDaoImpl;
 import myproperty.v1.db._entities.AccountTypes;
 import myproperty.v1.db._entities.Accounts;
 import myproperty.v1.db._entities.Contacts;
@@ -66,6 +67,7 @@ public class AccountService {
     private final AccountsDaoImpl accountsDaoImpl = AccountsDaoImpl.getInstance();
     private final UserDAOImpl userDAOImpl = UserDAOImpl.getInstance();
     private final RolesDaoImpl rolesDaoImpl = RolesDaoImpl.getInstance();
+    private final UserRoleDaoImpl userRoleDaoImpl = UserRoleDaoImpl.getInstance();
 
 
     private static final Logger LOG = Logger.getLogger(AccountService.class.getName());
@@ -120,7 +122,7 @@ public class AccountService {
             UserRole userrole = new UserRole();
             userrole.setUser(user);
             userrole.setRole(roles);
-
+            userRoleDaoImpl.create(userrole);
             //TODO: Setup the User Roles which is administrator ::
         }
 

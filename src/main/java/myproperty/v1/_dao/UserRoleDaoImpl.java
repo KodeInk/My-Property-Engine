@@ -5,6 +5,7 @@
  */
 package myproperty.v1._dao;
 
+import myproperty.v1._dao.interfaces.UserRoleDao;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,14 +16,13 @@ import javax.persistence.criteria.CriteriaQuery;
 import myproperty.v1.db.JpaController;
 import myproperty.v1.db._entities.User;
 import myproperty.v1.db._entities.UserRole;
-import myproperty.v1.helper.enums.ContactTypes;
 import myproperty.v1.helper.exception.InternalErrorException;
 
 /**
  *
  * @author mover 8/5/2017
  */
-public class UserRoleDaoImpl extends JpaController {
+public class UserRoleDaoImpl extends JpaController implements UserRoleDao {
     private static final Logger LOG = Logger.getLogger(UserRoleDaoImpl.class.getName());
     private static UserRoleDaoImpl instance = null;
 
@@ -37,6 +37,7 @@ public class UserRoleDaoImpl extends JpaController {
         super(UserRole.class);
     }
 
+    @Override
     public UserRole create(UserRole userRole) {
         EntityManager em = null;
         try {
@@ -55,6 +56,7 @@ public class UserRoleDaoImpl extends JpaController {
         return userRole;
     }
 
+    @Override
     public UserRole edit(UserRole userRole) throws Exception {
         EntityManager em = null;
         try {
@@ -81,6 +83,7 @@ public class UserRoleDaoImpl extends JpaController {
 
     }
 
+    @Override
     public UserRole findUserRole(Integer id) {
         EntityManager em = getEntityManager();
         try {
@@ -90,10 +93,12 @@ public class UserRoleDaoImpl extends JpaController {
         }
     }
 
+    @Override
     public List<UserRole> findUserRoleEntities() {
         return findUserRoleEntities(true, -1, -1);
     }
 
+    @Override
     public List<UserRole> findUserRoleEntities(int maxResults, int firstResult) {
         return findUserRoleEntities(false, maxResults, firstResult);
     }
@@ -114,6 +119,7 @@ public class UserRoleDaoImpl extends JpaController {
         }
     }
 
+    @Override
     public void destroy(Integer id) throws Exception {
         EntityManager em = null;
         try {
