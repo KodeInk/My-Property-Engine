@@ -44,9 +44,6 @@ import javax.xml.bind.annotation.XmlTransient;
 })
 public class User implements Serializable {
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    private Collection<UserRole> userRoleCollection;
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -150,16 +147,8 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return this.getClass().getCanonicalName() + "{ id=" + id + " {";
+        return this.getClass().getCanonicalName() + "{ id=" + id + " }";
     }
 
-    @XmlTransient
-    public Collection<UserRole> getUserRoleCollection() {
-        return userRoleCollection;
-    }
-
-    public void setUserRoleCollection(Collection<UserRole> userRoleCollection) {
-        this.userRoleCollection = userRoleCollection;
-    }
 
 }

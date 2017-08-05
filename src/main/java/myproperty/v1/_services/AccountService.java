@@ -94,7 +94,6 @@ public class AccountService {
         names = account.getNames();
         email_address = account.getEmail_address();
         password = account.getPassword();
-
         Person person = new Person();
 
 
@@ -117,13 +116,17 @@ public class AccountService {
             userResponse = userService.createUser(user);
             user.setId(userResponse.getId());
 
-            Roles roles = rolesDaoImpl.findRoleByName(RolesEnum.ADMINISTRATOR.toString());
-            // Get Role By Name
-            UserRole userrole = new UserRole();
-            userrole.setUser(user);
-            userrole.setRole(roles);
-            userRoleDaoImpl.create(userrole);
+//            Roles roles = rolesDaoImpl.findRoleByName("" + RolesEnum.ADMINISTRATOR);
+//            // Get Role By Name
+//            UserRole userrole = new UserRole();
+
             //TODO: Setup the User Roles which is administrator ::
+            {
+//                userrole.setUser(user);
+//                userrole.setRole(roles);
+//                userRoleDaoImpl.create(userrole);
+            }
+
         }
 
         //STEP TWO: Create Empty Person [Profile]:
@@ -190,7 +193,6 @@ public class AccountService {
 
             }
         }
-        //STEP FIVE: ADD DEFAULT ROLE
 
         return getAccountsResponse(accounts);
         //TODO: Send Email to the User and Notify about _account Creation ::

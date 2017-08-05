@@ -6,12 +6,9 @@
 package myproperty.v1.db._entities;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
-import java.util.Collection;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -30,14 +27,6 @@ import javax.xml.bind.annotation.XmlTransient;
 
 public class Permissions implements Serializable {
 
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 100)
-    @Column(name = "name")
-    private String name;
-    @OneToMany(mappedBy = "permissionId")
-    private Collection<PermissionRole> permissionRoleCollection;
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -54,10 +43,17 @@ public class Permissions implements Serializable {
     @Column(name = "display_name")
     private String displayName;
     @Basic(optional = false)
-    @NotNull
+
     @Size(min = 1, max = 8)
     @Column(name = "status")
     private String status;
+
+    @Basic(optional = false)
+
+    @Size(min = 1, max = 100)
+    @Column(name = "name")
+    private String name;
+
 
     public Permissions() {
     }
@@ -131,11 +127,6 @@ public class Permissions implements Serializable {
         return true;
     }
 
-    @Override
-    public String toString() {
-        return "com.awamo.microservice.mifos.dataconnector.database.controllers.Permissions[ id=" + id + " ]";
-    }
-
     public String getName() {
         return name;
     }
@@ -144,13 +135,13 @@ public class Permissions implements Serializable {
         this.name = name;
     }
 
-    @XmlTransient
-    public Collection<PermissionRole> getPermissionRoleCollection() {
-        return permissionRoleCollection;
-    }
 
-    public void setPermissionRoleCollection(Collection<PermissionRole> permissionRoleCollection) {
-        this.permissionRoleCollection = permissionRoleCollection;
+    @Override
+    public String toString() {
+        return this.getClass().getCanonicalName()
+                + "{ "
+                + "id=" + id
+                + " }";
     }
 
 }
