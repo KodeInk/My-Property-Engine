@@ -156,6 +156,8 @@ public class RolesDaoImpl extends JpaController implements RolesDao {
             if (roles.size() > 0) {
                 _roles = roles.get(0);
             }
+        } catch (Exception e) {
+            throw e;
         } finally {
             em.close();
         }

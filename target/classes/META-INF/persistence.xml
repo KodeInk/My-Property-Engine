@@ -19,7 +19,7 @@
     <class>myproperty._entities.SubscriptionPermission</class>
     <class>myproperty._entities.Reviews</class>-->
     <!--    <class>myproperty._entities.User</class>-->
-    <class>myproperty.v1._entities.Contacts_1</class>
+<!--    <class>myproperty.v1._entities.Contacts_1</class>-->
     <class>myproperty.v1.db._entities.Address</class>
     <class>myproperty.v1.db._entities.Packages</class>
     <class>myproperty.v1.db._entities.Contacts</class>
@@ -32,6 +32,9 @@
     <class>myproperty.v1.db._entities.Property</class>
     <class>myproperty.v1.db._entities.Accounts</class>
     <class>myproperty.v1.db._entities.PermissionRole</class>
+    <class>myproperty.v1.db._entities.Roles</class>
+    <class>myproperty.v1.db._entities.UserRole</class>
+
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/property"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

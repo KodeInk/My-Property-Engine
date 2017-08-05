@@ -116,17 +116,27 @@ public class AccountService {
             userResponse = userService.createUser(user);
             user.setId(userResponse.getId());
 
-//            Roles roles = rolesDaoImpl.findRoleByName("" + RolesEnum.ADMINISTRATOR);
-//            // Get Role By Name
-//            UserRole userrole = new UserRole();
+        }
 
-            //TODO: Setup the User Roles which is administrator ::
-            {
-//                userrole.setUser(user);
-//                userrole.setRole(roles);
-//                userRoleDaoImpl.create(userrole);
+        {
+            try {
+                Roles roles = rolesDaoImpl.findRoleByName(RolesEnum.ADMINISTRATOR.toString());             // Get Role By Name
+                UserRole userrole = new UserRole();
+
+                //TODO: Setup the User Roles which is administrator ::
+                {
+                    userrole.setUser(user);
+                    userrole.setRole(roles);
+                    userrole.setStatus(StatusEnum.ACTIVE.toString());
+                    userRoleDaoImpl.create(userrole);
+                }
+
+            } catch (Exception em) {
+                System.out.println("USER ROLE SAVING");
+                System.out.println(em.toString());
+
+                throw em;
             }
-
         }
 
         //STEP TWO: Create Empty Person [Profile]:

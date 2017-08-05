@@ -10,7 +10,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  *
@@ -23,7 +22,8 @@ import java.util.Date;
     @NamedQuery(name = "UserRole.findAll", query = "SELECT u FROM UserRole u")
     , @NamedQuery(name = "UserRole.findById", query = "SELECT u FROM UserRole u WHERE u.id = :id")
     , @NamedQuery(name = "UserRole.findByStatus", query = "SELECT u FROM UserRole u WHERE u.status = :status")
-    , @NamedQuery(name = "UserRole.findByDateCreated", query = "SELECT u FROM UserRole u WHERE u.dateCreated = :dateCreated")})
+
+})
 public class UserRole implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -32,15 +32,15 @@ public class UserRole implements Serializable {
     @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
-    @NotNull
+
     @Size(min = 1, max = 8)
     @Column(name = "status")
     private String status;
-    @Column(name = "author_id")
-    private Integer authorId;
-    @Column(name = "date_created")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dateCreated;
+//    @Column(name = "author_id")
+//    private Integer authorId;
+//    @Column(name = "date_created")
+//    @Temporal(TemporalType.TIMESTAMP)
+//    private Date dateCreated;
     @JoinColumn(name = "role_id", referencedColumnName = "id")
     @ManyToOne
     private Roles role;
@@ -76,21 +76,21 @@ public class UserRole implements Serializable {
         this.status = status;
     }
 
-    public Integer getAuthorId() {
-        return authorId;
-    }
-
-    public void setAuthorId(Integer authorId) {
-        this.authorId = authorId;
-    }
-
-    public Date getDateCreated() {
-        return dateCreated;
-    }
-
-    public void setDateCreated(Date dateCreated) {
-        this.dateCreated = dateCreated;
-    }
+//    public Integer getAuthorId() {
+//        return authorId;
+//    }
+//
+//    public void setAuthorId(Integer authorId) {
+//        this.authorId = authorId;
+//    }
+//
+//    public Date getDateCreated() {
+//        return dateCreated;
+//    }
+//
+//    public void setDateCreated(Date dateCreated) {
+//        this.dateCreated = dateCreated;
+//    }
 
     public Roles getRole() {
         return role;
