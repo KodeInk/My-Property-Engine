@@ -22,8 +22,7 @@ import java.io.Serializable;
         , @NamedQuery(name = "Permissions.findById", query = "SELECT p FROM Permissions p WHERE p.id = :id")
         , @NamedQuery(name = "Permissions.findByGrouping", query = "SELECT p FROM Permissions p WHERE p.grouping = :grouping")
         , @NamedQuery(name = "Permissions.findByCode", query = "SELECT p FROM Permissions p WHERE p.code = :code")
-        , @NamedQuery(name = "Permissions.findByDisplayName", query = "SELECT p FROM Permissions p WHERE p.displayName = :displayName")
-        , @NamedQuery(name = "Permissions.findByStatus", query = "SELECT p FROM Permissions p WHERE p.status = :status")})
+    , @NamedQuery(name = "Permissions.findByStatus", query = "SELECT p FROM Permissions p WHERE p.status = :status")})
 
 public class Permissions implements Serializable {
 
@@ -39,11 +38,8 @@ public class Permissions implements Serializable {
     @Size(max = 45)
     @Column(name = "code")
     private String code;
-    @Size(max = 45)
-    @Column(name = "display_name")
-    private String displayName;
-    @Basic(optional = false)
 
+    @Basic(optional = false)
     @Size(min = 1, max = 8)
     @Column(name = "status")
     private String status;
@@ -89,14 +85,6 @@ public class Permissions implements Serializable {
 
     public void setCode(String code) {
         this.code = code;
-    }
-
-    public String getDisplayName() {
-        return displayName;
-    }
-
-    public void setDisplayName(String displayName) {
-        this.displayName = displayName;
     }
 
     public String getStatus() {
@@ -145,4 +133,3 @@ public class Permissions implements Serializable {
     }
 
 }
-

@@ -10,7 +10,9 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -59,6 +61,14 @@ public class Roles implements Serializable {
     @JoinColumn(name = "updated_by", referencedColumnName = "id")
     @ManyToOne
     private User updatedBy;
+
+    @JoinTable(name = "permission_role",
+            joinColumns = @JoinColumn(name = "role_id",
+                    referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "permission_id",
+                    referencedColumnName = "id")
+    )
+    private Permissions permissions;
 
     public Roles() {
     }
@@ -145,6 +155,13 @@ public class Roles implements Serializable {
         this.updatedBy = updatedBy;
     }
 
+    public Permissions getPermissions() {
+        return permissions;
+    }
+
+    public void setPermissions(Permissions permissions) {
+        this.permissions = permissions;
+    }
 
     @Override
     public int hashCode() {

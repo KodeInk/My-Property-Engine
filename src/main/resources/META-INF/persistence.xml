@@ -34,6 +34,7 @@
     <class>myproperty.v1.db._entities.PermissionRole</class>
     <class>myproperty.v1.db._entities.Roles</class>
     <class>myproperty.v1.db._entities.UserRole</class>
+    <class>myproperty.v1.db._entities.Permissions</class>
 
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/property"/>

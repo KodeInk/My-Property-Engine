@@ -204,7 +204,14 @@ public class AccountService {
             }
         }
 
-        return getAccountsResponse(accounts);
+        AuthenticationResponse authenticationResponse = new AuthenticationResponse();
+        authenticationResponse.setIsLoggedIn(true);
+        authenticationResponse.setAuthorization(encryptPassword_md5(user.getPassword()));
+        // Missing Functionality  Permissions Associated  
+        AccountsResponse accountsResponse = getAccountsResponse(accounts);
+        accountsResponse.setAuthentication(authenticationResponse);
+
+        return accountsResponse;
         //TODO: Send Email to the User and Notify about _account Creation ::
     }
 
