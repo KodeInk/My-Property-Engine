@@ -22,6 +22,7 @@ public class AccountsResponse {
     private Date dateUpdated;
     private Integer updatedBy;
     private UserResponse user;
+    private AuthenticationResponse authentication;
 
 
     public AccountsResponse() {
@@ -92,9 +93,17 @@ public class AccountsResponse {
         this.user = user;
     }
 
+    public AuthenticationResponse getAuthentication() {
+        return authentication;
+    }
+
+    public void setAuthentication(AuthenticationResponse authentication) {
+        this.authentication = authentication;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 7;
+        int hash = 5;
         hash = 67 * hash + Objects.hashCode(this.id);
         hash = 67 * hash + this.parentId;
         hash = 67 * hash + Objects.hashCode(this.status);
@@ -103,6 +112,7 @@ public class AccountsResponse {
         hash = 67 * hash + Objects.hashCode(this.dateUpdated);
         hash = 67 * hash + Objects.hashCode(this.updatedBy);
         hash = 67 * hash + Objects.hashCode(this.user);
+        hash = 67 * hash + Objects.hashCode(this.authentication);
         return hash;
     }
 
@@ -139,8 +149,15 @@ public class AccountsResponse {
         if (!Objects.equals(this.updatedBy, other.updatedBy)) {
             return false;
         }
-        return Objects.equals(this.user, other.user);
+        if (!Objects.equals(this.user, other.user)) {
+            return false;
+        }
+        if (!Objects.equals(this.authentication, other.authentication)) {
+            return false;
+        }
+        return true;
     }
+
 
     @Override
     public String toString() {
@@ -154,6 +171,7 @@ public class AccountsResponse {
                 + ", dateUpdated=" + dateUpdated
                 + ", updatedBy=" + updatedBy
                 + ", accountOwner=" + user
+                + ", authentication=" + authentication
                 + "}";
     }
 
