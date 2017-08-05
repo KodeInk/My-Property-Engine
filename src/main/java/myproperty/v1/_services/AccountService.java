@@ -20,6 +20,7 @@ import myproperty.v1.db._entities.AccountTypes;
 import myproperty.v1.db._entities.Accounts;
 import myproperty.v1.db._entities.Contacts;
 import myproperty.v1.db._entities.Packages;
+import myproperty.v1.db._entities.Permissions;
 import myproperty.v1.db._entities.Person;
 import myproperty.v1.db._entities.Roles;
 import myproperty.v1.db._entities.User;
@@ -63,6 +64,8 @@ public class AccountService {
     private User user;
     private Contacts contacts;
     private Accounts accounts;
+    private Roles roles;
+    private UserRole userrole;
 
     private final AccountsDaoImpl accountsDaoImpl = AccountsDaoImpl.getInstance();
     private final UserDAOImpl userDAOImpl = UserDAOImpl.getInstance();
@@ -120,8 +123,8 @@ public class AccountService {
 
         {
             try {
-                Roles roles = rolesDaoImpl.findRoleByName(RolesEnum.ADMINISTRATOR.toString());             // Get Role By Name
-                UserRole userrole = new UserRole();
+                roles = rolesDaoImpl.findRoleByName(RolesEnum.ADMINISTRATOR.toString());             // Get Role By Name
+                userrole = new UserRole();
 
                 //TODO: Setup the User Roles which is administrator ::
                 {
@@ -211,6 +214,7 @@ public class AccountService {
         AccountsResponse accountsResponse = getAccountsResponse(accounts);
         accountsResponse.setAuthentication(authenticationResponse);
 
+        Permissions permissions = userrole.getUser().getRoles().getPermissions();
         return accountsResponse;
         //TODO: Send Email to the User and Notify about _account Creation ::
     }
