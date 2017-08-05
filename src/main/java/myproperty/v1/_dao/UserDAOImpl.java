@@ -11,7 +11,6 @@ import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import myproperty.v1.db._entities.Roles;
 import myproperty.v1.helper.enums.ContactTypes;
 import myproperty.v1.helper.exception.InternalErrorException;
 
