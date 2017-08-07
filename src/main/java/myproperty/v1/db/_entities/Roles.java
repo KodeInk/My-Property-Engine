@@ -62,13 +62,14 @@ public class Roles implements Serializable {
     @ManyToOne
     private User updatedBy;
 
+    @ManyToOne
     @JoinTable(name = "permission_role",
             joinColumns = @JoinColumn(name = "role_id",
                     referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "permission_id",
                     referencedColumnName = "id")
     )
-    private Permissions permissions;
+    private Permissions[] permissions;
 
     public Roles() {
     }
@@ -155,11 +156,11 @@ public class Roles implements Serializable {
         this.updatedBy = updatedBy;
     }
 
-    public Permissions getPermissions() {
+    public Permissions[] getPermissions() {
         return permissions;
     }
 
-    public void setPermissions(Permissions permissions) {
+    public void setPermissions(Permissions[] permissions) {
         this.permissions = permissions;
     }
 

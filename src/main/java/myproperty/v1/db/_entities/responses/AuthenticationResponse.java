@@ -5,6 +5,8 @@
  */
 package myproperty.v1.db._entities.responses;
 
+import java.util.List;
+
 /**
  *
  * @author mover
@@ -19,7 +21,7 @@ package myproperty.v1.db._entities.responses;
 public class AuthenticationResponse {
 
     private String authorization;
-    private String[] permissions;
+    private List<PermissionsResponse> permissions;
     private Boolean isLoggedIn;
 
     public AuthenticationResponse() {
@@ -33,11 +35,11 @@ public class AuthenticationResponse {
         this.authorization = authorization;
     }
 
-    public String[] getPermissions() {
+    public List<PermissionsResponse> getPermissions() {
         return permissions;
     }
 
-    public void setPermissions(String[] permissions) {
+    public void setPermissions(List<PermissionsResponse> permissions) {
         this.permissions = permissions;
     }
 

@@ -30,6 +30,7 @@ import myproperty.v1.db._entities.responses.AccountTypesResponse;
 import myproperty.v1.db._entities.responses.AccountsResponse;
 import myproperty.v1.db._entities.responses.AuthenticationResponse;
 import myproperty.v1.db._entities.responses.ContactsResponse;
+import myproperty.v1.db._entities.responses.PermissionsResponse;
 import myproperty.v1.db._entities.responses.PersonResponse;
 import myproperty.v1.db._entities.responses.UserResponse;
 import myproperty.v1.helper.enums.AccountPackage;
@@ -212,9 +213,32 @@ public class AccountService {
         authenticationResponse.setAuthorization(encryptPassword_md5(user.getPassword()));
         // Missing Functionality  Permissions Associated  
         AccountsResponse accountsResponse = getAccountsResponse(accounts);
+
+        Roles[] _roles = userrole.getUser().getRoles();
+
+        List<PermissionsResponse> listpermissions = new ArrayList<>();
+//        for (Roles role : _roles) {
+//            Permissions[] permissions = role.getPermissions();
+//            for (int x = 0; x < permissions.length; x++) {
+//                Permissions p = permissions[x];
+//                PermissionsResponse response = new PermissionsResponse();
+//                response.setCode(p.getCode());
+//                response.setGrouping(p.getGrouping());
+//                response.setId(p.getId());
+//                response.setName(p.getName());
+//                response.setStatus(p.getStatus());
+//                listpermissions.add(response);
+//            }
+//        }
+        authenticationResponse.setPermissions(listpermissions);
+
+        // authenticationResponse.setPermissions();
+
         accountsResponse.setAuthentication(authenticationResponse);
 
-        Permissions permissions = userrole.getUser().getRoles().getPermissions();
+
+//        Permissions permissions = userrole.getUser().getRoles().getPermissions();
+
         return accountsResponse;
         //TODO: Send Email to the User and Notify about _account Creation ::
     }

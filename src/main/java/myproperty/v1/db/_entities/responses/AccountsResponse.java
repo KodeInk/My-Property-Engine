@@ -25,6 +25,7 @@ public class AccountsResponse {
     private AuthenticationResponse authentication;
 
 
+
     public AccountsResponse() {
     }
 

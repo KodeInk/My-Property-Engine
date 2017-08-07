@@ -81,7 +81,7 @@ public class User implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "role_id",
                     referencedColumnName = "id")
     )
-    private Roles roles;
+    private Roles[] roles;
 
     public User() {
     }
@@ -138,11 +138,11 @@ public class User implements Serializable {
         this.dateCreated = dateCreated;
     }
 
-    public Roles getRoles() {
+    public Roles[] getRoles() {
         return roles;
     }
 
-    public void setRoles(Roles roles) {
+    public void setRoles(Roles[] roles) {
         this.roles = roles;
     }
 
