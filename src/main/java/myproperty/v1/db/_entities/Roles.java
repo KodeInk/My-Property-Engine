@@ -12,6 +12,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Set;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
@@ -62,14 +63,18 @@ public class Roles implements Serializable {
     @ManyToOne
     private User updatedBy;
 
-    @ManyToOne
+    @ManyToMany
     @JoinTable(name = "permission_role",
-            joinColumns = @JoinColumn(name = "role_id",
-                    referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "permission_id",
-                    referencedColumnName = "id")
+            joinColumns = {
+                @JoinColumn(name = "role_id")
+            },
+            inverseJoinColumns = {
+                @JoinColumn(name = "permission_id")
+            }
     )
-    private Permissions[] permissions;
+    private Set<Permissions> permissions;
+
+
 
     public Roles() {
     }
@@ -156,13 +161,14 @@ public class Roles implements Serializable {
         this.updatedBy = updatedBy;
     }
 
-    public Permissions[] getPermissions() {
+    public Set<Permissions> getPermissions() {
         return permissions;
     }
 
-    public void setPermissions(Permissions[] permissions) {
+    public void setPermissions(Set<Permissions> permissions) {
         this.permissions = permissions;
     }
+
 
     @Override
     public int hashCode() {

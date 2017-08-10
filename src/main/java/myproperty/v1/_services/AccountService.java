@@ -7,7 +7,9 @@ package myproperty.v1._services;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import myproperty.v1._dao.AccountsDaoImpl;
@@ -111,29 +113,19 @@ public class AccountService {
         if (!users.isEmpty()) {
             throw new BadRequestException("An Active User with this Email Address Exists in the database");
         }
-        //create user ::
-        {
-            user = new User();
-            user.setUsername(account.getEmail_address());
-            user.setPassword(account.getPassword());
-            user.setStatus(StatusEnum.PENDING.toString());
-            userResponse = userService.createUser(user);
-            user.setId(userResponse.getId());
-
-        }
-
+// Roles
         {
             try {
                 roles = rolesDaoImpl.findRoleByName(RolesEnum.ADMINISTRATOR.toString());             // Get Role By Name
                 userrole = new UserRole();
 
                 //TODO: Setup the User Roles which is administrator ::
-                {
-                    userrole.setUser(user);
-                    userrole.setRole(roles);
-                    userrole.setStatus(StatusEnum.ACTIVE.toString());
-                    userRoleDaoImpl.create(userrole);
-                }
+//                {
+//                    userrole.setUser(user);
+//                    userrole.setRole(roles);
+//                    userrole.setStatus(StatusEnum.ACTIVE.toString());
+//                    userRoleDaoImpl.create(userrole);
+//                }
 
             } catch (Exception em) {
                 System.out.println("USER ROLE SAVING");
@@ -141,6 +133,22 @@ public class AccountService {
 
                 throw em;
             }
+        }
+
+        //create user ::
+        {
+            user = new User();
+            user.setUsername(account.getEmail_address());
+            user.setPassword(account.getPassword());
+            user.setStatus(StatusEnum.PENDING.toString());
+            Set<Roles> rs = new HashSet<>();
+            rs.add(roles);
+            //Setting Roles
+            user.setRoles(rs);
+
+            userResponse = userService.createUser(user);
+            user.setId(userResponse.getId());
+
         }
 
         //STEP TWO: Create Empty Person [Profile]:
@@ -214,9 +222,9 @@ public class AccountService {
         // Missing Functionality  Permissions Associated  
         AccountsResponse accountsResponse = getAccountsResponse(accounts);
 
-        Roles[] _roles = userrole.getUser().getRoles();
+        //   Roles[] _roles = userrole.getUser().getRoles();
 
-        List<PermissionsResponse> listpermissions = new ArrayList<>();
+        // List<PermissionsResponse> listpermissions = new ArrayList<>();
 //        for (Roles role : _roles) {
 //            Permissions[] permissions = role.getPermissions();
 //            for (int x = 0; x < permissions.length; x++) {
@@ -230,7 +238,7 @@ public class AccountService {
 //                listpermissions.add(response);
 //            }
 //        }
-        authenticationResponse.setPermissions(listpermissions);
+      //  authenticationResponse.setPermissions(listpermissions);
 
         // authenticationResponse.setPermissions();
 
