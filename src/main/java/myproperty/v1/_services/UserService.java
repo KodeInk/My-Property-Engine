@@ -1,6 +1,6 @@
 package myproperty.v1._services;
 import java.util.ArrayList;
-import myproperty.v1._dao.userDAOImpl;
+import myproperty.v1._dao.UserDAOImpl;
 import myproperty.v1.db._entities.User;
 import org.springframework.stereotype.Service;
 
@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import myproperty.v1.db._entities.responses.UserResponse;
+import myproperty.v1.helper.enums.StatusEnum;
 import myproperty.v1.helper.exception.BadRequestException;
 import static myproperty.v1.helper.utilities.*;
 
@@ -20,7 +21,7 @@ import static myproperty.v1.helper.utilities.*;
 @Service
 public class UserService {
 
-    private final userDAOImpl userDAOImpl = myproperty.v1._dao.userDAOImpl.getInstance();
+    private final UserDAOImpl userDAOImpl = myproperty.v1._dao.UserDAOImpl.getInstance();
     private static final Logger LOG = Logger.getLogger(UserService.class.getName());
 
 
@@ -93,7 +94,7 @@ public class UserService {
         user.setPassword(password);
 
         if (user.getStatus() == null)
-            user.setStatus("PENDING");
+            user.setStatus(StatusEnum.ACTIVE.toString());
 
         user.setDateCreated(getCurrentDate());
 

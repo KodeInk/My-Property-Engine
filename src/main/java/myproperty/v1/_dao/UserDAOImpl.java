@@ -11,7 +11,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import myproperty.v1.helper.ContactTypes;
+import myproperty.v1.helper.enums.ContactTypes;
 import myproperty.v1.helper.exception.InternalErrorException;
 
 /**
@@ -19,20 +19,18 @@ import myproperty.v1.helper.exception.InternalErrorException;
  */
 
 
-public class userDAOImpl extends JpaController implements userDAO {
-    private static final Logger LOG = Logger.getLogger(userDAOImpl.class.getName());
+public class UserDAOImpl extends JpaController implements userDAO {
+    private static final Logger LOG = Logger.getLogger(UserDAOImpl.class.getName());
+    private static UserDAOImpl instance = null;
 
-    private static userDAOImpl instance = null;
-
-    public static userDAOImpl getInstance() {
-        if(instance == null){
-            instance =  new userDAOImpl();
+    public static UserDAOImpl getInstance() {
+        if (instance == null) {
+            instance = new UserDAOImpl();
         }
         return instance;
     }
 
-
-    public userDAOImpl() {
+    public UserDAOImpl() {
         super(User.class);
     }
 
@@ -150,23 +148,42 @@ public class userDAOImpl extends JpaController implements userDAO {
 
     @Override
     public User CheckPassword(User user) throws Exception {
-
         User user1 = null;
         EntityManager em = getEntityManager();
-        Query query = em.createNamedQuery("User.checkPassword");
-        query.setParameter("userName",user.getUsername());
-        query.setParameter("userPassword",user.getPassword());
-
-
         try {
+            Query query = em.createNamedQuery("User.checkPassword");
+            query.setParameter("userName", user.getUsername());
+            query.setParameter("userPassword", user.getPassword());
             List<User> users = query.getResultList();
-
-            user1 = users.get(0);
+            if (users.size() > 0) {
+                user1 = users.get(0);
+            }
         } finally {
             em.close();
         }
 
         return user1;
+    }
+
+    public User loginUser(String username, String password) {
+        User user = null;
+        EntityManager em = getEntityManager();
+        try {
+
+            Query query = em.createNamedQuery("User.findUserByUsernameAndPassword");
+            query.setParameter("username", username);
+            query.setParameter("password", password);
+            List<User> users = query.getResultList();
+            if (users.size() > 0) {
+                user = users.get(0);
+            }
+
+        } finally {
+            em.close();
+        }
+
+        return user;
+
     }
 
     @Override

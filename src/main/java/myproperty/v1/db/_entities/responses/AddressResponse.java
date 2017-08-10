@@ -7,7 +7,7 @@ package myproperty.v1.db._entities.responses;
 
 import java.util.Date;
 import java.util.Objects;
-import myproperty.v1.helper.ParentTypes;
+import myproperty.v1.helper.enums.ParentTypes;
 
 /**
  *

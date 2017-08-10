@@ -6,7 +6,6 @@
 package myproperty.v1.db._entities;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
@@ -23,8 +22,7 @@ import java.io.Serializable;
         , @NamedQuery(name = "Permissions.findById", query = "SELECT p FROM Permissions p WHERE p.id = :id")
         , @NamedQuery(name = "Permissions.findByGrouping", query = "SELECT p FROM Permissions p WHERE p.grouping = :grouping")
         , @NamedQuery(name = "Permissions.findByCode", query = "SELECT p FROM Permissions p WHERE p.code = :code")
-        , @NamedQuery(name = "Permissions.findByDisplayName", query = "SELECT p FROM Permissions p WHERE p.displayName = :displayName")
-        , @NamedQuery(name = "Permissions.findByStatus", query = "SELECT p FROM Permissions p WHERE p.status = :status")})
+    , @NamedQuery(name = "Permissions.findByStatus", query = "SELECT p FROM Permissions p WHERE p.status = :status")})
 
 public class Permissions implements Serializable {
 
@@ -40,14 +38,18 @@ public class Permissions implements Serializable {
     @Size(max = 45)
     @Column(name = "code")
     private String code;
-    @Size(max = 45)
-    @Column(name = "display_name")
-    private String displayName;
+
     @Basic(optional = false)
-    @NotNull
     @Size(min = 1, max = 8)
     @Column(name = "status")
     private String status;
+
+    @Basic(optional = false)
+
+    @Size(min = 1, max = 100)
+    @Column(name = "name")
+    private String name;
+
 
     public Permissions() {
     }
@@ -85,14 +87,6 @@ public class Permissions implements Serializable {
         this.code = code;
     }
 
-    public String getDisplayName() {
-        return displayName;
-    }
-
-    public void setDisplayName(String displayName) {
-        this.displayName = displayName;
-    }
-
     public String getStatus() {
         return status;
     }
@@ -121,10 +115,21 @@ public class Permissions implements Serializable {
         return true;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+
     @Override
     public String toString() {
-        return "com.awamo.microservice.mifos.dataconnector.database.controllers.Permissions[ id=" + id + " ]";
+        return this.getClass().getCanonicalName()
+                + "{ "
+                + "id=" + id
+                + " }";
     }
 
 }
-

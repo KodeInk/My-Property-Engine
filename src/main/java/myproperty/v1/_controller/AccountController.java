@@ -2,9 +2,11 @@ package myproperty.v1._controller;
 
 import java.util.Collection;
 import myproperty.v1._controller.entities._account;
+import myproperty.v1._controller.entities._login;
 import myproperty.v1.db._entities.Accounts;
 import myproperty.v1.db._entities.responses.AccountsResponse;
 import myproperty.v1._services.AccountService;
+import myproperty.v1.db._entities.responses.AuthenticationResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -49,6 +51,12 @@ public class AccountController {
     @RequestMapping(value = "/{id}/update", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public AccountsResponse update_account(@PathVariable Integer id, @RequestBody Accounts account) throws Exception {
         return accountService.updateAccount(id, account);
+    }
+
+    //TODO: Handle Login 
+    @RequestMapping(value = "/login", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public AuthenticationResponse loginAccount(@RequestBody _login login) throws Exception {
+        return accountService.loginAccount(login);
     }
 
 

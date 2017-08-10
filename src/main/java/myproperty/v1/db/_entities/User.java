@@ -7,12 +7,16 @@ package myproperty.v1.db._entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -34,7 +38,10 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "User.findByUsername", query = "SELECT u FROM User u WHERE u.username = :username")
     , @NamedQuery(name = "User.findByPassword", query = "SELECT u FROM User u WHERE u.password = :password")
     , @NamedQuery(name = "User.findByStatus", query = "SELECT u FROM User u WHERE u.status = :status")
-    , @NamedQuery(name = "User.findByDateCreated", query = "SELECT u FROM User u WHERE u.dateCreated = :dateCreated")})
+    , @NamedQuery(name = "User.findByDateCreated", query = "SELECT u FROM User u WHERE u.dateCreated = :dateCreated")
+    , @NamedQuery(name = "User.findUserByUsernameAndPassword", query = "SELECT u FROM User u WHERE u.username = :username AND u.password = :password ")
+
+})
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -63,6 +70,19 @@ public class User implements Serializable {
     @Column(name = "date_created")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateCreated;
+
+    // ,  referencedColumnName = "id")
+    //,referencedColumnName = "id"
+    @ManyToMany
+    @JoinTable(name = "user_role",
+            joinColumns = {
+                @JoinColumn(name = "user_id")
+            },
+            inverseJoinColumns = {
+                @JoinColumn(name = "role_id")
+            }
+    )
+    private Set<Roles> roles;
 
 
     public User() {
@@ -120,6 +140,13 @@ public class User implements Serializable {
         this.dateCreated = dateCreated;
     }
 
+    public Set<Roles> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Roles> roles) {
+        this.roles = roles;
+    }
 
     @Override
     public int hashCode() {
@@ -140,7 +167,7 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return this.getClass().getCanonicalName() + "{ id=" + id + " {";
+        return this.getClass().getCanonicalName() + "{ id=" + id + " }";
     }
 
 }

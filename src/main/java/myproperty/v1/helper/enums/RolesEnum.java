@@ -3,31 +3,34 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package myproperty.v1.helper;
+package myproperty.v1.helper.enums;
 
 /**
  *
- * @author Mover 6/7/2017
+ * @author mover 7/20/2017
+ *
+ *
  */
-public enum ParentTypes {
-    PERSON, COMPANY, PROPERTY, OTHERS;
+public enum RolesEnum {
 
-    public static final ParentTypes fromString(String text) {
-        ParentTypes returnValue = OTHERS;
+    SUPERADMIN, ADMINISTRATOR;
+
+    public static final RolesEnum fromString(String text) {
+        RolesEnum returnValue = SUPERADMIN;
 
         try {
             if (text != null) {
-                returnValue = ParentTypes.valueOf(text.toUpperCase());
+                returnValue = RolesEnum.valueOf(text.toUpperCase());
             }
         } catch (IllegalArgumentException e) {
 
-            returnValue = OTHERS;
+            returnValue = SUPERADMIN;
         }
 
         return returnValue;
     }
 
-    public static final ParentTypes fromObject(Object text) {
+    public static final RolesEnum fromObject(Object text) {
         return fromString(text.toString());
     }
 

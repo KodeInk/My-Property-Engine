@@ -9,14 +9,15 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Set;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Manny
+ * @author Mover 7/27/2017
  */
 @Entity
 @Table(name = "roles")
@@ -24,21 +25,25 @@ import java.util.Date;
 @NamedQueries({
     @NamedQuery(name = "Roles.findAll", query = "SELECT r FROM Roles r")
     , @NamedQuery(name = "Roles.findById", query = "SELECT r FROM Roles r WHERE r.id = :id")
-    , @NamedQuery(name = "Roles.findByRole", query = "SELECT r FROM Roles r WHERE r.role = :role")
+    , @NamedQuery(name = "Roles.findByName", query = "SELECT r FROM Roles r WHERE r.name = :name")
     , @NamedQuery(name = "Roles.findByStatus", query = "SELECT r FROM Roles r WHERE r.status = :status")
     , @NamedQuery(name = "Roles.findByDateCreated", query = "SELECT r FROM Roles r WHERE r.dateCreated = :dateCreated")})
 public class Roles implements Serializable {
 
-
-    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
+    @Size(max = 100)
+    @Column(name = "name")
+    private String name;
+    @Size(max = 50)
+    @Column(name = "code")
+    private String code;
     @Size(max = 255)
-    @Column(name = "role")
-    private String role;
+    @Column(name = "brief")
+    private String brief;
     @Size(max = 8)
     @Column(name = "status")
     private String status;
@@ -47,11 +52,29 @@ public class Roles implements Serializable {
     @Column(name = "date_created")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateCreated;
-    @OneToMany(mappedBy = "roleId")
-    private Collection<UserRole> userRoleCollection;
-    @JoinColumn(name = "author_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private Person authorId;
+    @Column(name = "date_updated")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dateUpdated;
+
+    @JoinColumn(name = "created_by", referencedColumnName = "id")
+    @ManyToOne
+    private User createdBy;
+    @JoinColumn(name = "updated_by", referencedColumnName = "id")
+    @ManyToOne
+    private User updatedBy;
+
+    @ManyToMany
+    @JoinTable(name = "permission_role",
+            joinColumns = {
+                @JoinColumn(name = "role_id")
+            },
+            inverseJoinColumns = {
+                @JoinColumn(name = "permission_id")
+            }
+    )
+    private Set<Permissions> permissions;
+
+
 
     public Roles() {
     }
@@ -73,12 +96,28 @@ public class Roles implements Serializable {
         this.id = id;
     }
 
-    public String getRole() {
-        return role;
+    public String getName() {
+        return name;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getBrief() {
+        return brief;
+    }
+
+    public void setBrief(String brief) {
+        this.brief = brief;
     }
 
     public String getStatus() {
@@ -97,22 +136,39 @@ public class Roles implements Serializable {
         this.dateCreated = dateCreated;
     }
 
-    @XmlTransient
-    public Collection<UserRole> getUserRoleCollection() {
-        return userRoleCollection;
+    public Date getDateUpdated() {
+        return dateUpdated;
     }
 
-    public void setUserRoleCollection(Collection<UserRole> userRoleCollection) {
-        this.userRoleCollection = userRoleCollection;
+    public void setDateUpdated(Date dateUpdated) {
+        this.dateUpdated = dateUpdated;
     }
 
-    public Person getAuthorId() {
-        return authorId;
+
+    public User getCreatedBy() {
+        return createdBy;
     }
 
-    public void setAuthorId(Person authorId) {
-        this.authorId = authorId;
+    public void setCreatedBy(User createdBy) {
+        this.createdBy = createdBy;
     }
+
+    public User getUpdatedBy() {
+        return updatedBy;
+    }
+
+    public void setUpdatedBy(User updatedBy) {
+        this.updatedBy = updatedBy;
+    }
+
+    public Set<Permissions> getPermissions() {
+        return permissions;
+    }
+
+    public void setPermissions(Set<Permissions> permissions) {
+        this.permissions = permissions;
+    }
+
 
     @Override
     public int hashCode() {
@@ -128,14 +184,12 @@ public class Roles implements Serializable {
             return false;
         }
         Roles other = (Roles) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+        return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
     }
 
     @Override
     public String toString() {
-        return "com.awamo.microservice.mifos.dataconnector.database.controllers.Roles[ id=" + id + " ]";
+        return "myproperty.v1.db._entities.Roles[ id=" + id + " ]";
     }
+
 }

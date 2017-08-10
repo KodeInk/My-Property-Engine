@@ -7,31 +7,45 @@ package myproperty.v1._services;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import myproperty.v1._dao.AccountsDaoImpl;
 import myproperty.v1._controller.entities._account;
+import myproperty.v1._controller.entities._login;
+import myproperty.v1._dao.RolesDaoImpl;
+import myproperty.v1._dao.UserDAOImpl;
+import myproperty.v1._dao.UserRoleDaoImpl;
 import myproperty.v1.db._entities.AccountTypes;
 import myproperty.v1.db._entities.Accounts;
 import myproperty.v1.db._entities.Contacts;
 import myproperty.v1.db._entities.Packages;
+import myproperty.v1.db._entities.Permissions;
 import myproperty.v1.db._entities.Person;
+import myproperty.v1.db._entities.Roles;
 import myproperty.v1.db._entities.User;
+import myproperty.v1.db._entities.UserRole;
 import myproperty.v1.db._entities.responses.AccountPackageResponse;
 import myproperty.v1.db._entities.responses.AccountTypesResponse;
 import myproperty.v1.db._entities.responses.AccountsResponse;
+import myproperty.v1.db._entities.responses.AuthenticationResponse;
 import myproperty.v1.db._entities.responses.ContactsResponse;
+import myproperty.v1.db._entities.responses.PermissionsResponse;
 import myproperty.v1.db._entities.responses.PersonResponse;
 import myproperty.v1.db._entities.responses.UserResponse;
-import myproperty.v1.helper.AccountPackage;
-import myproperty.v1.helper.AccountType;
-import myproperty.v1.helper.ContactTypes;
-import myproperty.v1.helper.ParentTypes;
-import myproperty.v1.helper.StatusEnum;
+import myproperty.v1.helper.enums.AccountPackage;
+import myproperty.v1.helper.enums.AccountType;
+import myproperty.v1.helper.enums.ContactTypes;
+import myproperty.v1.helper.enums.ParentTypes;
+import myproperty.v1.helper.enums.RolesEnum;
+import myproperty.v1.helper.enums.StatusEnum;
 import myproperty.v1.helper.exception.BadRequestException;
 import myproperty.v1.helper.exception.ForbiddenException;
+import static myproperty.v1.helper.utilities.encryptPassword_md5;
 import static myproperty.v1.helper.utilities.getCurrentDate;
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -53,8 +67,14 @@ public class AccountService {
     private User user;
     private Contacts contacts;
     private Accounts accounts;
+    private Roles roles;
+    private UserRole userrole;
 
     private final AccountsDaoImpl accountsDaoImpl = AccountsDaoImpl.getInstance();
+    private final UserDAOImpl userDAOImpl = UserDAOImpl.getInstance();
+    private final RolesDaoImpl rolesDaoImpl = RolesDaoImpl.getInstance();
+    private final UserRoleDaoImpl userRoleDaoImpl = UserRoleDaoImpl.getInstance();
+
 
     private static final Logger LOG = Logger.getLogger(AccountService.class.getName());
 
@@ -80,7 +100,6 @@ public class AccountService {
         names = account.getNames();
         email_address = account.getEmail_address();
         password = account.getPassword();
-
         Person person = new Person();
 
 
@@ -94,16 +113,34 @@ public class AccountService {
         if (!users.isEmpty()) {
             throw new BadRequestException("An Active User with this Email Address Exists in the database");
         }
+// Roles
+        {
+            try {
+                roles = rolesDaoImpl.findRoleByName(RolesEnum.ADMINISTRATOR.toString());
+            } catch (Exception em) {
+                System.out.println("USER ROLE SAVING");
+                System.out.println(em.toString());
+
+                throw em;
+            }
+        }
+        Set<Roles> rs = new HashSet<>();
         //create user ::
         {
             user = new User();
             user.setUsername(account.getEmail_address());
             user.setPassword(account.getPassword());
             user.setStatus(StatusEnum.PENDING.toString());
+
+            rs.add(roles);
+            //Setting Roles
+            user.setRoles(rs);
+
             userResponse = userService.createUser(user);
             user.setId(userResponse.getId());
 
         }
+
 
         //STEP TWO: Create Empty Person [Profile]:
         {
@@ -129,6 +166,7 @@ public class AccountService {
             }
         }
         //STEP FOUR : Create _account data
+        //TODO:
         {
             // Check to see that User is Created, Profile is Created, and Contact Information is Created for this User
             //Checker 
@@ -165,11 +203,46 @@ public class AccountService {
                 accounts = accountsDaoImpl.create(accounts);
 
 
+
             }
         }
 
-        return getAccountsResponse(accounts);
+        List<PermissionsResponse> permissionsResponses = GetPermissionsResponseFromRoles(rs);
+
+        AuthenticationResponse authenticationResponse = new AuthenticationResponse();
+        authenticationResponse.setIsLoggedIn(true);
+        authenticationResponse.setAuthorization(encryptPassword_md5(user.getPassword()));
+        authenticationResponse.setPermissions(permissionsResponses);
+        // Missing Functionality  Permissions Associated  
+        AccountsResponse accountsResponse = getAccountsResponse(accounts);
+
+        accountsResponse.setAuthentication(authenticationResponse);
+        return accountsResponse;
         //TODO: Send Email to the User and Notify about _account Creation ::
+    }
+
+    private List<PermissionsResponse> GetPermissionsResponseFromRoles(Set<Roles> rs) {
+        List<Permissions> permissionses = new ArrayList<>();
+        List<PermissionsResponse> permissionsResponses = new ArrayList<>();
+        if (!rs.isEmpty()) {
+            PermissionsResponse permissionsResponse = new PermissionsResponse();
+            for (Roles r : rs) {
+                // get the Permissions in this list :
+                Set<Permissions> permissionses1 = r.getPermissions();
+                for (Permissions p : permissionses1) {
+                    permissionsResponse.setCode(p.getCode());
+                    permissionsResponse.setGrouping(p.getGrouping());
+                    permissionsResponse.setStatus(p.getStatus());
+                    permissionsResponse.setName(p.getName());
+                    permissionsResponse.setId(p.getId());
+                    permissionsResponses.add(permissionsResponse);
+
+                }
+
+            }
+        }
+
+        return permissionsResponses;
     }
 
     //TODO: Activate _account
@@ -243,6 +316,58 @@ public class AccountService {
         });
 
         return accountsResponses;
+    }
+
+    public AuthenticationResponse loginAccount(_login login) {
+        //TODO: check to see that the username and password are not empty
+        User user = null;
+        AuthenticationResponse authenticationResponse = new AuthenticationResponse();
+        authenticationResponse.setIsLoggedIn(false);
+        {
+            {
+                if (login.getPassword() == null || login.getUsername() == null) {
+                    throw new BadRequestException("Fill in Blanks");
+                }
+            }
+
+            {
+                String _username = login.getUsername();
+                String _password = encryptPassword_md5(login.getPassword());
+
+//                System.out.println("++++++++++++++++++++++++++++++++");
+//                System.out.println(_username);
+//                System.out.println(_password);
+//                System.out.println("++++++++++++++++++++++++++++++++");
+//
+
+                user = userDAOImpl.loginUser(_username, _password);
+                System.out.println(user);
+
+                if (user == null) {
+                    throw new ForbiddenException("Username or Password is Invalid");
+                }
+
+                Set<Roles> rs = user.getRoles();
+                List<PermissionsResponse> permissionsResponses = GetPermissionsResponseFromRoles(rs);
+                String authorization = convertToBasicAuth(_username, _password);
+                authenticationResponse.setAuthorization(authorization);
+                authenticationResponse.setIsLoggedIn(true);
+                authenticationResponse.setPermissions(permissionsResponses);
+
+            }
+
+        }
+
+        return authenticationResponse;
+    }
+
+    private String convertToBasicAuth(String username, String Password) {
+        String authString = username + ":" + password;
+        byte[] authEncBytes = Base64.encodeBase64(authString.getBytes());
+        String authStringEnc = new String(authEncBytes);
+        return ("Basic " + authStringEnc);
+        //  String possibleAuthenticationKey = "Basic " + Base64.getEncoder().encodeToString(usernamePassowrd.trim().getBytes());
+
     }
 
     public AccountsResponse getAccountsResponse(Accounts accounts) {

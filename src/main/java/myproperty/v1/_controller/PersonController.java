@@ -22,7 +22,7 @@ import myproperty.v1.db._entities.responses.PersonResponse;
 import myproperty.v1._services.AddressService;
 import myproperty.v1._services.ContactsService;
 import myproperty.v1._services.PersonService;
-import myproperty.v1.helper.ParentTypes;
+import myproperty.v1.helper.enums.ParentTypes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
