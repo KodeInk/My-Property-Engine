@@ -116,17 +116,7 @@ public class AccountService {
 // Roles
         {
             try {
-                roles = rolesDaoImpl.findRoleByName(RolesEnum.ADMINISTRATOR.toString());             // Get Role By Name
-                userrole = new UserRole();
-
-                //TODO: Setup the User Roles which is administrator ::
-//                {
-//                    userrole.setUser(user);
-//                    userrole.setRole(roles);
-//                    userrole.setStatus(StatusEnum.ACTIVE.toString());
-//                    userRoleDaoImpl.create(userrole);
-//                }
-
+                roles = rolesDaoImpl.findRoleByName(RolesEnum.ADMINISTRATOR.toString());
             } catch (Exception em) {
                 System.out.println("USER ROLE SAVING");
                 System.out.println(em.toString());
@@ -134,14 +124,14 @@ public class AccountService {
                 throw em;
             }
         }
-
+        Set<Roles> rs = new HashSet<>();
         //create user ::
         {
             user = new User();
             user.setUsername(account.getEmail_address());
             user.setPassword(account.getPassword());
             user.setStatus(StatusEnum.PENDING.toString());
-            Set<Roles> rs = new HashSet<>();
+
             rs.add(roles);
             //Setting Roles
             user.setRoles(rs);
@@ -150,6 +140,7 @@ public class AccountService {
             user.setId(userResponse.getId());
 
         }
+
 
         //STEP TWO: Create Empty Person [Profile]:
         {
@@ -216,39 +207,42 @@ public class AccountService {
             }
         }
 
+        List<PermissionsResponse> permissionsResponses = GetPermissionsResponseFromRoles(rs);
+
         AuthenticationResponse authenticationResponse = new AuthenticationResponse();
         authenticationResponse.setIsLoggedIn(true);
         authenticationResponse.setAuthorization(encryptPassword_md5(user.getPassword()));
+        authenticationResponse.setPermissions(permissionsResponses);
         // Missing Functionality  Permissions Associated  
         AccountsResponse accountsResponse = getAccountsResponse(accounts);
 
-        //   Roles[] _roles = userrole.getUser().getRoles();
-
-        // List<PermissionsResponse> listpermissions = new ArrayList<>();
-//        for (Roles role : _roles) {
-//            Permissions[] permissions = role.getPermissions();
-//            for (int x = 0; x < permissions.length; x++) {
-//                Permissions p = permissions[x];
-//                PermissionsResponse response = new PermissionsResponse();
-//                response.setCode(p.getCode());
-//                response.setGrouping(p.getGrouping());
-//                response.setId(p.getId());
-//                response.setName(p.getName());
-//                response.setStatus(p.getStatus());
-//                listpermissions.add(response);
-//            }
-//        }
-      //  authenticationResponse.setPermissions(listpermissions);
-
-        // authenticationResponse.setPermissions();
-
         accountsResponse.setAuthentication(authenticationResponse);
-
-
-//        Permissions permissions = userrole.getUser().getRoles().getPermissions();
-
         return accountsResponse;
         //TODO: Send Email to the User and Notify about _account Creation ::
+    }
+
+    private List<PermissionsResponse> GetPermissionsResponseFromRoles(Set<Roles> rs) {
+        List<Permissions> permissionses = new ArrayList<>();
+        List<PermissionsResponse> permissionsResponses = new ArrayList<>();
+        if (!rs.isEmpty()) {
+            PermissionsResponse permissionsResponse = new PermissionsResponse();
+            for (Roles r : rs) {
+                // get the Permissions in this list :
+                Set<Permissions> permissionses1 = r.getPermissions();
+                for (Permissions p : permissionses1) {
+                    permissionsResponse.setCode(p.getCode());
+                    permissionsResponse.setGrouping(p.getGrouping());
+                    permissionsResponse.setStatus(p.getStatus());
+                    permissionsResponse.setName(p.getName());
+                    permissionsResponse.setId(p.getId());
+                    permissionsResponses.add(permissionsResponse);
+
+                }
+
+            }
+        }
+
+        return permissionsResponses;
     }
 
     //TODO: Activate _account
