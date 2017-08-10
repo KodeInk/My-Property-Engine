@@ -347,9 +347,13 @@ public class AccountService {
                     throw new ForbiddenException("Username or Password is Invalid");
                 }
 
+                Set<Roles> rs = user.getRoles();
+                List<PermissionsResponse> permissionsResponses = GetPermissionsResponseFromRoles(rs);
                 String authorization = convertToBasicAuth(_username, _password);
                 authenticationResponse.setAuthorization(authorization);
                 authenticationResponse.setIsLoggedIn(true);
+                authenticationResponse.setPermissions(permissionsResponses);
+
             }
 
         }
