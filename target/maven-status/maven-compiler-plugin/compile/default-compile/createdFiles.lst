@@ -84,6 +84,7 @@ myproperty\AppJersey.class
 myproperty\v1\db\_entities\Person_.class
 myproperty\v1\helper\EmailValidator.class
 myproperty\v1\_dao\interfaces\PropertyDao.class
+myproperty\v1\db\_entities\responses\PermissionsResponse.class
 myproperty\v1\_services\Status.class
 myproperty\v1\_controller\entities\_property_size.class
 myproperty\v1\_dao\AccountTypesDaonImpl.class

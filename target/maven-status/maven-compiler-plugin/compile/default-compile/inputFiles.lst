@@ -89,6 +89,7 @@ E:\codemovers\myproperty\src\main\java\myproperty\v1\_services\Status.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\db\_entities\responses\AccountsResponse.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\db\_entities\responses\AddressResponse.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\_controller\UserController.java
+E:\codemovers\myproperty\src\main\java\myproperty\v1\db\_entities\responses\PermissionsResponse.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\_dao\interfaces\userDAO.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\db\_entities\Users.java
 E:\codemovers\myproperty\src\main\java\myproperty\v1\helper\exception\ServiceUnAvailableException.java

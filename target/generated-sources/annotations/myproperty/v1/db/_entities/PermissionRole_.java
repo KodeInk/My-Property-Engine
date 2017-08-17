@@ -6,7 +6,7 @@ import javax.persistence.metamodel.StaticMetamodel;
 import myproperty.v1.db._entities.Permissions;
 import myproperty.v1.db._entities.Roles;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2017-08-05T15:14:20")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2017-08-10T06:38:58")
 @StaticMetamodel(PermissionRole.class)
 public class PermissionRole_ { 
 
