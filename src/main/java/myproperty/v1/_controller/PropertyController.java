@@ -12,10 +12,12 @@ import myproperty.v1._controller.entities._property;
 import myproperty.v1.db._entities.Property;
 import myproperty.v1.db._entities.responses.PropertyResponse;
 import myproperty.v1._services.PropertyService;
+import myproperty.v1.helper.security.AccessManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -41,7 +43,7 @@ public class PropertyController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public PropertyResponse getPropertyById(@PathVariable("id") Integer id) throws Exception {
-        LOG.log(Level.INFO, " Get All Property  By Id End Point");
+        LOG.log(Level.INFO, " Get  Property  By Id End Point");
         return propertyService.getPropertyById(id);
     }
 
@@ -56,9 +58,22 @@ public class PropertyController {
         return propertyService.getAllPropertiesByUserId(userId);
     }
 
-    @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public PropertyResponse createProperty(@RequestBody _property property) throws Exception {
+    @RequestMapping(value = "/create",
+            method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public PropertyResponse createProperty(
+            @RequestBody _property property,
+            @RequestHeader String auhorization
+    ) throws Exception {
         LOG.log(Level.INFO, " Create Property End Point");
+
+        //todo: Create a permissions class to get all system permissions 
+        String[] permissions = new String[1];
+        permissions[0] = "_ALL_FUNCTIONS";
+
+        AccessManager.check_user_access(permissions, auhorization);
         return propertyService.createProperty(property);
     }
 
