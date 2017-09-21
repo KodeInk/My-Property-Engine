@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import myproperty.v1.db._entities.Property;
+import myproperty.v1.db._entities.responses.PropertyResponse;
+import myproperty.v1.helper.enums.StatusEnum;
 
 
 /**
@@ -76,6 +79,27 @@ public  abstract class JpaController<T  extends  Entity> implements Serializable
         return entity;
     }
 
+    public List<Property> findEntities(StatusEnum status) {
+        List<Property> list = new ArrayList<>();
+        EntityManager em = getEntityManager();
+
+        Query query = em.createNamedQuery("Property.findByStatus");
+        query.setParameter("status", status);
+
+        try {
+            list = query.getResultList();
+            LOG.log(Level.FINE, "Share Product  found for name {0}", new Object[]{status});
+        } catch (Exception ex) {
+            LOG.log(Level.SEVERE, "unexpected exception {0}\n{1}", new Object[]{ex.getMessage()});
+            return null;
+            // don't throw WebApplicationException, force caller to handle this
+        } finally {
+            LOG.log(Level.FINER, "closing entity manager {0}", em);
+            em.close();
+        }
+        return list;
+
+    }
 
     public List<T> findEntities() {
         return findEntities(true, -1, -1);

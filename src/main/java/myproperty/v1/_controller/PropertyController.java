@@ -12,6 +12,7 @@ import myproperty.v1._controller.entities._property;
 import myproperty.v1.db._entities.Property;
 import myproperty.v1.db._entities.responses.PropertyResponse;
 import myproperty.v1._services.PropertyService;
+import myproperty.v1.helper.enums.StatusEnum;
 import myproperty.v1.helper.security.AccessManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -35,10 +36,14 @@ public class PropertyController {
 
     private static final Logger LOG = Logger.getLogger(PropertyController.class.getName());
 
+    /*
+     this is public level access point
+    Get only Active Lists 
+     */
     @RequestMapping(value = "/list", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public Collection<PropertyResponse> getProperty() {
         LOG.log(Level.INFO, " Get All Property End Point");
-        return propertyService.getAllProperties();
+        return propertyService.getAllProperties(StatusEnum.ACTIVE);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)

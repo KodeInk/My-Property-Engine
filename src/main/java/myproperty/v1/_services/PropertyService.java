@@ -218,6 +218,18 @@ public class PropertyService {
         return propertyResponses;
     }
 
+
+    //TODO: Fetch all  Property
+    public Collection<PropertyResponse> getAllProperties(StatusEnum status) {
+        Collection<Property> property = propertyDaoImpl.findEntities();
+        Collection<PropertyResponse> propertyResponses = new ArrayList<>();
+        //java 8 functional statement
+        property.forEach((Property p) -> {
+            propertyResponses.add(propertyResponse(p));
+        });
+        return propertyResponses;
+    }
+
     //TODO: Fetch all  Property in a given account :: 
     public Collection<PropertyResponse> getAllPropertiesByAccountId(Integer accountId) {
         Collection<Property> property = propertyDaoImpl.findPropertyEntitiesByAccountId(accountId, -1, -1);
