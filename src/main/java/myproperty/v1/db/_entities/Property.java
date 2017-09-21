@@ -29,7 +29,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Property.findByDateCreated", query = "SELECT p FROM Property p WHERE p.dateCreated = :dateCreated")
     , @NamedQuery(name = "Property.findByUser", query = "SELECT p FROM Property p WHERE p.user.id = :userId")
     , @NamedQuery(name = "Property.findByAccount", query = "SELECT p FROM Property p  WHERE p.account.id  = :accountId")
-    , @NamedQuery(name = "Property.findByStatus", query = "SELECT p FROM Property p  WHERE p.account.status  = :accountId")
+
 
 })
 public class Property implements Serializable {

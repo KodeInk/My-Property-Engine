@@ -79,7 +79,7 @@ public  abstract class JpaController<T  extends  Entity> implements Serializable
         return entity;
     }
 
-    public List<Property> findEntities(StatusEnum status) {
+    public List<Property> findEntities(String status) {
         List<Property> list = new ArrayList<>();
         EntityManager em = getEntityManager();
 

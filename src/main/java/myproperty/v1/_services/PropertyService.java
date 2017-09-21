@@ -221,7 +221,7 @@ public class PropertyService {
 
     //TODO: Fetch all  Property
     public Collection<PropertyResponse> getAllProperties(StatusEnum status) {
-        Collection<Property> property = propertyDaoImpl.findEntities();
+        Collection<Property> property = propertyDaoImpl.findEntities(status.toString());
         Collection<PropertyResponse> propertyResponses = new ArrayList<>();
         //java 8 functional statement
         property.forEach((Property p) -> {
